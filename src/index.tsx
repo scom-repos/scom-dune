@@ -124,8 +124,7 @@ export default class ScomDune extends Module implements PageBlock {
             'RDNT/WETH LP Staked Supply (Radiant Capital Pool2 Staking LP)',
             'Holders OverTime (RDNT and RDNT V2 Holders Overtime)'
           ],
-          required: true,
-          readOnly
+          required: true
         }
       }
     }
