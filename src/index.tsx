@@ -6,13 +6,13 @@ import {
   Container,
   IDataSchema,
   Panel,
-  PieChart,
   HStack,
   Image,
-  Label
+  Label,
+  LineChart
 } from '@ijstech/components';
 import { PageBlock, IDuneConfig, IDunePieChart, IVisualizationWidgets, IDuneDefaultChart } from './global/index';
-import { containerStyle } from './index.css';
+import { containerStyle, duneChartStyle } from './index.css';
 import { dashboards, queryIdData } from './dummy/index';
 import { DuneDefaultChart, DunePieChart } from './charts/index';
 
@@ -31,12 +31,12 @@ declare global {
 @customModule
 @customElements('i-scom-dune')
 export default class ScomDune extends Module implements PageBlock {
-  private pnlDune: Panel;
+  private hStackDune: Panel;
   private dashboard: IVisualizationWidgets[] = [];
-  private chartsData = [];
+  private chartData: IDunePieChart | IDuneDefaultChart;
 
-  private _oldData: IDuneConfig = { url: '' };
-  private _data: IDuneConfig = { url: '' };
+  private _oldData: IDuneConfig = { chartName: '' };
+  private _data: IDuneConfig = { chartName: '' };
   private oldTag: any = {};
   tag: any = {};
   defaultEdit: boolean = true;
@@ -60,8 +60,7 @@ export default class ScomDune extends Module implements PageBlock {
 
   async setData(data: IDuneConfig) {
     this._data = data;
-    this.getDashboardData();
-    this.onUpdateBlock();
+    this.updateChartData();
   }
 
   getTag() {
@@ -70,6 +69,12 @@ export default class ScomDune extends Module implements PageBlock {
 
   async setTag(value: any) {
     this.tag = value || {};
+    this.width = this.tag.width;
+    if (this.tag.theme === 'dark') {
+      this.classList.add('dune-chart--dark');
+    } else {
+      this.classList.remove('dune-chart--dark');
+    }
     this.onUpdateBlock();
   }
 
@@ -83,16 +88,16 @@ export default class ScomDune extends Module implements PageBlock {
   }
 
   async edit() {
-    // this.pnlDune.visible = false
+    // this.hStackDune.visible = false
   }
 
   async confirm() {
     this.onUpdateBlock();
-    // this.pnlDune.visible = true
+    // this.hStackDune.visible = true
   }
 
   async discard() {
-    // this.pnlDune.visible = true
+    // this.hStackDune.visible = true
   }
 
   async config() { }
@@ -101,8 +106,23 @@ export default class ScomDune extends Module implements PageBlock {
     const propertiesSchema = {
       type: 'object',
       properties: {
-        url: {
+        chartName: {
           type: 'string',
+          enum: [
+            'Ethereum Beacon Chain Deposits Entity',
+            'Chart (ETH Staked - Cumulative)',
+            'Liquid Staking validators - All',
+            'ETH withdrawals cumsum (ETH Withdrawals after Shanghai Unlock)',
+            'Validators (ETH Withdrawals after Shanghai Unlock)',
+            'ETH withdrawals (ETH Withdrawals after Shanghai Unlock)',
+            'ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
+            'Validators and ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
+            'ETH withdrawals (ETH Withdrawals after Shanghai Unlock vs ETH price)',
+            '$RDNT Price Chart (RDNT Price Chart on Arbitrum and BSC)',
+            'Reserve Cumulative Value (Radiant Capital Reserve Markets (Weekly % change))',
+            'RDNT/WETH LP Staked Supply (Radiant Capital Pool2 Staking LP)',
+            'Holders OverTime (RDNT and RDNT V2 Holders Overtime)'
+          ],
           required: true,
           readOnly
         }
@@ -114,7 +134,24 @@ export default class ScomDune extends Module implements PageBlock {
   private getThemeSchema(readOnly?: boolean) {
     const themeSchema = {
       type: 'object',
-      properties: {}
+      properties: {
+        width: {
+          type: 'string',
+          readOnly
+        },
+        height: {
+          type: 'string',
+          readOnly
+        },
+        theme: {
+          type: 'string',
+          enum: [
+            'light',
+            'theme'
+          ],
+          readOnly
+        }
+      }
     }
     return themeSchema as IDataSchema;
   }
@@ -174,7 +211,7 @@ export default class ScomDune extends Module implements PageBlock {
 
   private onUpdateBlock() {
     if (this._data) {
-
+      this.renderChart();
     }
   }
 
@@ -185,46 +222,63 @@ export default class ScomDune extends Module implements PageBlock {
     } else {
       this.dashboard = [];
     }
-    this.getQueryData();
   }
 
-  private async getQueryData() {
-    let _queryDataIds = {};
-    const _chartsData = [];
-    for (const dashboard of this.dashboard) {
-      const { query_details, name, options } = dashboard.visualization;
-      const _queryId = query_details.query_id;
-      if (!_queryDataIds[_queryId]) {
-        _queryDataIds[_queryId] = queryIdData[_queryId];
+  private async updateChartData() {
+    if (this._data?.chartName) {
+      // TODO - fetch data
+      const chartInfo = this.dashboard.find(v => {
+        const { name, query_details } = v.visualization;
+        const subName = query_details.name;
+        let fullName = name;
+        if (fullName && subName) {
+          fullName = `${fullName} (${subName})`;
+        } else if (subName) {
+          fullName = subName;
+        }
+        return fullName === this._data.chartName;
+      });
+
+      if (chartInfo) {
+        const { options, name, query_details } = chartInfo.visualization;
+        const chartOpt = {
+          options,
+          name,
+          subName: query_details.name,
+          info: query_details.user || query_details.team,
+          chartData: queryIdData[query_details.query_id]
+        }
+        this.chartData = chartOpt as IDunePieChart | IDuneDefaultChart;
+      } else {
+        this.chartData = null;
       }
-      const _chartOpt = {
-        options,
-        name,
-        subName: query_details.name,
-        info: query_details.user || query_details.team,
-        chartData: queryIdData[_queryId]
-      }
-      _chartsData.push(_chartOpt);
+    } else {
+      this.chartData = null;
     }
-    this.chartsData = _chartsData;
-    console.log(this.chartsData);
-    for (const chart of this.chartsData) {
-      this.initChart(chart, chart.options.globalSeriesType);
+    this.renderChart();
+  }
+
+  private async renderChart() {
+    this.hStackDune.clearInnerHTML();
+    if (this.chartData) {
+      this.initChart(this.chartData as IDunePieChart | IDuneDefaultChart, this.chartData.options.globalSeriesType);
     }
   }
 
   private initChart(chart: IDunePieChart | IDuneDefaultChart, type: string) {
+    this.hStackDune.clearInnerHTML();
     const { name, subName, info } = chart;
-    const hStack = new HStack(this.pnlDune, {
+    const { width, height, theme } = this.tag || {};
+    const hStack = new HStack(this.hStackDune, {
       gap: 10,
-      width: '100%',
-      maxWidth: 650,
-      margin: { top: 20, left: 'auto', right: 'auto' },
+      width: width || 700,
+      maxWidth: '100%',
+      margin: { left: 'auto', right: 'auto' },
       padding: { top: 10, bottom: 10, left: 10, right: 10 },
-      border: { width: 1, style: 'solid', color: '#ffbdb6' },
       verticalAlignment: 'center',
       wrap: 'wrap'
     });
+    hStack.style.boxShadow = 'rgba(0, 0, 0, 0.16) 0px 1px 4px';
     if (name) {
       new Label(hStack, {
         caption: name,
@@ -260,46 +314,54 @@ export default class ScomDune extends Module implements PageBlock {
     if (type === 'pie') {
       chartElm = new DunePieChart(undefined, {
         width: '100%',
-        height: 500,
-        data: chart as IDunePieChart
+        height: height || 500,
+        data: {
+          ...chart,
+          theme
+        } as IDunePieChart
       });
     } else {
       chartElm = new DuneDefaultChart(undefined, {
         width: '100%',
-        height: 500,
-        data: chart as IDuneDefaultChart
+        height: height || 500,
+        data: {
+          ...chart,
+          theme
+        } as IDuneDefaultChart
       });
     }
-    if (chartElm)
     hStack.appendChild(chartElm);
   }
 
-  private resizeCharts() {
-    const charts = this.pnlDune.querySelectorAll('[role=dune-chart]');
-    for (const chart of charts) {
-      (chart as PieChart).resize();
-    }
+  private resizeChart() {
+    const chart = this.hStackDune.querySelector('[role=dune-chart]');
+    (chart as LineChart)?.resize();
   }
 
-  init() {
+  async init() {
     this.isReadyCallbackQueued = true;
     super.init();
-    const url = this.getAttribute('url', true);
-    if (url) {
-      this.setData({ url });
+    this.classList.add(duneChartStyle);
+    if (this.tag?.theme === 'dark') {
+      this.classList.add('dune-chart--dark');
+    }
+    await this.getDashboardData();
+    const chartName = this.getAttribute('chartName', true);
+    if (chartName) {
+      this.setData({ chartName });
     }
     this.isReadyCallbackQueued = false;
     this.executeReadyCallback();
     window.addEventListener('resize', () => {
       setTimeout(() => {
-        this.resizeCharts();
+        this.resizeChart();
       }, 300);
     });
   }
 
   render() {
     return (
-      <i-panel id="pnlDune" class={containerStyle} />
+      <i-hstack id="hStackDune" gap={20} wrap="wrap" verticalAlignment="center" class={containerStyle} />
     )
   }
 }

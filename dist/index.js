@@ -56,16 +56,16 @@ define("@scom/scom-dune/global/utils.ts", ["require", "exports"], function (requ
     };
     exports.formatNumber = formatNumber;
     const formatNumberByFormat = (num, format) => {
-        const separator = format.indexOf(",") !== -1 ? "," : ".";
-        const decimalSeparator = format.indexOf(".") !== -1 ? "." : ",";
-        const currencySymbol = format.indexOf("$") !== -1 ? "$" : "";
         const decimalPlaces = format.split(".")[1] ? format.split(".").length : 0;
+        if (format.includes('%')) {
+            return (num * 100).toFixed(decimalPlaces) + '%';
+        }
+        const currencySymbol = format.indexOf("$") !== -1 ? "$" : "";
         const roundedNum = num.toFixed(decimalPlaces);
         const parts = roundedNum.split(".");
-        const integerPart = parts[0];
         const decimalPart = parts.length > 1 ? parts[1] : "";
-        const integerWithSeparator = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, separator);
-        return currencySymbol + integerWithSeparator + (decimalPart ? decimalSeparator + decimalPart.slice(0, decimalPlaces) : "");
+        const integerPart = exports.formatNumber(parseInt(parts[0]), { decimals: decimalPart.length });
+        return `${currencySymbol}${integerPart}`;
     };
     exports.formatNumberByFormat = formatNumberByFormat;
     const getChartType = (type, defaultType) => {
@@ -89,13 +89,26 @@ define("@scom/scom-dune/global/index.ts", ["require", "exports", "@scom/scom-dun
 define("@scom/scom-dune/index.css.ts", ["require", "exports", "@ijstech/components"], function (require, exports, components_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.containerStyle = void 0;
+    exports.duneChartStyle = exports.containerStyle = void 0;
     exports.containerStyle = components_1.Styles.style({
         width: 'var(--layout-container-width)',
         maxWidth: 'var(--layout-container-max_width)',
         textAlign: 'var(--layout-container-text_align)',
         margin: '0 auto',
         padding: 10
+    });
+    exports.duneChartStyle = components_1.Styles.style({
+        display: 'block',
+        $nest: {
+            '&.dune-chart--dark': {
+                background: '#100c2a',
+                $nest: {
+                    'i-label': {
+                        color: '#fff !important'
+                    }
+                }
+            }
+        }
     });
 });
 define("@scom/scom-dune/dummy/2030664.json.ts", ["require", "exports"], function (require, exports) {
@@ -35308,6 +35321,9604 @@ define("@scom/scom-dune/dummy/2360905.json.ts", ["require", "exports"], function
         ]
     };
 });
+define("@scom/scom-dune/dummy/1154848.json.ts", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.query_id_1154848 = void 0;
+    ///<amd-module name='@scom/scom-dune/dummy/1154848.json.ts'/> 
+    exports.query_id_1154848 = {
+        "execution_id": "01GYG877STZGQ0FMSFMMQJDK8Z",
+        "runtime_seconds": 262,
+        "generated_at": "2023-04-20T22:36:22.831507Z",
+        "columns": [
+            "time",
+            "usd_volume",
+            "rdnt_price",
+            "green_volume",
+            "red_volume",
+            "last_price",
+            "rdnt_volume"
+        ],
+        "data": [
+            {
+                "time": "2023-04-20T00:00:00Z",
+                "usd_volume": 8194202.21751163,
+                "rdnt_price": 0.4442663496043308,
+                "green_volume": 8194202.21751163,
+                "red_volume": null,
+                "last_price": 0.4157968419590733,
+                "rdnt_volume": 18387563.626858573
+            },
+            {
+                "time": "2023-04-19T00:00:00Z",
+                "usd_volume": 6163779.016616552,
+                "rdnt_price": 0.4271263293977072,
+                "green_volume": null,
+                "red_volume": 6163779.016616552,
+                "last_price": 0.4419815086030138,
+                "rdnt_volume": 14427452.376521245
+            },
+            {
+                "time": "2023-04-18T00:00:00Z",
+                "usd_volume": 6985203.2983415695,
+                "rdnt_price": 0.4621411131457469,
+                "green_volume": 6985203.2983415695,
+                "red_volume": null,
+                "last_price": 0.4667917670679479,
+                "rdnt_volume": 15141836.489312608
+            },
+            {
+                "time": "2023-04-17T00:00:00Z",
+                "usd_volume": 4195273.7218671655,
+                "rdnt_price": 0.4398581921803371,
+                "green_volume": null,
+                "red_volume": 4195273.7218671655,
+                "last_price": 0.43943171615323345,
+                "rdnt_volume": 9553260.266130716
+            },
+            {
+                "time": "2023-04-16T00:00:00Z",
+                "usd_volume": 6162909.649553219,
+                "rdnt_price": 0.4612153030080221,
+                "green_volume": 6162909.649553219,
+                "red_volume": null,
+                "last_price": 0.45247598633556335,
+                "rdnt_volume": 13356577.019227663
+            },
+            {
+                "time": "2023-04-15T00:00:00Z",
+                "usd_volume": 11382695.797469394,
+                "rdnt_price": 0.44563155343039773,
+                "green_volume": 11382695.797469394,
+                "red_volume": null,
+                "last_price": 0.4248159115837995,
+                "rdnt_volume": 25454533.54455837
+            },
+            {
+                "time": "2023-04-14T00:00:00Z",
+                "usd_volume": 8220031.59632463,
+                "rdnt_price": 0.3818171301172216,
+                "green_volume": 8220031.59632463,
+                "red_volume": null,
+                "last_price": 0.3713202782392706,
+                "rdnt_volume": 21402805.22940376
+            },
+            {
+                "time": "2023-04-13T00:00:00Z",
+                "usd_volume": 2973702.8696837286,
+                "rdnt_price": 0.33394952735769046,
+                "green_volume": 2973702.8696837286,
+                "red_volume": null,
+                "last_price": 0.32896542006928364,
+                "rdnt_volume": 8858440.59594267
+            },
+            {
+                "time": "2023-04-12T00:00:00Z",
+                "usd_volume": 1344758.5867102565,
+                "rdnt_price": 0.3100934585361825,
+                "green_volume": null,
+                "red_volume": 1344758.5867102565,
+                "last_price": 0.30120878048643934,
+                "rdnt_volume": 4341352.926119442
+            },
+            {
+                "time": "2023-04-11T00:00:00Z",
+                "usd_volume": 871085.5302737285,
+                "rdnt_price": 0.3290852222191967,
+                "green_volume": 871085.5302737285,
+                "red_volume": null,
+                "last_price": 0.33153623508673674,
+                "rdnt_volume": 2636980.275386434
+            },
+            {
+                "time": "2023-04-10T00:00:00Z",
+                "usd_volume": 1020771.4731150037,
+                "rdnt_price": 0.3225484222165726,
+                "green_volume": 1020771.4731150037,
+                "red_volume": null,
+                "last_price": 0.3165412230930978,
+                "rdnt_volume": 3161813.003285551
+            },
+            {
+                "time": "2023-04-09T00:00:00Z",
+                "usd_volume": 1135704.310739375,
+                "rdnt_price": 0.32028317844232235,
+                "green_volume": null,
+                "red_volume": 1135704.310739375,
+                "last_price": 0.3226403952696845,
+                "rdnt_volume": 3550067.0086859018
+            },
+            {
+                "time": "2023-04-08T00:00:00Z",
+                "usd_volume": 1158509.7039703985,
+                "rdnt_price": 0.32726107093978307,
+                "green_volume": null,
+                "red_volume": 1158509.7039703985,
+                "last_price": 0.32977442412055,
+                "rdnt_volume": 3537259.175770113
+            },
+            {
+                "time": "2023-04-07T00:00:00Z",
+                "usd_volume": 1557438.5979126212,
+                "rdnt_price": 0.33055856088004243,
+                "green_volume": null,
+                "red_volume": 1557438.5979126212,
+                "last_price": 0.32515542532487013,
+                "rdnt_volume": 4700199.732458403
+            },
+            {
+                "time": "2023-04-06T00:00:00Z",
+                "usd_volume": 2315474.31951103,
+                "rdnt_price": 0.3331029808337267,
+                "green_volume": null,
+                "red_volume": 2315474.31951103,
+                "last_price": 0.3404156308342618,
+                "rdnt_volume": 6964447.065457264
+            },
+            {
+                "time": "2023-04-05T00:00:00Z",
+                "usd_volume": 2729173.080488488,
+                "rdnt_price": 0.35881052891484627,
+                "green_volume": 2729173.080488488,
+                "red_volume": null,
+                "last_price": 0.3537764638109236,
+                "rdnt_volume": 7625201.9105049
+            },
+            {
+                "time": "2023-04-04T00:00:00Z",
+                "usd_volume": 4654140.031026805,
+                "rdnt_price": 0.350977564931026,
+                "green_volume": 4654140.031026805,
+                "red_volume": null,
+                "last_price": 0.34660380223689297,
+                "rdnt_volume": 13241093.209849615
+            },
+            {
+                "time": "2023-04-03T00:00:00Z",
+                "usd_volume": 3649099.590879565,
+                "rdnt_price": 0.32961201187884626,
+                "green_volume": null,
+                "red_volume": 3649099.590879565,
+                "last_price": 0.32775983988408064,
+                "rdnt_volume": 11197191.56549644
+            },
+            {
+                "time": "2023-04-02T00:00:00Z",
+                "usd_volume": 3029550.549560339,
+                "rdnt_price": 0.3441655015465567,
+                "green_volume": null,
+                "red_volume": 3029550.549560339,
+                "last_price": 0.3473345431679027,
+                "rdnt_volume": 8856811.06832208
+            },
+            {
+                "time": "2023-04-01T00:00:00Z",
+                "usd_volume": 2051124.3533699948,
+                "rdnt_price": 0.37524111236616753,
+                "green_volume": 2051124.3533699948,
+                "red_volume": null,
+                "last_price": 0.3745189609553331,
+                "rdnt_volume": 5477781.23912529
+            },
+            {
+                "time": "2023-03-31T00:00:00Z",
+                "usd_volume": 3789009.9699043576,
+                "rdnt_price": 0.3734646088228621,
+                "green_volume": null,
+                "red_volume": 3789009.9699043576,
+                "last_price": 0.3847535964549373,
+                "rdnt_volume": 10098323.929280922
+            },
+            {
+                "time": "2023-03-30T00:00:00Z",
+                "usd_volume": 22363453.445171013,
+                "rdnt_price": 0.411093199511951,
+                "green_volume": 22363453.445171013,
+                "red_volume": null,
+                "last_price": 0.3654423619304925,
+                "rdnt_volume": 54269952.02542153
+            },
+            {
+                "time": "2023-03-29T00:00:00Z",
+                "usd_volume": 3586261.477713082,
+                "rdnt_price": 0.35265531820315776,
+                "green_volume": 3586261.477713082,
+                "red_volume": null,
+                "last_price": 0.3440715248258436,
+                "rdnt_volume": 9747252.678204194
+            },
+            {
+                "time": "2023-03-28T00:00:00Z",
+                "usd_volume": 3467783.6153397937,
+                "rdnt_price": 0.33003181867682885,
+                "green_volume": null,
+                "red_volume": 3467783.6153397937,
+                "last_price": 0.3369931867027895,
+                "rdnt_volume": 10402656.013108965
+            },
+            {
+                "time": "2023-03-27T00:00:00Z",
+                "usd_volume": 2586227.297452954,
+                "rdnt_price": 0.3365476649439966,
+                "green_volume": null,
+                "red_volume": 2586227.297452954,
+                "last_price": 0.3283600990956669,
+                "rdnt_volume": 7688847.751175021
+            },
+            {
+                "time": "2023-03-26T00:00:00Z",
+                "usd_volume": 1602884.9791979622,
+                "rdnt_price": 0.3509669194012768,
+                "green_volume": 1602884.9791979622,
+                "red_volume": null,
+                "last_price": 0.35370641647631446,
+                "rdnt_volume": 4558784.246400446
+            },
+            {
+                "time": "2023-03-25T00:00:00Z",
+                "usd_volume": 1815540.4600943401,
+                "rdnt_price": 0.3266169228923003,
+                "green_volume": 1815540.4600943401,
+                "red_volume": null,
+                "last_price": 0.3299543948616877,
+                "rdnt_volume": 5567611.814119421
+            },
+            {
+                "time": "2023-03-24T00:00:00Z",
+                "usd_volume": 4869657.300185913,
+                "rdnt_price": 0.3226992206671741,
+                "green_volume": null,
+                "red_volume": 4869657.300185913,
+                "last_price": 0.3125237263435268,
+                "rdnt_volume": 15102733.813506734
+            },
+            {
+                "time": "2023-03-23T00:00:00Z",
+                "usd_volume": 4737009.543284969,
+                "rdnt_price": 0.36109510388485305,
+                "green_volume": null,
+                "red_volume": 4737009.543284969,
+                "last_price": 0.3517582897720171,
+                "rdnt_volume": 13142053.030053694
+            },
+            {
+                "time": "2023-03-22T00:00:00Z",
+                "usd_volume": 10038311.018198747,
+                "rdnt_price": 0.38117606680146127,
+                "green_volume": null,
+                "red_volume": 10038311.018198747,
+                "last_price": 0.401497167035233,
+                "rdnt_volume": 28127132.37403229
+            },
+            {
+                "time": "2023-03-21T00:00:00Z",
+                "usd_volume": 9661224.459975448,
+                "rdnt_price": 0.44837673019231167,
+                "green_volume": null,
+                "red_volume": 9661224.459975448,
+                "last_price": 0.44885321861188,
+                "rdnt_volume": 21316996.188953146
+            },
+            {
+                "time": "2023-03-20T00:00:00Z",
+                "usd_volume": 10018392.079736654,
+                "rdnt_price": 0.45423663546396886,
+                "green_volume": 10018392.079736654,
+                "red_volume": null,
+                "last_price": 0.4699239915690133,
+                "rdnt_volume": 22047154.034177747
+            },
+            {
+                "time": "2023-03-19T00:00:00Z",
+                "usd_volume": 33908325.73624404,
+                "rdnt_price": 0.4454770119763904,
+                "green_volume": 33908325.73624404,
+                "red_volume": null,
+                "last_price": 0.45147399795527493,
+                "rdnt_volume": 73185927.50644818
+            },
+            {
+                "time": "2023-03-18T00:00:00Z",
+                "usd_volume": 5482917.820879953,
+                "rdnt_price": 0.3622869013695215,
+                "green_volume": null,
+                "red_volume": 5482917.820879953,
+                "last_price": 0.35370611936098423,
+                "rdnt_volume": 15150569.151192427
+            },
+            {
+                "time": "2023-03-17T00:00:00Z",
+                "usd_volume": 8470279.017218687,
+                "rdnt_price": 0.36736505668360825,
+                "green_volume": 8470279.017218687,
+                "red_volume": null,
+                "last_price": 0.3775900866694099,
+                "rdnt_volume": 23134796.06361404
+            },
+            {
+                "time": "2023-03-16T00:00:00Z",
+                "usd_volume": 11505370.78610908,
+                "rdnt_price": 0.323103758862273,
+                "green_volume": 11505370.78610908,
+                "red_volume": null,
+                "last_price": 0.3058701276251253,
+                "rdnt_volume": 35688096.91125652
+            },
+            {
+                "time": "2023-03-15T00:00:00Z",
+                "usd_volume": 4383323.8265160415,
+                "rdnt_price": 0.28796526084712737,
+                "green_volume": null,
+                "red_volume": 4383323.8265160415,
+                "last_price": 0.285635082285918,
+                "rdnt_volume": 15203249.157023521
+            },
+            {
+                "time": "2023-03-14T00:00:00Z",
+                "usd_volume": 3783036.5608117254,
+                "rdnt_price": 0.2957991475807934,
+                "green_volume": 3783036.5608117254,
+                "red_volume": null,
+                "last_price": 0.3030774172858301,
+                "rdnt_volume": 12758133.126991939
+            },
+            {
+                "time": "2023-03-13T00:00:00Z",
+                "usd_volume": 3916273.600646598,
+                "rdnt_price": 0.2790620822503739,
+                "green_volume": 3916273.600646598,
+                "red_volume": null,
+                "last_price": 0.2787849972144155,
+                "rdnt_volume": 14008920.82076998
+            },
+            {
+                "time": "2023-03-12T00:00:00Z",
+                "usd_volume": 2871082.9322036454,
+                "rdnt_price": 0.23222144601840675,
+                "green_volume": 2871082.9322036454,
+                "red_volume": null,
+                "last_price": 0.22779424497800696,
+                "rdnt_volume": 12256174.68257523
+            },
+            {
+                "time": "2023-03-11T00:00:00Z",
+                "usd_volume": 4963708.843192997,
+                "rdnt_price": 0.23027524063787105,
+                "green_volume": null,
+                "red_volume": 4963708.843192997,
+                "last_price": 0.25477068723919183,
+                "rdnt_volume": 22368116.22265517
+            },
+            {
+                "time": "2023-03-10T00:00:00Z",
+                "usd_volume": 2916785.249451788,
+                "rdnt_price": 0.23624554257616848,
+                "green_volume": null,
+                "red_volume": 2916785.249451788,
+                "last_price": 0.23818502597195818,
+                "rdnt_volume": 12326765.559313217
+            },
+            {
+                "time": "2023-03-09T00:00:00Z",
+                "usd_volume": 2129615.586356817,
+                "rdnt_price": 0.26412485256091317,
+                "green_volume": null,
+                "red_volume": 2129615.586356817,
+                "last_price": 0.2749153494333245,
+                "rdnt_volume": 8065219.481373065
+            },
+            {
+                "time": "2023-03-08T00:00:00Z",
+                "usd_volume": 1833595.4628893486,
+                "rdnt_price": 0.2752173867888857,
+                "green_volume": null,
+                "red_volume": 1833595.4628893486,
+                "last_price": 0.2667465018620827,
+                "rdnt_volume": 6646291.451847694
+            },
+            {
+                "time": "2023-03-07T00:00:00Z",
+                "usd_volume": 3198127.006010274,
+                "rdnt_price": 0.3022148617388755,
+                "green_volume": 3198127.006010274,
+                "red_volume": null,
+                "last_price": 0.29441052028531656,
+                "rdnt_volume": 10567453.093378967
+            },
+            {
+                "time": "2023-03-06T00:00:00Z",
+                "usd_volume": 2560542.4789414043,
+                "rdnt_price": 0.29446220537930645,
+                "green_volume": 2560542.4789414043,
+                "red_volume": null,
+                "last_price": 0.2912050616949754,
+                "rdnt_volume": 8662049.120026154
+            },
+            {
+                "time": "2023-03-05T00:00:00Z",
+                "usd_volume": 1054901.8568588125,
+                "rdnt_price": 0.2660414006544873,
+                "green_volume": 1054901.8568588125,
+                "red_volume": null,
+                "last_price": 0.27466546904362144,
+                "rdnt_volume": 3963864.1853314675
+            },
+            {
+                "time": "2023-03-04T00:00:00Z",
+                "usd_volume": 1710316.622055789,
+                "rdnt_price": 0.2558771504452158,
+                "green_volume": null,
+                "red_volume": 1710316.622055789,
+                "last_price": 0.26310641669612816,
+                "rdnt_volume": 6716357.875341347
+            },
+            {
+                "time": "2023-03-03T00:00:00Z",
+                "usd_volume": 4147408.5754261725,
+                "rdnt_price": 0.2646261041792162,
+                "green_volume": null,
+                "red_volume": 4147408.5754261725,
+                "last_price": 0.25544468065337506,
+                "rdnt_volume": 15902002.575747987
+            },
+            {
+                "time": "2023-03-02T00:00:00Z",
+                "usd_volume": 2358639.0768340537,
+                "rdnt_price": 0.2905483939628708,
+                "green_volume": null,
+                "red_volume": 2358639.0768340537,
+                "last_price": 0.28948554942072957,
+                "rdnt_volume": 8121429.892355993
+            },
+            {
+                "time": "2023-03-01T00:00:00Z",
+                "usd_volume": 4334250.365819495,
+                "rdnt_price": 0.30602065791651634,
+                "green_volume": null,
+                "red_volume": 4334250.365819495,
+                "last_price": 0.31171794493778904,
+                "rdnt_volume": 14647915.99187215
+            },
+            {
+                "time": "2023-02-28T00:00:00Z",
+                "usd_volume": 6759629.569662642,
+                "rdnt_price": 0.3182786380213296,
+                "green_volume": 6759629.569662642,
+                "red_volume": null,
+                "last_price": 0.31530298470202894,
+                "rdnt_volume": 21290190.788155064
+            },
+            {
+                "time": "2023-02-27T00:00:00Z",
+                "usd_volume": 4513399.198289687,
+                "rdnt_price": 0.2926808072575324,
+                "green_volume": 4513399.198289687,
+                "red_volume": null,
+                "last_price": 0.2956537577750979,
+                "rdnt_volume": 15347934.48936729
+            },
+            {
+                "time": "2023-02-26T00:00:00Z",
+                "usd_volume": 1402568.6840808666,
+                "rdnt_price": 0.26929703875983874,
+                "green_volume": 1402568.6840808666,
+                "red_volume": null,
+                "last_price": 0.2549131559374162,
+                "rdnt_volume": 5198094.062790296
+            },
+            {
+                "time": "2023-02-25T00:00:00Z",
+                "usd_volume": 1573529.753487669,
+                "rdnt_price": 0.2487307908317365,
+                "green_volume": null,
+                "red_volume": 1573529.753487669,
+                "last_price": 0.26040898563439735,
+                "rdnt_volume": 6329771.312524303
+            },
+            {
+                "time": "2023-02-24T00:00:00Z",
+                "usd_volume": 2451508.628226536,
+                "rdnt_price": 0.2672725677852803,
+                "green_volume": null,
+                "red_volume": 2451508.628226536,
+                "last_price": 0.254318552798165,
+                "rdnt_volume": 9220480.755479781
+            },
+            {
+                "time": "2023-02-23T00:00:00Z",
+                "usd_volume": 4872750.789957408,
+                "rdnt_price": 0.27766126854362716,
+                "green_volume": 4872750.789957408,
+                "red_volume": null,
+                "last_price": 0.2881928179386877,
+                "rdnt_volume": 17556994.66807775
+            },
+            {
+                "time": "2023-02-22T00:00:00Z",
+                "usd_volume": 3343001.3015914047,
+                "rdnt_price": 0.23705364423120975,
+                "green_volume": null,
+                "red_volume": 3343001.3015914047,
+                "last_price": 0.23536500105300212,
+                "rdnt_volume": 14366871.541357381
+            },
+            {
+                "time": "2023-02-21T00:00:00Z",
+                "usd_volume": 3933670.1577241756,
+                "rdnt_price": 0.24622109086751512,
+                "green_volume": null,
+                "red_volume": 3933670.1577241756,
+                "last_price": 0.23947174415129532,
+                "rdnt_volume": 15990507.192847688
+            },
+            {
+                "time": "2023-02-20T00:00:00Z",
+                "usd_volume": 3849563.551425956,
+                "rdnt_price": 0.27003195798057683,
+                "green_volume": null,
+                "red_volume": 3849563.551425956,
+                "last_price": 0.2655268608290569,
+                "rdnt_volume": 14353106.10337881
+            },
+            {
+                "time": "2023-02-19T00:00:00Z",
+                "usd_volume": 3265011.7482327437,
+                "rdnt_price": 0.2856097870313905,
+                "green_volume": 3265011.7482327437,
+                "red_volume": null,
+                "last_price": 0.29010619034033036,
+                "rdnt_volume": 11473498.427918345
+            },
+            {
+                "time": "2023-02-18T00:00:00Z",
+                "usd_volume": 4207048.176145555,
+                "rdnt_price": 0.27722659014235296,
+                "green_volume": 4207048.176145555,
+                "red_volume": null,
+                "last_price": 0.2667488002453578,
+                "rdnt_volume": 15272583.826210592
+            },
+            {
+                "time": "2023-02-17T00:00:00Z",
+                "usd_volume": 5321665.138205548,
+                "rdnt_price": 0.2517804891435325,
+                "green_volume": 5321665.138205548,
+                "red_volume": null,
+                "last_price": 0.26840763225142983,
+                "rdnt_volume": 21198108.28666242
+            },
+            {
+                "time": "2023-02-16T00:00:00Z",
+                "usd_volume": 3608823.279885446,
+                "rdnt_price": 0.21894449472887703,
+                "green_volume": 3608823.279885446,
+                "red_volume": null,
+                "last_price": 0.21131176110700467,
+                "rdnt_volume": 16451134.785253998
+            },
+            {
+                "time": "2023-02-15T00:00:00Z",
+                "usd_volume": 3433048.7793190796,
+                "rdnt_price": 0.21724536068183803,
+                "green_volume": 3433048.7793190796,
+                "red_volume": null,
+                "last_price": 0.21857340612573492,
+                "rdnt_volume": 15676161.370913804
+            },
+            {
+                "time": "2023-02-14T00:00:00Z",
+                "usd_volume": 2521784.7671225425,
+                "rdnt_price": 0.19690057239446077,
+                "green_volume": 2521784.7671225425,
+                "red_volume": null,
+                "last_price": 0.19172252646365448,
+                "rdnt_volume": 12852942.629543634
+            },
+            {
+                "time": "2023-02-13T00:00:00Z",
+                "usd_volume": 2899325.4035268757,
+                "rdnt_price": 0.17976348903478143,
+                "green_volume": null,
+                "red_volume": 2899325.4035268757,
+                "last_price": 0.1832725620866505,
+                "rdnt_volume": 16245320.6194208
+            },
+            {
+                "time": "2023-02-12T00:00:00Z",
+                "usd_volume": 1698660.5248242165,
+                "rdnt_price": 0.20255313470161923,
+                "green_volume": 1698660.5248242165,
+                "red_volume": null,
+                "last_price": 0.19984539424869766,
+                "rdnt_volume": 8401689.290542092
+            },
+            {
+                "time": "2023-02-11T00:00:00Z",
+                "usd_volume": 1721643.976114962,
+                "rdnt_price": 0.19591468182540647,
+                "green_volume": 1721643.976114962,
+                "red_volume": null,
+                "last_price": 0.19963395071872095,
+                "rdnt_volume": 8851432.747776017
+            },
+            {
+                "time": "2023-02-10T00:00:00Z",
+                "usd_volume": 2771047.1741845873,
+                "rdnt_price": 0.18645168476980695,
+                "green_volume": null,
+                "red_volume": 2771047.1741845873,
+                "last_price": 0.17612340242708027,
+                "rdnt_volume": 14938935.528454673
+            },
+            {
+                "time": "2023-02-09T00:00:00Z",
+                "usd_volume": 7710779.865432897,
+                "rdnt_price": 0.20907740910844405,
+                "green_volume": null,
+                "red_volume": 7710779.865432897,
+                "last_price": 0.18102871150357042,
+                "rdnt_volume": 37367881.85919267
+            },
+            {
+                "time": "2023-02-08T00:00:00Z",
+                "usd_volume": 7118359.564556558,
+                "rdnt_price": 0.2495348719229822,
+                "green_volume": null,
+                "red_volume": 7118359.564556558,
+                "last_price": 0.24536374653479995,
+                "rdnt_volume": 28745931.250359822
+            },
+            {
+                "time": "2023-02-07T00:00:00Z",
+                "usd_volume": 8894742.395265216,
+                "rdnt_price": 0.2761002701067416,
+                "green_volume": 8894742.395265216,
+                "red_volume": null,
+                "last_price": 0.23572871772407078,
+                "rdnt_volume": 32420932.062498603
+            },
+            {
+                "time": "2023-02-06T00:00:00Z",
+                "usd_volume": 4766816.6958407285,
+                "rdnt_price": 0.2338878839215412,
+                "green_volume": 4766816.6958407285,
+                "red_volume": null,
+                "last_price": 0.2246622419635452,
+                "rdnt_volume": 20333268.824483927
+            },
+            {
+                "time": "2023-02-05T00:00:00Z",
+                "usd_volume": 6638867.527113255,
+                "rdnt_price": 0.20075136822288894,
+                "green_volume": null,
+                "red_volume": 6638867.527113255,
+                "last_price": 0.21062326015112015,
+                "rdnt_volume": 33560768.8074416
+            },
+            {
+                "time": "2023-02-04T00:00:00Z",
+                "usd_volume": 7474885.517943183,
+                "rdnt_price": 0.21503478916362745,
+                "green_volume": 7474885.517943183,
+                "red_volume": null,
+                "last_price": 0.23454826883486732,
+                "rdnt_volume": 34975949.53951576
+            },
+            {
+                "time": "2023-02-03T00:00:00Z",
+                "usd_volume": 4801768.625541387,
+                "rdnt_price": 0.17527628768129866,
+                "green_volume": 4801768.625541387,
+                "red_volume": null,
+                "last_price": 0.18154658418459577,
+                "rdnt_volume": 27434120.507619675
+            },
+            {
+                "time": "2023-02-02T00:00:00Z",
+                "usd_volume": 2040202.1081678567,
+                "rdnt_price": 0.145462014790118,
+                "green_volume": 2040202.1081678567,
+                "red_volume": null,
+                "last_price": 0.14514770572699587,
+                "rdnt_volume": 13930156.816903044
+            },
+            {
+                "time": "2023-02-01T00:00:00Z",
+                "usd_volume": 1747926.3998913728,
+                "rdnt_price": 0.12321951724613948,
+                "green_volume": 1747926.3998913728,
+                "red_volume": null,
+                "last_price": 0.11651403610294818,
+                "rdnt_volume": 13411798.704877257
+            },
+            {
+                "time": "2023-01-31T00:00:00Z",
+                "usd_volume": 856604.7836138334,
+                "rdnt_price": 0.1186954325959683,
+                "green_volume": null,
+                "red_volume": 856604.7836138334,
+                "last_price": 0.11929368834465444,
+                "rdnt_volume": 7210240.14070262
+            },
+            {
+                "time": "2023-01-30T00:00:00Z",
+                "usd_volume": 1021383.4089216612,
+                "rdnt_price": 0.12757441622541696,
+                "green_volume": 1021383.4089216612,
+                "red_volume": null,
+                "last_price": 0.13136204508782034,
+                "rdnt_volume": 8085660.216773184
+            },
+            {
+                "time": "2023-01-29T00:00:00Z",
+                "usd_volume": 2017096.4236248457,
+                "rdnt_price": 0.12733363065519696,
+                "green_volume": 2017096.4236248457,
+                "red_volume": null,
+                "last_price": 0.1315126414102471,
+                "rdnt_volume": 15890341.049261753
+            },
+            {
+                "time": "2023-01-28T00:00:00Z",
+                "usd_volume": 454631.2402116941,
+                "rdnt_price": 0.1087091786929997,
+                "green_volume": 454631.2402116941,
+                "red_volume": null,
+                "last_price": 0.10556982337820009,
+                "rdnt_volume": 4181415.4243351426
+            },
+            {
+                "time": "2023-01-27T00:00:00Z",
+                "usd_volume": 817942.2825026244,
+                "rdnt_price": 0.09699862170227974,
+                "green_volume": null,
+                "red_volume": 817942.2825026244,
+                "last_price": 0.09704468542959563,
+                "rdnt_volume": 8376880.719011421
+            },
+            {
+                "time": "2023-01-26T00:00:00Z",
+                "usd_volume": 1496613.478275035,
+                "rdnt_price": 0.10719564732322062,
+                "green_volume": 1496613.478275035,
+                "red_volume": null,
+                "last_price": 0.10168469843141102,
+                "rdnt_volume": 13963790.068241498
+            },
+            {
+                "time": "2023-01-25T00:00:00Z",
+                "usd_volume": 608649.307958418,
+                "rdnt_price": 0.09689293020543688,
+                "green_volume": null,
+                "red_volume": 608649.307958418,
+                "last_price": 0.0903128616102108,
+                "rdnt_volume": 6286142.323684599
+            },
+            {
+                "time": "2023-01-24T00:00:00Z",
+                "usd_volume": 634631.0492347869,
+                "rdnt_price": 0.1058651056408625,
+                "green_volume": 634631.0492347869,
+                "red_volume": null,
+                "last_price": 0.10880353901343352,
+                "rdnt_volume": 6060959.158180138
+            },
+            {
+                "time": "2023-01-23T00:00:00Z",
+                "usd_volume": 644030.38152925,
+                "rdnt_price": 0.10577968960585458,
+                "green_volume": null,
+                "red_volume": 644030.38152925,
+                "last_price": 0.10694244860392214,
+                "rdnt_volume": 6083726.289649466
+            },
+            {
+                "time": "2023-01-22T00:00:00Z",
+                "usd_volume": 504190.3857865704,
+                "rdnt_price": 0.10941609868005396,
+                "green_volume": null,
+                "red_volume": 504190.3857865704,
+                "last_price": 0.11220772950533277,
+                "rdnt_volume": 4604170.157216592
+            },
+            {
+                "time": "2023-01-21T00:00:00Z",
+                "usd_volume": 944351.8368869256,
+                "rdnt_price": 0.12216237410762969,
+                "green_volume": 944351.8368869256,
+                "red_volume": null,
+                "last_price": 0.12110507199300583,
+                "rdnt_volume": 7654386.95203945
+            },
+            {
+                "time": "2023-01-20T00:00:00Z",
+                "usd_volume": 1986199.8402697425,
+                "rdnt_price": 0.11313312090109733,
+                "green_volume": 1986199.8402697425,
+                "red_volume": null,
+                "last_price": 0.11890862670987636,
+                "rdnt_volume": 17370569.13725429
+            },
+            {
+                "time": "2023-01-19T00:00:00Z",
+                "usd_volume": 6626220.241249415,
+                "rdnt_price": 0.1071697187436085,
+                "green_volume": 6626220.241249415,
+                "red_volume": null,
+                "last_price": 0.1266937282291035,
+                "rdnt_volume": 62839743.88282713
+            },
+            {
+                "time": "2023-01-18T00:00:00Z",
+                "usd_volume": 2583888.967023388,
+                "rdnt_price": 0.07746691842955805,
+                "green_volume": 2583888.967023388,
+                "red_volume": null,
+                "last_price": 0.08272945763166006,
+                "rdnt_volume": 32242488.14890912
+            },
+            {
+                "time": "2023-01-17T00:00:00Z",
+                "usd_volume": 889780.139930757,
+                "rdnt_price": 0.07026220495534953,
+                "green_volume": 889780.139930757,
+                "red_volume": null,
+                "last_price": 0.07559636362427939,
+                "rdnt_volume": 12775021.311898982
+            },
+            {
+                "time": "2023-01-16T00:00:00Z",
+                "usd_volume": 1259841.9981889478,
+                "rdnt_price": 0.06428299404573413,
+                "green_volume": 1259841.9981889478,
+                "red_volume": null,
+                "last_price": 0.06562697357390147,
+                "rdnt_volume": 19733346.08075653
+            },
+            {
+                "time": "2023-01-15T00:00:00Z",
+                "usd_volume": 234359.7095627951,
+                "rdnt_price": 0.05042991580430643,
+                "green_volume": 234359.7095627951,
+                "red_volume": null,
+                "last_price": 0.048092776790365964,
+                "rdnt_volume": 4467181.671488887
+            },
+            {
+                "time": "2023-01-14T00:00:00Z",
+                "usd_volume": 370696.7676198109,
+                "rdnt_price": 0.0487497280347846,
+                "green_volume": 370696.7676198109,
+                "red_volume": null,
+                "last_price": 0.047939736664083674,
+                "rdnt_volume": 7551263.196813239
+            },
+            {
+                "time": "2023-01-13T00:00:00Z",
+                "usd_volume": 188751.29118297203,
+                "rdnt_price": 0.046732944756043525,
+                "green_volume": 188751.29118297203,
+                "red_volume": null,
+                "last_price": 0.04558089894382709,
+                "rdnt_volume": 4026954.84197558
+            },
+            {
+                "time": "2023-01-12T00:00:00Z",
+                "usd_volume": 333883.76474605803,
+                "rdnt_price": 0.04476162681066207,
+                "green_volume": null,
+                "red_volume": 333883.76474605803,
+                "last_price": 0.04633195212571797,
+                "rdnt_volume": 7521004.822868926
+            },
+            {
+                "time": "2023-01-11T00:00:00Z",
+                "usd_volume": 171890.23643144808,
+                "rdnt_price": 0.04636807309885678,
+                "green_volume": null,
+                "red_volume": 171890.23643144808,
+                "last_price": 0.04671181030203209,
+                "rdnt_volume": 3740277.837046285
+            },
+            {
+                "time": "2023-01-10T00:00:00Z",
+                "usd_volume": 171309.0441549635,
+                "rdnt_price": 0.048503288325310936,
+                "green_volume": 171309.0441549635,
+                "red_volume": null,
+                "last_price": 0.04865105054019833,
+                "rdnt_volume": 3507495.42596493
+            },
+            {
+                "time": "2023-01-09T00:00:00Z",
+                "usd_volume": 408748.6693584652,
+                "rdnt_price": 0.04631809297790113,
+                "green_volume": 408748.6693584652,
+                "red_volume": null,
+                "last_price": 0.04764324781801342,
+                "rdnt_volume": 8820960.357847951
+            },
+            {
+                "time": "2023-01-08T00:00:00Z",
+                "usd_volume": 65669.63049753131,
+                "rdnt_price": 0.039395622445632016,
+                "green_volume": null,
+                "red_volume": 65669.63049753131,
+                "last_price": 0.03904566962582672,
+                "rdnt_volume": 1660647.8373878219
+            },
+            {
+                "time": "2023-01-07T00:00:00Z",
+                "usd_volume": 60138.967882945406,
+                "rdnt_price": 0.039604631396372,
+                "green_volume": null,
+                "red_volume": 60138.967882945406,
+                "last_price": 0.040479491411853655,
+                "rdnt_volume": 1528464.4577527456
+            },
+            {
+                "time": "2023-01-06T00:00:00Z",
+                "usd_volume": 130273.46463991432,
+                "rdnt_price": 0.04075111662708973,
+                "green_volume": null,
+                "red_volume": 130273.46463991432,
+                "last_price": 0.04190868311542061,
+                "rdnt_volume": 3225246.297087719
+            },
+            {
+                "time": "2023-01-05T00:00:00Z",
+                "usd_volume": 267974.2096900273,
+                "rdnt_price": 0.043367840137452256,
+                "green_volume": null,
+                "red_volume": 267974.2096900273,
+                "last_price": 0.04231589490855716,
+                "rdnt_volume": 6209842.796933526
+            },
+            {
+                "time": "2023-01-04T00:00:00Z",
+                "usd_volume": 123955.04452381107,
+                "rdnt_price": 0.04815177641936598,
+                "green_volume": 123955.04452381107,
+                "red_volume": null,
+                "last_price": 0.04725664841462447,
+                "rdnt_volume": 2608649.074569741
+            },
+            {
+                "time": "2023-01-03T00:00:00Z",
+                "usd_volume": 208063.13172419296,
+                "rdnt_price": 0.047978021875494534,
+                "green_volume": 208063.13172419296,
+                "red_volume": null,
+                "last_price": 0.04681365006429436,
+                "rdnt_volume": 4345343.8010157505
+            },
+            {
+                "time": "2023-01-02T00:00:00Z",
+                "usd_volume": 193283.2212210884,
+                "rdnt_price": 0.042993507516501474,
+                "green_volume": 193283.2212210884,
+                "red_volume": null,
+                "last_price": 0.04279562117982971,
+                "rdnt_volume": 4308811.835781897
+            },
+            {
+                "time": "2023-01-01T00:00:00Z",
+                "usd_volume": 68731.29104294367,
+                "rdnt_price": 0.04077820854974381,
+                "green_volume": 68731.29104294367,
+                "red_volume": null,
+                "last_price": 0.04032972950840463,
+                "rdnt_volume": 1666969.092430274
+            },
+            {
+                "time": "2022-12-31T00:00:00Z",
+                "usd_volume": 193773.32074991788,
+                "rdnt_price": 0.039085117384293835,
+                "green_volume": 193773.32074991788,
+                "red_volume": null,
+                "last_price": 0.037876428476500405,
+                "rdnt_volume": 4966084.14840654
+            },
+            {
+                "time": "2022-12-30T00:00:00Z",
+                "usd_volume": 120256.72205824597,
+                "rdnt_price": 0.035729060755891176,
+                "green_volume": 120256.72205824597,
+                "red_volume": null,
+                "last_price": 0.03466641217711806,
+                "rdnt_volume": 3335367.5317403506
+            },
+            {
+                "time": "2022-12-29T00:00:00Z",
+                "usd_volume": 174059.69434959497,
+                "rdnt_price": 0.034113727946652475,
+                "green_volume": null,
+                "red_volume": 174059.69434959497,
+                "last_price": 0.033201806222006816,
+                "rdnt_volume": 5108557.253073477
+            },
+            {
+                "time": "2022-12-28T00:00:00Z",
+                "usd_volume": 100077.98945193054,
+                "rdnt_price": 0.036838866664896094,
+                "green_volume": null,
+                "red_volume": 100077.98945193054,
+                "last_price": 0.03534086774580306,
+                "rdnt_volume": 2727387.3986835037
+            },
+            {
+                "time": "2022-12-27T00:00:00Z",
+                "usd_volume": 41689.35654998754,
+                "rdnt_price": 0.039409074070534046,
+                "green_volume": null,
+                "red_volume": 41689.35654998754,
+                "last_price": 0.039147508263337474,
+                "rdnt_volume": 1058794.8371246583
+            },
+            {
+                "time": "2022-12-26T00:00:00Z",
+                "usd_volume": 30164.023521999494,
+                "rdnt_price": 0.04034346046331652,
+                "green_volume": null,
+                "red_volume": 30164.023521999494,
+                "last_price": 0.03992370095047631,
+                "rdnt_volume": 748290.0335033031
+            },
+            {
+                "time": "2022-12-25T00:00:00Z",
+                "usd_volume": 30356.821152666926,
+                "rdnt_price": 0.04116691422649948,
+                "green_volume": 30356.821152666926,
+                "red_volume": null,
+                "last_price": 0.041469746444182644,
+                "rdnt_volume": 739400.9526317129
+            },
+            {
+                "time": "2022-12-24T00:00:00Z",
+                "usd_volume": 127380.60308466144,
+                "rdnt_price": 0.04110171279061904,
+                "green_volume": 127380.60308466144,
+                "red_volume": null,
+                "last_price": 0.041572534750520376,
+                "rdnt_volume": 3157332.0446188413
+            },
+            {
+                "time": "2022-12-23T00:00:00Z",
+                "usd_volume": 90993.01855013131,
+                "rdnt_price": 0.03705475874000802,
+                "green_volume": 90993.01855013131,
+                "red_volume": null,
+                "last_price": 0.036150199018743494,
+                "rdnt_volume": 2480472.83618428
+            },
+            {
+                "time": "2022-12-22T00:00:00Z",
+                "usd_volume": 301817.25358013914,
+                "rdnt_price": 0.03411186023972985,
+                "green_volume": null,
+                "red_volume": 301817.25358013914,
+                "last_price": 0.031782597321247524,
+                "rdnt_volume": 8915780.046785533
+            },
+            {
+                "time": "2022-12-21T00:00:00Z",
+                "usd_volume": 93740.16077745546,
+                "rdnt_price": 0.038886037705052195,
+                "green_volume": null,
+                "red_volume": 93740.16077745546,
+                "last_price": 0.03936786667163205,
+                "rdnt_volume": 2415129.2827723753
+            },
+            {
+                "time": "2022-12-20T00:00:00Z",
+                "usd_volume": 69457.95877843331,
+                "rdnt_price": 0.03946401081227487,
+                "green_volume": null,
+                "red_volume": 69457.95877843331,
+                "last_price": 0.04019720284523258,
+                "rdnt_volume": 1755047.4761857798
+            },
+            {
+                "time": "2022-12-19T00:00:00Z",
+                "usd_volume": 66474.0461014013,
+                "rdnt_price": 0.04034377105731212,
+                "green_volume": 66474.0461014013,
+                "red_volume": null,
+                "last_price": 0.04005855568597017,
+                "rdnt_volume": 1654717.3027062346
+            },
+            {
+                "time": "2022-12-18T00:00:00Z",
+                "usd_volume": 38452.364464696424,
+                "rdnt_price": 0.039783239993591915,
+                "green_volume": 38452.364464696424,
+                "red_volume": null,
+                "last_price": 0.04022343827621875,
+                "rdnt_volume": 967085.6408916382
+            },
+            {
+                "time": "2022-12-17T00:00:00Z",
+                "usd_volume": 142508.00579870606,
+                "rdnt_price": 0.038110863955202565,
+                "green_volume": null,
+                "red_volume": 142508.00579870606,
+                "last_price": 0.03776391716090593,
+                "rdnt_volume": 3774356.7584822318
+            },
+            {
+                "time": "2022-12-16T00:00:00Z",
+                "usd_volume": 292377.1726540245,
+                "rdnt_price": 0.04175588798939184,
+                "green_volume": null,
+                "red_volume": 292377.1726540245,
+                "last_price": 0.04125658958111731,
+                "rdnt_volume": 7050718.903695257
+            },
+            {
+                "time": "2022-12-15T00:00:00Z",
+                "usd_volume": 340702.48201068596,
+                "rdnt_price": 0.04771329473702237,
+                "green_volume": null,
+                "red_volume": 340702.48201068596,
+                "last_price": 0.04960375687142432,
+                "rdnt_volume": 7131164.946312211
+            },
+            {
+                "time": "2022-12-14T00:00:00Z",
+                "usd_volume": 475579.63783918973,
+                "rdnt_price": 0.05040393114263321,
+                "green_volume": null,
+                "red_volume": 475579.63783918973,
+                "last_price": 0.045447353804464526,
+                "rdnt_volume": 9479978.879532455
+            },
+            {
+                "time": "2022-12-13T00:00:00Z",
+                "usd_volume": 701458.2623153203,
+                "rdnt_price": 0.053843444959652695,
+                "green_volume": 701458.2623153203,
+                "red_volume": null,
+                "last_price": 0.054926407372058526,
+                "rdnt_volume": 13039525.337846503
+            },
+            {
+                "time": "2022-12-12T00:00:00Z",
+                "usd_volume": 206094.67658556657,
+                "rdnt_price": 0.0479215740936323,
+                "green_volume": null,
+                "red_volume": 206094.67658556657,
+                "last_price": 0.048233468800909875,
+                "rdnt_volume": 4331609.473051175
+            },
+            {
+                "time": "2022-12-11T00:00:00Z",
+                "usd_volume": 156938.42690778262,
+                "rdnt_price": 0.04919977296513156,
+                "green_volume": 156938.42690778262,
+                "red_volume": null,
+                "last_price": 0.04963166080777995,
+                "rdnt_volume": 3208220.868326281
+            },
+            {
+                "time": "2022-12-10T00:00:00Z",
+                "usd_volume": 186974.9009050296,
+                "rdnt_price": 0.049024704650988016,
+                "green_volume": 186974.9009050296,
+                "red_volume": null,
+                "last_price": 0.04791887062454741,
+                "rdnt_volume": 3814294.9771733703
+            },
+            {
+                "time": "2022-12-09T00:00:00Z",
+                "usd_volume": 177776.46501303767,
+                "rdnt_price": 0.04692917982195337,
+                "green_volume": 177776.46501303767,
+                "red_volume": null,
+                "last_price": 0.04747578713157371,
+                "rdnt_volume": 3764999.0991321323
+            },
+            {
+                "time": "2022-12-08T00:00:00Z",
+                "usd_volume": 340214.5356927194,
+                "rdnt_price": 0.04604396103255232,
+                "green_volume": null,
+                "red_volume": 340214.5356927194,
+                "last_price": 0.046393168011394675,
+                "rdnt_volume": 7348931.090808153
+            },
+            {
+                "time": "2022-12-07T00:00:00Z",
+                "usd_volume": 178157.98282131678,
+                "rdnt_price": 0.04634113020519535,
+                "green_volume": null,
+                "red_volume": 178157.98282131678,
+                "last_price": 0.04564890913993546,
+                "rdnt_volume": 3847750.4493672648
+            },
+            {
+                "time": "2022-12-06T00:00:00Z",
+                "usd_volume": 238448.78815469035,
+                "rdnt_price": 0.04921684440235827,
+                "green_volume": null,
+                "red_volume": 238448.78815469035,
+                "last_price": 0.04565245383044622,
+                "rdnt_volume": 4879383.094357972
+            },
+            {
+                "time": "2022-12-05T00:00:00Z",
+                "usd_volume": 505725.7435688785,
+                "rdnt_price": 0.04970845515647515,
+                "green_volume": 505725.7435688785,
+                "red_volume": null,
+                "last_price": 0.049092930064471026,
+                "rdnt_volume": 10047297.631635724
+            },
+            {
+                "time": "2022-12-04T00:00:00Z",
+                "usd_volume": 109270.49626807668,
+                "rdnt_price": 0.041965474593828864,
+                "green_volume": 109270.49626807668,
+                "red_volume": null,
+                "last_price": 0.04226375385949771,
+                "rdnt_volume": 2592323.028120596
+            },
+            {
+                "time": "2022-12-03T00:00:00Z",
+                "usd_volume": 187712.40276624996,
+                "rdnt_price": 0.04007487139121519,
+                "green_volume": 187712.40276624996,
+                "red_volume": null,
+                "last_price": 0.0428643420391671,
+                "rdnt_volume": 4608287.6554637775
+            },
+            {
+                "time": "2022-12-02T00:00:00Z",
+                "usd_volume": 120132.69154205681,
+                "rdnt_price": 0.039162150545625246,
+                "green_volume": null,
+                "red_volume": 120132.69154205681,
+                "last_price": 0.038601882742376394,
+                "rdnt_volume": 3062579.327551427
+            },
+            {
+                "time": "2022-12-01T00:00:00Z",
+                "usd_volume": 303839.8716744199,
+                "rdnt_price": 0.039541469744761165,
+                "green_volume": null,
+                "red_volume": 303839.8716744199,
+                "last_price": 0.0389616366558042,
+                "rdnt_volume": 7761720.69648544
+            },
+            {
+                "time": "2022-11-30T00:00:00Z",
+                "usd_volume": 186717.68004279444,
+                "rdnt_price": 0.0412571178753598,
+                "green_volume": 186717.68004279444,
+                "red_volume": null,
+                "last_price": 0.03978302312816433,
+                "rdnt_volume": 4434311.427148993
+            },
+            {
+                "time": "2022-11-29T00:00:00Z",
+                "usd_volume": 132436.29176532754,
+                "rdnt_price": 0.03807451127006396,
+                "green_volume": 132436.29176532754,
+                "red_volume": null,
+                "last_price": 0.03733451697165474,
+                "rdnt_volume": 3495047.554555607
+            },
+            {
+                "time": "2022-11-28T00:00:00Z",
+                "usd_volume": 135353.54912312754,
+                "rdnt_price": 0.03661189614464436,
+                "green_volume": null,
+                "red_volume": 135353.54912312754,
+                "last_price": 0.03685451819699039,
+                "rdnt_volume": 3712128.258103705
+            },
+            {
+                "time": "2022-11-27T00:00:00Z",
+                "usd_volume": 67985.4694606107,
+                "rdnt_price": 0.03957975426160521,
+                "green_volume": null,
+                "red_volume": 67985.4694606107,
+                "last_price": 0.03863566862404483,
+                "rdnt_volume": 1718927.9939749534
+            },
+            {
+                "time": "2022-11-26T00:00:00Z",
+                "usd_volume": 128863.39033679446,
+                "rdnt_price": 0.041406753921873506,
+                "green_volume": 128863.39033679446,
+                "red_volume": null,
+                "last_price": 0.04236525325159604,
+                "rdnt_volume": 3104933.685674804
+            },
+            {
+                "time": "2022-11-25T00:00:00Z",
+                "usd_volume": 195322.68536765434,
+                "rdnt_price": 0.040622621132495915,
+                "green_volume": 195322.68536765434,
+                "red_volume": null,
+                "last_price": 0.04305468278476011,
+                "rdnt_volume": 4819347.235547257
+            },
+            {
+                "time": "2022-11-24T00:00:00Z",
+                "usd_volume": 299461.2641563062,
+                "rdnt_price": 0.03835746415445905,
+                "green_volume": 299461.2641563062,
+                "red_volume": null,
+                "last_price": 0.03499040890856982,
+                "rdnt_volume": 7882722.9165771855
+            },
+            {
+                "time": "2022-11-23T00:00:00Z",
+                "usd_volume": 230613.9853853079,
+                "rdnt_price": 0.03510316531971474,
+                "green_volume": 230613.9853853079,
+                "red_volume": null,
+                "last_price": 0.036655645233476794,
+                "rdnt_volume": 6527393.140818407
+            },
+            {
+                "time": "2022-11-22T00:00:00Z",
+                "usd_volume": 88896.75405741014,
+                "rdnt_price": 0.030919906652017923,
+                "green_volume": 88896.75405741014,
+                "red_volume": null,
+                "last_price": 0.030899339377115,
+                "rdnt_volume": 2886054.9657018445
+            },
+            {
+                "time": "2022-11-21T00:00:00Z",
+                "usd_volume": 106111.08566476984,
+                "rdnt_price": 0.030824139021945442,
+                "green_volume": null,
+                "red_volume": 106111.08566476984,
+                "last_price": 0.03137886677631588,
+                "rdnt_volume": 3464581.24847847
+            },
+            {
+                "time": "2022-11-20T00:00:00Z",
+                "usd_volume": 66053.19013902388,
+                "rdnt_price": 0.03352300875164476,
+                "green_volume": null,
+                "red_volume": 66053.19013902388,
+                "last_price": 0.03310649442764762,
+                "rdnt_volume": 1972618.4954873072
+            },
+            {
+                "time": "2022-11-19T00:00:00Z",
+                "usd_volume": 53494.07207600473,
+                "rdnt_price": 0.03453383727414987,
+                "green_volume": null,
+                "red_volume": 53494.07207600473,
+                "last_price": 0.034544836997111854,
+                "rdnt_volume": 1547641.6767166941
+            },
+            {
+                "time": "2022-11-18T00:00:00Z",
+                "usd_volume": 152189.65972266,
+                "rdnt_price": 0.03500509815254001,
+                "green_volume": 152189.65972266,
+                "red_volume": null,
+                "last_price": 0.03497101994459564,
+                "rdnt_volume": 4366456.917821785
+            },
+            {
+                "time": "2022-11-17T00:00:00Z",
+                "usd_volume": 383456.55035177513,
+                "rdnt_price": 0.03312888017748618,
+                "green_volume": null,
+                "red_volume": 383456.55035177513,
+                "last_price": 0.032657416268564776,
+                "rdnt_volume": 11609210.075663239
+            },
+            {
+                "time": "2022-11-16T00:00:00Z",
+                "usd_volume": 180066.3987672018,
+                "rdnt_price": 0.041329560481524814,
+                "green_volume": 180066.3987672018,
+                "red_volume": null,
+                "last_price": 0.0386792908286347,
+                "rdnt_volume": 4353584.964386636
+            },
+            {
+                "time": "2022-11-15T00:00:00Z",
+                "usd_volume": 194914.49695629024,
+                "rdnt_price": 0.03972354288268597,
+                "green_volume": 194914.49695629024,
+                "red_volume": null,
+                "last_price": 0.04013402947496104,
+                "rdnt_volume": 4870222.210539625
+            },
+            {
+                "time": "2022-11-14T00:00:00Z",
+                "usd_volume": 124614.09656184535,
+                "rdnt_price": 0.03554791696107809,
+                "green_volume": 124614.09656184535,
+                "red_volume": null,
+                "last_price": 0.03651454054582881,
+                "rdnt_volume": 3495306.2671012627
+            },
+            {
+                "time": "2022-11-13T00:00:00Z",
+                "usd_volume": 55713.39665493691,
+                "rdnt_price": 0.03376765484535713,
+                "green_volume": 55713.39665493691,
+                "red_volume": null,
+                "last_price": 0.03352498177249451,
+                "rdnt_volume": 1649640.3164029608
+            },
+            {
+                "time": "2022-11-12T00:00:00Z",
+                "usd_volume": 111354.46345126003,
+                "rdnt_price": 0.03292099125028325,
+                "green_volume": null,
+                "red_volume": 111354.46345126003,
+                "last_price": 0.03239842672408171,
+                "rdnt_volume": 3394440.870665623
+            },
+            {
+                "time": "2022-11-11T00:00:00Z",
+                "usd_volume": 421734.2356548851,
+                "rdnt_price": 0.033631729657167354,
+                "green_volume": 421734.2356548851,
+                "red_volume": null,
+                "last_price": 0.03585050003087781,
+                "rdnt_volume": 12604446.134129364
+            },
+            {
+                "time": "2022-11-10T00:00:00Z",
+                "usd_volume": 654954.2048895074,
+                "rdnt_price": 0.02941643187684379,
+                "green_volume": null,
+                "red_volume": 654954.2048895074,
+                "last_price": 0.02959634170812167,
+                "rdnt_volume": 22581085.740383774
+            },
+            {
+                "time": "2022-11-09T00:00:00Z",
+                "usd_volume": 394739.3463714081,
+                "rdnt_price": 0.02981838063396126,
+                "green_volume": null,
+                "red_volume": 394739.3463714081,
+                "last_price": 0.03040288668358285,
+                "rdnt_volume": 13358290.464026757
+            },
+            {
+                "time": "2022-11-08T00:00:00Z",
+                "usd_volume": 1003614.7548343985,
+                "rdnt_price": 0.0408925306405648,
+                "green_volume": null,
+                "red_volume": 1003614.7548343985,
+                "last_price": 0.039516714654493676,
+                "rdnt_volume": 24804798.822479762
+            },
+            {
+                "time": "2022-11-07T00:00:00Z",
+                "usd_volume": 621432.7892562808,
+                "rdnt_price": 0.05667213636149326,
+                "green_volume": null,
+                "red_volume": 621432.7892562808,
+                "last_price": 0.058185208931120926,
+                "rdnt_volume": 11097446.64664542
+            },
+            {
+                "time": "2022-11-06T00:00:00Z",
+                "usd_volume": 468841.1559090201,
+                "rdnt_price": 0.06581711224263294,
+                "green_volume": null,
+                "red_volume": 468841.1559090201,
+                "last_price": 0.06692494779507105,
+                "rdnt_volume": 7274837.826381583
+            },
+            {
+                "time": "2022-11-05T00:00:00Z",
+                "usd_volume": 534012.2454615622,
+                "rdnt_price": 0.07394409052456676,
+                "green_volume": 534012.2454615622,
+                "red_volume": null,
+                "last_price": 0.07297140762190019,
+                "rdnt_volume": 7293328.709789312
+            },
+            {
+                "time": "2022-11-04T00:00:00Z",
+                "usd_volume": 1025153.269211834,
+                "rdnt_price": 0.07287638000071212,
+                "green_volume": 1025153.269211834,
+                "red_volume": null,
+                "last_price": 0.07854653157148597,
+                "rdnt_volume": 14113840.77284114
+            },
+            {
+                "time": "2022-11-03T00:00:00Z",
+                "usd_volume": 654829.8090012427,
+                "rdnt_price": 0.053909819470640656,
+                "green_volume": 654829.8090012427,
+                "red_volume": null,
+                "last_price": 0.049016678283057676,
+                "rdnt_volume": 12171374.591621833
+            },
+            {
+                "time": "2022-11-02T00:00:00Z",
+                "usd_volume": 383667.8593953223,
+                "rdnt_price": 0.05110399526348374,
+                "green_volume": null,
+                "red_volume": 383667.8593953223,
+                "last_price": 0.050997545707694936,
+                "rdnt_volume": 7552305.323530122
+            },
+            {
+                "time": "2022-11-01T00:00:00Z",
+                "usd_volume": 232637.70490435997,
+                "rdnt_price": 0.05554061305653741,
+                "green_volume": null,
+                "red_volume": 232637.70490435997,
+                "last_price": 0.05609604308695633,
+                "rdnt_volume": 4200430.742072086
+            },
+            {
+                "time": "2022-10-31T00:00:00Z",
+                "usd_volume": 450652.8776022495,
+                "rdnt_price": 0.05559914917832339,
+                "green_volume": 450652.8776022495,
+                "red_volume": null,
+                "last_price": 0.054161560162543185,
+                "rdnt_volume": 8001642.270676537
+            },
+            {
+                "time": "2022-10-30T00:00:00Z",
+                "usd_volume": 391074.06046363944,
+                "rdnt_price": 0.046872761689436424,
+                "green_volume": 391074.06046363944,
+                "red_volume": null,
+                "last_price": 0.04311668605657532,
+                "rdnt_volume": 8206848.85768486
+            },
+            {
+                "time": "2022-10-29T00:00:00Z",
+                "usd_volume": 537705.1595729281,
+                "rdnt_price": 0.043698845445007864,
+                "green_volume": null,
+                "red_volume": 537705.1595729281,
+                "last_price": 0.04765443662790844,
+                "rdnt_volume": 12523072.798212903
+            },
+            {
+                "time": "2022-10-28T00:00:00Z",
+                "usd_volume": 401305.8243895038,
+                "rdnt_price": 0.048373109547044,
+                "green_volume": 401305.8243895038,
+                "red_volume": null,
+                "last_price": 0.05502290949236095,
+                "rdnt_volume": 8285697.268754955
+            },
+            {
+                "time": "2022-10-27T00:00:00Z",
+                "usd_volume": 562257.6601530141,
+                "rdnt_price": 0.043805925776458025,
+                "green_volume": 562257.6601530141,
+                "red_volume": null,
+                "last_price": 0.04741263941055011,
+                "rdnt_volume": 12666819.127445994
+            },
+            {
+                "time": "2022-10-26T00:00:00Z",
+                "usd_volume": 716443.8922386036,
+                "rdnt_price": 0.04342261803679091,
+                "green_volume": null,
+                "red_volume": 716443.8922386036,
+                "last_price": 0.04626114297103701,
+                "rdnt_volume": 16467073.011946779
+            },
+            {
+                "time": "2022-10-25T00:00:00Z",
+                "usd_volume": 713557.2091131561,
+                "rdnt_price": 0.04371073729645708,
+                "green_volume": null,
+                "red_volume": 713557.2091131561,
+                "last_price": 0.04971103961082371,
+                "rdnt_volume": 16640501.865898162
+            },
+            {
+                "time": "2022-10-24T00:00:00Z",
+                "usd_volume": 1477159.9964322944,
+                "rdnt_price": 0.052672226030362465,
+                "green_volume": 1477159.9964322944,
+                "red_volume": null,
+                "last_price": 0.047709597373038766,
+                "rdnt_volume": 28057614.0435483
+            },
+            {
+                "time": "2022-10-23T00:00:00Z",
+                "usd_volume": 1426690.705095144,
+                "rdnt_price": 0.03859620819614036,
+                "green_volume": 1426690.705095144,
+                "red_volume": null,
+                "last_price": 0.03323991184131889,
+                "rdnt_volume": 36872052.19565563
+            },
+            {
+                "time": "2022-10-22T00:00:00Z",
+                "usd_volume": 73909.03892483976,
+                "rdnt_price": 0.013729107656178179,
+                "green_volume": 73909.03892483976,
+                "red_volume": null,
+                "last_price": 0.013430300181794917,
+                "rdnt_volume": 4919245.354503675
+            },
+            {
+                "time": "2022-10-21T00:00:00Z",
+                "usd_volume": 37887.65430412442,
+                "rdnt_price": 0.012701574842548092,
+                "green_volume": 37887.65430412442,
+                "red_volume": null,
+                "last_price": 0.013302074986772699,
+                "rdnt_volume": 2966806.796120804
+            },
+            {
+                "time": "2022-10-20T00:00:00Z",
+                "usd_volume": 91597.62590554406,
+                "rdnt_price": 0.01256762408703644,
+                "green_volume": null,
+                "red_volume": 91597.62590554406,
+                "last_price": 0.012956600075475022,
+                "rdnt_volume": 7460862.676394408
+            },
+            {
+                "time": "2022-10-19T00:00:00Z",
+                "usd_volume": 35845.977691756045,
+                "rdnt_price": 0.014979482274148111,
+                "green_volume": null,
+                "red_volume": 35845.977691756045,
+                "last_price": 0.01544309324595751,
+                "rdnt_volume": 2467855.3895732383
+            },
+            {
+                "time": "2022-10-18T00:00:00Z",
+                "usd_volume": 18485.262090185985,
+                "rdnt_price": 0.016900468812393134,
+                "green_volume": null,
+                "red_volume": 18485.262090185985,
+                "last_price": 0.016112712597244016,
+                "rdnt_volume": 1114482.9253651698
+            },
+            {
+                "time": "2022-10-17T00:00:00Z",
+                "usd_volume": 11520.457500946202,
+                "rdnt_price": 0.017655349891085692,
+                "green_volume": 11520.457500946202,
+                "red_volume": null,
+                "last_price": 0.01772930164547766,
+                "rdnt_volume": 657251.4020872274
+            },
+            {
+                "time": "2022-10-16T00:00:00Z",
+                "usd_volume": 15276.606424719957,
+                "rdnt_price": 0.017105199627571007,
+                "green_volume": null,
+                "red_volume": 15276.606424719957,
+                "last_price": 0.0169426240467458,
+                "rdnt_volume": 893471.485554636
+            },
+            {
+                "time": "2022-10-15T00:00:00Z",
+                "usd_volume": 22202.009008317422,
+                "rdnt_price": 0.017378708610341666,
+                "green_volume": null,
+                "red_volume": 22202.009008317422,
+                "last_price": 0.017668963094907834,
+                "rdnt_volume": 1273504.4955401577
+            },
+            {
+                "time": "2022-10-14T00:00:00Z",
+                "usd_volume": 30920.96781539162,
+                "rdnt_price": 0.01741781406559946,
+                "green_volume": 30920.96781539162,
+                "red_volume": null,
+                "last_price": 0.016898571793626808,
+                "rdnt_volume": 1760743.6728316664
+            },
+            {
+                "time": "2022-10-13T00:00:00Z",
+                "usd_volume": 138524.5272730299,
+                "rdnt_price": 0.01629691763521126,
+                "green_volume": null,
+                "red_volume": 138524.5272730299,
+                "last_price": 0.0163208709450733,
+                "rdnt_volume": 8280405.419099345
+            },
+            {
+                "time": "2022-10-12T00:00:00Z",
+                "usd_volume": 25277.152281913604,
+                "rdnt_price": 0.021582766905263975,
+                "green_volume": 25277.152281913604,
+                "red_volume": null,
+                "last_price": 0.021575859043689152,
+                "rdnt_volume": 1165271.2417320982
+            },
+            {
+                "time": "2022-10-11T00:00:00Z",
+                "usd_volume": 30018.908249788194,
+                "rdnt_price": 0.020801100413667856,
+                "green_volume": null,
+                "red_volume": 30018.908249788194,
+                "last_price": 0.020708816432220705,
+                "rdnt_volume": 1434597.2102284844
+            },
+            {
+                "time": "2022-10-10T00:00:00Z",
+                "usd_volume": 30446.834198272012,
+                "rdnt_price": 0.023319802321041576,
+                "green_volume": null,
+                "red_volume": 30446.834198272012,
+                "last_price": 0.02344501954885946,
+                "rdnt_volume": 1316999.0293626108
+            },
+            {
+                "time": "2022-10-09T00:00:00Z",
+                "usd_volume": 19292.04600816924,
+                "rdnt_price": 0.024569955546293144,
+                "green_volume": 19292.04600816924,
+                "red_volume": null,
+                "last_price": 0.024628711278169964,
+                "rdnt_volume": 791584.7451621859
+            },
+            {
+                "time": "2022-10-08T00:00:00Z",
+                "usd_volume": 28061.912057139478,
+                "rdnt_price": 0.023637795287454515,
+                "green_volume": null,
+                "red_volume": 28061.912057139478,
+                "last_price": 0.02386288659204347,
+                "rdnt_volume": 1190144.4583379428
+            },
+            {
+                "time": "2022-10-07T00:00:00Z",
+                "usd_volume": 79135.56499854948,
+                "rdnt_price": 0.02398868488636973,
+                "green_volume": null,
+                "red_volume": 79135.56499854948,
+                "last_price": 0.02325458344357922,
+                "rdnt_volume": 3375767.405700911
+            },
+            {
+                "time": "2022-10-06T00:00:00Z",
+                "usd_volume": 92511.51597895342,
+                "rdnt_price": 0.027976105768661195,
+                "green_volume": null,
+                "red_volume": 92511.51597895342,
+                "last_price": 0.029495514251241327,
+                "rdnt_volume": 3286587.7163323285
+            },
+            {
+                "time": "2022-10-05T00:00:00Z",
+                "usd_volume": 36366.273828366946,
+                "rdnt_price": 0.0286939355765119,
+                "green_volume": null,
+                "red_volume": 36366.273828366946,
+                "last_price": 0.028258693380076583,
+                "rdnt_volume": 1243984.335221713
+            },
+            {
+                "time": "2022-10-04T00:00:00Z",
+                "usd_volume": 22778.205230157226,
+                "rdnt_price": 0.02892207556270578,
+                "green_volume": 22778.205230157226,
+                "red_volume": null,
+                "last_price": 0.028924441985183427,
+                "rdnt_volume": 788857.0300842752
+            },
+            {
+                "time": "2022-10-03T00:00:00Z",
+                "usd_volume": 26691.73047193241,
+                "rdnt_price": 0.02863056670231842,
+                "green_volume": null,
+                "red_volume": 26691.73047193241,
+                "last_price": 0.027978719348915104,
+                "rdnt_volume": 937864.9496692128
+            },
+            {
+                "time": "2022-10-02T00:00:00Z",
+                "usd_volume": 48046.12165580594,
+                "rdnt_price": 0.029350499023568705,
+                "green_volume": null,
+                "red_volume": 48046.12165580594,
+                "last_price": 0.029875750043015587,
+                "rdnt_volume": 1653840.0849615491
+            },
+            {
+                "time": "2022-10-01T00:00:00Z",
+                "usd_volume": 24018.291984616255,
+                "rdnt_price": 0.030317013753092602,
+                "green_volume": 24018.291984616255,
+                "red_volume": null,
+                "last_price": 0.03002885519997857,
+                "rdnt_volume": 787809.3761640489
+            },
+            {
+                "time": "2022-09-30T00:00:00Z",
+                "usd_volume": 66615.96764879386,
+                "rdnt_price": 0.029698271266352962,
+                "green_volume": null,
+                "red_volume": 66615.96764879386,
+                "last_price": 0.029110215490374514,
+                "rdnt_volume": 2240325.914346961
+            },
+            {
+                "time": "2022-09-29T00:00:00Z",
+                "usd_volume": 243189.11855242323,
+                "rdnt_price": 0.03072027088111129,
+                "green_volume": null,
+                "red_volume": 243189.11855242323,
+                "last_price": 0.035229245786724706,
+                "rdnt_volume": 7914543.641801953
+            },
+            {
+                "time": "2022-09-28T00:00:00Z",
+                "usd_volume": 113696.56807995113,
+                "rdnt_price": 0.03918731974544886,
+                "green_volume": null,
+                "red_volume": 113696.56807995113,
+                "last_price": 0.03692038694053159,
+                "rdnt_volume": 2994300.530960129
+            },
+            {
+                "time": "2022-09-27T00:00:00Z",
+                "usd_volume": 42744.48335893443,
+                "rdnt_price": 0.04213947517789734,
+                "green_volume": 42744.48335893443,
+                "red_volume": null,
+                "last_price": 0.04142650267155185,
+                "rdnt_volume": 1016842.9275824134
+            },
+            {
+                "time": "2022-09-26T00:00:00Z",
+                "usd_volume": 62400.3165214453,
+                "rdnt_price": 0.040980688586684855,
+                "green_volume": null,
+                "red_volume": 62400.3165214453,
+                "last_price": 0.04077011287660372,
+                "rdnt_volume": 1534250.9279026869
+            },
+            {
+                "time": "2022-09-25T00:00:00Z",
+                "usd_volume": 45398.27483061032,
+                "rdnt_price": 0.04198223166713425,
+                "green_volume": null,
+                "red_volume": 45398.27483061032,
+                "last_price": 0.04225678878044853,
+                "rdnt_volume": 1082924.3066885746
+            },
+            {
+                "time": "2022-09-24T00:00:00Z",
+                "usd_volume": 70963.59058850349,
+                "rdnt_price": 0.044054653927586306,
+                "green_volume": 70963.59058850349,
+                "red_volume": null,
+                "last_price": 0.042949929183962836,
+                "rdnt_volume": 1634337.5659588163
+            },
+            {
+                "time": "2022-09-23T00:00:00Z",
+                "usd_volume": 114029.76514477607,
+                "rdnt_price": 0.043699035984432553,
+                "green_volume": 114029.76514477607,
+                "red_volume": null,
+                "last_price": 0.04223419685574228,
+                "rdnt_volume": 2656183.817390076
+            },
+            {
+                "time": "2022-09-22T00:00:00Z",
+                "usd_volume": 109227.4389726008,
+                "rdnt_price": 0.043647423961721825,
+                "green_volume": null,
+                "red_volume": 109227.4389726008,
+                "last_price": 0.04356001599432895,
+                "rdnt_volume": 2479512.7659661886
+            },
+            {
+                "time": "2022-09-21T00:00:00Z",
+                "usd_volume": 53202.63124258107,
+                "rdnt_price": 0.04591905087778352,
+                "green_volume": 53202.63124258107,
+                "red_volume": null,
+                "last_price": 0.045909815924766784,
+                "rdnt_volume": 1154958.755978381
+            },
+            {
+                "time": "2022-09-20T00:00:00Z",
+                "usd_volume": 44699.30503417372,
+                "rdnt_price": 0.04401630167297321,
+                "green_volume": null,
+                "red_volume": 44699.30503417372,
+                "last_price": 0.04297363042774582,
+                "rdnt_volume": 996778.6104193036
+            },
+            {
+                "time": "2022-09-19T00:00:00Z",
+                "usd_volume": 87746.70755709513,
+                "rdnt_price": 0.044208754534692134,
+                "green_volume": null,
+                "red_volume": 87746.70755709513,
+                "last_price": 0.04694244330194132,
+                "rdnt_volume": 2017231.2987392952
+            },
+            {
+                "time": "2022-09-18T00:00:00Z",
+                "usd_volume": 78760.1710047443,
+                "rdnt_price": 0.04885880557700931,
+                "green_volume": 78760.1710047443,
+                "red_volume": null,
+                "last_price": 0.050736578366665064,
+                "rdnt_volume": 1639802.5627169288
+            },
+            {
+                "time": "2022-09-17T00:00:00Z",
+                "usd_volume": 20595.238617847004,
+                "rdnt_price": 0.04544850778069653,
+                "green_volume": 20595.238617847004,
+                "red_volume": null,
+                "last_price": 0.04538200025767108,
+                "rdnt_volume": 454685.6209562183
+            },
+            {
+                "time": "2022-09-16T00:00:00Z",
+                "usd_volume": 84209.25838814699,
+                "rdnt_price": 0.043785582700016604,
+                "green_volume": 84209.25838814699,
+                "red_volume": null,
+                "last_price": 0.043554253226001295,
+                "rdnt_volume": 1922905.5162064005
+            },
+            {
+                "time": "2022-09-15T00:00:00Z",
+                "usd_volume": 186857.73146501547,
+                "rdnt_price": 0.042556568621892665,
+                "green_volume": null,
+                "red_volume": 186857.73146501547,
+                "last_price": 0.04225534969952558,
+                "rdnt_volume": 4388370.807314536
+            },
+            {
+                "time": "2022-09-14T00:00:00Z",
+                "usd_volume": 46030.42287173632,
+                "rdnt_price": 0.05068246864977596,
+                "green_volume": null,
+                "red_volume": 46030.42287173632,
+                "last_price": 0.04884248159928325,
+                "rdnt_volume": 901295.3203103206
+            },
+            {
+                "time": "2022-09-13T00:00:00Z",
+                "usd_volume": 85529.50262223152,
+                "rdnt_price": 0.05097154307534262,
+                "green_volume": 85529.50262223152,
+                "red_volume": null,
+                "last_price": 0.05108636379650383,
+                "rdnt_volume": 1690023.1310372553
+            },
+            {
+                "time": "2022-09-12T00:00:00Z",
+                "usd_volume": 56586.525597101274,
+                "rdnt_price": 0.05023531895446889,
+                "green_volume": null,
+                "red_volume": 56586.525597101274,
+                "last_price": 0.05045980188060866,
+                "rdnt_volume": 1119888.2035603668
+            },
+            {
+                "time": "2022-09-11T00:00:00Z",
+                "usd_volume": 56209.59368171276,
+                "rdnt_price": 0.052194283653908255,
+                "green_volume": null,
+                "red_volume": 56209.59368171276,
+                "last_price": 0.05260116702896143,
+                "rdnt_volume": 1076441.2057426746
+            },
+            {
+                "time": "2022-09-10T00:00:00Z",
+                "usd_volume": 261463.51404945014,
+                "rdnt_price": 0.054861980457154125,
+                "green_volume": null,
+                "red_volume": 261463.51404945014,
+                "last_price": 0.04931650628182265,
+                "rdnt_volume": 4805601.1905268915
+            },
+            {
+                "time": "2022-09-09T00:00:00Z",
+                "usd_volume": 261273.4843684367,
+                "rdnt_price": 0.05922536326462509,
+                "green_volume": 261273.4843684367,
+                "red_volume": null,
+                "last_price": 0.052028063692923884,
+                "rdnt_volume": 4347419.146680979
+            },
+            {
+                "time": "2022-09-08T00:00:00Z",
+                "usd_volume": 182696.07823082095,
+                "rdnt_price": 0.05056394153246206,
+                "green_volume": null,
+                "red_volume": 182696.07823082095,
+                "last_price": 0.04774100050325145,
+                "rdnt_volume": 3568933.0324788243
+            },
+            {
+                "time": "2022-09-07T00:00:00Z",
+                "usd_volume": 84881.48882900071,
+                "rdnt_price": 0.05145500959230185,
+                "green_volume": null,
+                "red_volume": 84881.48882900071,
+                "last_price": 0.04959503013463695,
+                "rdnt_volume": 1646113.853241882
+            },
+            {
+                "time": "2022-09-06T00:00:00Z",
+                "usd_volume": 114899.86159975112,
+                "rdnt_price": 0.05657485142283295,
+                "green_volume": null,
+                "red_volume": 114899.86159975112,
+                "last_price": 0.05158299752035895,
+                "rdnt_volume": 2020052.357190586
+            },
+            {
+                "time": "2022-09-05T00:00:00Z",
+                "usd_volume": 106440.69400232004,
+                "rdnt_price": 0.06178855118618852,
+                "green_volume": null,
+                "red_volume": 106440.69400232004,
+                "last_price": 0.06246462469075599,
+                "rdnt_volume": 1729110.789973974
+            },
+            {
+                "time": "2022-09-04T00:00:00Z",
+                "usd_volume": 72495.74289011992,
+                "rdnt_price": 0.06655576565393084,
+                "green_volume": null,
+                "red_volume": 72495.74289011992,
+                "last_price": 0.06606995525742078,
+                "rdnt_volume": 1091771.2124596713
+            },
+            {
+                "time": "2022-09-03T00:00:00Z",
+                "usd_volume": 125751.07464739046,
+                "rdnt_price": 0.06750806080823946,
+                "green_volume": null,
+                "red_volume": 125751.07464739046,
+                "last_price": 0.06819960756754317,
+                "rdnt_volume": 1876692.0653313505
+            },
+            {
+                "time": "2022-09-02T00:00:00Z",
+                "usd_volume": 78250.92267116965,
+                "rdnt_price": 0.07206309690814892,
+                "green_volume": null,
+                "red_volume": 78250.92267116965,
+                "last_price": 0.07201183640586181,
+                "rdnt_volume": 1085849.693350077
+            },
+            {
+                "time": "2022-09-01T00:00:00Z",
+                "usd_volume": 399126.31946377165,
+                "rdnt_price": 0.07440278064649306,
+                "green_volume": null,
+                "red_volume": 399126.31946377165,
+                "last_price": 0.0735089571967668,
+                "rdnt_volume": 5371843.563997532
+            },
+            {
+                "time": "2022-08-31T00:00:00Z",
+                "usd_volume": 116273.79072242745,
+                "rdnt_price": 0.08255955301689885,
+                "green_volume": 116273.79072242745,
+                "red_volume": null,
+                "last_price": 0.08461273080085902,
+                "rdnt_volume": 1419232.9212055602
+            },
+            {
+                "time": "2022-08-30T00:00:00Z",
+                "usd_volume": 216271.89994724997,
+                "rdnt_price": 0.0795226373074764,
+                "green_volume": null,
+                "red_volume": 216271.89994724997,
+                "last_price": 0.08225987094182798,
+                "rdnt_volume": 2729199.9289642284
+            },
+            {
+                "time": "2022-08-29T00:00:00Z",
+                "usd_volume": 108459.80863619108,
+                "rdnt_price": 0.08221670122906306,
+                "green_volume": null,
+                "red_volume": 108459.80863619108,
+                "last_price": 0.08189399447572425,
+                "rdnt_volume": 1321354.6871011674
+            },
+            {
+                "time": "2022-08-28T00:00:00Z",
+                "usd_volume": 163619.95279450584,
+                "rdnt_price": 0.08792257025300239,
+                "green_volume": 163619.95279450584,
+                "red_volume": null,
+                "last_price": 0.08053202078250202,
+                "rdnt_volume": 1881967.2646622735
+            },
+            {
+                "time": "2022-08-27T00:00:00Z",
+                "usd_volume": 65357.91680825358,
+                "rdnt_price": 0.0809261230411258,
+                "green_volume": null,
+                "red_volume": 65357.91680825358,
+                "last_price": 0.08099383298547995,
+                "rdnt_volume": 808330.2850817484
+            },
+            {
+                "time": "2022-08-26T00:00:00Z",
+                "usd_volume": 156710.4783660841,
+                "rdnt_price": 0.09010188896181873,
+                "green_volume": null,
+                "red_volume": 156710.4783660841,
+                "last_price": 0.08919752819724448,
+                "rdnt_volume": 1762383.2913133672
+            },
+            {
+                "time": "2022-08-25T00:00:00Z",
+                "usd_volume": 526092.2640314249,
+                "rdnt_price": 0.10050662370986878,
+                "green_volume": null,
+                "red_volume": 526092.2640314249,
+                "last_price": 0.10692591814965768,
+                "rdnt_volume": 5086864.738897165
+            },
+            {
+                "time": "2022-08-24T00:00:00Z",
+                "usd_volume": 254657.364155933,
+                "rdnt_price": 0.10856922553276946,
+                "green_volume": 254657.364155933,
+                "red_volume": null,
+                "last_price": 0.10941213633383735,
+                "rdnt_volume": 2299639.360655488
+            },
+            {
+                "time": "2022-08-23T00:00:00Z",
+                "usd_volume": 351500.4966452442,
+                "rdnt_price": 0.10481476959614551,
+                "green_volume": 351500.4966452442,
+                "red_volume": null,
+                "last_price": 0.08884960836580735,
+                "rdnt_volume": 3373946.9437811743
+            },
+            {
+                "time": "2022-08-22T00:00:00Z",
+                "usd_volume": 205773.93956790568,
+                "rdnt_price": 0.08404677638443957,
+                "green_volume": null,
+                "red_volume": 205773.93956790568,
+                "last_price": 0.08143434742793754,
+                "rdnt_volume": 2423486.885450132
+            },
+            {
+                "time": "2022-08-21T00:00:00Z",
+                "usd_volume": 91915.11579028169,
+                "rdnt_price": 0.09424868999504296,
+                "green_volume": null,
+                "red_volume": 91915.11579028169,
+                "last_price": 0.09417118996926088,
+                "rdnt_volume": 970436.818249494
+            },
+            {
+                "time": "2022-08-20T00:00:00Z",
+                "usd_volume": 131308.7535232484,
+                "rdnt_price": 0.10016568440983595,
+                "green_volume": null,
+                "red_volume": 131308.7535232484,
+                "last_price": 0.09619545263499774,
+                "rdnt_volume": 1322663.371400821
+            },
+            {
+                "time": "2022-08-19T00:00:00Z",
+                "usd_volume": 397743.93710536486,
+                "rdnt_price": 0.10703352032814428,
+                "green_volume": null,
+                "red_volume": 397743.93710536486,
+                "last_price": 0.11839073089352749,
+                "rdnt_volume": 3691830.3824463193
+            },
+            {
+                "time": "2022-08-18T00:00:00Z",
+                "usd_volume": 801669.1612156963,
+                "rdnt_price": 0.11983910096993088,
+                "green_volume": null,
+                "red_volume": 801669.1612156963,
+                "last_price": 0.12525232319378096,
+                "rdnt_volume": 6870810.896707644
+            },
+            {
+                "time": "2022-08-17T00:00:00Z",
+                "usd_volume": 214032.6723209841,
+                "rdnt_price": 0.1339322936303292,
+                "green_volume": 214032.6723209841,
+                "red_volume": null,
+                "last_price": 0.1392601119025553,
+                "rdnt_volume": 1612122.0844681137
+            },
+            {
+                "time": "2022-08-16T00:00:00Z",
+                "usd_volume": 363790.71868788044,
+                "rdnt_price": 0.12602565012049222,
+                "green_volume": null,
+                "red_volume": 363790.71868788044,
+                "last_price": 0.14466064028470083,
+                "rdnt_volume": 2859385.2520478223
+            },
+            {
+                "time": "2022-08-15T00:00:00Z",
+                "usd_volume": 302711.2995670531,
+                "rdnt_price": 0.12760929726619138,
+                "green_volume": null,
+                "red_volume": 302711.2995670531,
+                "last_price": 0.12264945720672234,
+                "rdnt_volume": 2368629.696340222
+            },
+            {
+                "time": "2022-08-14T00:00:00Z",
+                "usd_volume": 516387.5497917936,
+                "rdnt_price": 0.15080926382605012,
+                "green_volume": null,
+                "red_volume": 516387.5497917936,
+                "last_price": 0.16413114920688898,
+                "rdnt_volume": 3425162.719589227
+            },
+            {
+                "time": "2022-08-13T00:00:00Z",
+                "usd_volume": 376779.0447374306,
+                "rdnt_price": 0.19382676247645741,
+                "green_volume": 376779.0447374306,
+                "red_volume": null,
+                "last_price": 0.17369259273826348,
+                "rdnt_volume": 1968968.6508915205
+            },
+            {
+                "time": "2022-08-12T00:00:00Z",
+                "usd_volume": 717216.2928204783,
+                "rdnt_price": 0.19106273337670446,
+                "green_volume": null,
+                "red_volume": 717216.2928204783,
+                "last_price": 0.1871856439069946,
+                "rdnt_volume": 3675419.4063453116
+            },
+            {
+                "time": "2022-08-11T00:00:00Z",
+                "usd_volume": 1092911.2104681246,
+                "rdnt_price": 0.20280635449634835,
+                "green_volume": 1092911.2104681246,
+                "red_volume": null,
+                "last_price": 0.20205605333397533,
+                "rdnt_volume": 5428662.835881823
+            },
+            {
+                "time": "2022-08-10T00:00:00Z",
+                "usd_volume": 722841.2811466303,
+                "rdnt_price": 0.1680862084722952,
+                "green_volume": 722841.2811466303,
+                "red_volume": null,
+                "last_price": 0.1637997723614634,
+                "rdnt_volume": 4204861.878486717
+            },
+            {
+                "time": "2022-08-09T00:00:00Z",
+                "usd_volume": 447264.9768655745,
+                "rdnt_price": 0.15213152629247204,
+                "green_volume": null,
+                "red_volume": 447264.9768655745,
+                "last_price": 0.1518418221023175,
+                "rdnt_volume": 2967942.3376568994
+            },
+            {
+                "time": "2022-08-08T00:00:00Z",
+                "usd_volume": 559417.8466448513,
+                "rdnt_price": 0.1738915483097427,
+                "green_volume": null,
+                "red_volume": 559417.8466448513,
+                "last_price": 0.1670151564729111,
+                "rdnt_volume": 3257079.916338292
+            },
+            {
+                "time": "2022-08-07T00:00:00Z",
+                "usd_volume": 1817013.2401461015,
+                "rdnt_price": 0.18017400295754765,
+                "green_volume": 1817013.2401461015,
+                "red_volume": null,
+                "last_price": 0.18468340870830205,
+                "rdnt_volume": 10403880.365762288
+            },
+            {
+                "time": "2022-08-06T00:00:00Z",
+                "usd_volume": 1411982.3271852056,
+                "rdnt_price": 0.12384534639449776,
+                "green_volume": 1411982.3271852056,
+                "red_volume": null,
+                "last_price": 0.08943222636259777,
+                "rdnt_volume": 11017741.818586798
+            },
+            {
+                "time": "2022-08-05T00:00:00Z",
+                "usd_volume": 804927.1632255818,
+                "rdnt_price": 0.08973156684224504,
+                "green_volume": null,
+                "red_volume": 804927.1632255818,
+                "last_price": 0.09010870839885653,
+                "rdnt_volume": 8718205.6804509
+            },
+            {
+                "time": "2022-08-04T00:00:00Z",
+                "usd_volume": 891084.4003800086,
+                "rdnt_price": 0.10010281376545674,
+                "green_volume": 891084.4003800086,
+                "red_volume": null,
+                "last_price": 0.10739256585080076,
+                "rdnt_volume": 9164057.84054761
+            },
+            {
+                "time": "2022-08-03T00:00:00Z",
+                "usd_volume": 594291.2484725727,
+                "rdnt_price": 0.09737849503714743,
+                "green_volume": 594291.2484725727,
+                "red_volume": null,
+                "last_price": 0.08569693370786387,
+                "rdnt_volume": 5943218.977643508
+            },
+            {
+                "time": "2022-08-02T00:00:00Z",
+                "usd_volume": 617587.1272528949,
+                "rdnt_price": 0.07025925995210944,
+                "green_volume": 617587.1272528949,
+                "red_volume": null,
+                "last_price": 0.06390420868005478,
+                "rdnt_volume": 8771053.187117305
+            },
+            {
+                "time": "2022-08-01T00:00:00Z",
+                "usd_volume": 105831.06530782997,
+                "rdnt_price": 0.04914209057344043,
+                "green_volume": 105831.06530782997,
+                "red_volume": null,
+                "last_price": 0.04735129159590732,
+                "rdnt_volume": 2144653.540781925
+            },
+            {
+                "time": "2022-07-31T00:00:00Z",
+                "usd_volume": 61815.885937418716,
+                "rdnt_price": 0.04842655318976637,
+                "green_volume": null,
+                "red_volume": 61815.885937418716,
+                "last_price": 0.04956967937513173,
+                "rdnt_volume": 1269612.2032029605
+            },
+            {
+                "time": "2022-07-30T00:00:00Z",
+                "usd_volume": 246870.89068614738,
+                "rdnt_price": 0.05339097429610293,
+                "green_volume": null,
+                "red_volume": 246870.89068614738,
+                "last_price": 0.06656205084204758,
+                "rdnt_volume": 4372546.803162579
+            },
+            {
+                "time": "2022-07-29T00:00:00Z",
+                "usd_volume": 339897.52465748286,
+                "rdnt_price": 0.06770645007880303,
+                "green_volume": null,
+                "red_volume": 339897.52465748286,
+                "last_price": 0.06812271068793975,
+                "rdnt_volume": 5072893.895409535
+            },
+            {
+                "time": "2022-07-28T00:00:00Z",
+                "usd_volume": 1228167.3117608228,
+                "rdnt_price": 0.0929705555787827,
+                "green_volume": null,
+                "red_volume": 1228167.3117608228,
+                "last_price": 0.10491535392785974,
+                "rdnt_volume": 14129602.115481317
+            },
+            {
+                "time": "2022-07-27T00:00:00Z",
+                "usd_volume": 2377396.9771487555,
+                "rdnt_price": 0.12390149510539915,
+                "green_volume": null,
+                "red_volume": 2377396.9771487555,
+                "last_price": 0.10360804240939261,
+                "rdnt_volume": 21599712.720174167
+            },
+            {
+                "time": "2022-07-26T00:00:00Z",
+                "usd_volume": 6793005.920389714,
+                "rdnt_price": 0.20101080459828516,
+                "green_volume": 6793005.920389714,
+                "red_volume": null,
+                "last_price": 0.16103570053609956,
+                "rdnt_volume": 34070873.245750375
+            },
+            {
+                "time": "2022-07-25T00:00:00Z",
+                "usd_volume": 3016189.045425272,
+                "rdnt_price": 0.15690941546694917,
+                "green_volume": 3016189.045425272,
+                "red_volume": null,
+                "last_price": 0.137300141143669,
+                "rdnt_volume": 19042957.48634399
+            },
+            {
+                "time": "2022-07-24T00:00:00Z",
+                "usd_volume": 3571551.5760018486,
+                "rdnt_price": 0.09949328313651197,
+                "green_volume": null,
+                "red_volume": null,
+                "last_price": 0.11767947635478052,
+                "rdnt_volume": 46284492.3466349
+            }
+        ]
+    };
+});
+define("@scom/scom-dune/dummy/283918.json.ts", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.query_id_283918 = void 0;
+    ///<amd-module name='@scom/scom-dune/dummy/283918.json.ts'/> 
+    exports.query_id_283918 = {
+        "execution_id": "01GYGNB1PAQKYDDTJ17CZ9AZ4S",
+        "runtime_seconds": 25,
+        "generated_at": "2023-04-21T01:02:55.069875Z",
+        "columns": [
+            "time",
+            "slp_value",
+            "masterchef_pool",
+            "masterchef_pool_percent",
+            "non_masterchef_pool",
+            "non_masterchef_pool_percent"
+        ],
+        "data": [
+            {
+                "time": "2023-04-21 00:00:00.000 UTC",
+                "slp_value": 72.07854062528318,
+                "masterchef_pool": 427835.6370772746,
+                "masterchef_pool_percent": 82.0482363535369,
+                "non_masterchef_pool": 93608.4013220123,
+                "non_masterchef_pool_percent": 17.951763646463107
+            },
+            {
+                "time": "2023-04-20 00:00:00.000 UTC",
+                "slp_value": 73.67458320125874,
+                "masterchef_pool": 437309.2458153437,
+                "masterchef_pool_percent": 82.0482363535369,
+                "non_masterchef_pool": 95681.18182898243,
+                "non_masterchef_pool_percent": 17.951763646463107
+            },
+            {
+                "time": "2023-04-19 00:00:00.000 UTC",
+                "slp_value": 73.42962664635522,
+                "masterchef_pool": 436894.9177908819,
+                "masterchef_pool_percent": 82.10050447484468,
+                "non_masterchef_pool": 95251.5295244875,
+                "non_masterchef_pool_percent": 17.899495525155302
+            },
+            {
+                "time": "2023-04-18 00:00:00.000 UTC",
+                "slp_value": 77.83727029476283,
+                "masterchef_pool": 463379.0085642084,
+                "masterchef_pool_percent": 82.11296084803986,
+                "non_masterchef_pool": 100939.95372695569,
+                "non_masterchef_pool_percent": 17.88703915196014
+            },
+            {
+                "time": "2023-04-17 00:00:00.000 UTC",
+                "slp_value": 75.53763271183087,
+                "masterchef_pool": 450682.33147519047,
+                "masterchef_pool_percent": 82.08779352396833,
+                "non_masterchef_pool": 98342.45299973688,
+                "non_masterchef_pool_percent": 17.912206476031685
+            },
+            {
+                "time": "2023-04-16 00:00:00.000 UTC",
+                "slp_value": 77.5703804990828,
+                "masterchef_pool": 463220.14129284304,
+                "masterchef_pool_percent": 81.94764283488946,
+                "non_masterchef_pool": 102043.3919440466,
+                "non_masterchef_pool_percent": 18.052357165110536
+            },
+            {
+                "time": "2023-04-15 00:00:00.000 UTC",
+                "slp_value": 76.25757554711221,
+                "masterchef_pool": 456370.0032540928,
+                "masterchef_pool_percent": 81.92610239394533,
+                "non_masterchef_pool": 100680.78998347296,
+                "non_masterchef_pool_percent": 18.073897606054672
+            },
+            {
+                "time": "2023-04-14 00:00:00.000 UTC",
+                "slp_value": 70.50808274474822,
+                "masterchef_pool": 436805.8011096061,
+                "masterchef_pool_percent": 82.3812440146113,
+                "non_masterchef_pool": 93419.01685033314,
+                "non_masterchef_pool_percent": 17.618755985388702
+            },
+            {
+                "time": "2023-04-13 00:00:00.000 UTC",
+                "slp_value": 63.40978358200243,
+                "masterchef_pool": 399032.2720698876,
+                "masterchef_pool_percent": 82.50116701914399,
+                "non_masterchef_pool": 84636.36740195658,
+                "non_masterchef_pool_percent": 17.498832980856008
+            },
+            {
+                "time": "2023-04-12 00:00:00.000 UTC",
+                "slp_value": 59.9486735452675,
+                "masterchef_pool": 382401.8560359854,
+                "masterchef_pool_percent": 82.66987529072044,
+                "non_masterchef_pool": 80163.08033438475,
+                "non_masterchef_pool_percent": 17.330124709279545
+            },
+            {
+                "time": "2023-04-11 00:00:00.000 UTC",
+                "slp_value": 62.07934029354551,
+                "masterchef_pool": 396866.2835196303,
+                "masterchef_pool_percent": 82.58303965818865,
+                "non_masterchef_pool": 83700.04724545241,
+                "non_masterchef_pool_percent": 17.416960341811347
+            },
+            {
+                "time": "2023-04-10 00:00:00.000 UTC",
+                "slp_value": 60.79407376507845,
+                "masterchef_pool": 468484.43014210125,
+                "masterchef_pool_percent": 84.60126827707467,
+                "non_masterchef_pool": 85271.37007567356,
+                "non_masterchef_pool_percent": 15.398731722925334
+            },
+            {
+                "time": "2023-04-09 00:00:00.000 UTC",
+                "slp_value": 60.312321796312474,
+                "masterchef_pool": 500155.64349377353,
+                "masterchef_pool_percent": 85.64617541216523,
+                "non_masterchef_pool": 83823.3153877121,
+                "non_masterchef_pool_percent": 14.353824587834751
+            },
+            {
+                "time": "2023-04-08 00:00:00.000 UTC",
+                "slp_value": 61.258201542978284,
+                "masterchef_pool": 511153.63287816604,
+                "masterchef_pool_percent": 85.7387976403246,
+                "non_masterchef_pool": 85021.78239003301,
+                "non_masterchef_pool_percent": 14.261202359675394
+            },
+            {
+                "time": "2023-04-07 00:00:00.000 UTC",
+                "slp_value": 61.59922848777013,
+                "masterchef_pool": 522736.30266602465,
+                "masterchef_pool_percent": 85.8162375082484,
+                "non_masterchef_pool": 86398.18964468839,
+                "non_masterchef_pool_percent": 14.183762491751594
+            },
+            {
+                "time": "2023-04-06 00:00:00.000 UTC",
+                "slp_value": 62.10670502302075,
+                "masterchef_pool": 532522.2093660384,
+                "masterchef_pool_percent": 85.66573631742314,
+                "non_masterchef_pool": 89105.79765049764,
+                "non_masterchef_pool_percent": 14.334263682576847
+            },
+            {
+                "time": "2023-04-05 00:00:00.000 UTC",
+                "slp_value": 64.90839748171705,
+                "masterchef_pool": 561819.4974793517,
+                "masterchef_pool_percent": 85.38266666582166,
+                "non_masterchef_pool": 96182.31883572228,
+                "non_masterchef_pool_percent": 14.61733333417834
+            },
+            {
+                "time": "2023-04-04 00:00:00.000 UTC",
+                "slp_value": 63.24687369136444,
+                "masterchef_pool": 553792.0955065573,
+                "masterchef_pool_percent": 85.19110683380521,
+                "non_masterchef_pool": 96266.47995827487,
+                "non_masterchef_pool_percent": 14.808893166194807
+            },
+            {
+                "time": "2023-04-03 00:00:00.000 UTC",
+                "slp_value": 60.804404902238794,
+                "masterchef_pool": 564061.9890178136,
+                "masterchef_pool_percent": 85.47450141715296,
+                "non_masterchef_pool": 95856.4424041427,
+                "non_masterchef_pool_percent": 14.525498582847035
+            },
+            {
+                "time": "2023-04-02 00:00:00.000 UTC",
+                "slp_value": 61.738413218058575,
+                "masterchef_pool": 578653.3497686415,
+                "masterchef_pool_percent": 85.61500505501313,
+                "non_masterchef_pool": 97225.07761312358,
+                "non_masterchef_pool_percent": 14.384994944986857
+            },
+            {
+                "time": "2023-04-01 00:00:00.000 UTC",
+                "slp_value": 64.84444458859443,
+                "masterchef_pool": 612602.1652969118,
+                "masterchef_pool_percent": 85.67725790939144,
+                "non_masterchef_pool": 102409.23941537889,
+                "non_masterchef_pool_percent": 14.322742090608571
+            },
+            {
+                "time": "2023-03-31 00:00:00.000 UTC",
+                "slp_value": 64.60743149672636,
+                "masterchef_pool": 752799.7736263737,
+                "masterchef_pool_percent": 87.57425408230668,
+                "non_masterchef_pool": 106813.34156939469,
+                "non_masterchef_pool_percent": 12.425745917693334
+            },
+            {
+                "time": "2023-03-30 00:00:00.000 UTC",
+                "slp_value": 67.22785930467498,
+                "masterchef_pool": 864858.3632352792,
+                "masterchef_pool_percent": 87.21856437703651,
+                "non_masterchef_pool": 126740.5806507828,
+                "non_masterchef_pool_percent": 12.781435622963471
+            },
+            {
+                "time": "2023-03-29 00:00:00.000 UTC",
+                "slp_value": 61.862683218257764,
+                "masterchef_pool": 827242.4114306094,
+                "masterchef_pool_percent": 88.09025027295105,
+                "non_masterchef_pool": 111842.6846695455,
+                "non_masterchef_pool_percent": 11.909749727048947
+            },
+            {
+                "time": "2023-03-28 00:00:00.000 UTC",
+                "slp_value": 58.8849046702093,
+                "masterchef_pool": 936445.7807853884,
+                "masterchef_pool_percent": 89.83799410381059,
+                "non_masterchef_pool": 105925.86845613003,
+                "non_masterchef_pool_percent": 10.162005896189413
+            },
+            {
+                "time": "2023-03-27 00:00:00.000 UTC",
+                "slp_value": 59.492735418808394,
+                "masterchef_pool": 948328.3916512699,
+                "masterchef_pool_percent": 89.35911910693135,
+                "non_masterchef_pool": 112926.91293208802,
+                "non_masterchef_pool_percent": 10.640880893068655
+            },
+            {
+                "time": "2023-03-26 00:00:00.000 UTC",
+                "slp_value": 61.215045750673696,
+                "masterchef_pool": 981358.5172559506,
+                "masterchef_pool_percent": 89.02794772982986,
+                "non_masterchef_pool": 120945.35729145154,
+                "non_masterchef_pool_percent": 10.972052270170138
+            },
+            {
+                "time": "2023-03-25 00:00:00.000 UTC",
+                "slp_value": 58.79939329826534,
+                "masterchef_pool": 987105.0477593441,
+                "masterchef_pool_percent": 87.32923955620846,
+                "non_masterchef_pool": 143220.89206978423,
+                "non_masterchef_pool_percent": 12.670760443791536
+            },
+            {
+                "time": "2023-03-24 00:00:00.000 UTC",
+                "slp_value": 58.847230824811035,
+                "masterchef_pool": 1049772.394629763,
+                "masterchef_pool_percent": 83.73075357562757,
+                "non_masterchef_pool": 203975.3023637724,
+                "non_masterchef_pool_percent": 16.269246424372426
+            },
+            {
+                "time": "2023-03-23 00:00:00.000 UTC",
+                "slp_value": 62.13581503539725,
+                "masterchef_pool": 1165589.9407050346,
+                "masterchef_pool_percent": 82.64123644622711,
+                "non_masterchef_pool": 244831.76984555623,
+                "non_masterchef_pool_percent": 17.35876355377289
+            },
+            {
+                "time": "2023-03-22 00:00:00.000 UTC",
+                "slp_value": 64.35984617256051,
+                "masterchef_pool": 1244623.9797193918,
+                "masterchef_pool_percent": 83.84405238124056,
+                "non_masterchef_pool": 239827.14635459846,
+                "non_masterchef_pool_percent": 16.15594761875944
+            },
+            {
+                "time": "2023-03-21 00:00:00.000 UTC",
+                "slp_value": 68.82269354701094,
+                "masterchef_pool": 1923950.1188363694,
+                "masterchef_pool_percent": 77.58284344680652,
+                "non_masterchef_pool": 555915.3170773014,
+                "non_masterchef_pool_percent": 22.41715655319348
+            },
+            {
+                "time": "2023-03-20 00:00:00.000 UTC",
+                "slp_value": 69.09817811758268,
+                "masterchef_pool": 2094330.8974568227,
+                "masterchef_pool_percent": 78.59877010710838,
+                "non_masterchef_pool": 570253.9231489312,
+                "non_masterchef_pool_percent": 21.40122989289162
+            },
+            {
+                "time": "2023-03-19 00:00:00.000 UTC",
+                "slp_value": 68.10386586712943,
+                "masterchef_pool": 3007747.061055725,
+                "masterchef_pool_percent": 82.38598479576687,
+                "non_masterchef_pool": 643052.3661913569,
+                "non_masterchef_pool_percent": 17.614015204233112
+            },
+            {
+                "time": "2023-03-18 00:00:00.000 UTC",
+                "slp_value": 61.511151504253405,
+                "masterchef_pool": 9826780.897358853,
+                "masterchef_pool_percent": 98.29608109670055,
+                "non_masterchef_pool": 170342.8818603605,
+                "non_masterchef_pool_percent": 1.7039189032994528
+            },
+            {
+                "time": "2023-03-17 00:00:00.000 UTC",
+                "slp_value": 60.467228290681945,
+                "masterchef_pool": 9712529.138629463,
+                "masterchef_pool_percent": 92.24242674605418,
+                "non_masterchef_pool": 816822.1384876389,
+                "non_masterchef_pool_percent": 7.7575732539458215
+            },
+            {
+                "time": "2023-03-16 00:00:00.000 UTC",
+                "slp_value": 55.550687085768594,
+                "masterchef_pool": 8881350.073090326,
+                "masterchef_pool_percent": 92.3586080539494,
+                "non_masterchef_pool": 734808.3556968048,
+                "non_masterchef_pool_percent": 7.641391946050604
+            },
+            {
+                "time": "2023-03-15 00:00:00.000 UTC",
+                "slp_value": 52.534342544692,
+                "masterchef_pool": 8653611.895239865,
+                "masterchef_pool_percent": 92.58521431656958,
+                "non_masterchef_pool": 693033.74263837,
+                "non_masterchef_pool_percent": 7.4147856834304235
+            },
+            {
+                "time": "2023-03-14 00:00:00.000 UTC",
+                "slp_value": 53.553664510650286,
+                "masterchef_pool": 9056175.076646414,
+                "masterchef_pool_percent": 93.14563655430176,
+                "non_masterchef_pool": 666422.1502960119,
+                "non_masterchef_pool_percent": 6.854363445698226
+            },
+            {
+                "time": "2023-03-13 00:00:00.000 UTC",
+                "slp_value": 50.823118233460605,
+                "masterchef_pool": 8504661.195442146,
+                "masterchef_pool_percent": 93.10831962095904,
+                "non_masterchef_pool": 629496.9872684292,
+                "non_masterchef_pool_percent": 6.891680379040977
+            },
+            {
+                "time": "2023-03-12 00:00:00.000 UTC",
+                "slp_value": 44.40340624608314,
+                "masterchef_pool": 7530403.313415531,
+                "masterchef_pool_percent": 92.8047462198048,
+                "non_masterchef_pool": 583840.4296577312,
+                "non_masterchef_pool_percent": 7.195253780195202
+            },
+            {
+                "time": "2023-03-11 00:00:00.000 UTC",
+                "slp_value": 43.55874191237789,
+                "masterchef_pool": 7053324.702805602,
+                "masterchef_pool_percent": 92.51029774959208,
+                "non_masterchef_pool": 571042.3940311428,
+                "non_masterchef_pool_percent": 7.48970225040793
+            },
+            {
+                "time": "2023-03-10 00:00:00.000 UTC",
+                "slp_value": 43.44154488007161,
+                "masterchef_pool": 7373172.637980281,
+                "masterchef_pool_percent": 92.85867577397029,
+                "non_masterchef_pool": 567036.0463730404,
+                "non_masterchef_pool_percent": 7.141324226029724
+            },
+            {
+                "time": "2023-03-09 00:00:00.000 UTC",
+                "slp_value": 47.60029016591701,
+                "masterchef_pool": 8254221.334769547,
+                "masterchef_pool_percent": 92.97608795834837,
+                "non_masterchef_pool": 623568.1227383781,
+                "non_masterchef_pool_percent": 7.023912041651627
+            },
+            {
+                "time": "2023-03-08 00:00:00.000 UTC",
+                "slp_value": 49.12019052190957,
+                "masterchef_pool": 8436351.055016775,
+                "masterchef_pool_percent": 93.09583504399079,
+                "non_masterchef_pool": 625655.9091297165,
+                "non_masterchef_pool_percent": 6.904164956009211
+            },
+            {
+                "time": "2023-03-07 00:00:00.000 UTC",
+                "slp_value": 51.61360765831033,
+                "masterchef_pool": 8712753.485691123,
+                "masterchef_pool_percent": 93.0315020207162,
+                "non_masterchef_pool": 652626.3012018912,
+                "non_masterchef_pool_percent": 6.968497979283796
+            },
+            {
+                "time": "2023-03-06 00:00:00.000 UTC",
+                "slp_value": 50.93546508312824,
+                "masterchef_pool": 8553223.851966564,
+                "masterchef_pool_percent": 93.03700381701742,
+                "non_masterchef_pool": 640133.0931784082,
+                "non_masterchef_pool_percent": 6.962996182982593
+            },
+            {
+                "time": "2023-03-05 00:00:00.000 UTC",
+                "slp_value": 48.45112206776448,
+                "masterchef_pool": 8102982.413748065,
+                "masterchef_pool_percent": 92.88328089178461,
+                "non_masterchef_pool": 620850.698035093,
+                "non_masterchef_pool_percent": 7.116719108215392
+            },
+            {
+                "time": "2023-03-04 00:00:00.000 UTC",
+                "slp_value": 47.442694041346165,
+                "masterchef_pool": 7840296.457519307,
+                "masterchef_pool_percent": 92.81374608820146,
+                "non_masterchef_pool": 607047.5922172768,
+                "non_masterchef_pool_percent": 7.186253911798545
+            },
+            {
+                "time": "2023-03-03 00:00:00.000 UTC",
+                "slp_value": 48.286704766784254,
+                "masterchef_pool": 7826264.682361494,
+                "masterchef_pool_percent": 92.33044066987169,
+                "non_masterchef_pool": 650099.8032628866,
+                "non_masterchef_pool_percent": 7.669559330128308
+            },
+            {
+                "time": "2023-03-02 00:00:00.000 UTC",
+                "slp_value": 51.66440585932661,
+                "masterchef_pool": 7683719.42028621,
+                "masterchef_pool_percent": 91.57424810626785,
+                "non_masterchef_pool": 706979.4707050603,
+                "non_masterchef_pool_percent": 8.42575189373214
+            },
+            {
+                "time": "2023-03-01 00:00:00.000 UTC",
+                "slp_value": 53.026882773980326,
+                "masterchef_pool": 7502898.994947182,
+                "masterchef_pool_percent": 91.58516103641311,
+                "non_masterchef_pool": 689365.8982314449,
+                "non_masterchef_pool_percent": 8.414838963586888
+            },
+            {
+                "time": "2023-02-28 00:00:00.000 UTC",
+                "slp_value": 53.74305458664207,
+                "masterchef_pool": 8063444.217901612,
+                "masterchef_pool_percent": 91.7304205037152,
+                "non_masterchef_pool": 726926.7120725196,
+                "non_masterchef_pool_percent": 8.269579496284791
+            },
+            {
+                "time": "2023-02-27 00:00:00.000 UTC",
+                "slp_value": 51.55001873535126,
+                "masterchef_pool": 7426159.39487914,
+                "masterchef_pool_percent": 91.98937939578111,
+                "non_masterchef_pool": 646684.9309080206,
+                "non_masterchef_pool_percent": 8.010620604218872
+            },
+            {
+                "time": "2023-02-26 00:00:00.000 UTC",
+                "slp_value": 48.9187932370524,
+                "masterchef_pool": 6720455.997956272,
+                "masterchef_pool_percent": 91.8682193187387,
+                "non_masterchef_pool": 594865.935779606,
+                "non_masterchef_pool_percent": 8.131780681261318
+            },
+            {
+                "time": "2023-02-25 00:00:00.000 UTC",
+                "slp_value": 46.84824781832215,
+                "masterchef_pool": 6215134.688616248,
+                "masterchef_pool_percent": 91.55776668017398,
+                "non_masterchef_pool": 573076.6384759853,
+                "non_masterchef_pool_percent": 8.442233319826016
+            },
+            {
+                "time": "2023-02-24 00:00:00.000 UTC",
+                "slp_value": 49.049860835374034,
+                "masterchef_pool": 6664252.433845504,
+                "masterchef_pool_percent": 91.78155110757244,
+                "non_masterchef_pool": 596741.0375272734,
+                "non_masterchef_pool_percent": 8.21844889242756
+            },
+            {
+                "time": "2023-02-23 00:00:00.000 UTC",
+                "slp_value": 50.31100622632759,
+                "masterchef_pool": 6827958.645752497,
+                "masterchef_pool_percent": 91.36367669084208,
+                "non_masterchef_pool": 645425.628018639,
+                "non_masterchef_pool_percent": 8.636323309157916
+            },
+            {
+                "time": "2023-02-22 00:00:00.000 UTC",
+                "slp_value": 46.195946632596815,
+                "masterchef_pool": 6058343.241967194,
+                "masterchef_pool_percent": 91.27906663963482,
+                "non_masterchef_pool": 578822.8301676465,
+                "non_masterchef_pool_percent": 8.720933360365166
+            },
+            {
+                "time": "2023-02-21 00:00:00.000 UTC",
+                "slp_value": 47.62429307286027,
+                "masterchef_pool": 6138789.436340391,
+                "masterchef_pool_percent": 91.66540674743743,
+                "non_masterchef_pool": 558163.8137056036,
+                "non_masterchef_pool_percent": 8.33459325256257
+            },
+            {
+                "time": "2023-02-20 00:00:00.000 UTC",
+                "slp_value": 49.983932224855856,
+                "masterchef_pool": 6259155.500095126,
+                "masterchef_pool_percent": 91.46732103918616,
+                "non_masterchef_pool": 583895.5797693403,
+                "non_masterchef_pool_percent": 8.53267896081384
+            },
+            {
+                "time": "2023-02-19 00:00:00.000 UTC",
+                "slp_value": 51.31545979439048,
+                "masterchef_pool": 6617807.8722036155,
+                "masterchef_pool_percent": 91.70643876624518,
+                "non_masterchef_pool": 598487.9094612403,
+                "non_masterchef_pool_percent": 8.293561233754815
+            },
+            {
+                "time": "2023-02-18 00:00:00.000 UTC",
+                "slp_value": 50.49122094061352,
+                "masterchef_pool": 6435598.448704736,
+                "masterchef_pool_percent": 91.52149157327597,
+                "non_masterchef_pool": 596190.8480771296,
+                "non_masterchef_pool_percent": 8.478508426724034
+            },
+            {
+                "time": "2023-02-17 00:00:00.000 UTC",
+                "slp_value": 47.77276368576411,
+                "masterchef_pool": 6260662.56982076,
+                "masterchef_pool_percent": 91.77580706675892,
+                "non_masterchef_pool": 561029.0828243345,
+                "non_masterchef_pool_percent": 8.224192933241099
+            },
+            {
+                "time": "2023-02-16 00:00:00.000 UTC",
+                "slp_value": 44.64009466962272,
+                "masterchef_pool": 5794110.393440699,
+                "masterchef_pool_percent": 91.74135089110351,
+                "non_masterchef_pool": 521591.67237940896,
+                "non_masterchef_pool_percent": 8.258649108896492
+            },
+            {
+                "time": "2023-02-15 00:00:00.000 UTC",
+                "slp_value": 42.938821504554014,
+                "masterchef_pool": 5567100.59138316,
+                "masterchef_pool_percent": 91.7175418775764,
+                "non_masterchef_pool": 502731.28310609236,
+                "non_masterchef_pool_percent": 8.282458122423591
+            },
+            {
+                "time": "2023-02-14 00:00:00.000 UTC",
+                "slp_value": 40.06681930375245,
+                "masterchef_pool": 5146432.494394471,
+                "masterchef_pool_percent": 91.57458255668354,
+                "non_masterchef_pool": 473503.02778920066,
+                "non_masterchef_pool_percent": 8.425417443316462
+            },
+            {
+                "time": "2023-02-13 00:00:00.000 UTC",
+                "slp_value": 37.95993318698688,
+                "masterchef_pool": 4793590.423902991,
+                "masterchef_pool_percent": 91.46035762565658,
+                "non_masterchef_pool": 447576.94996947516,
+                "non_masterchef_pool_percent": 8.539642374343416
+            },
+            {
+                "time": "2023-02-12 00:00:00.000 UTC",
+                "slp_value": 40.6643409601666,
+                "masterchef_pool": 5272412.793098741,
+                "masterchef_pool_percent": 91.69114435139029,
+                "non_masterchef_pool": 477774.78542371653,
+                "non_masterchef_pool_percent": 8.308855648609708
+            },
+            {
+                "time": "2023-02-11 00:00:00.000 UTC",
+                "slp_value": 39.83772967707039,
+                "masterchef_pool": 5160993.6600183565,
+                "masterchef_pool_percent": 91.71633315244884,
+                "non_masterchef_pool": 466132.37372731045,
+                "non_masterchef_pool_percent": 8.28366684755116
+            },
+            {
+                "time": "2023-02-10 00:00:00.000 UTC",
+                "slp_value": 39.04492485663267,
+                "masterchef_pool": 5001806.352677526,
+                "masterchef_pool_percent": 91.59884702361165,
+                "non_masterchef_pool": 458749.6643520314,
+                "non_masterchef_pool_percent": 8.401152976388346
+            },
+            {
+                "time": "2023-02-09 00:00:00.000 UTC",
+                "slp_value": 42.39337270996413,
+                "masterchef_pool": 5360985.012451449,
+                "masterchef_pool_percent": 91.60370324916154,
+                "non_masterchef_pool": 491382.1105998978,
+                "non_masterchef_pool_percent": 8.396296750838445
+            },
+            {
+                "time": "2023-02-08 00:00:00.000 UTC",
+                "slp_value": 46.95657524522266,
+                "masterchef_pool": 5947134.222043626,
+                "masterchef_pool_percent": 91.55682365136039,
+                "non_masterchef_pool": 548432.1212032121,
+                "non_masterchef_pool_percent": 8.44317634863961
+            },
+            {
+                "time": "2023-02-07 00:00:00.000 UTC",
+                "slp_value": 48.685480891570116,
+                "masterchef_pool": 6160270.211566913,
+                "masterchef_pool_percent": 91.60179438484403,
+                "non_masterchef_pool": 564783.869454626,
+                "non_masterchef_pool_percent": 8.398205615155973
+            },
+            {
+                "time": "2023-02-06 00:00:00.000 UTC",
+                "slp_value": 44.56967167341819,
+                "masterchef_pool": 5666618.765451565,
+                "masterchef_pool_percent": 91.72117524217549,
+                "non_masterchef_pool": 511473.4258987317,
+                "non_masterchef_pool_percent": 8.278824757824523
+            },
+            {
+                "time": "2023-02-05 00:00:00.000 UTC",
+                "slp_value": 41.47358952799666,
+                "masterchef_pool": 5149661.442223587,
+                "masterchef_pool_percent": 91.40753083598986,
+                "non_masterchef_pool": 484077.26084179804,
+                "non_masterchef_pool_percent": 8.59246916401014
+            },
+            {
+                "time": "2023-02-04 00:00:00.000 UTC",
+                "slp_value": 42.972644913643144,
+                "masterchef_pool": 5486007.258731895,
+                "masterchef_pool_percent": 91.65023489906736,
+                "non_masterchef_pool": 499800.92252757493,
+                "non_masterchef_pool_percent": 8.349765100932657
+            },
+            {
+                "time": "2023-02-03 00:00:00.000 UTC",
+                "slp_value": 38.48649887303007,
+                "masterchef_pool": 4803123.984589746,
+                "masterchef_pool_percent": 91.56426151220914,
+                "non_masterchef_pool": 442507.77748076245,
+                "non_masterchef_pool_percent": 8.435738487790843
+            },
+            {
+                "time": "2023-02-02 00:00:00.000 UTC",
+                "slp_value": 35.189701144092965,
+                "masterchef_pool": 4315779.599171704,
+                "masterchef_pool_percent": 91.41378534477346,
+                "non_masterchef_pool": 405367.85456783883,
+                "non_masterchef_pool_percent": 8.586214655226527
+            },
+            {
+                "time": "2023-02-01 00:00:00.000 UTC",
+                "slp_value": 31.653425512760894,
+                "masterchef_pool": 3829587.9496273184,
+                "masterchef_pool_percent": 91.3315312766271,
+                "non_masterchef_pool": 363474.28867915645,
+                "non_masterchef_pool_percent": 8.668468723372897
+            },
+            {
+                "time": "2023-01-31 00:00:00.000 UTC",
+                "slp_value": 30.817275720737353,
+                "masterchef_pool": 3689451.1596687497,
+                "masterchef_pool_percent": 91.23644428957267,
+                "non_masterchef_pool": 354383.72275927337,
+                "non_masterchef_pool_percent": 8.763555710427326
+            },
+            {
+                "time": "2023-01-30 00:00:00.000 UTC",
+                "slp_value": 32.17450814451957,
+                "masterchef_pool": 3728343.38315186,
+                "masterchef_pool_percent": 90.96396385411076,
+                "non_masterchef_pool": 370360.3509240076,
+                "non_masterchef_pool_percent": 9.036036145889241
+            },
+            {
+                "time": "2023-01-29 00:00:00.000 UTC",
+                "slp_value": 32.219542058464725,
+                "masterchef_pool": 3718171.151740117,
+                "masterchef_pool_percent": 90.93411743123632,
+                "non_masterchef_pool": 370691.48504939117,
+                "non_masterchef_pool_percent": 9.065882568763683
+            },
+            {
+                "time": "2023-01-28 00:00:00.000 UTC",
+                "slp_value": 29.497743766739546,
+                "masterchef_pool": 3364310.3602022105,
+                "masterchef_pool_percent": 90.84960538554105,
+                "non_masterchef_pool": 338854.16750816396,
+                "non_masterchef_pool_percent": 9.150394614458946
+            },
+            {
+                "time": "2023-01-27 00:00:00.000 UTC",
+                "slp_value": 27.87991896038695,
+                "masterchef_pool": 3131755.188779775,
+                "masterchef_pool_percent": 90.73121800734432,
+                "non_masterchef_pool": 319929.09096424,
+                "non_masterchef_pool_percent": 9.268781992655676
+            },
+            {
+                "time": "2023-01-26 00:00:00.000 UTC",
+                "slp_value": 29.501398246769963,
+                "masterchef_pool": 3282212.681471267,
+                "masterchef_pool_percent": 90.66074529665362,
+                "non_masterchef_pool": 338111.2754203789,
+                "non_masterchef_pool_percent": 9.339254703346384
+            },
+            {
+                "time": "2023-01-25 00:00:00.000 UTC",
+                "slp_value": 27.543755717443187,
+                "masterchef_pool": 2939107.057430412,
+                "masterchef_pool_percent": 87.50946246124333,
+                "non_masterchef_pool": 419509.2279022741,
+                "non_masterchef_pool_percent": 12.49053753875667
+            },
+            {
+                "time": "2023-01-24 00:00:00.000 UTC",
+                "slp_value": 29.42564719891291,
+                "masterchef_pool": 3216153.993150468,
+                "masterchef_pool_percent": 87.85325132643597,
+                "non_masterchef_pool": 444671.24051130936,
+                "non_masterchef_pool_percent": 12.14674867356402
+            },
+            {
+                "time": "2023-01-23 00:00:00.000 UTC",
+                "slp_value": 29.426293364768014,
+                "masterchef_pool": 3146511.1418516943,
+                "masterchef_pool_percent": 87.60858665139688,
+                "non_masterchef_pool": 445044.5059662182,
+                "non_masterchef_pool_percent": 12.391413348603123
+            },
+            {
+                "time": "2023-01-22 00:00:00.000 UTC",
+                "slp_value": 29.914808745443295,
+                "masterchef_pool": 3131833.078766907,
+                "masterchef_pool_percent": 87.39244551924352,
+                "non_masterchef_pool": 451809.7179978178,
+                "non_masterchef_pool_percent": 12.607554480756477
+            },
+            {
+                "time": "2023-01-21 00:00:00.000 UTC",
+                "slp_value": 31.809343792508574,
+                "masterchef_pool": 3247878.2097751657,
+                "masterchef_pool_percent": 87.04694782200679,
+                "non_masterchef_pool": 483301.67767638806,
+                "non_masterchef_pool_percent": 12.953052177993214
+            },
+            {
+                "time": "2023-01-20 00:00:00.000 UTC",
+                "slp_value": 29.880263512066822,
+                "masterchef_pool": 2699388.3673011092,
+                "masterchef_pool_percent": 85.66506569129554,
+                "non_masterchef_pool": 451707.52636070456,
+                "non_masterchef_pool_percent": 14.334934308704447
+            },
+            {
+                "time": "2023-01-19 00:00:00.000 UTC",
+                "slp_value": 28.691342229793964,
+                "masterchef_pool": 2444323.0724974913,
+                "masterchef_pool_percent": 88.09536970378343,
+                "non_masterchef_pool": 330309.78359518806,
+                "non_masterchef_pool_percent": 11.904630296216567
+            },
+            {
+                "time": "2023-01-18 00:00:00.000 UTC",
+                "slp_value": 24.459548972010953,
+                "masterchef_pool": 1867533.649543681,
+                "masterchef_pool_percent": 86.76541660593044,
+                "non_masterchef_pool": 284860.3832373873,
+                "non_masterchef_pool_percent": 13.23458339406956
+            },
+            {
+                "time": "2023-01-17 00:00:00.000 UTC",
+                "slp_value": 23.252446257306612,
+                "masterchef_pool": 1765355.1727296498,
+                "masterchef_pool_percent": 86.83202277117125,
+                "non_masterchef_pool": 267714.0987094098,
+                "non_masterchef_pool_percent": 13.167977228828747
+            },
+            {
+                "time": "2023-01-16 00:00:00.000 UTC",
+                "slp_value": 22.148531202199262,
+                "masterchef_pool": 1677715.5786079722,
+                "masterchef_pool_percent": 86.83756324361798,
+                "non_masterchef_pool": 254300.37847414217,
+                "non_masterchef_pool_percent": 13.162436756382021
+            },
+            {
+                "time": "2023-01-15 00:00:00.000 UTC",
+                "slp_value": 19.454769228541842,
+                "masterchef_pool": 1478188.4355010584,
+                "masterchef_pool_percent": 86.66788497412459,
+                "non_masterchef_pool": 227389.62947927858,
+                "non_masterchef_pool_percent": 13.33211502587541
+            },
+            {
+                "time": "2023-01-14 00:00:00.000 UTC",
+                "slp_value": 19.07637340033307,
+                "masterchef_pool": 1455745.5758770283,
+                "masterchef_pool_percent": 86.72215620408302,
+                "non_masterchef_pool": 222886.0905811095,
+                "non_masterchef_pool_percent": 13.277843795916965
+            },
+            {
+                "time": "2023-01-13 00:00:00.000 UTC",
+                "slp_value": 17.93464791066096,
+                "masterchef_pool": 1368501.7079127026,
+                "masterchef_pool_percent": 86.73239563267234,
+                "non_masterchef_pool": 209342.06998611102,
+                "non_masterchef_pool_percent": 13.267604367327678
+            },
+            {
+                "time": "2023-01-12 00:00:00.000 UTC",
+                "slp_value": 17.469181984696608,
+                "masterchef_pool": 1309378.3689382025,
+                "masterchef_pool_percent": 86.52869372324577,
+                "non_masterchef_pool": 203851.88174156775,
+                "non_masterchef_pool_percent": 13.47130627675422
+            },
+            {
+                "time": "2023-01-11 00:00:00.000 UTC",
+                "slp_value": 17.345924388274856,
+                "masterchef_pool": 1291946.1869862527,
+                "masterchef_pool_percent": 86.46437091967412,
+                "non_masterchef_pool": 202248.67413923657,
+                "non_masterchef_pool_percent": 13.53562908032589
+            },
+            {
+                "time": "2023-01-10 00:00:00.000 UTC",
+                "slp_value": 17.691276297317078,
+                "masterchef_pool": 1325984.5978215933,
+                "masterchef_pool_percent": 86.54272553657293,
+                "non_masterchef_pool": 206188.7761972691,
+                "non_masterchef_pool_percent": 13.45727446342707
+            },
+            {
+                "time": "2023-01-09 00:00:00.000 UTC",
+                "slp_value": 17.20385946425001,
+                "masterchef_pool": 1250318.9864115822,
+                "masterchef_pool_percent": 86.18825814441449,
+                "non_masterchef_pool": 200364.6836500459,
+                "non_masterchef_pool_percent": 13.81174185558551
+            },
+            {
+                "time": "2023-01-08 00:00:00.000 UTC",
+                "slp_value": 15.545091354072463,
+                "masterchef_pool": 1094583.9261908506,
+                "masterchef_pool_percent": 86.0644488137121,
+                "non_masterchef_pool": 177234.97380593582,
+                "non_masterchef_pool_percent": 13.935551186287896
+            },
+            {
+                "time": "2023-01-07 00:00:00.000 UTC",
+                "slp_value": 15.57483922696412,
+                "masterchef_pool": 1096306.813436748,
+                "masterchef_pool_percent": 86.06194056689519,
+                "non_masterchef_pool": 177551.06870640256,
+                "non_masterchef_pool_percent": 13.938059433104812
+            },
+            {
+                "time": "2023-01-06 00:00:00.000 UTC",
+                "slp_value": 15.732796872949487,
+                "masterchef_pool": 1106426.6491093594,
+                "masterchef_pool_percent": 86.05343365912822,
+                "non_masterchef_pool": 179317.10574427852,
+                "non_masterchef_pool_percent": 13.946566340871783
+            },
+            {
+                "time": "2023-01-05 00:00:00.000 UTC",
+                "slp_value": 16.215154251924204,
+                "masterchef_pool": 1153074.4313203928,
+                "masterchef_pool_percent": 86.08399215813178,
+                "non_masterchef_pool": 186401.58787055663,
+                "non_masterchef_pool_percent": 13.916007841868222
+            },
+            {
+                "time": "2023-01-04 00:00:00.000 UTC",
+                "slp_value": 17.051038238694964,
+                "masterchef_pool": 1188863.8227705355,
+                "masterchef_pool_percent": 85.8550534068246,
+                "non_masterchef_pool": 195869.83657167992,
+                "non_masterchef_pool_percent": 14.144946593175405
+            },
+            {
+                "time": "2023-01-03 00:00:00.000 UTC",
+                "slp_value": 16.778523188214066,
+                "masterchef_pool": 1207990.1946079407,
+                "masterchef_pool_percent": 86.24184701809492,
+                "non_masterchef_pool": 192710.551463146,
+                "non_masterchef_pool_percent": 13.758152981905084
+            },
+            {
+                "time": "2023-01-02 00:00:00.000 UTC",
+                "slp_value": 15.906586409805424,
+                "masterchef_pool": 1143847.8510733722,
+                "masterchef_pool_percent": 86.23323980386846,
+                "non_masterchef_pool": 182610.3147974396,
+                "non_masterchef_pool_percent": 13.766760196131557
+            },
+            {
+                "time": "2023-01-01 00:00:00.000 UTC",
+                "slp_value": 15.353905751926588,
+                "masterchef_pool": 1101419.4669001827,
+                "masterchef_pool_percent": 86.21046502644558,
+                "non_masterchef_pool": 176174.22959863069,
+                "non_masterchef_pool_percent": 13.789534973554424
+            },
+            {
+                "time": "2022-12-31 00:00:00.000 UTC",
+                "slp_value": 15.033448620981707,
+                "masterchef_pool": 1065193.795806782,
+                "masterchef_pool_percent": 86.06587597258746,
+                "non_masterchef_pool": 172455.60213352717,
+                "non_masterchef_pool_percent": 13.934124027412537
+            },
+            {
+                "time": "2022-12-30 00:00:00.000 UTC",
+                "slp_value": 14.351987269402725,
+                "masterchef_pool": 988615.4193528199,
+                "masterchef_pool_percent": 85.73052858096014,
+                "non_masterchef_pool": 164550.71144878236,
+                "non_masterchef_pool_percent": 14.269471419039846
+            },
+            {
+                "time": "2022-12-29 00:00:00.000 UTC",
+                "slp_value": 14.02257909370808,
+                "masterchef_pool": 953000.0089476946,
+                "masterchef_pool_percent": 85.56966677587721,
+                "non_masterchef_pool": 160712.41375435714,
+                "non_masterchef_pool_percent": 14.430333224122805
+            },
+            {
+                "time": "2022-12-28 00:00:00.000 UTC",
+                "slp_value": 14.575388212740751,
+                "masterchef_pool": 981234.7028931965,
+                "masterchef_pool_percent": 85.45897517681642,
+                "non_masterchef_pool": 166959.15370641893,
+                "non_masterchef_pool_percent": 14.541024823183577
+            },
+            {
+                "time": "2022-12-27 00:00:00.000 UTC",
+                "slp_value": 15.196985014028446,
+                "masterchef_pool": 1023356.6959557446,
+                "masterchef_pool_percent": 85.46610886138218,
+                "non_masterchef_pool": 174026.3481413381,
+                "non_masterchef_pool_percent": 14.533891138617804
+            },
+            {
+                "time": "2022-12-26 00:00:00.000 UTC",
+                "slp_value": 15.3782217451378,
+                "masterchef_pool": 1034758.4977781737,
+                "masterchef_pool_percent": 85.46138932111363,
+                "non_masterchef_pool": 176032.136446318,
+                "non_masterchef_pool_percent": 14.538610678886371
+            },
+            {
+                "time": "2022-12-25 00:00:00.000 UTC",
+                "slp_value": 15.525609392398145,
+                "masterchef_pool": 1044275.2321674576,
+                "masterchef_pool_percent": 85.4576237305288,
+                "non_masterchef_pool": 177704.9570551474,
+                "non_masterchef_pool_percent": 14.542376269471205
+            },
+            {
+                "time": "2022-12-24 00:00:00.000 UTC",
+                "slp_value": 15.528054200545027,
+                "masterchef_pool": 1038681.279497652,
+                "masterchef_pool_percent": 85.38985359435533,
+                "non_masterchef_pool": 177717.66695318685,
+                "non_masterchef_pool_percent": 14.61014640564467
+            },
+            {
+                "time": "2022-12-23 00:00:00.000 UTC",
+                "slp_value": 14.742434563164233,
+                "masterchef_pool": 988440.6367473033,
+                "masterchef_pool_percent": 85.42365262606127,
+                "non_masterchef_pool": 168663.52159882116,
+                "non_masterchef_pool_percent": 14.57634737393873
+            },
+            {
+                "time": "2022-12-22 00:00:00.000 UTC",
+                "slp_value": 14.080480490913919,
+                "masterchef_pool": 935861.9749026782,
+                "masterchef_pool_percent": 85.31866696804165,
+                "non_masterchef_pool": 161039.8030555147,
+                "non_masterchef_pool_percent": 14.68133303195836
+            },
+            {
+                "time": "2022-12-21 00:00:00.000 UTC",
+                "slp_value": 15.04939328225242,
+                "masterchef_pool": 979918.5260262678,
+                "masterchef_pool_percent": 85.07610252444849,
+                "non_masterchef_pool": 171895.5521335383,
+                "non_masterchef_pool_percent": 14.923897475551513
+            },
+            {
+                "time": "2022-12-20 00:00:00.000 UTC",
+                "slp_value": 15.112734388934644,
+                "masterchef_pool": 970848.538536467,
+                "masterchef_pool_percent": 84.90721981070789,
+                "non_masterchef_pool": 172574.2948820294,
+                "non_masterchef_pool_percent": 15.092780189292114
+            },
+            {
+                "time": "2022-12-19 00:00:00.000 UTC",
+                "slp_value": 15.118318080051827,
+                "masterchef_pool": 966433.1295225014,
+                "masterchef_pool_percent": 84.84695687249686,
+                "non_masterchef_pool": 172597.85655611719,
+                "non_masterchef_pool_percent": 15.153043127503125
+            },
+            {
+                "time": "2022-12-18 00:00:00.000 UTC",
+                "slp_value": 15.026082333204542,
+                "masterchef_pool": 955423.8792797441,
+                "masterchef_pool_percent": 84.47508675431098,
+                "non_masterchef_pool": 175588.72572475602,
+                "non_masterchef_pool_percent": 15.52491324568902
+            },
+            {
+                "time": "2022-12-17 00:00:00.000 UTC",
+                "slp_value": 14.674117941533918,
+                "masterchef_pool": 932830.0027775794,
+                "masterchef_pool_percent": 84.77872142699681,
+                "non_masterchef_pool": 167481.4752397457,
+                "non_masterchef_pool_percent": 15.22127857300319
+            },
+            {
+                "time": "2022-12-16 00:00:00.000 UTC",
+                "slp_value": 15.67649807244243,
+                "masterchef_pool": 986410.9515902085,
+                "masterchef_pool_percent": 84.65301868851051,
+                "non_masterchef_pool": 178829.1861771274,
+                "non_masterchef_pool_percent": 15.3469813114895
+            },
+            {
+                "time": "2022-12-15 00:00:00.000 UTC",
+                "slp_value": 17.119294964413026,
+                "masterchef_pool": 1094843.8354201694,
+                "masterchef_pool_percent": 83.62949409732475,
+                "non_masterchef_pool": 214316.10538496403,
+                "non_masterchef_pool_percent": 16.370505902675234
+            },
+            {
+                "time": "2022-12-14 00:00:00.000 UTC",
+                "slp_value": 17.847521989894553,
+                "masterchef_pool": 1115057.9140625729,
+                "masterchef_pool_percent": 84.58143187120199,
+                "non_masterchef_pool": 203266.79313858808,
+                "non_masterchef_pool_percent": 15.418568128798015
+            },
+            {
+                "time": "2022-12-13 00:00:00.000 UTC",
+                "slp_value": 18.220906616351957,
+                "masterchef_pool": 1133862.9731553928,
+                "masterchef_pool_percent": 84.38478848410348,
+                "non_masterchef_pool": 209818.74190749624,
+                "non_masterchef_pool_percent": 15.615211515896533
+            },
+            {
+                "time": "2022-12-12 00:00:00.000 UTC",
+                "slp_value": 16.919281050494213,
+                "masterchef_pool": 1049683.983857094,
+                "masterchef_pool_percent": 84.486268261875,
+                "non_masterchef_pool": 192747.48512846534,
+                "non_masterchef_pool_percent": 15.513731738125003
+            },
+            {
+                "time": "2022-12-11 00:00:00.000 UTC",
+                "slp_value": 17.247154680768173,
+                "masterchef_pool": 1062655.4922843073,
+                "masterchef_pool_percent": 84.40751699378751,
+                "non_masterchef_pool": 196302.86845330335,
+                "non_masterchef_pool_percent": 15.59248300621249
+            },
+            {
+                "time": "2022-12-10 00:00:00.000 UTC",
+                "slp_value": 17.18380202128486,
+                "masterchef_pool": 1051214.7667015889,
+                "masterchef_pool_percent": 84.313826653863,
+                "non_masterchef_pool": 195573.34436017554,
+                "non_masterchef_pool_percent": 15.686173346136997
+            },
+            {
+                "time": "2022-12-09 00:00:00.000 UTC",
+                "slp_value": 16.85894630719176,
+                "masterchef_pool": 1019136.0667990006,
+                "masterchef_pool_percent": 84.17000571920015,
+                "non_masterchef_pool": 191670.63101559156,
+                "non_masterchef_pool_percent": 15.829994280799866
+            },
+            {
+                "time": "2022-12-08 00:00:00.000 UTC",
+                "slp_value": 16.494648406810644,
+                "masterchef_pool": 977748.970169509,
+                "masterchef_pool_percent": 83.9153010847836,
+                "non_masterchef_pool": 187412.75543955842,
+                "non_masterchef_pool_percent": 16.084698915216393
+            },
+            {
+                "time": "2022-12-07 00:00:00.000 UTC",
+                "slp_value": 16.502135065418646,
+                "masterchef_pool": 958080.1644958319,
+                "masterchef_pool_percent": 83.54799215768112,
+                "non_masterchef_pool": 188662.13265912037,
+                "non_masterchef_pool_percent": 16.452007842318878
+            },
+            {
+                "time": "2022-12-06 00:00:00.000 UTC",
+                "slp_value": 17.12961471589489,
+                "masterchef_pool": 993861.6040894379,
+                "masterchef_pool_percent": 83.54437499391088,
+                "non_masterchef_pool": 195759.60519230657,
+                "non_masterchef_pool_percent": 16.45562500608912
+            },
+            {
+                "time": "2022-12-05 00:00:00.000 UTC",
+                "slp_value": 17.355415527202236,
+                "masterchef_pool": 1003697.9043378795,
+                "masterchef_pool_percent": 83.5119522483365,
+                "non_masterchef_pool": 198163.4787527935,
+                "non_masterchef_pool_percent": 16.488047751663487
+            },
+            {
+                "time": "2022-12-04 00:00:00.000 UTC",
+                "slp_value": 15.809823141513288,
+                "masterchef_pool": 902958.5305606247,
+                "masterchef_pool_percent": 83.35743085402214,
+                "non_masterchef_pool": 180278.46620084078,
+                "non_masterchef_pool_percent": 16.64256914597786
+            },
+            {
+                "time": "2022-12-03 00:00:00.000 UTC",
+                "slp_value": 15.537563084931586,
+                "masterchef_pool": 903011.1372079162,
+                "masterchef_pool_percent": 83.60146615748266,
+                "non_masterchef_pool": 177126.7822717328,
+                "non_masterchef_pool_percent": 16.398533842517324
+            },
+            {
+                "time": "2022-12-02 00:00:00.000 UTC",
+                "slp_value": 15.371610025838171,
+                "masterchef_pool": 893874.9442453738,
+                "masterchef_pool_percent": 83.61677438855536,
+                "non_masterchef_pool": 175138.959701295,
+                "non_masterchef_pool_percent": 16.383225611444658
+            },
+            {
+                "time": "2022-12-01 00:00:00.000 UTC",
+                "slp_value": 15.441845869695804,
+                "masterchef_pool": 876392.1934376444,
+                "masterchef_pool_percent": 83.28576197065557,
+                "non_masterchef_pool": 175879.13445922628,
+                "non_masterchef_pool_percent": 16.714238029344415
+            },
+            {
+                "time": "2022-11-30 00:00:00.000 UTC",
+                "slp_value": 15.700498293580587,
+                "masterchef_pool": 882168.5680344618,
+                "masterchef_pool_percent": 83.16621713196317,
+                "non_masterchef_pool": 178560.89454851195,
+                "non_masterchef_pool_percent": 16.83378286803685
+            },
+            {
+                "time": "2022-11-29 00:00:00.000 UTC",
+                "slp_value": 14.68305255529719,
+                "masterchef_pool": 815498.875542218,
+                "masterchef_pool_percent": 83.00986496594017,
+                "non_masterchef_pool": 166913.12558177614,
+                "non_masterchef_pool_percent": 16.990135034059833
+            },
+            {
+                "time": "2022-11-28 00:00:00.000 UTC",
+                "slp_value": 14.180596379719484,
+                "masterchef_pool": 794909.3908349515,
+                "masterchef_pool_percent": 83.15396772272368,
+                "non_masterchef_pool": 161039.4503382938,
+                "non_masterchef_pool_percent": 16.846032277276308
+            },
+            {
+                "time": "2022-11-27 00:00:00.000 UTC",
+                "slp_value": 15.019392226764797,
+                "masterchef_pool": 828057.7674392619,
+                "masterchef_pool_percent": 82.92649909536333,
+                "non_masterchef_pool": 170486.45723253675,
+                "non_masterchef_pool_percent": 17.073500904636674
+            },
+            {
+                "time": "2022-11-26 00:00:00.000 UTC",
+                "slp_value": 15.360528545780628,
+                "masterchef_pool": 841369.3725369431,
+                "masterchef_pool_percent": 82.84068732978476,
+                "non_masterchef_pool": 174278.13070924836,
+                "non_masterchef_pool_percent": 17.15931267021523
+            },
+            {
+                "time": "2022-11-25 00:00:00.000 UTC",
+                "slp_value": 15.050158657938358,
+                "masterchef_pool": 817642.9173556893,
+                "masterchef_pool_percent": 82.73439900588015,
+                "non_masterchef_pool": 170631.52130624768,
+                "non_masterchef_pool_percent": 17.265600994119836
+            },
+            {
+                "time": "2022-11-24 00:00:00.000 UTC",
+                "slp_value": 14.696389519579029,
+                "masterchef_pool": 756477.2509795041,
+                "masterchef_pool_percent": 81.87179391497779,
+                "non_masterchef_pool": 167500.61099954392,
+                "non_masterchef_pool_percent": 18.1282060850222
+            },
+            {
+                "time": "2022-11-23 00:00:00.000 UTC",
+                "slp_value": 13.805611052054466,
+                "masterchef_pool": 705909.2286852628,
+                "masterchef_pool_percent": 81.78609469808937,
+                "non_masterchef_pool": 157207.2109627031,
+                "non_masterchef_pool_percent": 18.213905301910643
+            },
+            {
+                "time": "2022-11-22 00:00:00.000 UTC",
+                "slp_value": 12.664607915129688,
+                "masterchef_pool": 646217.0888771351,
+                "masterchef_pool_percent": 81.77003632823606,
+                "non_masterchef_pool": 144068.83723292768,
+                "non_masterchef_pool_percent": 18.229963671763954
+            },
+            {
+                "time": "2022-11-21 00:00:00.000 UTC",
+                "slp_value": 12.696435201165778,
+                "masterchef_pool": 650845.7133981142,
+                "masterchef_pool_percent": 81.84146865805803,
+                "non_masterchef_pool": 144406.03864144615,
+                "non_masterchef_pool_percent": 18.158531341941966
+            },
+            {
+                "time": "2022-11-20 00:00:00.000 UTC",
+                "slp_value": 13.655535394842621,
+                "masterchef_pool": 698563.3769311664,
+                "masterchef_pool_percent": 81.81710060320034,
+                "non_masterchef_pool": 155247.588968353,
+                "non_masterchef_pool_percent": 18.182899396799655
+            },
+            {
+                "time": "2022-11-19 00:00:00.000 UTC",
+                "slp_value": 13.953866883295616,
+                "masterchef_pool": 705494.1067452587,
+                "masterchef_pool_percent": 81.63826693279539,
+                "non_masterchef_pool": 158676.74505151133,
+                "non_masterchef_pool_percent": 18.36173306720461
+            },
+            {
+                "time": "2022-11-18 00:00:00.000 UTC",
+                "slp_value": 14.070113911800215,
+                "masterchef_pool": 707577.2254521055,
+                "masterchef_pool_percent": 81.56078295617212,
+                "non_masterchef_pool": 159968.67075677775,
+                "non_masterchef_pool_percent": 18.43921704382788
+            },
+            {
+                "time": "2022-11-17 00:00:00.000 UTC",
+                "slp_value": 13.639897203165242,
+                "masterchef_pool": 684812.0937829097,
+                "masterchef_pool_percent": 81.54334272678915,
+                "non_masterchef_pool": 155001.52052693232,
+                "non_masterchef_pool_percent": 18.456657273210837
+            },
+            {
+                "time": "2022-11-16 00:00:00.000 UTC",
+                "slp_value": 15.36887912511983,
+                "masterchef_pool": 761394.5955305854,
+                "masterchef_pool_percent": 81.3606414072218,
+                "non_masterchef_pool": 174432.09211767837,
+                "non_masterchef_pool_percent": 18.639358592778194
+            },
+            {
+                "time": "2022-11-15 00:00:00.000 UTC",
+                "slp_value": 15.232958389744244,
+                "masterchef_pool": 754097.8870201707,
+                "masterchef_pool_percent": 81.3580008204516,
+                "non_masterchef_pool": 172790.53134741448,
+                "non_masterchef_pool_percent": 18.641999179548407
+            },
+            {
+                "time": "2022-11-14 00:00:00.000 UTC",
+                "slp_value": 14.229073790008105,
+                "masterchef_pool": 702597.600044016,
+                "masterchef_pool_percent": 81.32739141272133,
+                "non_masterchef_pool": 161315.02255378058,
+                "non_masterchef_pool_percent": 18.672608587278674
+            },
+            {
+                "time": "2022-11-13 00:00:00.000 UTC",
+                "slp_value": 13.930675023659187,
+                "masterchef_pool": 688019.8724469461,
+                "masterchef_pool_percent": 81.19896046489633,
+                "non_masterchef_pool": 159306.0890034947,
+                "non_masterchef_pool_percent": 18.80103953510367
+            },
+            {
+                "time": "2022-11-12 00:00:00.000 UTC",
+                "slp_value": 13.886455198497101,
+                "masterchef_pool": 679930.7952275174,
+                "masterchef_pool_percent": 81.06733804896609,
+                "non_masterchef_pool": 158792.68033156323,
+                "non_masterchef_pool_percent": 18.932661951033907
+            },
+            {
+                "time": "2022-11-11 00:00:00.000 UTC",
+                "slp_value": 14.048655816295653,
+                "masterchef_pool": 686333.5862853676,
+                "masterchef_pool_percent": 81.03850946854644,
+                "non_masterchef_pool": 160589.18017019634,
+                "non_masterchef_pool_percent": 18.961490531453563
+            },
+            {
+                "time": "2022-11-10 00:00:00.000 UTC",
+                "slp_value": 12.912736970430513,
+                "masterchef_pool": 628326.3189888949,
+                "masterchef_pool_percent": 80.99722534170381,
+                "non_masterchef_pool": 147411.75887509144,
+                "non_masterchef_pool_percent": 19.00277465829619
+            },
+            {
+                "time": "2022-11-09 00:00:00.000 UTC",
+                "slp_value": 12.99271682766132,
+                "masterchef_pool": 632945.6360499565,
+                "masterchef_pool_percent": 81.05163332059733,
+                "non_masterchef_pool": 147970.9354228957,
+                "non_masterchef_pool_percent": 18.948366679402668
+            },
+            {
+                "time": "2022-11-08 00:00:00.000 UTC",
+                "slp_value": 16.543983170783164,
+                "masterchef_pool": 807862.6676423356,
+                "masterchef_pool_percent": 81.09911599413358,
+                "non_masterchef_pool": 188279.7165740023,
+                "non_masterchef_pool_percent": 18.900884005866416
+            },
+            {
+                "time": "2022-11-07 00:00:00.000 UTC",
+                "slp_value": 20.244919361750753,
+                "masterchef_pool": 985225.223673579,
+                "masterchef_pool_percent": 81.08765161616553,
+                "non_masterchef_pool": 229787.42503058654,
+                "non_masterchef_pool_percent": 18.91234838383447
+            },
+            {
+                "time": "2022-11-06 00:00:00.000 UTC",
+                "slp_value": 22.00340259071286,
+                "masterchef_pool": 1063770.5822725254,
+                "masterchef_pool_percent": 80.59713773552551,
+                "non_masterchef_pool": 256090.9068081691,
+                "non_masterchef_pool_percent": 19.40286226447448
+            },
+            {
+                "time": "2022-11-05 00:00:00.000 UTC",
+                "slp_value": 23.483569209062004,
+                "masterchef_pool": 1109834.3299231518,
+                "masterchef_pool_percent": 80.25334362771737,
+                "non_masterchef_pool": 273079.1784180065,
+                "non_masterchef_pool_percent": 19.74665637228263
+            },
+            {
+                "time": "2022-11-04 00:00:00.000 UTC",
+                "slp_value": 22.942791636945785,
+                "masterchef_pool": 1071745.9027864416,
+                "masterchef_pool_percent": 80.08655523439673,
+                "non_masterchef_pool": 266488.58569875266,
+                "non_masterchef_pool_percent": 19.913444765603273
+            },
+            {
+                "time": "2022-11-03 00:00:00.000 UTC",
+                "slp_value": 19.37615078273512,
+                "masterchef_pool": 900756.6869354513,
+                "masterchef_pool_percent": 79.81504547864076,
+                "non_masterchef_pool": 227798.31360827712,
+                "non_masterchef_pool_percent": 20.184954521359245
+            },
+            {
+                "time": "2022-11-02 00:00:00.000 UTC",
+                "slp_value": 18.94786310215329,
+                "masterchef_pool": 878922.2281722167,
+                "masterchef_pool_percent": 79.7890763654247,
+                "non_masterchef_pool": 222634.86235839047,
+                "non_masterchef_pool_percent": 20.210923634575295
+            },
+            {
+                "time": "2022-11-01 00:00:00.000 UTC",
+                "slp_value": 19.86962961056407,
+                "masterchef_pool": 919918.0261812732,
+                "masterchef_pool_percent": 79.763637713289,
+                "non_masterchef_pool": 233386.97914950852,
+                "non_masterchef_pool_percent": 20.236362286711
+            },
+            {
+                "time": "2022-10-31 00:00:00.000 UTC",
+                "slp_value": 19.870632685607426,
+                "masterchef_pool": 918345.3485788753,
+                "masterchef_pool_percent": 79.73074358148538,
+                "non_masterchef_pool": 233462.9844768924,
+                "non_masterchef_pool_percent": 20.269256418514615
+            },
+            {
+                "time": "2022-10-30 00:00:00.000 UTC",
+                "slp_value": 18.355329468040278,
+                "masterchef_pool": 847760.5311085456,
+                "masterchef_pool_percent": 79.77289901852882,
+                "non_masterchef_pool": 214956.93502194644,
+                "non_masterchef_pool_percent": 20.227100981471168
+            },
+            {
+                "time": "2022-10-29 00:00:00.000 UTC",
+                "slp_value": 17.72653784601745,
+                "masterchef_pool": 816728.5624114029,
+                "masterchef_pool_percent": 79.74949644993453,
+                "non_masterchef_pool": 207388.95402223663,
+                "non_masterchef_pool_percent": 20.250503550065474
+            },
+            {
+                "time": "2022-10-28 00:00:00.000 UTC",
+                "slp_value": 18.17071999373315,
+                "masterchef_pool": 835549.7433201818,
+                "masterchef_pool_percent": 79.70143780218916,
+                "non_masterchef_pool": 212799.90552044648,
+                "non_masterchef_pool_percent": 20.29856219781084
+            },
+            {
+                "time": "2022-10-27 00:00:00.000 UTC",
+                "slp_value": 17.391495197757944,
+                "masterchef_pool": 798450.0164925226,
+                "masterchef_pool_percent": 79.69366474515046,
+                "non_masterchef_pool": 203448.96637626318,
+                "non_masterchef_pool_percent": 20.306335254849557
+            },
+            {
+                "time": "2022-10-26 00:00:00.000 UTC",
+                "slp_value": 17.15058385596675,
+                "masterchef_pool": 787993.286046586,
+                "masterchef_pool_percent": 79.77732512776012,
+                "non_masterchef_pool": 199747.6350542995,
+                "non_masterchef_pool_percent": 20.222674872239892
+            },
+            {
+                "time": "2022-10-25 00:00:00.000 UTC",
+                "slp_value": 16.69722588834901,
+                "masterchef_pool": 756995.9863906034,
+                "masterchef_pool_percent": 79.5984633945605,
+                "non_masterchef_pool": 194022.3550543323,
+                "non_masterchef_pool_percent": 20.401536605439503
+            },
+            {
+                "time": "2022-10-24 00:00:00.000 UTC",
+                "slp_value": 17.670077350109025,
+                "masterchef_pool": 801201.4290547649,
+                "masterchef_pool_percent": 79.63007164365646,
+                "non_masterchef_pool": 204952.92007119197,
+                "non_masterchef_pool_percent": 20.36992835634352
+            },
+            {
+                "time": "2022-10-23 00:00:00.000 UTC",
+                "slp_value": 15.116552048896644,
+                "masterchef_pool": 694293.0073082481,
+                "masterchef_pool_percent": 79.90310580370851,
+                "non_masterchef_pool": 174625.66653386934,
+                "non_masterchef_pool_percent": 20.096894196291487
+            },
+            {
+                "time": "2022-10-22 00:00:00.000 UTC",
+                "slp_value": 8.894674644695614,
+                "masterchef_pool": 411499.20865522366,
+                "masterchef_pool_percent": 80.08573855571207,
+                "non_masterchef_pool": 102324.12128630147,
+                "non_masterchef_pool_percent": 19.91426144428793
+            },
+            {
+                "time": "2022-10-21 00:00:00.000 UTC",
+                "slp_value": 8.425605187377826,
+                "masterchef_pool": 387150.658618305,
+                "masterchef_pool_percent": 79.98095681295112,
+                "non_masterchef_pool": 96902.88868261274,
+                "non_masterchef_pool_percent": 20.01904318704888
+            },
+            {
+                "time": "2022-10-20 00:00:00.000 UTC",
+                "slp_value": 8.381956987886205,
+                "masterchef_pool": 384925.2763052261,
+                "masterchef_pool_percent": 79.97851607447205,
+                "non_masterchef_pool": 96360.56794174964,
+                "non_masterchef_pool_percent": 20.021483925527946
+            },
+            {
+                "time": "2022-10-19 00:00:00.000 UTC",
+                "slp_value": 9.192583665125499,
+                "masterchef_pool": 422358.1830961363,
+                "masterchef_pool_percent": 79.9989916130617,
+                "non_masterchef_pool": 105596.20055284014,
+                "non_masterchef_pool_percent": 20.001008386938295
+            },
+            {
+                "time": "2022-10-18 00:00:00.000 UTC",
+                "slp_value": 9.834003786227836,
+                "masterchef_pool": 453411.984807004,
+                "masterchef_pool_percent": 79.5456483262946,
+                "non_masterchef_pool": 116590.26465247292,
+                "non_masterchef_pool_percent": 20.45435167370539
+            },
+            {
+                "time": "2022-10-17 00:00:00.000 UTC",
+                "slp_value": 10.027773064472747,
+                "masterchef_pool": 463001.8442666533,
+                "masterchef_pool_percent": 80.08516705045484,
+                "non_masterchef_pool": 115134.98346195137,
+                "non_masterchef_pool_percent": 19.914832949545158
+            },
+            {
+                "time": "2022-10-16 00:00:00.000 UTC",
+                "slp_value": 9.76456248517743,
+                "masterchef_pool": 460475.77412601525,
+                "masterchef_pool_percent": 80.42392105032823,
+                "non_masterchef_pool": 112084.93680706096,
+                "non_masterchef_pool_percent": 19.576078949671768
+            },
+            {
+                "time": "2022-10-15 00:00:00.000 UTC",
+                "slp_value": 9.845174906121922,
+                "masterchef_pool": 464068.9386326552,
+                "masterchef_pool_percent": 80.42225633003011,
+                "non_masterchef_pool": 112971.49744793423,
+                "non_masterchef_pool_percent": 19.577743669969877
+            },
+            {
+                "time": "2022-10-14 00:00:00.000 UTC",
+                "slp_value": 9.952531806392557,
+                "masterchef_pool": 487120.83998879854,
+                "masterchef_pool_percent": 80.99541499738785,
+                "non_masterchef_pool": 114296.95632042276,
+                "non_masterchef_pool_percent": 19.004585002612146
+            },
+            {
+                "time": "2022-10-13 00:00:00.000 UTC",
+                "slp_value": 9.477895309203603,
+                "masterchef_pool": 437775.5128938795,
+                "masterchef_pool_percent": 80.09288085272473,
+                "non_masterchef_pool": 108809.28744419763,
+                "non_masterchef_pool_percent": 19.907119147275267
+            },
+            {
+                "time": "2022-10-12 00:00:00.000 UTC",
+                "slp_value": 10.987870323603293,
+                "masterchef_pool": 507378.43826616014,
+                "masterchef_pool_percent": 80.09843459146435,
+                "non_masterchef_pool": 126065.19999469124,
+                "non_masterchef_pool_percent": 19.90156540853563
+            },
+            {
+                "time": "2022-10-11 00:00:00.000 UTC",
+                "slp_value": 10.736697102919319,
+                "masterchef_pool": 495656.6561171342,
+                "masterchef_pool_percent": 80.08125693776253,
+                "non_masterchef_pool": 123285.49722887046,
+                "non_masterchef_pool_percent": 19.918743062237482
+            },
+            {
+                "time": "2022-10-10 00:00:00.000 UTC",
+                "slp_value": 11.502985207269777,
+                "masterchef_pool": 530992.4773797918,
+                "masterchef_pool_percent": 80.08097978793798,
+                "non_masterchef_pool": 132076.92909589096,
+                "non_masterchef_pool_percent": 19.919020212062023
+            },
+            {
+                "time": "2022-10-09 00:00:00.000 UTC",
+                "slp_value": 11.824888399321129,
+                "masterchef_pool": 545751.4195890577,
+                "masterchef_pool_percent": 80.08064878296058,
+                "non_masterchef_pool": 135750.82581380627,
+                "non_masterchef_pool_percent": 19.91935121703942
+            },
+            {
+                "time": "2022-10-08 00:00:00.000 UTC",
+                "slp_value": 11.63727043031604,
+                "masterchef_pool": 536927.8549280972,
+                "masterchef_pool_percent": 80.07823333373216,
+                "non_masterchef_pool": 133576.26657319674,
+                "non_masterchef_pool_percent": 19.921766666267843
+            },
+            {
+                "time": "2022-10-07 00:00:00.000 UTC",
+                "slp_value": 11.801381932968136,
+                "masterchef_pool": 544414.6615078255,
+                "masterchef_pool_percent": 80.07604442333395,
+                "non_masterchef_pool": 135457.4093823101,
+                "non_masterchef_pool_percent": 19.923955576666046
+            },
+            {
+                "time": "2022-10-06 00:00:00.000 UTC",
+                "slp_value": 12.836314156501864,
+                "masterchef_pool": 590945.1578268047,
+                "masterchef_pool_percent": 80.05219648020017,
+                "non_masterchef_pool": 147254.64656328107,
+                "non_masterchef_pool_percent": 19.947803519799848
+            },
+            {
+                "time": "2022-10-05 00:00:00.000 UTC",
+                "slp_value": 12.917256240409477,
+                "masterchef_pool": 595906.3170297737,
+                "masterchef_pool_percent": 80.09959819015235,
+                "non_masterchef_pool": 148050.3700126789,
+                "non_masterchef_pool_percent": 19.90040180984765
+            },
+            {
+                "time": "2022-10-04 00:00:00.000 UTC",
+                "slp_value": 12.934149850820916,
+                "masterchef_pool": 596256.9236798119,
+                "masterchef_pool_percent": 80.06422121791648,
+                "non_masterchef_pool": 148466.39293990145,
+                "non_masterchef_pool_percent": 19.935778782083517
+            },
+            {
+                "time": "2022-10-03 00:00:00.000 UTC",
+                "slp_value": 12.678128892814598,
+                "masterchef_pool": 583849.9965287896,
+                "masterchef_pool_percent": 80.11748713568406,
+                "non_masterchef_pool": 144892.27610390354,
+                "non_masterchef_pool_percent": 19.88251286431594
+            },
+            {
+                "time": "2022-10-02 00:00:00.000 UTC",
+                "slp_value": 12.831858292872388,
+                "masterchef_pool": 590954.8730700293,
+                "masterchef_pool_percent": 80.18803961424392,
+                "non_masterchef_pool": 146006.49412750115,
+                "non_masterchef_pool_percent": 19.811960385756095
+            },
+            {
+                "time": "2022-10-01 00:00:00.000 UTC",
+                "slp_value": 13.142255976650247,
+                "masterchef_pool": 603510.6637100098,
+                "masterchef_pool_percent": 80.1780304638284,
+                "non_masterchef_pool": 149202.59230128396,
+                "non_masterchef_pool_percent": 19.821969536171594
+            },
+            {
+                "time": "2022-09-30 00:00:00.000 UTC",
+                "slp_value": 13.074318857528358,
+                "masterchef_pool": 598656.6859846468,
+                "masterchef_pool_percent": 80.16213704612588,
+                "non_masterchef_pool": 148150.60738900106,
+                "non_masterchef_pool_percent": 19.837862953874136
+            },
+            {
+                "time": "2022-09-29 00:00:00.000 UTC",
+                "slp_value": 13.255047110385055,
+                "masterchef_pool": 606720.5207415721,
+                "masterchef_pool_percent": 80.16300136223019,
+                "non_masterchef_pool": 150138.0180249618,
+                "non_masterchef_pool_percent": 19.83699863776981
+            },
+            {
+                "time": "2022-09-28 00:00:00.000 UTC",
+                "slp_value": 14.830740544313535,
+                "masterchef_pool": 677423.4187311463,
+                "masterchef_pool_percent": 80.13486621035442,
+                "non_masterchef_pool": 167930.73329664452,
+                "non_masterchef_pool_percent": 19.865133789645583
+            },
+            {
+                "time": "2022-09-27 00:00:00.000 UTC",
+                "slp_value": 15.68923155183992,
+                "masterchef_pool": 730676.4256163557,
+                "masterchef_pool_percent": 80.4482892386467,
+                "non_masterchef_pool": 177579.58893832634,
+                "non_masterchef_pool_percent": 19.551710761353306
+            },
+            {
+                "time": "2022-09-26 00:00:00.000 UTC",
+                "slp_value": 15.189647714605707,
+                "masterchef_pool": 704859.168361666,
+                "masterchef_pool_percent": 80.41617577204,
+                "non_masterchef_pool": 171654.99261978583,
+                "non_masterchef_pool_percent": 19.583824227959994
+            },
+            {
+                "time": "2022-09-25 00:00:00.000 UTC",
+                "slp_value": 15.38831239125699,
+                "masterchef_pool": 710593.3706736686,
+                "masterchef_pool_percent": 80.34558919308887,
+                "non_masterchef_pool": 173827.76284487452,
+                "non_masterchef_pool_percent": 19.654410806911145
+            },
+            {
+                "time": "2022-09-24 00:00:00.000 UTC",
+                "slp_value": 15.84758330551771,
+                "masterchef_pool": 729040.9084885188,
+                "masterchef_pool_percent": 80.32668633649024,
+                "non_masterchef_pool": 178553.9914611075,
+                "non_masterchef_pool_percent": 19.67331366350976
+            },
+            {
+                "time": "2022-09-23 00:00:00.000 UTC",
+                "slp_value": 15.691950007009341,
+                "masterchef_pool": 721847.6794406777,
+                "masterchef_pool_percent": 80.32925276389977,
+                "non_masterchef_pool": 176763.542006011,
+                "non_masterchef_pool_percent": 19.670747236100226
+            },
+            {
+                "time": "2022-09-22 00:00:00.000 UTC",
+                "slp_value": 15.498254673925898,
+                "masterchef_pool": 709062.1514028623,
+                "masterchef_pool_percent": 80.24748207697566,
+                "non_masterchef_pool": 174532.1160443204,
+                "non_masterchef_pool_percent": 19.752517923024342
+            },
+            {
+                "time": "2022-09-21 00:00:00.000 UTC",
+                "slp_value": 16.165210802696343,
+                "masterchef_pool": 739453.9502050483,
+                "masterchef_pool_percent": 79.40492069442114,
+                "non_masterchef_pool": 191790.54162025638,
+                "non_masterchef_pool_percent": 20.595079305578864
+            },
+            {
+                "time": "2022-09-20 00:00:00.000 UTC",
+                "slp_value": 15.965292127070015,
+                "masterchef_pool": 746029.3199744382,
+                "masterchef_pool_percent": 80.5875285329655,
+                "non_masterchef_pool": 179708.61188094073,
+                "non_masterchef_pool_percent": 19.412471467034493
+            },
+            {
+                "time": "2022-09-19 00:00:00.000 UTC",
+                "slp_value": 15.862013225189203,
+                "masterchef_pool": 741149.6951330304,
+                "masterchef_pool_percent": 80.58818429236953,
+                "non_masterchef_pool": 178525.69108013937,
+                "non_masterchef_pool_percent": 19.41181570763048
+            },
+            {
+                "time": "2022-09-18 00:00:00.000 UTC",
+                "slp_value": 17.231999106177184,
+                "masterchef_pool": 805047.0838980423,
+                "masterchef_pool_percent": 66.04104353686743,
+                "non_masterchef_pool": 413963.1569813655,
+                "non_masterchef_pool_percent": 33.958956463132566
+            },
+            {
+                "time": "2022-09-17 00:00:00.000 UTC",
+                "slp_value": 16.753077413621504,
+                "masterchef_pool": 759495.3953479683,
+                "masterchef_pool_percent": 65.36606805793247,
+                "non_masterchef_pool": 402415.3909560888,
+                "non_masterchef_pool_percent": 34.633931942067534
+            },
+            {
+                "time": "2022-09-16 00:00:00.000 UTC",
+                "slp_value": 16.50881280862754,
+                "masterchef_pool": 748370.1121662124,
+                "masterchef_pool_percent": 65.3059770805513,
+                "non_masterchef_pool": 397574.1729076323,
+                "non_masterchef_pool_percent": 34.69402291944871
+            },
+            {
+                "time": "2022-09-15 00:00:00.000 UTC",
+                "slp_value": 16.858483820354824,
+                "masterchef_pool": 765019.9753074863,
+                "masterchef_pool_percent": 65.3309599332861,
+                "non_masterchef_pool": 405971.50574330566,
+                "non_masterchef_pool_percent": 34.669040066713904
+            },
+            {
+                "time": "2022-09-14 00:00:00.000 UTC",
+                "slp_value": 18.61106937221761,
+                "masterchef_pool": 846388.0846988393,
+                "masterchef_pool_percent": 65.47605955377513,
+                "non_masterchef_pool": 446279.93849474564,
+                "non_masterchef_pool_percent": 34.52394044622487
+            },
+            {
+                "time": "2022-09-13 00:00:00.000 UTC",
+                "slp_value": 19.029950836188984,
+                "masterchef_pool": 866346.5892863678,
+                "masterchef_pool_percent": 65.50075961098075,
+                "non_masterchef_pool": 456304.6203053006,
+                "non_masterchef_pool_percent": 34.49924038901926
+            },
+            {
+                "time": "2022-09-12 00:00:00.000 UTC",
+                "slp_value": 19.283327955414837,
+                "masterchef_pool": 877984.7434633361,
+                "masterchef_pool_percent": 65.50279214646525,
+                "non_masterchef_pool": 462392.84151067317,
+                "non_masterchef_pool_percent": 34.497207853534746
+            },
+            {
+                "time": "2022-09-11 00:00:00.000 UTC",
+                "slp_value": 19.812669197019137,
+                "masterchef_pool": 901941.2335617543,
+                "masterchef_pool_percent": 65.50323854640855,
+                "non_masterchef_pool": 475000.2025822551,
+                "non_masterchef_pool_percent": 34.496761453591446
+            },
+            {
+                "time": "2022-09-10 00:00:00.000 UTC",
+                "slp_value": 20.12268759275764,
+                "masterchef_pool": 916191.6276105938,
+                "masterchef_pool_percent": 65.50871009050658,
+                "non_masterchef_pool": 482388.235043986,
+                "non_masterchef_pool_percent": 34.49128990949342
+            },
+            {
+                "time": "2022-09-09 00:00:00.000 UTC",
+                "slp_value": 20.720386627142705,
+                "masterchef_pool": 943380.1855366016,
+                "masterchef_pool_percent": 65.51358394393174,
+                "non_masterchef_pool": 496596.272390004,
+                "non_masterchef_pool_percent": 34.486416056068265
+            },
+            {
+                "time": "2022-09-08 00:00:00.000 UTC",
+                "slp_value": 18.733661890303345,
+                "masterchef_pool": 851650.0271125544,
+                "masterchef_pool_percent": 65.48603195101586,
+                "non_masterchef_pool": 448856.3583554126,
+                "non_masterchef_pool_percent": 34.51396804898414
+            },
+            {
+                "time": "2022-09-07 00:00:00.000 UTC",
+                "slp_value": 18.394769676678695,
+                "masterchef_pool": 836689.6945191184,
+                "masterchef_pool_percent": 65.50249786937715,
+                "non_masterchef_pool": 440650.44018477714,
+                "non_masterchef_pool_percent": 34.49750213062285
+            },
+            {
+                "time": "2022-09-06 00:00:00.000 UTC",
+                "slp_value": 19.83868207135784,
+                "masterchef_pool": 902306.4291736536,
+                "masterchef_pool_percent": 65.50295210746756,
+                "non_masterchef_pool": 475198.5536449569,
+                "non_masterchef_pool_percent": 34.497047892532436
+            },
+            {
+                "time": "2022-09-05 00:00:00.000 UTC",
+                "slp_value": 20.367723139406614,
+                "masterchef_pool": 933112.6529045599,
+                "masterchef_pool_percent": 65.6759672065138,
+                "non_masterchef_pool": 487669.8533818689,
+                "non_masterchef_pool_percent": 34.3240327934862
+            },
+            {
+                "time": "2022-09-04 00:00:00.000 UTC",
+                "slp_value": 21.003126849278008,
+                "masterchef_pool": 988784.9230390631,
+                "masterchef_pool_percent": 66.4442401791431,
+                "non_masterchef_pool": 499357.49588718056,
+                "non_masterchef_pool_percent": 33.555759820856906
+            },
+            {
+                "time": "2022-09-03 00:00:00.000 UTC",
+                "slp_value": 21.147047652546032,
+                "masterchef_pool": 995688.0752570654,
+                "masterchef_pool_percent": 66.44855012947323,
+                "non_masterchef_pool": 502746.53816488816,
+                "non_masterchef_pool_percent": 33.55144987052677
+            },
+            {
+                "time": "2022-09-02 00:00:00.000 UTC",
+                "slp_value": 22.07112433936601,
+                "masterchef_pool": 1070912.90658218,
+                "masterchef_pool_percent": 67.11799498054626,
+                "non_masterchef_pool": 524654.5815297305,
+                "non_masterchef_pool_percent": 32.88200501945374
+            },
+            {
+                "time": "2022-09-01 00:00:00.000 UTC",
+                "slp_value": 22.183306208205018,
+                "masterchef_pool": 1038107.3779666796,
+                "masterchef_pool_percent": 66.1999216039009,
+                "non_masterchef_pool": 530032.5122556495,
+                "non_masterchef_pool_percent": 33.800078396099096
+            },
+            {
+                "time": "2022-08-31 00:00:00.000 UTC",
+                "slp_value": 23.48790635898402,
+                "masterchef_pool": 1104524.240576805,
+                "masterchef_pool_percent": 66.43342036953939,
+                "non_masterchef_pool": 558079.0612445236,
+                "non_masterchef_pool_percent": 33.56657963046061
+            },
+            {
+                "time": "2022-08-30 00:00:00.000 UTC",
+                "slp_value": 22.875804568903153,
+                "masterchef_pool": 1111177.8547196619,
+                "masterchef_pool_percent": 67.13930516808902,
+                "non_masterchef_pool": 543855.4405128888,
+                "non_masterchef_pool_percent": 32.86069483191099
+            },
+            {
+                "time": "2022-08-29 00:00:00.000 UTC",
+                "slp_value": 22.742929557174474,
+                "masterchef_pool": 1088894.9320052906,
+                "masterchef_pool_percent": 66.82438162441011,
+                "non_masterchef_pool": 540592.5477674077,
+                "non_masterchef_pool_percent": 33.17561837558989
+            },
+            {
+                "time": "2022-08-28 00:00:00.000 UTC",
+                "slp_value": 23.558631108694286,
+                "masterchef_pool": 1127633.628176473,
+                "masterchef_pool_percent": 66.77687313717708,
+                "non_masterchef_pool": 561025.2969876626,
+                "non_masterchef_pool_percent": 33.22312686282291
+            },
+            {
+                "time": "2022-08-27 00:00:00.000 UTC",
+                "slp_value": 22.615875397696904,
+                "masterchef_pool": 1077785.1711387068,
+                "masterchef_pool_percent": 66.68264354802729,
+                "non_masterchef_pool": 538505.2363680776,
+                "non_masterchef_pool_percent": 33.317356451972714
+            },
+            {
+                "time": "2022-08-26 00:00:00.000 UTC",
+                "slp_value": 24.932472313442744,
+                "masterchef_pool": 1188093.9785186218,
+                "masterchef_pool_percent": 66.68214868027945,
+                "non_masterchef_pool": 593633.2183885591,
+                "non_masterchef_pool_percent": 33.317851319720546
+            },
+            {
+                "time": "2022-08-25 00:00:00.000 UTC",
+                "slp_value": 26.87114708507736,
+                "masterchef_pool": 1280728.4414341769,
+                "masterchef_pool_percent": 66.7052466687136,
+                "non_masterchef_pool": 639253.1273242969,
+                "non_masterchef_pool_percent": 33.294753331286415
+            },
+            {
+                "time": "2022-08-24 00:00:00.000 UTC",
+                "slp_value": 27.5680110821845,
+                "masterchef_pool": 1303233.557841059,
+                "masterchef_pool_percent": 66.5319412602746,
+                "non_masterchef_pool": 655575.2987091758,
+                "non_masterchef_pool_percent": 33.46805873972539
+            },
+            {
+                "time": "2022-08-23 00:00:00.000 UTC",
+                "slp_value": 26.83191775352446,
+                "masterchef_pool": 1268807.9887014003,
+                "masterchef_pool_percent": 66.54259108540995,
+                "non_masterchef_pool": 637952.7310199537,
+                "non_masterchef_pool_percent": 33.45740891459005
+            },
+            {
+                "time": "2022-08-22 00:00:00.000 UTC",
+                "slp_value": 23.686673651030237,
+                "masterchef_pool": 1121619.5479970996,
+                "masterchef_pool_percent": 66.6506639687887,
+                "non_masterchef_pool": 561213.7220845514,
+                "non_masterchef_pool_percent": 33.349336031211294
+            },
+            {
+                "time": "2022-08-21 00:00:00.000 UTC",
+                "slp_value": 25.275795978077962,
+                "masterchef_pool": 1215970.9321559307,
+                "masterchef_pool_percent": 67.0054612058611,
+                "non_masterchef_pool": 598763.1361912736,
+                "non_masterchef_pool_percent": 32.994538794138904
+            },
+            {
+                "time": "2022-08-20 00:00:00.000 UTC",
+                "slp_value": 26.163606522725807,
+                "masterchef_pool": 1240260.6529449685,
+                "masterchef_pool_percent": 66.680395874529,
+                "non_masterchef_pool": 619747.2799394419,
+                "non_masterchef_pool_percent": 33.319604125471
+            },
+            {
+                "time": "2022-08-19 00:00:00.000 UTC",
+                "slp_value": 28.00045048238469,
+                "masterchef_pool": 1312657.287365861,
+                "masterchef_pool_percent": 66.43520127648458,
+                "non_masterchef_pool": 663188.7432692412,
+                "non_masterchef_pool_percent": 33.56479872351542
+            },
+            {
+                "time": "2022-08-18 00:00:00.000 UTC",
+                "slp_value": 30.63087493994071,
+                "masterchef_pool": 1457871.4848408175,
+                "masterchef_pool_percent": 66.77898869303249,
+                "non_masterchef_pool": 725257.5402816117,
+                "non_masterchef_pool_percent": 33.22101130696751
+            },
+            {
+                "time": "2022-08-17 00:00:00.000 UTC",
+                "slp_value": 32.47669952271688,
+                "masterchef_pool": 1523992.0211108695,
+                "masterchef_pool_percent": 66.43282822630097,
+                "non_masterchef_pool": 770042.5124174138,
+                "non_masterchef_pool_percent": 33.567171773699016
+            },
+            {
+                "time": "2022-08-16 00:00:00.000 UTC",
+                "slp_value": 31.64469187582933,
+                "masterchef_pool": 1482294.3302380575,
+                "masterchef_pool_percent": 66.39611677946186,
+                "non_masterchef_pool": 750207.2107203917,
+                "non_masterchef_pool_percent": 33.60388322053814
+            },
+            {
+                "time": "2022-08-15 00:00:00.000 UTC",
+                "slp_value": 32.12226841269139,
+                "masterchef_pool": 1509529.460549529,
+                "masterchef_pool_percent": 66.47441926572017,
+                "non_masterchef_pool": 761313.1842209983,
+                "non_masterchef_pool_percent": 33.52558073427983
+            },
+            {
+                "time": "2022-08-14 00:00:00.000 UTC",
+                "slp_value": 35.3782400595111,
+                "masterchef_pool": 1686595.2313368728,
+                "masterchef_pool_percent": 66.79778214431327,
+                "non_masterchef_pool": 838331.7605399953,
+                "non_masterchef_pool_percent": 33.20221785568674
+            },
+            {
+                "time": "2022-08-13 00:00:00.000 UTC",
+                "slp_value": 40.29150870907908,
+                "masterchef_pool": 1944525.4528778926,
+                "masterchef_pool_percent": 67.07535449547923,
+                "non_masterchef_pool": 954490.8363449252,
+                "non_masterchef_pool_percent": 32.92464550452077
+            },
+            {
+                "time": "2022-08-12 00:00:00.000 UTC",
+                "slp_value": 39.01648259200717,
+                "masterchef_pool": 1934537.0584006892,
+                "masterchef_pool_percent": 67.67445160108389,
+                "non_masterchef_pool": 924055.8265539999,
+                "non_masterchef_pool_percent": 32.3255483989161
+            },
+            {
+                "time": "2022-08-11 00:00:00.000 UTC",
+                "slp_value": 40.10240796885474,
+                "masterchef_pool": 1991294.4040574434,
+                "masterchef_pool_percent": 67.62096697168508,
+                "non_masterchef_pool": 953494.014734701,
+                "non_masterchef_pool_percent": 32.37903302831492
+            },
+            {
+                "time": "2022-08-10 00:00:00.000 UTC",
+                "slp_value": 35.131363504712134,
+                "masterchef_pool": 1754173.9499352523,
+                "masterchef_pool_percent": 67.51433280576462,
+                "non_masterchef_pool": 844050.5707482644,
+                "non_masterchef_pool_percent": 32.48566719423536
+            },
+            {
+                "time": "2022-08-09 00:00:00.000 UTC",
+                "slp_value": 33.155624607059366,
+                "masterchef_pool": 1705633.0831393402,
+                "masterchef_pool_percent": 68.19823377466223,
+                "non_masterchef_pool": 795359.9613066821,
+                "non_masterchef_pool_percent": 31.801766225337786
+            },
+            {
+                "time": "2022-08-08 00:00:00.000 UTC",
+                "slp_value": 35.739447487667675,
+                "masterchef_pool": 1844639.9923830356,
+                "masterchef_pool_percent": 68.27567406809537,
+                "non_masterchef_pool": 857112.8904127709,
+                "non_masterchef_pool_percent": 31.72432593190463
+            },
+            {
+                "time": "2022-08-07 00:00:00.000 UTC",
+                "slp_value": 35.69728566896691,
+                "masterchef_pool": 1819016.812814295,
+                "masterchef_pool_percent": 67.98878347298294,
+                "non_masterchef_pool": 856449.2271643833,
+                "non_masterchef_pool_percent": 32.011216527017055
+            },
+            {
+                "time": "2022-08-06 00:00:00.000 UTC",
+                "slp_value": 29.738436807894146,
+                "masterchef_pool": 1508230.4233998705,
+                "masterchef_pool_percent": 67.8469494229772,
+                "non_masterchef_pool": 714758.8726952753,
+                "non_masterchef_pool_percent": 32.153050577022796
+            },
+            {
+                "time": "2022-08-05 00:00:00.000 UTC",
+                "slp_value": 24.91114829507245,
+                "masterchef_pool": 1590555.9207696405,
+                "masterchef_pool_percent": 78.00013692516228,
+                "non_masterchef_pool": 448614.7569635401,
+                "non_masterchef_pool_percent": 21.99986307483772
+            },
+            {
+                "time": "2022-08-04 00:00:00.000 UTC",
+                "slp_value": 25.96496835470815,
+                "masterchef_pool": 1670520.8790286675,
+                "masterchef_pool_percent": 78.09220362954278,
+                "non_masterchef_pool": 468643.8536677712,
+                "non_masterchef_pool_percent": 21.90779637045722
+            },
+            {
+                "time": "2022-08-03 00:00:00.000 UTC",
+                "slp_value": 25.667019493037536,
+                "masterchef_pool": 2158991.523261027,
+                "masterchef_pool_percent": 82.3476038086904,
+                "non_masterchef_pool": 462810.96206299914,
+                "non_masterchef_pool_percent": 17.652396191309606
+            },
+            {
+                "time": "2022-08-02 00:00:00.000 UTC",
+                "slp_value": 21.661470027427193,
+                "masterchef_pool": 1793092.532772176,
+                "masterchef_pool_percent": 76.29694628605216,
+                "non_masterchef_pool": 557057.2701432928,
+                "non_masterchef_pool_percent": 23.70305371394784
+            },
+            {
+                "time": "2022-08-01 00:00:00.000 UTC",
+                "slp_value": 18.35999086063556,
+                "masterchef_pool": 1518387.860493317,
+                "masterchef_pool_percent": 76.29199215683097,
+                "non_masterchef_pool": 471844.4267590807,
+                "non_masterchef_pool_percent": 23.708007843169014
+            },
+            {
+                "time": "2022-07-31 00:00:00.000 UTC",
+                "slp_value": 18.417317114617283,
+                "masterchef_pool": 1520613.9918478583,
+                "masterchef_pool_percent": 76.05886046779652,
+                "non_masterchef_pool": 478645.505987623,
+                "non_masterchef_pool_percent": 23.94113953220348
+            },
+            {
+                "time": "2022-07-30 00:00:00.000 UTC",
+                "slp_value": 19.394664362415018,
+                "masterchef_pool": 1599884.8254901192,
+                "masterchef_pool_percent": 76.04384406178377,
+                "non_masterchef_pool": 504013.0576708794,
+                "non_masterchef_pool_percent": 23.956155938216227
+            },
+            {
+                "time": "2022-07-29 00:00:00.000 UTC",
+                "slp_value": 21.82241852818827,
+                "masterchef_pool": 1920968.5157263542,
+                "masterchef_pool_percent": 77.08465399510571,
+                "non_masterchef_pool": 571056.0522873008,
+                "non_masterchef_pool_percent": 22.915346004894275
+            },
+            {
+                "time": "2022-07-28 00:00:00.000 UTC",
+                "slp_value": 25.709106595340064,
+                "masterchef_pool": 2278495.4039860996,
+                "masterchef_pool_percent": 77.20940109412979,
+                "non_masterchef_pool": 672564.1453662822,
+                "non_masterchef_pool_percent": 22.790598905870212
+            },
+            {
+                "time": "2022-07-27 00:00:00.000 UTC",
+                "slp_value": 27.909121567153353,
+                "masterchef_pool": 2893832.3196591255,
+                "masterchef_pool_percent": 79.99828499420076,
+                "non_masterchef_pool": 723535.6275023739,
+                "non_masterchef_pool_percent": 20.00171500579924
+            },
+            {
+                "time": "2022-07-26 00:00:00.000 UTC",
+                "slp_value": 34.21121479400593,
+                "masterchef_pool": 3728328.6266676127,
+                "masterchef_pool_percent": 78.25771095377456,
+                "non_masterchef_pool": 1035839.1227186038,
+                "non_masterchef_pool_percent": 21.742289046225423
+            },
+            {
+                "time": "2022-07-25 00:00:00.000 UTC",
+                "slp_value": 31.416832914998608,
+                "masterchef_pool": 2829275.6232167413,
+                "masterchef_pool_percent": 69.01994433906496,
+                "non_masterchef_pool": 1269938.9593360075,
+                "non_masterchef_pool_percent": 30.98005566093505
+            },
+            {
+                "time": "2022-07-24 00:00:00.000 UTC",
+                "slp_value": 25.398336205162668,
+                "masterchef_pool": 998762.264196368,
+                "masterchef_pool_percent": 33.64115768224075,
+                "non_masterchef_pool": 1970107.813433621,
+                "non_masterchef_pool_percent": 66.35884231775924
+            }
+        ]
+    };
+});
+define("@scom/scom-dune/dummy/947867.json.ts", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.query_id_947867 = void 0;
+    ///<amd-module name='@scom/scom-dune/dummy/947867.json.ts'/> 
+    exports.query_id_947867 = {
+        "execution_id": "01GYGNB1MTMB6RDWJRKXEQVC1C",
+        "runtime_seconds": 30,
+        "generated_at": "2023-04-21T01:03:00.487125Z",
+        "columns": [
+            "time",
+            "total_holders",
+            "green_change",
+            "red_change",
+            "holding_change_format"
+        ],
+        "data": [
+            {
+                "time": "2023-04-21 00:00:00.000",
+                "total_holders": 30337,
+                "green_change": 0,
+                "red_change": null,
+                "holding_change_format": "30337 (0)"
+            },
+            {
+                "time": "2023-04-20 00:00:00.000",
+                "total_holders": 30337,
+                "green_change": 4,
+                "red_change": null,
+                "holding_change_format": "30337 (+4)"
+            },
+            {
+                "time": "2023-04-19 00:00:00.000",
+                "total_holders": 30333,
+                "green_change": null,
+                "red_change": -33,
+                "holding_change_format": "30333 (-33)"
+            },
+            {
+                "time": "2023-04-18 00:00:00.000",
+                "total_holders": 30366,
+                "green_change": null,
+                "red_change": -22,
+                "holding_change_format": "30366 (-22)"
+            },
+            {
+                "time": "2023-04-17 00:00:00.000",
+                "total_holders": 30388,
+                "green_change": null,
+                "red_change": -31,
+                "holding_change_format": "30388 (-31)"
+            },
+            {
+                "time": "2023-04-16 00:00:00.000",
+                "total_holders": 30419,
+                "green_change": null,
+                "red_change": -77,
+                "holding_change_format": "30419 (-77)"
+            },
+            {
+                "time": "2023-04-15 00:00:00.000",
+                "total_holders": 30496,
+                "green_change": null,
+                "red_change": -86,
+                "holding_change_format": "30496 (-86)"
+            },
+            {
+                "time": "2023-04-14 00:00:00.000",
+                "total_holders": 30582,
+                "green_change": null,
+                "red_change": -48,
+                "holding_change_format": "30582 (-48)"
+            },
+            {
+                "time": "2023-04-13 00:00:00.000",
+                "total_holders": 30630,
+                "green_change": null,
+                "red_change": -35,
+                "holding_change_format": "30630 (-35)"
+            },
+            {
+                "time": "2023-04-12 00:00:00.000",
+                "total_holders": 30665,
+                "green_change": null,
+                "red_change": -129,
+                "holding_change_format": "30665 (-129)"
+            },
+            {
+                "time": "2023-04-11 00:00:00.000",
+                "total_holders": 30794,
+                "green_change": null,
+                "red_change": -226,
+                "holding_change_format": "30794 (-226)"
+            },
+            {
+                "time": "2023-04-10 00:00:00.000",
+                "total_holders": 31020,
+                "green_change": null,
+                "red_change": -78,
+                "holding_change_format": "31020 (-78)"
+            },
+            {
+                "time": "2023-04-09 00:00:00.000",
+                "total_holders": 31098,
+                "green_change": 12,
+                "red_change": null,
+                "holding_change_format": "31098 (+12)"
+            },
+            {
+                "time": "2023-04-08 00:00:00.000",
+                "total_holders": 31086,
+                "green_change": null,
+                "red_change": -38,
+                "holding_change_format": "31086 (-38)"
+            },
+            {
+                "time": "2023-04-07 00:00:00.000",
+                "total_holders": 31124,
+                "green_change": null,
+                "red_change": -76,
+                "holding_change_format": "31124 (-76)"
+            },
+            {
+                "time": "2023-04-06 00:00:00.000",
+                "total_holders": 31200,
+                "green_change": null,
+                "red_change": -53,
+                "holding_change_format": "31200 (-53)"
+            },
+            {
+                "time": "2023-04-05 00:00:00.000",
+                "total_holders": 31253,
+                "green_change": null,
+                "red_change": -86,
+                "holding_change_format": "31253 (-86)"
+            },
+            {
+                "time": "2023-04-04 00:00:00.000",
+                "total_holders": 31339,
+                "green_change": null,
+                "red_change": -75,
+                "holding_change_format": "31339 (-75)"
+            },
+            {
+                "time": "2023-04-03 00:00:00.000",
+                "total_holders": 31414,
+                "green_change": null,
+                "red_change": -87,
+                "holding_change_format": "31414 (-87)"
+            },
+            {
+                "time": "2023-04-02 00:00:00.000",
+                "total_holders": 31501,
+                "green_change": null,
+                "red_change": -115,
+                "holding_change_format": "31501 (-115)"
+            },
+            {
+                "time": "2023-04-01 00:00:00.000",
+                "total_holders": 31616,
+                "green_change": null,
+                "red_change": -154,
+                "holding_change_format": "31616 (-154)"
+            },
+            {
+                "time": "2023-03-31 00:00:00.000",
+                "total_holders": 31770,
+                "green_change": null,
+                "red_change": -418,
+                "holding_change_format": "31770 (-418)"
+            },
+            {
+                "time": "2023-03-30 00:00:00.000",
+                "total_holders": 32188,
+                "green_change": 16,
+                "red_change": null,
+                "holding_change_format": "32188 (+16)"
+            },
+            {
+                "time": "2023-03-29 00:00:00.000",
+                "total_holders": 32172,
+                "green_change": null,
+                "red_change": -90,
+                "holding_change_format": "32172 (-90)"
+            },
+            {
+                "time": "2023-03-28 00:00:00.000",
+                "total_holders": 32262,
+                "green_change": null,
+                "red_change": -102,
+                "holding_change_format": "32262 (-102)"
+            },
+            {
+                "time": "2023-03-27 00:00:00.000",
+                "total_holders": 32364,
+                "green_change": null,
+                "red_change": -159,
+                "holding_change_format": "32364 (-159)"
+            },
+            {
+                "time": "2023-03-26 00:00:00.000",
+                "total_holders": 32523,
+                "green_change": null,
+                "red_change": -92,
+                "holding_change_format": "32523 (-92)"
+            },
+            {
+                "time": "2023-03-25 00:00:00.000",
+                "total_holders": 32615,
+                "green_change": null,
+                "red_change": -252,
+                "holding_change_format": "32615 (-252)"
+            },
+            {
+                "time": "2023-03-24 00:00:00.000",
+                "total_holders": 32867,
+                "green_change": null,
+                "red_change": -264,
+                "holding_change_format": "32867 (-264)"
+            },
+            {
+                "time": "2023-03-23 00:00:00.000",
+                "total_holders": 33131,
+                "green_change": null,
+                "red_change": -182,
+                "holding_change_format": "33131 (-182)"
+            },
+            {
+                "time": "2023-03-22 00:00:00.000",
+                "total_holders": 33313,
+                "green_change": null,
+                "red_change": -231,
+                "holding_change_format": "33313 (-231)"
+            },
+            {
+                "time": "2023-03-21 00:00:00.000",
+                "total_holders": 33544,
+                "green_change": null,
+                "red_change": -312,
+                "holding_change_format": "33544 (-312)"
+            },
+            {
+                "time": "2023-03-20 00:00:00.000",
+                "total_holders": 33856,
+                "green_change": null,
+                "red_change": -341,
+                "holding_change_format": "33856 (-341)"
+            },
+            {
+                "time": "2023-03-19 00:00:00.000",
+                "total_holders": 34197,
+                "green_change": null,
+                "red_change": -1051,
+                "holding_change_format": "34197 (-1051)"
+            },
+            {
+                "time": "2023-03-18 00:00:00.000",
+                "total_holders": 35248,
+                "green_change": 317,
+                "red_change": null,
+                "holding_change_format": "35248 (+317)"
+            },
+            {
+                "time": "2023-03-17 00:00:00.000",
+                "total_holders": 34931,
+                "green_change": 362,
+                "red_change": null,
+                "holding_change_format": "34931 (+362)"
+            },
+            {
+                "time": "2023-03-16 00:00:00.000",
+                "total_holders": 34569,
+                "green_change": 484,
+                "red_change": null,
+                "holding_change_format": "34569 (+484)"
+            },
+            {
+                "time": "2023-03-15 00:00:00.000",
+                "total_holders": 34085,
+                "green_change": 215,
+                "red_change": null,
+                "holding_change_format": "34085 (+215)"
+            },
+            {
+                "time": "2023-03-14 00:00:00.000",
+                "total_holders": 33870,
+                "green_change": 344,
+                "red_change": null,
+                "holding_change_format": "33870 (+344)"
+            },
+            {
+                "time": "2023-03-13 00:00:00.000",
+                "total_holders": 33526,
+                "green_change": 101,
+                "red_change": null,
+                "holding_change_format": "33526 (+101)"
+            },
+            {
+                "time": "2023-03-12 00:00:00.000",
+                "total_holders": 33425,
+                "green_change": 345,
+                "red_change": null,
+                "holding_change_format": "33425 (+345)"
+            },
+            {
+                "time": "2023-03-11 00:00:00.000",
+                "total_holders": 33080,
+                "green_change": 90,
+                "red_change": null,
+                "holding_change_format": "33080 (+90)"
+            },
+            {
+                "time": "2023-03-10 00:00:00.000",
+                "total_holders": 32990,
+                "green_change": 114,
+                "red_change": null,
+                "holding_change_format": "32990 (+114)"
+            },
+            {
+                "time": "2023-03-09 00:00:00.000",
+                "total_holders": 32876,
+                "green_change": 78,
+                "red_change": null,
+                "holding_change_format": "32876 (+78)"
+            },
+            {
+                "time": "2023-03-08 00:00:00.000",
+                "total_holders": 32798,
+                "green_change": 60,
+                "red_change": null,
+                "holding_change_format": "32798 (+60)"
+            },
+            {
+                "time": "2023-03-07 00:00:00.000",
+                "total_holders": 32738,
+                "green_change": 202,
+                "red_change": null,
+                "holding_change_format": "32738 (+202)"
+            },
+            {
+                "time": "2023-03-06 00:00:00.000",
+                "total_holders": 32536,
+                "green_change": 200,
+                "red_change": null,
+                "holding_change_format": "32536 (+200)"
+            },
+            {
+                "time": "2023-03-05 00:00:00.000",
+                "total_holders": 32336,
+                "green_change": 300,
+                "red_change": null,
+                "holding_change_format": "32336 (+300)"
+            },
+            {
+                "time": "2023-03-04 00:00:00.000",
+                "total_holders": 32036,
+                "green_change": 160,
+                "red_change": null,
+                "holding_change_format": "32036 (+160)"
+            },
+            {
+                "time": "2023-03-03 00:00:00.000",
+                "total_holders": 31876,
+                "green_change": 421,
+                "red_change": null,
+                "holding_change_format": "31876 (+421)"
+            },
+            {
+                "time": "2023-03-02 00:00:00.000",
+                "total_holders": 31455,
+                "green_change": 183,
+                "red_change": null,
+                "holding_change_format": "31455 (+183)"
+            },
+            {
+                "time": "2023-03-01 00:00:00.000",
+                "total_holders": 31272,
+                "green_change": 323,
+                "red_change": null,
+                "holding_change_format": "31272 (+323)"
+            },
+            {
+                "time": "2023-02-28 00:00:00.000",
+                "total_holders": 30949,
+                "green_change": 393,
+                "red_change": null,
+                "holding_change_format": "30949 (+393)"
+            },
+            {
+                "time": "2023-02-27 00:00:00.000",
+                "total_holders": 30556,
+                "green_change": 354,
+                "red_change": null,
+                "holding_change_format": "30556 (+354)"
+            },
+            {
+                "time": "2023-02-26 00:00:00.000",
+                "total_holders": 30202,
+                "green_change": 396,
+                "red_change": null,
+                "holding_change_format": "30202 (+396)"
+            },
+            {
+                "time": "2023-02-25 00:00:00.000",
+                "total_holders": 29806,
+                "green_change": 359,
+                "red_change": null,
+                "holding_change_format": "29806 (+359)"
+            },
+            {
+                "time": "2023-02-24 00:00:00.000",
+                "total_holders": 29447,
+                "green_change": 323,
+                "red_change": null,
+                "holding_change_format": "29447 (+323)"
+            },
+            {
+                "time": "2023-02-23 00:00:00.000",
+                "total_holders": 29124,
+                "green_change": 680,
+                "red_change": null,
+                "holding_change_format": "29124 (+680)"
+            },
+            {
+                "time": "2023-02-22 00:00:00.000",
+                "total_holders": 28444,
+                "green_change": 460,
+                "red_change": null,
+                "holding_change_format": "28444 (+460)"
+            },
+            {
+                "time": "2023-02-21 00:00:00.000",
+                "total_holders": 27984,
+                "green_change": 538,
+                "red_change": null,
+                "holding_change_format": "27984 (+538)"
+            },
+            {
+                "time": "2023-02-20 00:00:00.000",
+                "total_holders": 27446,
+                "green_change": 504,
+                "red_change": null,
+                "holding_change_format": "27446 (+504)"
+            },
+            {
+                "time": "2023-02-19 00:00:00.000",
+                "total_holders": 26942,
+                "green_change": 689,
+                "red_change": null,
+                "holding_change_format": "26942 (+689)"
+            },
+            {
+                "time": "2023-02-18 00:00:00.000",
+                "total_holders": 26253,
+                "green_change": 596,
+                "red_change": null,
+                "holding_change_format": "26253 (+596)"
+            },
+            {
+                "time": "2023-02-17 00:00:00.000",
+                "total_holders": 25657,
+                "green_change": 425,
+                "red_change": null,
+                "holding_change_format": "25657 (+425)"
+            },
+            {
+                "time": "2023-02-16 00:00:00.000",
+                "total_holders": 25232,
+                "green_change": 264,
+                "red_change": null,
+                "holding_change_format": "25232 (+264)"
+            },
+            {
+                "time": "2023-02-15 00:00:00.000",
+                "total_holders": 24968,
+                "green_change": 206,
+                "red_change": null,
+                "holding_change_format": "24968 (+206)"
+            },
+            {
+                "time": "2023-02-14 00:00:00.000",
+                "total_holders": 24762,
+                "green_change": 210,
+                "red_change": null,
+                "holding_change_format": "24762 (+210)"
+            },
+            {
+                "time": "2023-02-13 00:00:00.000",
+                "total_holders": 24552,
+                "green_change": 133,
+                "red_change": null,
+                "holding_change_format": "24552 (+133)"
+            },
+            {
+                "time": "2023-02-12 00:00:00.000",
+                "total_holders": 24419,
+                "green_change": 136,
+                "red_change": null,
+                "holding_change_format": "24419 (+136)"
+            },
+            {
+                "time": "2023-02-11 00:00:00.000",
+                "total_holders": 24283,
+                "green_change": 207,
+                "red_change": null,
+                "holding_change_format": "24283 (+207)"
+            },
+            {
+                "time": "2023-02-10 00:00:00.000",
+                "total_holders": 24076,
+                "green_change": 251,
+                "red_change": null,
+                "holding_change_format": "24076 (+251)"
+            },
+            {
+                "time": "2023-02-09 00:00:00.000",
+                "total_holders": 23825,
+                "green_change": 106,
+                "red_change": null,
+                "holding_change_format": "23825 (+106)"
+            },
+            {
+                "time": "2023-02-08 00:00:00.000",
+                "total_holders": 23719,
+                "green_change": 266,
+                "red_change": null,
+                "holding_change_format": "23719 (+266)"
+            },
+            {
+                "time": "2023-02-07 00:00:00.000",
+                "total_holders": 23453,
+                "green_change": 461,
+                "red_change": null,
+                "holding_change_format": "23453 (+461)"
+            },
+            {
+                "time": "2023-02-06 00:00:00.000",
+                "total_holders": 22992,
+                "green_change": 291,
+                "red_change": null,
+                "holding_change_format": "22992 (+291)"
+            },
+            {
+                "time": "2023-02-05 00:00:00.000",
+                "total_holders": 22701,
+                "green_change": 346,
+                "red_change": null,
+                "holding_change_format": "22701 (+346)"
+            },
+            {
+                "time": "2023-02-04 00:00:00.000",
+                "total_holders": 22355,
+                "green_change": 987,
+                "red_change": null,
+                "holding_change_format": "22355 (+987)"
+            },
+            {
+                "time": "2023-02-03 00:00:00.000",
+                "total_holders": 21368,
+                "green_change": 822,
+                "red_change": null,
+                "holding_change_format": "21368 (+822)"
+            },
+            {
+                "time": "2023-02-02 00:00:00.000",
+                "total_holders": 20546,
+                "green_change": 511,
+                "red_change": null,
+                "holding_change_format": "20546 (+511)"
+            },
+            {
+                "time": "2023-02-01 00:00:00.000",
+                "total_holders": 20035,
+                "green_change": 545,
+                "red_change": null,
+                "holding_change_format": "20035 (+545)"
+            },
+            {
+                "time": "2023-01-31 00:00:00.000",
+                "total_holders": 19490,
+                "green_change": 465,
+                "red_change": null,
+                "holding_change_format": "19490 (+465)"
+            },
+            {
+                "time": "2023-01-30 00:00:00.000",
+                "total_holders": 19025,
+                "green_change": 625,
+                "red_change": null,
+                "holding_change_format": "19025 (+625)"
+            },
+            {
+                "time": "2023-01-29 00:00:00.000",
+                "total_holders": 18400,
+                "green_change": 583,
+                "red_change": null,
+                "holding_change_format": "18400 (+583)"
+            },
+            {
+                "time": "2023-01-28 00:00:00.000",
+                "total_holders": 17817,
+                "green_change": 846,
+                "red_change": null,
+                "holding_change_format": "17817 (+846)"
+            },
+            {
+                "time": "2023-01-27 00:00:00.000",
+                "total_holders": 16971,
+                "green_change": 489,
+                "red_change": null,
+                "holding_change_format": "16971 (+489)"
+            },
+            {
+                "time": "2023-01-26 00:00:00.000",
+                "total_holders": 16482,
+                "green_change": 173,
+                "red_change": null,
+                "holding_change_format": "16482 (+173)"
+            },
+            {
+                "time": "2023-01-25 00:00:00.000",
+                "total_holders": 16309,
+                "green_change": 69,
+                "red_change": null,
+                "holding_change_format": "16309 (+69)"
+            },
+            {
+                "time": "2023-01-24 00:00:00.000",
+                "total_holders": 16240,
+                "green_change": 399,
+                "red_change": null,
+                "holding_change_format": "16240 (+399)"
+            },
+            {
+                "time": "2023-01-23 00:00:00.000",
+                "total_holders": 15841,
+                "green_change": 402,
+                "red_change": null,
+                "holding_change_format": "15841 (+402)"
+            },
+            {
+                "time": "2023-01-22 00:00:00.000",
+                "total_holders": 15439,
+                "green_change": 78,
+                "red_change": null,
+                "holding_change_format": "15439 (+78)"
+            },
+            {
+                "time": "2023-01-21 00:00:00.000",
+                "total_holders": 15361,
+                "green_change": 80,
+                "red_change": null,
+                "holding_change_format": "15361 (+80)"
+            },
+            {
+                "time": "2023-01-20 00:00:00.000",
+                "total_holders": 15281,
+                "green_change": 253,
+                "red_change": null,
+                "holding_change_format": "15281 (+253)"
+            },
+            {
+                "time": "2023-01-19 00:00:00.000",
+                "total_holders": 15028,
+                "green_change": 363,
+                "red_change": null,
+                "holding_change_format": "15028 (+363)"
+            },
+            {
+                "time": "2023-01-18 00:00:00.000",
+                "total_holders": 14665,
+                "green_change": 184,
+                "red_change": null,
+                "holding_change_format": "14665 (+184)"
+            },
+            {
+                "time": "2023-01-17 00:00:00.000",
+                "total_holders": 14481,
+                "green_change": 213,
+                "red_change": null,
+                "holding_change_format": "14481 (+213)"
+            },
+            {
+                "time": "2023-01-16 00:00:00.000",
+                "total_holders": 14268,
+                "green_change": 143,
+                "red_change": null,
+                "holding_change_format": "14268 (+143)"
+            },
+            {
+                "time": "2023-01-15 00:00:00.000",
+                "total_holders": 14125,
+                "green_change": 73,
+                "red_change": null,
+                "holding_change_format": "14125 (+73)"
+            },
+            {
+                "time": "2023-01-14 00:00:00.000",
+                "total_holders": 14052,
+                "green_change": 61,
+                "red_change": null,
+                "holding_change_format": "14052 (+61)"
+            },
+            {
+                "time": "2023-01-13 00:00:00.000",
+                "total_holders": 13991,
+                "green_change": 65,
+                "red_change": null,
+                "holding_change_format": "13991 (+65)"
+            },
+            {
+                "time": "2023-01-12 00:00:00.000",
+                "total_holders": 13926,
+                "green_change": 27,
+                "red_change": null,
+                "holding_change_format": "13926 (+27)"
+            },
+            {
+                "time": "2023-01-11 00:00:00.000",
+                "total_holders": 13899,
+                "green_change": 43,
+                "red_change": null,
+                "holding_change_format": "13899 (+43)"
+            },
+            {
+                "time": "2023-01-10 00:00:00.000",
+                "total_holders": 13856,
+                "green_change": 155,
+                "red_change": null,
+                "holding_change_format": "13856 (+155)"
+            },
+            {
+                "time": "2023-01-09 00:00:00.000",
+                "total_holders": 13701,
+                "green_change": 263,
+                "red_change": null,
+                "holding_change_format": "13701 (+263)"
+            },
+            {
+                "time": "2023-01-08 00:00:00.000",
+                "total_holders": 13438,
+                "green_change": 33,
+                "red_change": null,
+                "holding_change_format": "13438 (+33)"
+            },
+            {
+                "time": "2023-01-07 00:00:00.000",
+                "total_holders": 13405,
+                "green_change": 21,
+                "red_change": null,
+                "holding_change_format": "13405 (+21)"
+            },
+            {
+                "time": "2023-01-06 00:00:00.000",
+                "total_holders": 13384,
+                "green_change": 17,
+                "red_change": null,
+                "holding_change_format": "13384 (+17)"
+            },
+            {
+                "time": "2023-01-05 00:00:00.000",
+                "total_holders": 13367,
+                "green_change": 20,
+                "red_change": null,
+                "holding_change_format": "13367 (+20)"
+            },
+            {
+                "time": "2023-01-04 00:00:00.000",
+                "total_holders": 13347,
+                "green_change": 25,
+                "red_change": null,
+                "holding_change_format": "13347 (+25)"
+            },
+            {
+                "time": "2023-01-03 00:00:00.000",
+                "total_holders": 13322,
+                "green_change": null,
+                "red_change": -1,
+                "holding_change_format": "13322 (-1)"
+            },
+            {
+                "time": "2023-01-02 00:00:00.000",
+                "total_holders": 13323,
+                "green_change": 32,
+                "red_change": null,
+                "holding_change_format": "13323 (+32)"
+            },
+            {
+                "time": "2023-01-01 00:00:00.000",
+                "total_holders": 13291,
+                "green_change": null,
+                "red_change": -1,
+                "holding_change_format": "13291 (-1)"
+            },
+            {
+                "time": "2022-12-31 00:00:00.000",
+                "total_holders": 13292,
+                "green_change": 20,
+                "red_change": null,
+                "holding_change_format": "13292 (+20)"
+            },
+            {
+                "time": "2022-12-30 00:00:00.000",
+                "total_holders": 13272,
+                "green_change": 34,
+                "red_change": null,
+                "holding_change_format": "13272 (+34)"
+            },
+            {
+                "time": "2022-12-29 00:00:00.000",
+                "total_holders": 13238,
+                "green_change": 29,
+                "red_change": null,
+                "holding_change_format": "13238 (+29)"
+            },
+            {
+                "time": "2022-12-28 00:00:00.000",
+                "total_holders": 13209,
+                "green_change": 29,
+                "red_change": null,
+                "holding_change_format": "13209 (+29)"
+            },
+            {
+                "time": "2022-12-27 00:00:00.000",
+                "total_holders": 13180,
+                "green_change": 26,
+                "red_change": null,
+                "holding_change_format": "13180 (+26)"
+            },
+            {
+                "time": "2022-12-26 00:00:00.000",
+                "total_holders": 13154,
+                "green_change": 98,
+                "red_change": null,
+                "holding_change_format": "13154 (+98)"
+            },
+            {
+                "time": "2022-12-25 00:00:00.000",
+                "total_holders": 13056,
+                "green_change": 161,
+                "red_change": null,
+                "holding_change_format": "13056 (+161)"
+            },
+            {
+                "time": "2022-12-24 00:00:00.000",
+                "total_holders": 12895,
+                "green_change": 380,
+                "red_change": null,
+                "holding_change_format": "12895 (+380)"
+            },
+            {
+                "time": "2022-12-23 00:00:00.000",
+                "total_holders": 12515,
+                "green_change": 173,
+                "red_change": null,
+                "holding_change_format": "12515 (+173)"
+            },
+            {
+                "time": "2022-12-22 00:00:00.000",
+                "total_holders": 12342,
+                "green_change": 121,
+                "red_change": null,
+                "holding_change_format": "12342 (+121)"
+            },
+            {
+                "time": "2022-12-21 00:00:00.000",
+                "total_holders": 12221,
+                "green_change": 33,
+                "red_change": null,
+                "holding_change_format": "12221 (+33)"
+            },
+            {
+                "time": "2022-12-20 00:00:00.000",
+                "total_holders": 12188,
+                "green_change": 64,
+                "red_change": null,
+                "holding_change_format": "12188 (+64)"
+            },
+            {
+                "time": "2022-12-19 00:00:00.000",
+                "total_holders": 12124,
+                "green_change": 48,
+                "red_change": null,
+                "holding_change_format": "12124 (+48)"
+            },
+            {
+                "time": "2022-12-18 00:00:00.000",
+                "total_holders": 12076,
+                "green_change": 146,
+                "red_change": null,
+                "holding_change_format": "12076 (+146)"
+            },
+            {
+                "time": "2022-12-17 00:00:00.000",
+                "total_holders": 11930,
+                "green_change": 164,
+                "red_change": null,
+                "holding_change_format": "11930 (+164)"
+            },
+            {
+                "time": "2022-12-16 00:00:00.000",
+                "total_holders": 11766,
+                "green_change": 156,
+                "red_change": null,
+                "holding_change_format": "11766 (+156)"
+            },
+            {
+                "time": "2022-12-15 00:00:00.000",
+                "total_holders": 11610,
+                "green_change": 118,
+                "red_change": null,
+                "holding_change_format": "11610 (+118)"
+            },
+            {
+                "time": "2022-12-14 00:00:00.000",
+                "total_holders": 11492,
+                "green_change": 140,
+                "red_change": null,
+                "holding_change_format": "11492 (+140)"
+            },
+            {
+                "time": "2022-12-13 00:00:00.000",
+                "total_holders": 11352,
+                "green_change": 116,
+                "red_change": null,
+                "holding_change_format": "11352 (+116)"
+            },
+            {
+                "time": "2022-12-12 00:00:00.000",
+                "total_holders": 11236,
+                "green_change": 84,
+                "red_change": null,
+                "holding_change_format": "11236 (+84)"
+            },
+            {
+                "time": "2022-12-11 00:00:00.000",
+                "total_holders": 11152,
+                "green_change": 82,
+                "red_change": null,
+                "holding_change_format": "11152 (+82)"
+            },
+            {
+                "time": "2022-12-10 00:00:00.000",
+                "total_holders": 11070,
+                "green_change": 81,
+                "red_change": null,
+                "holding_change_format": "11070 (+81)"
+            },
+            {
+                "time": "2022-12-09 00:00:00.000",
+                "total_holders": 10989,
+                "green_change": 65,
+                "red_change": null,
+                "holding_change_format": "10989 (+65)"
+            },
+            {
+                "time": "2022-12-08 00:00:00.000",
+                "total_holders": 10924,
+                "green_change": 79,
+                "red_change": null,
+                "holding_change_format": "10924 (+79)"
+            },
+            {
+                "time": "2022-12-07 00:00:00.000",
+                "total_holders": 10845,
+                "green_change": 56,
+                "red_change": null,
+                "holding_change_format": "10845 (+56)"
+            },
+            {
+                "time": "2022-12-06 00:00:00.000",
+                "total_holders": 10789,
+                "green_change": 54,
+                "red_change": null,
+                "holding_change_format": "10789 (+54)"
+            },
+            {
+                "time": "2022-12-05 00:00:00.000",
+                "total_holders": 10735,
+                "green_change": 217,
+                "red_change": null,
+                "holding_change_format": "10735 (+217)"
+            },
+            {
+                "time": "2022-12-04 00:00:00.000",
+                "total_holders": 10518,
+                "green_change": 39,
+                "red_change": null,
+                "holding_change_format": "10518 (+39)"
+            },
+            {
+                "time": "2022-12-03 00:00:00.000",
+                "total_holders": 10479,
+                "green_change": 28,
+                "red_change": null,
+                "holding_change_format": "10479 (+28)"
+            },
+            {
+                "time": "2022-12-02 00:00:00.000",
+                "total_holders": 10451,
+                "green_change": 52,
+                "red_change": null,
+                "holding_change_format": "10451 (+52)"
+            },
+            {
+                "time": "2022-12-01 00:00:00.000",
+                "total_holders": 10399,
+                "green_change": 49,
+                "red_change": null,
+                "holding_change_format": "10399 (+49)"
+            },
+            {
+                "time": "2022-11-30 00:00:00.000",
+                "total_holders": 10350,
+                "green_change": 69,
+                "red_change": null,
+                "holding_change_format": "10350 (+69)"
+            },
+            {
+                "time": "2022-11-29 00:00:00.000",
+                "total_holders": 10281,
+                "green_change": 52,
+                "red_change": null,
+                "holding_change_format": "10281 (+52)"
+            },
+            {
+                "time": "2022-11-28 00:00:00.000",
+                "total_holders": 10229,
+                "green_change": 52,
+                "red_change": null,
+                "holding_change_format": "10229 (+52)"
+            },
+            {
+                "time": "2022-11-27 00:00:00.000",
+                "total_holders": 10177,
+                "green_change": 59,
+                "red_change": null,
+                "holding_change_format": "10177 (+59)"
+            },
+            {
+                "time": "2022-11-26 00:00:00.000",
+                "total_holders": 10118,
+                "green_change": 71,
+                "red_change": null,
+                "holding_change_format": "10118 (+71)"
+            },
+            {
+                "time": "2022-11-25 00:00:00.000",
+                "total_holders": 10047,
+                "green_change": 82,
+                "red_change": null,
+                "holding_change_format": "10047 (+82)"
+            },
+            {
+                "time": "2022-11-24 00:00:00.000",
+                "total_holders": 9965,
+                "green_change": 82,
+                "red_change": null,
+                "holding_change_format": "9965 (+82)"
+            },
+            {
+                "time": "2022-11-23 00:00:00.000",
+                "total_holders": 9883,
+                "green_change": 76,
+                "red_change": null,
+                "holding_change_format": "9883 (+76)"
+            },
+            {
+                "time": "2022-11-22 00:00:00.000",
+                "total_holders": 9807,
+                "green_change": 78,
+                "red_change": null,
+                "holding_change_format": "9807 (+78)"
+            },
+            {
+                "time": "2022-11-21 00:00:00.000",
+                "total_holders": 9729,
+                "green_change": 93,
+                "red_change": null,
+                "holding_change_format": "9729 (+93)"
+            },
+            {
+                "time": "2022-11-20 00:00:00.000",
+                "total_holders": 9636,
+                "green_change": 68,
+                "red_change": null,
+                "holding_change_format": "9636 (+68)"
+            },
+            {
+                "time": "2022-11-19 00:00:00.000",
+                "total_holders": 9568,
+                "green_change": 71,
+                "red_change": null,
+                "holding_change_format": "9568 (+71)"
+            },
+            {
+                "time": "2022-11-18 00:00:00.000",
+                "total_holders": 9497,
+                "green_change": 64,
+                "red_change": null,
+                "holding_change_format": "9497 (+64)"
+            },
+            {
+                "time": "2022-11-17 00:00:00.000",
+                "total_holders": 9433,
+                "green_change": 61,
+                "red_change": null,
+                "holding_change_format": "9433 (+61)"
+            },
+            {
+                "time": "2022-11-16 00:00:00.000",
+                "total_holders": 9372,
+                "green_change": 130,
+                "red_change": null,
+                "holding_change_format": "9372 (+130)"
+            },
+            {
+                "time": "2022-11-15 00:00:00.000",
+                "total_holders": 9242,
+                "green_change": 149,
+                "red_change": null,
+                "holding_change_format": "9242 (+149)"
+            },
+            {
+                "time": "2022-11-14 00:00:00.000",
+                "total_holders": 9093,
+                "green_change": 250,
+                "red_change": null,
+                "holding_change_format": "9093 (+250)"
+            },
+            {
+                "time": "2022-11-13 00:00:00.000",
+                "total_holders": 8843,
+                "green_change": 118,
+                "red_change": null,
+                "holding_change_format": "8843 (+118)"
+            },
+            {
+                "time": "2022-11-12 00:00:00.000",
+                "total_holders": 8725,
+                "green_change": 154,
+                "red_change": null,
+                "holding_change_format": "8725 (+154)"
+            },
+            {
+                "time": "2022-11-11 00:00:00.000",
+                "total_holders": 8571,
+                "green_change": 218,
+                "red_change": null,
+                "holding_change_format": "8571 (+218)"
+            },
+            {
+                "time": "2022-11-10 00:00:00.000",
+                "total_holders": 8353,
+                "green_change": 220,
+                "red_change": null,
+                "holding_change_format": "8353 (+220)"
+            },
+            {
+                "time": "2022-11-09 00:00:00.000",
+                "total_holders": 8133,
+                "green_change": 305,
+                "red_change": null,
+                "holding_change_format": "8133 (+305)"
+            },
+            {
+                "time": "2022-11-08 00:00:00.000",
+                "total_holders": 7828,
+                "green_change": 116,
+                "red_change": null,
+                "holding_change_format": "7828 (+116)"
+            },
+            {
+                "time": "2022-11-07 00:00:00.000",
+                "total_holders": 7712,
+                "green_change": 134,
+                "red_change": null,
+                "holding_change_format": "7712 (+134)"
+            },
+            {
+                "time": "2022-11-06 00:00:00.000",
+                "total_holders": 7578,
+                "green_change": 167,
+                "red_change": null,
+                "holding_change_format": "7578 (+167)"
+            },
+            {
+                "time": "2022-11-05 00:00:00.000",
+                "total_holders": 7411,
+                "green_change": 178,
+                "red_change": null,
+                "holding_change_format": "7411 (+178)"
+            },
+            {
+                "time": "2022-11-04 00:00:00.000",
+                "total_holders": 7233,
+                "green_change": 235,
+                "red_change": null,
+                "holding_change_format": "7233 (+235)"
+            },
+            {
+                "time": "2022-11-03 00:00:00.000",
+                "total_holders": 6998,
+                "green_change": 193,
+                "red_change": null,
+                "holding_change_format": "6998 (+193)"
+            },
+            {
+                "time": "2022-11-02 00:00:00.000",
+                "total_holders": 6805,
+                "green_change": 139,
+                "red_change": null,
+                "holding_change_format": "6805 (+139)"
+            },
+            {
+                "time": "2022-11-01 00:00:00.000",
+                "total_holders": 6666,
+                "green_change": 186,
+                "red_change": null,
+                "holding_change_format": "6666 (+186)"
+            },
+            {
+                "time": "2022-10-31 00:00:00.000",
+                "total_holders": 6480,
+                "green_change": 170,
+                "red_change": null,
+                "holding_change_format": "6480 (+170)"
+            },
+            {
+                "time": "2022-10-30 00:00:00.000",
+                "total_holders": 6310,
+                "green_change": 211,
+                "red_change": null,
+                "holding_change_format": "6310 (+211)"
+            },
+            {
+                "time": "2022-10-29 00:00:00.000",
+                "total_holders": 6099,
+                "green_change": 205,
+                "red_change": null,
+                "holding_change_format": "6099 (+205)"
+            },
+            {
+                "time": "2022-10-28 00:00:00.000",
+                "total_holders": 5894,
+                "green_change": 251,
+                "red_change": null,
+                "holding_change_format": "5894 (+251)"
+            },
+            {
+                "time": "2022-10-27 00:00:00.000",
+                "total_holders": 5643,
+                "green_change": 282,
+                "red_change": null,
+                "holding_change_format": "5643 (+282)"
+            },
+            {
+                "time": "2022-10-26 00:00:00.000",
+                "total_holders": 5361,
+                "green_change": 312,
+                "red_change": null,
+                "holding_change_format": "5361 (+312)"
+            },
+            {
+                "time": "2022-10-25 00:00:00.000",
+                "total_holders": 5049,
+                "green_change": 332,
+                "red_change": null,
+                "holding_change_format": "5049 (+332)"
+            },
+            {
+                "time": "2022-10-24 00:00:00.000",
+                "total_holders": 4717,
+                "green_change": 573,
+                "red_change": null,
+                "holding_change_format": "4717 (+573)"
+            },
+            {
+                "time": "2022-10-23 00:00:00.000",
+                "total_holders": 4144,
+                "green_change": 422,
+                "red_change": null,
+                "holding_change_format": "4144 (+422)"
+            },
+            {
+                "time": "2022-10-22 00:00:00.000",
+                "total_holders": 3722,
+                "green_change": 170,
+                "red_change": null,
+                "holding_change_format": "3722 (+170)"
+            },
+            {
+                "time": "2022-10-21 00:00:00.000",
+                "total_holders": 3552,
+                "green_change": 153,
+                "red_change": null,
+                "holding_change_format": "3552 (+153)"
+            },
+            {
+                "time": "2022-10-20 00:00:00.000",
+                "total_holders": 3399,
+                "green_change": 76,
+                "red_change": null,
+                "holding_change_format": "3399 (+76)"
+            },
+            {
+                "time": "2022-10-19 00:00:00.000",
+                "total_holders": 3323,
+                "green_change": 65,
+                "red_change": null,
+                "holding_change_format": "3323 (+65)"
+            },
+            {
+                "time": "2022-10-18 00:00:00.000",
+                "total_holders": 3258,
+                "green_change": 75,
+                "red_change": null,
+                "holding_change_format": "3258 (+75)"
+            },
+            {
+                "time": "2022-10-17 00:00:00.000",
+                "total_holders": 3183,
+                "green_change": 32,
+                "red_change": null,
+                "holding_change_format": "3183 (+32)"
+            },
+            {
+                "time": "2022-10-16 00:00:00.000",
+                "total_holders": 3151,
+                "green_change": 39,
+                "red_change": null,
+                "holding_change_format": "3151 (+39)"
+            },
+            {
+                "time": "2022-10-15 00:00:00.000",
+                "total_holders": 3112,
+                "green_change": 89,
+                "red_change": null,
+                "holding_change_format": "3112 (+89)"
+            },
+            {
+                "time": "2022-10-14 00:00:00.000",
+                "total_holders": 3023,
+                "green_change": 27,
+                "red_change": null,
+                "holding_change_format": "3023 (+27)"
+            },
+            {
+                "time": "2022-10-13 00:00:00.000",
+                "total_holders": 2996,
+                "green_change": 20,
+                "red_change": null,
+                "holding_change_format": "2996 (+20)"
+            },
+            {
+                "time": "2022-10-12 00:00:00.000",
+                "total_holders": 2976,
+                "green_change": 14,
+                "red_change": null,
+                "holding_change_format": "2976 (+14)"
+            },
+            {
+                "time": "2022-10-11 00:00:00.000",
+                "total_holders": 2962,
+                "green_change": 7,
+                "red_change": null,
+                "holding_change_format": "2962 (+7)"
+            },
+            {
+                "time": "2022-10-10 00:00:00.000",
+                "total_holders": 2955,
+                "green_change": 12,
+                "red_change": null,
+                "holding_change_format": "2955 (+12)"
+            },
+            {
+                "time": "2022-10-09 00:00:00.000",
+                "total_holders": 2943,
+                "green_change": 25,
+                "red_change": null,
+                "holding_change_format": "2943 (+25)"
+            },
+            {
+                "time": "2022-10-08 00:00:00.000",
+                "total_holders": 2918,
+                "green_change": 41,
+                "red_change": null,
+                "holding_change_format": "2918 (+41)"
+            },
+            {
+                "time": "2022-10-07 00:00:00.000",
+                "total_holders": 2877,
+                "green_change": 36,
+                "red_change": null,
+                "holding_change_format": "2877 (+36)"
+            },
+            {
+                "time": "2022-10-06 00:00:00.000",
+                "total_holders": 2841,
+                "green_change": 65,
+                "red_change": null,
+                "holding_change_format": "2841 (+65)"
+            },
+            {
+                "time": "2022-10-05 00:00:00.000",
+                "total_holders": 2776,
+                "green_change": 70,
+                "red_change": null,
+                "holding_change_format": "2776 (+70)"
+            },
+            {
+                "time": "2022-10-04 00:00:00.000",
+                "total_holders": 2706,
+                "green_change": 113,
+                "red_change": null,
+                "holding_change_format": "2706 (+113)"
+            },
+            {
+                "time": "2022-10-03 00:00:00.000",
+                "total_holders": 2593,
+                "green_change": 51,
+                "red_change": null,
+                "holding_change_format": "2593 (+51)"
+            },
+            {
+                "time": "2022-10-02 00:00:00.000",
+                "total_holders": 2542,
+                "green_change": 98,
+                "red_change": null,
+                "holding_change_format": "2542 (+98)"
+            },
+            {
+                "time": "2022-10-01 00:00:00.000",
+                "total_holders": 2444,
+                "green_change": 100,
+                "red_change": null,
+                "holding_change_format": "2444 (+100)"
+            },
+            {
+                "time": "2022-09-30 00:00:00.000",
+                "total_holders": 2344,
+                "green_change": 103,
+                "red_change": null,
+                "holding_change_format": "2344 (+103)"
+            },
+            {
+                "time": "2022-09-29 00:00:00.000",
+                "total_holders": 2241,
+                "green_change": 236,
+                "red_change": null,
+                "holding_change_format": "2241 (+236)"
+            },
+            {
+                "time": "2022-09-28 00:00:00.000",
+                "total_holders": 2005,
+                "green_change": 171,
+                "red_change": null,
+                "holding_change_format": "2005 (+171)"
+            },
+            {
+                "time": "2022-09-27 00:00:00.000",
+                "total_holders": 1834,
+                "green_change": 151,
+                "red_change": null,
+                "holding_change_format": "1834 (+151)"
+            },
+            {
+                "time": "2022-09-26 00:00:00.000",
+                "total_holders": 1683,
+                "green_change": 98,
+                "red_change": null,
+                "holding_change_format": "1683 (+98)"
+            },
+            {
+                "time": "2022-09-25 00:00:00.000",
+                "total_holders": 1585,
+                "green_change": 135,
+                "red_change": null,
+                "holding_change_format": "1585 (+135)"
+            },
+            {
+                "time": "2022-09-24 00:00:00.000",
+                "total_holders": 1450,
+                "green_change": 3,
+                "red_change": null,
+                "holding_change_format": "1450 (+3)"
+            },
+            {
+                "time": "2022-09-23 00:00:00.000",
+                "total_holders": 1447,
+                "green_change": 5,
+                "red_change": null,
+                "holding_change_format": "1447 (+5)"
+            },
+            {
+                "time": "2022-09-22 00:00:00.000",
+                "total_holders": 1442,
+                "green_change": null,
+                "red_change": -17,
+                "holding_change_format": "1442 (-17)"
+            },
+            {
+                "time": "2022-09-21 00:00:00.000",
+                "total_holders": 1459,
+                "green_change": 7,
+                "red_change": null,
+                "holding_change_format": "1459 (+7)"
+            },
+            {
+                "time": "2022-09-20 00:00:00.000",
+                "total_holders": 1452,
+                "green_change": 5,
+                "red_change": null,
+                "holding_change_format": "1452 (+5)"
+            },
+            {
+                "time": "2022-09-19 00:00:00.000",
+                "total_holders": 1447,
+                "green_change": null,
+                "red_change": -4,
+                "holding_change_format": "1447 (-4)"
+            },
+            {
+                "time": "2022-09-18 00:00:00.000",
+                "total_holders": 1451,
+                "green_change": 5,
+                "red_change": null,
+                "holding_change_format": "1451 (+5)"
+            },
+            {
+                "time": "2022-09-17 00:00:00.000",
+                "total_holders": 1446,
+                "green_change": 14,
+                "red_change": null,
+                "holding_change_format": "1446 (+14)"
+            },
+            {
+                "time": "2022-09-16 00:00:00.000",
+                "total_holders": 1432,
+                "green_change": 9,
+                "red_change": null,
+                "holding_change_format": "1432 (+9)"
+            },
+            {
+                "time": "2022-09-15 00:00:00.000",
+                "total_holders": 1423,
+                "green_change": null,
+                "red_change": -3,
+                "holding_change_format": "1423 (-3)"
+            },
+            {
+                "time": "2022-09-14 00:00:00.000",
+                "total_holders": 1426,
+                "green_change": 4,
+                "red_change": null,
+                "holding_change_format": "1426 (+4)"
+            },
+            {
+                "time": "2022-09-13 00:00:00.000",
+                "total_holders": 1422,
+                "green_change": 12,
+                "red_change": null,
+                "holding_change_format": "1422 (+12)"
+            },
+            {
+                "time": "2022-09-12 00:00:00.000",
+                "total_holders": 1410,
+                "green_change": null,
+                "red_change": -10,
+                "holding_change_format": "1410 (-10)"
+            },
+            {
+                "time": "2022-09-11 00:00:00.000",
+                "total_holders": 1420,
+                "green_change": 6,
+                "red_change": null,
+                "holding_change_format": "1420 (+6)"
+            },
+            {
+                "time": "2022-09-10 00:00:00.000",
+                "total_holders": 1414,
+                "green_change": 11,
+                "red_change": null,
+                "holding_change_format": "1414 (+11)"
+            },
+            {
+                "time": "2022-09-09 00:00:00.000",
+                "total_holders": 1403,
+                "green_change": 48,
+                "red_change": null,
+                "holding_change_format": "1403 (+48)"
+            },
+            {
+                "time": "2022-09-08 00:00:00.000",
+                "total_holders": 1355,
+                "green_change": null,
+                "red_change": -21,
+                "holding_change_format": "1355 (-21)"
+            },
+            {
+                "time": "2022-09-07 00:00:00.000",
+                "total_holders": 1376,
+                "green_change": 10,
+                "red_change": null,
+                "holding_change_format": "1376 (+10)"
+            },
+            {
+                "time": "2022-09-06 00:00:00.000",
+                "total_holders": 1366,
+                "green_change": null,
+                "red_change": -13,
+                "holding_change_format": "1366 (-13)"
+            },
+            {
+                "time": "2022-09-05 00:00:00.000",
+                "total_holders": 1379,
+                "green_change": null,
+                "red_change": -7,
+                "holding_change_format": "1379 (-7)"
+            },
+            {
+                "time": "2022-09-04 00:00:00.000",
+                "total_holders": 1386,
+                "green_change": 12,
+                "red_change": null,
+                "holding_change_format": "1386 (+12)"
+            },
+            {
+                "time": "2022-09-03 00:00:00.000",
+                "total_holders": 1374,
+                "green_change": null,
+                "red_change": -5,
+                "holding_change_format": "1374 (-5)"
+            },
+            {
+                "time": "2022-09-02 00:00:00.000",
+                "total_holders": 1379,
+                "green_change": 6,
+                "red_change": null,
+                "holding_change_format": "1379 (+6)"
+            },
+            {
+                "time": "2022-09-01 00:00:00.000",
+                "total_holders": 1373,
+                "green_change": null,
+                "red_change": -53,
+                "holding_change_format": "1373 (-53)"
+            },
+            {
+                "time": "2022-08-31 00:00:00.000",
+                "total_holders": 1426,
+                "green_change": 24,
+                "red_change": null,
+                "holding_change_format": "1426 (+24)"
+            },
+            {
+                "time": "2022-08-30 00:00:00.000",
+                "total_holders": 1402,
+                "green_change": 7,
+                "red_change": null,
+                "holding_change_format": "1402 (+7)"
+            },
+            {
+                "time": "2022-08-29 00:00:00.000",
+                "total_holders": 1395,
+                "green_change": 14,
+                "red_change": null,
+                "holding_change_format": "1395 (+14)"
+            },
+            {
+                "time": "2022-08-28 00:00:00.000",
+                "total_holders": 1381,
+                "green_change": 4,
+                "red_change": null,
+                "holding_change_format": "1381 (+4)"
+            },
+            {
+                "time": "2022-08-27 00:00:00.000",
+                "total_holders": 1377,
+                "green_change": null,
+                "red_change": -2,
+                "holding_change_format": "1377 (-2)"
+            },
+            {
+                "time": "2022-08-26 00:00:00.000",
+                "total_holders": 1379,
+                "green_change": null,
+                "red_change": -3,
+                "holding_change_format": "1379 (-3)"
+            },
+            {
+                "time": "2022-08-25 00:00:00.000",
+                "total_holders": 1382,
+                "green_change": null,
+                "red_change": -3,
+                "holding_change_format": "1382 (-3)"
+            },
+            {
+                "time": "2022-08-24 00:00:00.000",
+                "total_holders": 1385,
+                "green_change": 19,
+                "red_change": null,
+                "holding_change_format": "1385 (+19)"
+            },
+            {
+                "time": "2022-08-23 00:00:00.000",
+                "total_holders": 1366,
+                "green_change": 17,
+                "red_change": null,
+                "holding_change_format": "1366 (+17)"
+            },
+            {
+                "time": "2022-08-22 00:00:00.000",
+                "total_holders": 1349,
+                "green_change": 7,
+                "red_change": null,
+                "holding_change_format": "1349 (+7)"
+            },
+            {
+                "time": "2022-08-21 00:00:00.000",
+                "total_holders": 1342,
+                "green_change": 14,
+                "red_change": null,
+                "holding_change_format": "1342 (+14)"
+            },
+            {
+                "time": "2022-08-20 00:00:00.000",
+                "total_holders": 1328,
+                "green_change": 8,
+                "red_change": null,
+                "holding_change_format": "1328 (+8)"
+            },
+            {
+                "time": "2022-08-19 00:00:00.000",
+                "total_holders": 1320,
+                "green_change": null,
+                "red_change": -1,
+                "holding_change_format": "1320 (-1)"
+            },
+            {
+                "time": "2022-08-18 00:00:00.000",
+                "total_holders": 1321,
+                "green_change": null,
+                "red_change": -1,
+                "holding_change_format": "1321 (-1)"
+            },
+            {
+                "time": "2022-08-17 00:00:00.000",
+                "total_holders": 1322,
+                "green_change": 13,
+                "red_change": null,
+                "holding_change_format": "1322 (+13)"
+            },
+            {
+                "time": "2022-08-16 00:00:00.000",
+                "total_holders": 1309,
+                "green_change": 16,
+                "red_change": null,
+                "holding_change_format": "1309 (+16)"
+            },
+            {
+                "time": "2022-08-15 00:00:00.000",
+                "total_holders": 1293,
+                "green_change": null,
+                "red_change": -2,
+                "holding_change_format": "1293 (-2)"
+            },
+            {
+                "time": "2022-08-14 00:00:00.000",
+                "total_holders": 1295,
+                "green_change": 12,
+                "red_change": null,
+                "holding_change_format": "1295 (+12)"
+            },
+            {
+                "time": "2022-08-13 00:00:00.000",
+                "total_holders": 1283,
+                "green_change": 17,
+                "red_change": null,
+                "holding_change_format": "1283 (+17)"
+            },
+            {
+                "time": "2022-08-12 00:00:00.000",
+                "total_holders": 1266,
+                "green_change": 27,
+                "red_change": null,
+                "holding_change_format": "1266 (+27)"
+            },
+            {
+                "time": "2022-08-11 00:00:00.000",
+                "total_holders": 1239,
+                "green_change": 89,
+                "red_change": null,
+                "holding_change_format": "1239 (+89)"
+            },
+            {
+                "time": "2022-08-10 00:00:00.000",
+                "total_holders": 1150,
+                "green_change": 54,
+                "red_change": null,
+                "holding_change_format": "1150 (+54)"
+            },
+            {
+                "time": "2022-08-09 00:00:00.000",
+                "total_holders": 1096,
+                "green_change": 28,
+                "red_change": null,
+                "holding_change_format": "1096 (+28)"
+            },
+            {
+                "time": "2022-08-08 00:00:00.000",
+                "total_holders": 1068,
+                "green_change": 49,
+                "red_change": null,
+                "holding_change_format": "1068 (+49)"
+            },
+            {
+                "time": "2022-08-07 00:00:00.000",
+                "total_holders": 1019,
+                "green_change": 93,
+                "red_change": null,
+                "holding_change_format": "1019 (+93)"
+            },
+            {
+                "time": "2022-08-06 00:00:00.000",
+                "total_holders": 926,
+                "green_change": 94,
+                "red_change": null,
+                "holding_change_format": "926 (+94)"
+            },
+            {
+                "time": "2022-08-05 00:00:00.000",
+                "total_holders": 832,
+                "green_change": 34,
+                "red_change": null,
+                "holding_change_format": "832 (+34)"
+            },
+            {
+                "time": "2022-08-04 00:00:00.000",
+                "total_holders": 798,
+                "green_change": 53,
+                "red_change": null,
+                "holding_change_format": "798 (+53)"
+            },
+            {
+                "time": "2022-08-03 00:00:00.000",
+                "total_holders": 745,
+                "green_change": 86,
+                "red_change": null,
+                "holding_change_format": "745 (+86)"
+            },
+            {
+                "time": "2022-08-02 00:00:00.000",
+                "total_holders": 659,
+                "green_change": 74,
+                "red_change": null,
+                "holding_change_format": "659 (+74)"
+            },
+            {
+                "time": "2022-08-01 00:00:00.000",
+                "total_holders": 585,
+                "green_change": 12,
+                "red_change": null,
+                "holding_change_format": "585 (+12)"
+            },
+            {
+                "time": "2022-07-31 00:00:00.000",
+                "total_holders": 573,
+                "green_change": 28,
+                "red_change": null,
+                "holding_change_format": "573 (+28)"
+            },
+            {
+                "time": "2022-07-30 00:00:00.000",
+                "total_holders": 545,
+                "green_change": 2,
+                "red_change": null,
+                "holding_change_format": "545 (+2)"
+            },
+            {
+                "time": "2022-07-29 00:00:00.000",
+                "total_holders": 543,
+                "green_change": 4,
+                "red_change": null,
+                "holding_change_format": "543 (+4)"
+            },
+            {
+                "time": "2022-07-28 00:00:00.000",
+                "total_holders": 539,
+                "green_change": 16,
+                "red_change": null,
+                "holding_change_format": "539 (+16)"
+            },
+            {
+                "time": "2022-07-27 00:00:00.000",
+                "total_holders": 523,
+                "green_change": 42,
+                "red_change": null,
+                "holding_change_format": "523 (+42)"
+            },
+            {
+                "time": "2022-07-26 00:00:00.000",
+                "total_holders": 481,
+                "green_change": 143,
+                "red_change": null,
+                "holding_change_format": "481 (+143)"
+            },
+            {
+                "time": "2022-07-25 00:00:00.000",
+                "total_holders": 338,
+                "green_change": 156,
+                "red_change": null,
+                "holding_change_format": "338 (+156)"
+            },
+            {
+                "time": "2022-07-24 00:00:00.000",
+                "total_holders": 182,
+                "green_change": 182,
+                "red_change": null,
+                "holding_change_format": "182 (+182)"
+            }
+        ]
+    };
+});
+define("@scom/scom-dune/dummy/1333833.json.ts", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.query_id_1333833 = void 0;
+    ///<amd-module name='@scom/scom-dune/dummy/1333833.json.ts'/> 
+    exports.query_id_1333833 = {
+        "execution_id": "01GYGJ3QKHE2KWCF0XVSPKP6GT",
+        "runtime_seconds": 35,
+        "generated_at": "2023-04-21T00:06:39.710984Z",
+        "columns": [
+            "time",
+            "cumulative_tokens_value",
+            "cumulative_format",
+            "cumulative_usdt",
+            "cumulative_weth",
+            "cumulative_wbtc",
+            "cumulative_usdc",
+            "cumulative_dai",
+            "cumulative_diff"
+        ],
+        "data": [
+            {
+                "time": "2023-04-21T00:00:00Z",
+                "cumulative_tokens_value": 229480067.92188647,
+                "cumulative_format": 229.48006792188647,
+                "cumulative_usdt": 52279487.71223921,
+                "cumulative_weth": 0,
+                "cumulative_wbtc": 0,
+                "cumulative_usdc": 177200580.20964727,
+                "cumulative_dai": 0,
+                "cumulative_diff": -1.0766096048606428
+            },
+            {
+                "time": "2023-04-20T00:00:00Z",
+                "cumulative_tokens_value": 484294736.5848152,
+                "cumulative_format": 484.2947365848152,
+                "cumulative_usdt": 52260439.99844021,
+                "cumulative_weth": 179526489.12490407,
+                "cumulative_wbtc": 48103932.51867716,
+                "cumulative_usdc": 171615456.41193524,
+                "cumulative_dai": 32788418.530858487,
+                "cumulative_diff": 0.09160182676743787
+            },
+            {
+                "time": "2023-04-19T00:00:00Z",
+                "cumulative_tokens_value": 483857123.900642,
+                "cumulative_format": 483.85712390064197,
+                "cumulative_usdt": 49526037.21051221,
+                "cumulative_weth": 180333883.3866375,
+                "cumulative_wbtc": 41247366.12972203,
+                "cumulative_usdc": 181455200.27791426,
+                "cumulative_dai": 31294636.895856075,
+                "cumulative_diff": 0.0806880409940801
+            },
+            {
+                "time": "2023-04-18T00:00:00Z",
+                "cumulative_tokens_value": 487846972.95560694,
+                "cumulative_format": 487.84697295560693,
+                "cumulative_usdt": 49020539.825660214,
+                "cumulative_weth": 187030608.89878476,
+                "cumulative_wbtc": 41909584.91329762,
+                "cumulative_usdc": 176041070.08592424,
+                "cumulative_dai": 33845169.231940106,
+                "cumulative_diff": 0.08245129047880552
+            },
+            {
+                "time": "2023-04-17T00:00:00Z",
+                "cumulative_tokens_value": 510243382.20519304,
+                "cumulative_format": 510.24338220519303,
+                "cumulative_usdt": 54360301.137090206,
+                "cumulative_weth": 188579459.7067426,
+                "cumulative_wbtc": 50801996.780300505,
+                "cumulative_usdc": 180719302.7682442,
+                "cumulative_dai": 35782321.81281546,
+                "cumulative_diff": 0.1422930512272093
+            },
+            {
+                "time": "2023-04-16T00:00:00Z",
+                "cumulative_tokens_value": 502580445.34175277,
+                "cumulative_format": 502.58044534175275,
+                "cumulative_usdt": 53539180.4317732,
+                "cumulative_weth": 185807214.69376713,
+                "cumulative_wbtc": 45243593.250009015,
+                "cumulative_usdc": 182426902.1108812,
+                "cumulative_dai": 35563554.8553222,
+                "cumulative_diff": 0.12849591662077298
+            },
+            {
+                "time": "2023-04-15T00:00:00Z",
+                "cumulative_tokens_value": 505819018.79427594,
+                "cumulative_format": 505.81901879427596,
+                "cumulative_usdt": 55021833.667863205,
+                "cumulative_weth": 184631095.58667386,
+                "cumulative_wbtc": 50358148.83845079,
+                "cumulative_usdc": 182395406.7969152,
+                "cumulative_dai": 33412533.904372893,
+                "cumulative_diff": 0.13355066871894133
+            },
+            {
+                "time": "2023-04-14T00:00:00Z",
+                "cumulative_tokens_value": 476540513.17066216,
+                "cumulative_format": 476.54051317066217,
+                "cumulative_usdt": 54513929.050690204,
+                "cumulative_weth": 173374818.2083886,
+                "cumulative_wbtc": 41747633.78960121,
+                "cumulative_usdc": 174119852.0595162,
+                "cumulative_dai": 32784280.062466025,
+                "cumulative_diff": 0.071769337360401
+            },
+            {
+                "time": "2023-04-13T00:00:00Z",
+                "cumulative_tokens_value": 439932454.019791,
+                "cumulative_format": 439.932454019791,
+                "cumulative_usdt": 51644738.495263204,
+                "cumulative_weth": 154662306.0323472,
+                "cumulative_wbtc": 31964308.54689449,
+                "cumulative_usdc": 170065460.7036992,
+                "cumulative_dai": 31595640.241586827,
+                "cumulative_diff": -0.0025169334352831783
+            },
+            {
+                "time": "2023-04-12T00:00:00Z",
+                "cumulative_tokens_value": 444815640.4520693,
+                "cumulative_format": 444.81564045206926,
+                "cumulative_usdt": 48885039.86942621,
+                "cumulative_weth": 145819886.38602895,
+                "cumulative_wbtc": 29675472.879937463,
+                "cumulative_usdc": 188793847.21954614,
+                "cumulative_dai": 31641394.097130455,
+                "cumulative_diff": -0.016839282277709467
+            },
+            {
+                "time": "2023-04-11T00:00:00Z",
+                "cumulative_tokens_value": 447623360.4792382,
+                "cumulative_format": 447.6233604792382,
+                "cumulative_usdt": 47933347.8880112,
+                "cumulative_weth": 146254520.92147395,
+                "cumulative_wbtc": 29972808.939547867,
+                "cumulative_usdc": 191813994.37805414,
+                "cumulative_dai": 31648688.352151044,
+                "cumulative_diff": 0.02828036312313346
+            },
+            {
+                "time": "2023-04-10T00:00:00Z",
+                "cumulative_tokens_value": 437639294.48272496,
+                "cumulative_format": 437.63929448272495,
+                "cumulative_usdt": 48660551.4302792,
+                "cumulative_weth": 138970590.41950464,
+                "cumulative_wbtc": 30230481.51329171,
+                "cumulative_usdc": 188282575.13986313,
+                "cumulative_dai": 31495095.979786254,
+                "cumulative_diff": 0.003071697930385987
+            },
+            {
+                "time": "2023-04-09T00:00:00Z",
+                "cumulative_tokens_value": 438000910.34188795,
+                "cumulative_format": 438.00091034188796,
+                "cumulative_usdt": 47951507.68693521,
+                "cumulative_weth": 140584146.64002553,
+                "cumulative_wbtc": 27553859.111418575,
+                "cumulative_usdc": 190448168.47905615,
+                "cumulative_dai": 31463228.42445241,
+                "cumulative_diff": -0.0022797395709619485
+            },
+            {
+                "time": "2023-04-08T00:00:00Z",
+                "cumulative_tokens_value": 438266550.58354163,
+                "cumulative_format": 438.26655058354163,
+                "cumulative_usdt": 47838270.948250204,
+                "cumulative_weth": 138215261.50678167,
+                "cumulative_wbtc": 29845496.770869516,
+                "cumulative_usdc": 190300799.29745713,
+                "cumulative_dai": 32066722.0601831,
+                "cumulative_diff": -0.03573774823546944
+            },
+            {
+                "time": "2023-04-07T00:00:00Z",
+                "cumulative_tokens_value": 442339516.3150183,
+                "cumulative_format": 442.3395163150183,
+                "cumulative_usdt": 46725133.98027921,
+                "cumulative_weth": 142466661.9502354,
+                "cumulative_wbtc": 28577265.742424767,
+                "cumulative_usdc": 192194693.31569013,
+                "cumulative_dai": 32375761.32638888,
+                "cumulative_diff": -0.020692483086699427
+            },
+            {
+                "time": "2023-04-06T00:00:00Z",
+                "cumulative_tokens_value": 441039734.7225796,
+                "cumulative_format": 441.0397347225796,
+                "cumulative_usdt": 50256937.77873621,
+                "cumulative_weth": 143650187.58916515,
+                "cumulative_wbtc": 28830445.818477057,
+                "cumulative_usdc": 187180123.7763501,
+                "cumulative_dai": 31122039.759851128,
+                "cumulative_diff": -0.002280023168028336
+            },
+            {
+                "time": "2023-04-05T00:00:00Z",
+                "cumulative_tokens_value": 452306016.5831818,
+                "cumulative_format": 452.3060165831818,
+                "cumulative_usdt": 49532099.73747121,
+                "cumulative_weth": 148484014.1080102,
+                "cumulative_wbtc": 30363397.700014666,
+                "cumulative_usdc": 191415393.38901713,
+                "cumulative_dai": 32511111.648668524,
+                "cumulative_diff": 0.0990767124954632
+            },
+            {
+                "time": "2023-04-04T00:00:00Z",
+                "cumulative_tokens_value": 434964409.3024881,
+                "cumulative_format": 434.9644093024881,
+                "cumulative_usdt": 48507172.15664321,
+                "cumulative_weth": 137181518.53273118,
+                "cumulative_wbtc": 31735849.540659267,
+                "cumulative_usdc": 185112663.2185971,
+                "cumulative_dai": 32427205.853857297,
+                "cumulative_diff": 0.073330818158983
+            },
+            {
+                "time": "2023-04-03T00:00:00Z",
+                "cumulative_tokens_value": 436294998.7676068,
+                "cumulative_format": 436.2949987676068,
+                "cumulative_usdt": 61670221.2735212,
+                "cumulative_weth": 136226986.64135903,
+                "cumulative_wbtc": 26209304.130079836,
+                "cumulative_usdc": 180222085.47179013,
+                "cumulative_dai": 31966401.250856623,
+                "cumulative_diff": 0.06549656360928942
+            },
+            {
+                "time": "2023-04-02T00:00:00Z",
+                "cumulative_tokens_value": 438999438.3493117,
+                "cumulative_format": 438.99943834931173,
+                "cumulative_usdt": 49897615.35424521,
+                "cumulative_weth": 139583336.10730937,
+                "cumulative_wbtc": 28334969.837394167,
+                "cumulative_usdc": 188882694.89082012,
+                "cumulative_dai": 32300822.1595428,
+                "cumulative_diff": 0.09005094015816947
+            },
+            {
+                "time": "2023-04-01T00:00:00Z",
+                "cumulative_tokens_value": 453929210.2283239,
+                "cumulative_format": 453.9292102283239,
+                "cumulative_usdt": 52116923.569042206,
+                "cumulative_weth": 139313472.77656633,
+                "cumulative_wbtc": 36826140.36680239,
+                "cumulative_usdc": 193040803.95083213,
+                "cumulative_dai": 32631869.565080814,
+                "cumulative_diff": 0.14766897604113177
+            },
+            {
+                "time": "2023-03-31T00:00:00Z",
+                "cumulative_tokens_value": 451492619.2749456,
+                "cumulative_format": 451.49261927494564,
+                "cumulative_usdt": 55733607.81468321,
+                "cumulative_weth": 137379166.23697263,
+                "cumulative_wbtc": 35220925.99948309,
+                "cumulative_usdc": 189253553.9543671,
+                "cumulative_dai": 33905365.26943955,
+                "cumulative_diff": 0.12433418092296597
+            },
+            {
+                "time": "2023-03-30T00:00:00Z",
+                "cumulative_tokens_value": 442045315.53576815,
+                "cumulative_format": 442.04531553576817,
+                "cumulative_usdt": 54096188.44658921,
+                "cumulative_weth": 124558178.82620037,
+                "cumulative_wbtc": 37403259.95058779,
+                "cumulative_usdc": 190047677.3090171,
+                "cumulative_dai": 35940011.00337364,
+                "cumulative_diff": 0.04058775205008333
+            },
+            {
+                "time": "2023-03-29T00:00:00Z",
+                "cumulative_tokens_value": 407493023.4182017,
+                "cumulative_format": 407.4930234182017,
+                "cumulative_usdt": 36851633.50396521,
+                "cumulative_weth": 125659568.51654428,
+                "cumulative_wbtc": 29746455.681827415,
+                "cumulative_usdc": 185203303.55405512,
+                "cumulative_dai": 30032062.16180969,
+                "cumulative_diff": -0.04963513971792511
+            },
+            {
+                "time": "2023-03-28T00:00:00Z",
+                "cumulative_tokens_value": 403068113.2982979,
+                "cumulative_format": 403.0681132982979,
+                "cumulative_usdt": 36537466.58100921,
+                "cumulative_weth": 125025907.60767391,
+                "cumulative_wbtc": 30573836.787776507,
+                "cumulative_usdc": 179950549.7498031,
+                "cumulative_dai": 30980352.572035134,
+                "cumulative_diff": -0.06909967169114889
+            },
+            {
+                "time": "2023-03-27T00:00:00Z",
+                "cumulative_tokens_value": 407719175.6284094,
+                "cumulative_format": 407.7191756284094,
+                "cumulative_usdt": 34224657.4077972,
+                "cumulative_weth": 124551196.674288,
+                "cumulative_wbtc": 27984409.56110791,
+                "cumulative_usdc": 189584691.01718113,
+                "cumulative_dai": 31374220.96803516,
+                "cumulative_diff": -0.032588047830115256
+            },
+            {
+                "time": "2023-03-26T00:00:00Z",
+                "cumulative_tokens_value": 399467126.1970478,
+                "cumulative_format": 399.46712619704783,
+                "cumulative_usdt": 41050430.23179321,
+                "cumulative_weth": 123675260.68291156,
+                "cumulative_wbtc": 27288271.393815503,
+                "cumulative_usdc": 176067671.91032812,
+                "cumulative_dai": 31385491.978199407,
+                "cumulative_diff": -0.6198531099778911
+            },
+            {
+                "time": "2023-03-25T00:00:00Z",
+                "cumulative_tokens_value": 386897948.55874765,
+                "cumulative_format": 386.89794855874766,
+                "cumulative_usdt": 43655314.46753321,
+                "cumulative_weth": 106470521.05740218,
+                "cumulative_wbtc": 29381740.424340714,
+                "cumulative_usdc": 174845109.60650912,
+                "cumulative_dai": 32545263.00296241,
+                "cumulative_diff": -0.2157562309858407
+            },
+            {
+                "time": "2023-03-24T00:00:00Z",
+                "cumulative_tokens_value": 395356654.26463073,
+                "cumulative_format": 395.3566542646307,
+                "cumulative_usdt": 40979691.07195821,
+                "cumulative_weth": 118306182.82307541,
+                "cumulative_wbtc": 25772887.831973195,
+                "cumulative_usdc": 176596501.6601291,
+                "cumulative_dai": 33701390.87749478,
+                "cumulative_diff": -0.12869113976539445
+            },
+            {
+                "time": "2023-03-23T00:00:00Z",
+                "cumulative_tokens_value": 424103689.87390155,
+                "cumulative_format": 424.10368987390154,
+                "cumulative_usdt": 47221661.2731012,
+                "cumulative_weth": 132218022.44024411,
+                "cumulative_wbtc": 45003552.445029125,
+                "cumulative_usdc": 167211491.2964181,
+                "cumulative_dai": 32448962.419109017,
+                "cumulative_diff": 0.02572300789895651
+            },
+            {
+                "time": "2023-03-22T00:00:00Z",
+                "cumulative_tokens_value": 427718996.56964386,
+                "cumulative_format": 427.7189965696439,
+                "cumulative_usdt": 47826903.893364206,
+                "cumulative_weth": 148240197.2959624,
+                "cumulative_wbtc": 37424000.93551615,
+                "cumulative_usdc": 159635714.9267501,
+                "cumulative_dai": 34592179.51805096,
+                "cumulative_diff": 0.06493089455526038
+            },
+            {
+                "time": "2023-03-21T00:00:00Z",
+                "cumulative_tokens_value": 430919987.59638107,
+                "cumulative_format": 430.9199875963811,
+                "cumulative_usdt": 46052626.2252952,
+                "cumulative_weth": 136059866.7023816,
+                "cumulative_wbtc": 45752414.09116641,
+                "cumulative_usdc": 166147265.72241312,
+                "cumulative_dai": 36907814.85512461,
+                "cumulative_diff": 0.13560762198483253
+            },
+            {
+                "time": "2023-03-20T00:00:00Z",
+                "cumulative_tokens_value": 421005947.62504315,
+                "cumulative_format": 421.0059476250432,
+                "cumulative_usdt": 49547766.1575052,
+                "cumulative_weth": 145764321.89048594,
+                "cumulative_wbtc": 32348105.601464026,
+                "cumulative_usdc": 158707621.61319914,
+                "cumulative_dai": 34638132.362388864,
+                "cumulative_diff": 0.17025887407574197
+            },
+            {
+                "time": "2023-03-19T00:00:00Z",
+                "cumulative_tokens_value": 647078066.7042186,
+                "cumulative_format": 647.0780667042186,
+                "cumulative_usdt": 123602783.70359218,
+                "cumulative_weth": 139963382.89548385,
+                "cumulative_wbtc": 34228726.12864914,
+                "cumulative_usdc": 263192733.2012281,
+                "cumulative_dai": 86090440.77526546,
+                "cumulative_diff": 0.4611248682147979
+            },
+            {
+                "time": "2023-03-18T00:00:00Z",
+                "cumulative_tokens_value": 470373591.7159367,
+                "cumulative_format": 470.3735917159367,
+                "cumulative_usdt": 101378117.93828997,
+                "cumulative_weth": 52782425.76552037,
+                "cumulative_wbtc": 39178630.75450303,
+                "cumulative_usdc": 206544851.20817864,
+                "cumulative_dai": 70489566.0494447,
+                "cumulative_diff": 0.1247253377175575
+            },
+            {
+                "time": "2023-03-17T00:00:00Z",
+                "cumulative_tokens_value": 446235552.71577907,
+                "cumulative_format": 446.2355527157791,
+                "cumulative_usdt": 96622018.95850098,
+                "cumulative_weth": 47737823.50152126,
+                "cumulative_wbtc": 36945521.395429134,
+                "cumulative_usdc": 199905330.27822965,
+                "cumulative_dai": 65024858.58209799,
+                "cumulative_diff": 0.007881811013498203
+            },
+            {
+                "time": "2023-03-16T00:00:00Z",
+                "cumulative_tokens_value": 413194467.3092986,
+                "cumulative_format": 413.1944673092986,
+                "cumulative_usdt": 93323394.05860096,
+                "cumulative_weth": 46353818.90112091,
+                "cumulative_wbtc": 34614683.97621725,
+                "cumulative_usdc": 182538691.38612565,
+                "cumulative_dai": 56363878.98723374,
+                "cumulative_diff": -0.11149435626355624
+            },
+            {
+                "time": "2023-03-15T00:00:00Z",
+                "cumulative_tokens_value": 399946819.50409853,
+                "cumulative_format": 399.9468195040985,
+                "cumulative_usdt": 64165788.255990975,
+                "cumulative_weth": 48438967.63523843,
+                "cumulative_wbtc": 37685021.9796651,
+                "cumulative_usdc": 196613393.27145267,
+                "cumulative_dai": 53043648.36175135,
+                "cumulative_diff": -0.15423836200208965
+            },
+            {
+                "time": "2023-03-14T00:00:00Z",
+                "cumulative_tokens_value": 372483952.8127023,
+                "cumulative_format": 372.4839528127023,
+                "cumulative_usdt": 40976542.68936597,
+                "cumulative_weth": 50578278.145565435,
+                "cumulative_wbtc": 38623285.32974863,
+                "cumulative_usdc": 182900672.94343656,
+                "cumulative_dai": 59405173.704585716,
+                "cumulative_diff": -0.19709925997106206
+            },
+            {
+                "time": "2023-03-13T00:00:00Z",
+                "cumulative_tokens_value": 349325949.0032125,
+                "cumulative_format": 349.3259490032125,
+                "cumulative_usdt": 35849741.28237395,
+                "cumulative_weth": 45719827.31513077,
+                "cumulative_wbtc": 32751192.0760201,
+                "cumulative_usdc": 179628132.21044052,
+                "cumulative_dai": 55377056.11924718,
+                "cumulative_diff": -0.2544735672551611
+            },
+            {
+                "time": "2023-03-12T00:00:00Z",
+                "cumulative_tokens_value": 348694278.4705496,
+                "cumulative_format": 348.6942784705496,
+                "cumulative_usdt": 38702282.06404194,
+                "cumulative_weth": 45172075.756597355,
+                "cumulative_wbtc": 28123103.645001195,
+                "cumulative_usdc": 184172894.74266446,
+                "cumulative_dai": 52523922.26224461,
+                "cumulative_diff": -0.14790700303590454
+            },
+            {
+                "time": "2023-03-11T00:00:00Z",
+                "cumulative_tokens_value": 411706086.635746,
+                "cumulative_format": 411.706086635746,
+                "cumulative_usdt": 89728222.18434194,
+                "cumulative_weth": 48013704.39119911,
+                "cumulative_wbtc": 27247846.727100372,
+                "cumulative_usdc": 192416667.8273814,
+                "cumulative_dai": 54299645.50572322,
+                "cumulative_diff": 0.04770728669688813
+            },
+            {
+                "time": "2023-03-10T00:00:00Z",
+                "cumulative_tokens_value": 442718408.4217694,
+                "cumulative_format": 442.71840842176937,
+                "cumulative_usdt": 119098995.65669495,
+                "cumulative_weth": 42435505.9537051,
+                "cumulative_wbtc": 24256489.462825343,
+                "cumulative_usdc": 194414200.32931828,
+                "cumulative_dai": 62513217.0192257,
+                "cumulative_diff": 0.05096310213865497
+            },
+            {
+                "time": "2023-03-09T00:00:00Z",
+                "cumulative_tokens_value": 459263318.45361185,
+                "cumulative_format": 459.2633184536119,
+                "cumulative_usdt": 111863517.03993694,
+                "cumulative_weth": 43549990.37761107,
+                "cumulative_wbtc": 29650395.210654184,
+                "cumulative_usdc": 208505073.0684393,
+                "cumulative_dai": 65694342.756970294,
+                "cumulative_diff": 0.06530050067206804
+            },
+            {
+                "time": "2023-03-08T00:00:00Z",
+                "cumulative_tokens_value": 461633961.8323561,
+                "cumulative_format": 461.6339618323561,
+                "cumulative_usdt": 112720983.62988093,
+                "cumulative_weth": 43245454.546085656,
+                "cumulative_wbtc": 29429242.950247817,
+                "cumulative_usdc": 212034881.3357173,
+                "cumulative_dai": 64203399.370424464,
+                "cumulative_diff": 0.08533010965779966
+            },
+            {
+                "time": "2023-03-07T00:00:00Z",
+                "cumulative_tokens_value": 445900264.2631819,
+                "cumulative_format": 445.90026426318195,
+                "cumulative_usdt": 109768261.53893892,
+                "cumulative_weth": 42793326.54184134,
+                "cumulative_wbtc": 27096547.85994552,
+                "cumulative_usdc": 205806852.9940893,
+                "cumulative_dai": 60435275.32836681,
+                "cumulative_diff": 0.1066129821379182
+            },
+            {
+                "time": "2023-03-06T00:00:00Z",
+                "cumulative_tokens_value": 438220169.3808545,
+                "cumulative_format": 438.2201693808545,
+                "cumulative_usdt": 108725159.99561994,
+                "cumulative_weth": 42408437.57057339,
+                "cumulative_wbtc": 27220173.10303171,
+                "cumulative_usdc": 202126209.2034753,
+                "cumulative_dai": 57740189.508154154,
+                "cumulative_diff": 0.15881957539060185
+            },
+            {
+                "time": "2023-03-05T00:00:00Z",
+                "cumulative_tokens_value": 400268604.1748957,
+                "cumulative_format": 400.2686041748957,
+                "cumulative_usdt": 90911644.09651494,
+                "cumulative_weth": 45919398.376798004,
+                "cumulative_wbtc": 24815375.08203363,
+                "cumulative_usdc": 181179742.71802235,
+                "cumulative_dai": 57442443.90152677,
+                "cumulative_diff": 0.09714488162993672
+            },
+            {
+                "time": "2023-03-04T00:00:00Z",
+                "cumulative_tokens_value": 392064706.3257606,
+                "cumulative_format": 392.0647063257606,
+                "cumulative_usdt": 88558886.46765894,
+                "cumulative_weth": 44172500.06288391,
+                "cumulative_wbtc": 23404839.49279528,
+                "cumulative_usdc": 178701875.08303335,
+                "cumulative_dai": 57226605.21938914,
+                "cumulative_diff": 0.12084299745791637
+            },
+            {
+                "time": "2023-03-03T00:00:00Z",
+                "cumulative_tokens_value": 420156104.954708,
+                "cumulative_format": 420.156104954708,
+                "cumulative_usdt": 87187297.28795795,
+                "cumulative_weth": 45096050.093324356,
+                "cumulative_wbtc": 23166768.889424082,
+                "cumulative_usdc": 208821293.73038536,
+                "cumulative_dai": 55884694.95361626,
+                "cumulative_diff": 0.2179630415891537
+            },
+            {
+                "time": "2023-03-02T00:00:00Z",
+                "cumulative_tokens_value": 429273193.8182756,
+                "cumulative_format": 429.27319381827556,
+                "cumulative_usdt": 86805460.00143293,
+                "cumulative_weth": 48445519.35086257,
+                "cumulative_wbtc": 22717751.961555317,
+                "cumulative_usdc": 217434523.3535244,
+                "cumulative_dai": 53869939.15090039,
+                "cumulative_diff": 0.27321479261528975
+            },
+            {
+                "time": "2023-03-01T00:00:00Z",
+                "cumulative_tokens_value": 422242685.24743664,
+                "cumulative_format": 422.24268524743667,
+                "cumulative_usdt": 106098661.19533494,
+                "cumulative_weth": 47359574.58671796,
+                "cumulative_wbtc": 21308779.158656754,
+                "cumulative_usdc": 196610606.34450138,
+                "cumulative_dai": 50865063.962225564,
+                "cumulative_diff": 0.2988472366791202
+            },
+            {
+                "time": "2023-02-28T00:00:00Z",
+                "cumulative_tokens_value": 398361507.3539983,
+                "cumulative_format": 398.3615073539983,
+                "cumulative_usdt": 92537323.81524095,
+                "cumulative_weth": 43378492.13998533,
+                "cumulative_wbtc": 21036815.539702468,
+                "cumulative_usdc": 198631427.35570937,
+                "cumulative_dai": 42777448.503360234,
+                "cumulative_diff": 0.2665634143543644
+            },
+            {
+                "time": "2023-02-27T00:00:00Z",
+                "cumulative_tokens_value": 368622228.15218955,
+                "cumulative_format": 368.62222815218956,
+                "cumulative_usdt": 90258394.99400294,
+                "cumulative_weth": 43552211.46005556,
+                "cumulative_wbtc": 20710985.033971816,
+                "cumulative_usdc": 174081797.47943637,
+                "cumulative_dai": 40018839.18472289,
+                "cumulative_diff": 0.1860655526169042
+            },
+            {
+                "time": "2023-02-26T00:00:00Z",
+                "cumulative_tokens_value": 361384558.00214547,
+                "cumulative_format": 361.38455800214547,
+                "cumulative_usdt": 97205388.44947097,
+                "cumulative_weth": 41957661.24567154,
+                "cumulative_wbtc": 20092739.735364497,
+                "cumulative_usdc": 158488047.49867243,
+                "cumulative_dai": 43640721.072966054,
+                "cumulative_diff": 0.18064496997760962
+            },
+            {
+                "time": "2023-02-25T00:00:00Z",
+                "cumulative_tokens_value": 344686432.015898,
+                "cumulative_format": 344.686432015898,
+                "cumulative_usdt": 94355837.37698695,
+                "cumulative_weth": 42834353.403222755,
+                "cumulative_wbtc": 19178179.89295799,
+                "cumulative_usdc": 146731801.0737853,
+                "cumulative_dai": 41586260.26894495,
+                "cumulative_diff": 0.16313245308386767
+            },
+            {
+                "time": "2023-02-24T00:00:00Z",
+                "cumulative_tokens_value": 328577602.37652814,
+                "cumulative_format": 328.57760237652815,
+                "cumulative_usdt": 87270799.41457395,
+                "cumulative_weth": 40987157.32530266,
+                "cumulative_wbtc": 19075842.124512464,
+                "cumulative_usdc": 138194890.9018423,
+                "cumulative_dai": 43048912.61029681,
+                "cumulative_diff": 0.13902198482983316
+            },
+            {
+                "time": "2023-02-23T00:00:00Z",
+                "cumulative_tokens_value": 311989407.1939123,
+                "cumulative_format": 311.9894071939123,
+                "cumulative_usdt": 85626996.64358395,
+                "cumulative_weth": 40384706.119351014,
+                "cumulative_wbtc": 17307665.296189707,
+                "cumulative_usdc": 128698649.53186627,
+                "cumulative_dai": 39971389.602921404,
+                "cumulative_diff": 0.12054970060801294
+            },
+            {
+                "time": "2023-02-22T00:00:00Z",
+                "cumulative_tokens_value": 296056625.5532687,
+                "cumulative_format": 296.05662555326865,
+                "cumulative_usdt": 73599995.47001797,
+                "cumulative_weth": 41120404.14259063,
+                "cumulative_wbtc": 16003460.812512375,
+                "cumulative_usdc": 125835542.60569327,
+                "cumulative_dai": 39497222.52245444,
+                "cumulative_diff": 0.08009551162772205
+            },
+            {
+                "time": "2023-02-21T00:00:00Z",
+                "cumulative_tokens_value": 292172903.80636525,
+                "cumulative_format": 292.17290380636524,
+                "cumulative_usdt": 70062745.16086097,
+                "cumulative_weth": 41071635.98560778,
+                "cumulative_wbtc": 16329117.826770537,
+                "cumulative_usdc": 125849205.28481326,
+                "cumulative_dai": 38860199.54831272,
+                "cumulative_diff": 0.07167098840855074
+            },
+            {
+                "time": "2023-02-20T00:00:00Z",
+                "cumulative_tokens_value": 300034329.5641779,
+                "cumulative_format": 300.0343295641779,
+                "cumulative_usdt": 76217517.48434196,
+                "cumulative_weth": 40575256.32243277,
+                "cumulative_wbtc": 15068755.184055582,
+                "cumulative_usdc": 125539897.89084728,
+                "cumulative_dai": 42632902.68250029,
+                "cumulative_diff": 0.06569744340676927
+            },
+            {
+                "time": "2023-02-19T00:00:00Z",
+                "cumulative_tokens_value": 296102255.3714762,
+                "cumulative_format": 296.1022553714762,
+                "cumulative_usdt": 74809547.80134897,
+                "cumulative_weth": 39009019.654094644,
+                "cumulative_wbtc": 14823956.55661865,
+                "cumulative_usdc": 124751182.14061227,
+                "cumulative_dai": 42708549.2188017,
+                "cumulative_diff": 0.030472768180129815
+            },
+            {
+                "time": "2023-02-18T00:00:00Z",
+                "cumulative_tokens_value": 288456888.81641877,
+                "cumulative_format": 288.45688881641877,
+                "cumulative_usdt": 74637155.98632698,
+                "cumulative_weth": 35262569.24518855,
+                "cumulative_wbtc": 13973572.598722082,
+                "cumulative_usdc": 122588137.86382027,
+                "cumulative_dai": 41995453.122360885,
+                "cumulative_diff": 0.010776412307219924
+            },
+            {
+                "time": "2023-02-17T00:00:00Z",
+                "cumulative_tokens_value": 282898091.9235155,
+                "cumulative_format": 282.8980919235155,
+                "cumulative_usdt": 73814987.92553897,
+                "cumulative_weth": 31721311.248786725,
+                "cumulative_wbtc": 13728553.667594891,
+                "cumulative_usdc": 122957737.03578027,
+                "cumulative_dai": 40675502.04581467,
+                "cumulative_diff": -0.04113592244711526
+            },
+            {
+                "time": "2023-02-16T00:00:00Z",
+                "cumulative_tokens_value": 274379177.56381476,
+                "cumulative_format": 274.3791775638148,
+                "cumulative_usdt": 66208485.49253997,
+                "cumulative_weth": 29048006.274434514,
+                "cumulative_wbtc": 14872136.356962383,
+                "cumulative_usdc": 122265702.83968827,
+                "cumulative_dai": 41984846.60018965,
+                "cumulative_diff": -0.1113620779741941
+            },
+            {
+                "time": "2023-02-15T00:00:00Z",
+                "cumulative_tokens_value": 272343818.6588027,
+                "cumulative_format": 272.34381865880266,
+                "cumulative_usdt": 65416186.62219397,
+                "cumulative_weth": 30605582.663054273,
+                "cumulative_wbtc": 14413602.325051568,
+                "cumulative_usdc": 118478312.48100927,
+                "cumulative_dai": 43430134.56749356,
+                "cumulative_diff": -0.11352441741023195
+            },
+            {
+                "time": "2023-02-14T00:00:00Z",
+                "cumulative_tokens_value": 271232583.00436664,
+                "cumulative_format": 271.23258300436663,
+                "cumulative_usdt": 64926964.11620797,
+                "cumulative_weth": 29679225.596067972,
+                "cumulative_wbtc": 14035032.470687993,
+                "cumulative_usdc": 122897110.64795725,
+                "cumulative_dai": 39694250.17344546,
+                "cumulative_diff": -0.04933165554033278
+            },
+            {
+                "time": "2023-02-13T00:00:00Z",
+                "cumulative_tokens_value": 280322841.17754734,
+                "cumulative_format": 280.32284117754733,
+                "cumulative_usdt": 67282641.53278297,
+                "cumulative_weth": 28114155.49401013,
+                "cumulative_wbtc": 14049069.643855847,
+                "cumulative_usdc": 124071876.53136027,
+                "cumulative_dai": 46805097.975538164,
+                "cumulative_diff": 0.12259173636373566
+            },
+            {
+                "time": "2023-02-12T00:00:00Z",
+                "cumulative_tokens_value": 287079199.9859276,
+                "cumulative_format": 287.0791999859276,
+                "cumulative_usdt": 73243351.01465397,
+                "cumulative_weth": 29328913.466766976,
+                "cumulative_wbtc": 14467609.011852972,
+                "cumulative_usdc": 124904092.69178328,
+                "cumulative_dai": 45135233.800870396,
+                "cumulative_diff": 0.22657416263023095
+            },
+            {
+                "time": "2023-02-11T00:00:00Z",
+                "cumulative_tokens_value": 285348358.44967514,
+                "cumulative_format": 285.3483584496751,
+                "cumulative_usdt": 73587720.79092997,
+                "cumulative_weth": 27093170.72230019,
+                "cumulative_wbtc": 15100089.379356405,
+                "cumulative_usdc": 124423599.11124328,
+                "cumulative_dai": 45143778.44584529,
+                "cumulative_diff": 0.2753814448327787
+            },
+            {
+                "time": "2023-02-10T00:00:00Z",
+                "cumulative_tokens_value": 294535365.8933181,
+                "cumulative_format": 294.5353658933181,
+                "cumulative_usdt": 73209234.04797797,
+                "cumulative_weth": 28770920.41659356,
+                "cumulative_wbtc": 13436527.983657613,
+                "cumulative_usdc": 130241980.25821626,
+                "cumulative_dai": 48876703.18687273,
+                "cumulative_diff": 0.3396928515379795
+            },
+            {
+                "time": "2023-02-09T00:00:00Z",
+                "cumulative_tokens_value": 304934612.93017155,
+                "cumulative_format": 304.93461293017157,
+                "cumulative_usdt": 74877070.49015397,
+                "cumulative_weth": 30497122.202195723,
+                "cumulative_wbtc": 16012068.194286227,
+                "cumulative_usdc": 133691401.98449728,
+                "cumulative_dai": 49856950.059038326,
+                "cumulative_diff": 0.37985486277531705
+            },
+            {
+                "time": "2023-02-08T00:00:00Z",
+                "cumulative_tokens_value": 303261492.0073211,
+                "cumulative_format": 303.2614920073211,
+                "cumulative_usdt": 73064927.61253199,
+                "cumulative_weth": 31262129.90417178,
+                "cumulative_wbtc": 15326922.147315202,
+                "cumulative_usdc": 132867285.48633829,
+                "cumulative_dai": 50740226.85696392,
+                "cumulative_diff": 0.39371591490204483
+            },
+            {
+                "time": "2023-02-07T00:00:00Z",
+                "cumulative_tokens_value": 284612935.3604528,
+                "cumulative_format": 284.61293536045275,
+                "cumulative_usdt": 70541838.73466198,
+                "cumulative_weth": 31266537.020282086,
+                "cumulative_wbtc": 14476981.70327294,
+                "cumulative_usdc": 128070248.59779727,
+                "cumulative_dai": 40257329.30443847,
+                "cumulative_diff": 0.3538899619225749
+            },
+            {
+                "time": "2023-02-06T00:00:00Z",
+                "cumulative_tokens_value": 245957577.3351761,
+                "cumulative_format": 245.9575773351761,
+                "cumulative_usdt": 66366487.742466986,
+                "cumulative_weth": 25642347.666642785,
+                "cumulative_wbtc": 10437282.945919065,
+                "cumulative_usdc": 105883770.0149083,
+                "cumulative_dai": 37627688.96523896,
+                "cumulative_diff": 0.26511067002418964
+            },
+            {
+                "time": "2023-02-05T00:00:00Z",
+                "cumulative_tokens_value": 222034470.64055943,
+                "cumulative_format": 222.03447064055945,
+                "cumulative_usdt": 61093116.85404399,
+                "cumulative_weth": 19496379.735461205,
+                "cumulative_wbtc": 9744600.397961695,
+                "cumulative_usdc": 99393507.68088233,
+                "cumulative_dai": 32306865.972210206,
+                "cumulative_diff": 0.2692960387369697
+            },
+            {
+                "time": "2023-02-04T00:00:00Z",
+                "cumulative_tokens_value": 206768715.21914196,
+                "cumulative_format": 206.76871521914197,
+                "cumulative_usdt": 58499322.682962984,
+                "cumulative_weth": 18823399.439261846,
+                "cumulative_wbtc": 9369130.372691419,
+                "cumulative_usdc": 90846582.25612132,
+                "cumulative_dai": 29230280.468104374,
+                "cumulative_diff": 0.2616029759955356
+            },
+            {
+                "time": "2023-02-03T00:00:00Z",
+                "cumulative_tokens_value": 194483807.57423472,
+                "cumulative_format": 194.48380757423473,
+                "cumulative_usdt": 55651446.61591399,
+                "cumulative_weth": 16745651.343807936,
+                "cumulative_wbtc": 8966734.049692938,
+                "cumulative_usdc": 84936456.29401833,
+                "cumulative_dai": 28183519.27080152,
+                "cumulative_diff": 0.21595759053974684
+            },
+            {
+                "time": "2023-02-02T00:00:00Z",
+                "cumulative_tokens_value": 189103717.38013682,
+                "cumulative_format": 189.10371738013683,
+                "cumulative_usdt": 55169616.036301985,
+                "cumulative_weth": 15561966.007764082,
+                "cumulative_wbtc": 9009741.645819996,
+                "cumulative_usdc": 82263515.48079133,
+                "cumulative_dai": 27098878.209459413,
+                "cumulative_diff": 0.18336142889819548
+            },
+            {
+                "time": "2023-02-01T00:00:00Z",
+                "cumulative_tokens_value": 183862616.22709954,
+                "cumulative_format": 183.86261622709955,
+                "cumulative_usdt": 54844850.749042995,
+                "cumulative_weth": 13843584.846778324,
+                "cumulative_wbtc": 8195129.222015843,
+                "cumulative_usdc": 79860730.97175632,
+                "cumulative_dai": 27118320.437506054,
+                "cumulative_diff": 0.1779431695098587
+            },
+            {
+                "time": "2023-01-31T00:00:00Z",
+                "cumulative_tokens_value": 183891274.50306988,
+                "cumulative_format": 183.89127450306987,
+                "cumulative_usdt": 55080603.06213899,
+                "cumulative_weth": 13808889.783758672,
+                "cumulative_wbtc": 8088569.7696209885,
+                "cumulative_usdc": 79298417.10216433,
+                "cumulative_dai": 27614794.785386875,
+                "cumulative_diff": 0.1733054677542149
+            },
+            {
+                "time": "2023-01-30T00:00:00Z",
+                "cumulative_tokens_value": 180751599.21032113,
+                "cumulative_format": 180.75159921032113,
+                "cumulative_usdt": 55009232.57626599,
+                "cumulative_weth": 13780357.02549355,
+                "cumulative_wbtc": 8090872.398561961,
+                "cumulative_usdc": 79503152.77369133,
+                "cumulative_dai": 24367984.436308302,
+                "cumulative_diff": 0.15777621526564617
+            },
+            {
+                "time": "2023-01-29T00:00:00Z",
+                "cumulative_tokens_value": 162241467.23399678,
+                "cumulative_format": 162.2414672339968,
+                "cumulative_usdt": 48702427.17690198,
+                "cumulative_weth": 13709823.484100278,
+                "cumulative_wbtc": 7160602.960666014,
+                "cumulative_usdc": 70179845.47236633,
+                "cumulative_dai": 22488768.13996215,
+                "cumulative_diff": 0.08998878617048174
+            },
+            {
+                "time": "2023-01-28T00:00:00Z",
+                "cumulative_tokens_value": 152677403.97504103,
+                "cumulative_format": 152.67740397504105,
+                "cumulative_usdt": 42393446.71523398,
+                "cumulative_weth": 13489883.938674942,
+                "cumulative_wbtc": 6995441.712890583,
+                "cumulative_usdc": 68980964.07830434,
+                "cumulative_dai": 20817667.52993717,
+                "cumulative_diff": -0.036654033352214684
+            },
+            {
+                "time": "2023-01-27T00:00:00Z",
+                "cumulative_tokens_value": 152483553.09150723,
+                "cumulative_format": 152.48355309150722,
+                "cumulative_usdt": 43645746.77467199,
+                "cumulative_weth": 12995758.443923771,
+                "cumulative_wbtc": 6970068.490395615,
+                "cumulative_usdc": 68342510.73146734,
+                "cumulative_dai": 20529468.651048504,
+                "cumulative_diff": 0.11184415180086456
+            },
+            {
+                "time": "2023-01-26T00:00:00Z",
+                "cumulative_tokens_value": 154429389.5513544,
+                "cumulative_format": 154.4293895513544,
+                "cumulative_usdt": 43315976.80499798,
+                "cumulative_weth": 13047299.910271112,
+                "cumulative_wbtc": 6822096.127564615,
+                "cumulative_usdc": 70768515.28844026,
+                "cumulative_dai": 20475501.420080446,
+                "cumulative_diff": 0.2487981935495361
+            },
+            {
+                "time": "2023-01-25T00:00:00Z",
+                "cumulative_tokens_value": 151145519.54127467,
+                "cumulative_format": 151.14551954127467,
+                "cumulative_usdt": 42644361.80155898,
+                "cumulative_weth": 12686654.303117078,
+                "cumulative_wbtc": 6663241.433406348,
+                "cumulative_usdc": 68764056.06328227,
+                "cumulative_dai": 20387205.93990998,
+                "cumulative_diff": 0.2745306323692582
+            },
+            {
+                "time": "2023-01-24T00:00:00Z",
+                "cumulative_tokens_value": 152021911.15939662,
+                "cumulative_format": 152.0219111593966,
+                "cumulative_usdt": 42710825.69014298,
+                "cumulative_weth": 12926109.185850907,
+                "cumulative_wbtc": 6500270.283861335,
+                "cumulative_usdc": 69496779.41369227,
+                "cumulative_dai": 20387926.585849132,
+                "cumulative_diff": 0.28301744378414323
+            },
+            {
+                "time": "2023-01-23T00:00:00Z",
+                "cumulative_tokens_value": 152233295.9837037,
+                "cumulative_format": 152.2332959837037,
+                "cumulative_usdt": 42892433.77718699,
+                "cumulative_weth": 12893605.854059782,
+                "cumulative_wbtc": 6396375.479473477,
+                "cumulative_usdc": 69558383.48704726,
+                "cumulative_dai": 20492497.38593619,
+                "cumulative_diff": 0.3046161714720407
+            },
+            {
+                "time": "2023-01-22T00:00:00Z",
+                "cumulative_tokens_value": 147641554.53109142,
+                "cumulative_format": 147.64155453109143,
+                "cumulative_usdt": 42795219.643012986,
+                "cumulative_weth": 12486380.6604658,
+                "cumulative_wbtc": 6293011.608645722,
+                "cumulative_usdc": 65826119.09367426,
+                "cumulative_dai": 20240823.525292657,
+                "cumulative_diff": 0.32309695656481907
+            },
+            {
+                "time": "2023-01-21T00:00:00Z",
+                "cumulative_tokens_value": 158273646.63247174,
+                "cumulative_format": 158.27364663247175,
+                "cumulative_usdt": 42756571.72944499,
+                "cumulative_weth": 12747480.11241344,
+                "cumulative_wbtc": 6281701.718800896,
+                "cumulative_usdc": 76314669.20581326,
+                "cumulative_dai": 20173223.865999173,
+                "cumulative_diff": 0.3673013830485822
+            },
+            {
+                "time": "2023-01-20T00:00:00Z",
+                "cumulative_tokens_value": 135429159.4324055,
+                "cumulative_format": 135.4291594324055,
+                "cumulative_usdt": 34856175.79394298,
+                "cumulative_weth": 12442868.648450993,
+                "cumulative_wbtc": 5111535.777649546,
+                "cumulative_usdc": 64290269.59041828,
+                "cumulative_dai": 18728309.621943697,
+                "cumulative_diff": 0.271011430204037
+            },
+            {
+                "time": "2023-01-19T00:00:00Z",
+                "cumulative_tokens_value": 116007636.40001982,
+                "cumulative_format": 116.00763640001982,
+                "cumulative_usdt": 31029591.559145987,
+                "cumulative_weth": 10257252.042842701,
+                "cumulative_wbtc": 4158886.2569094794,
+                "cumulative_usdc": 52928514.991102114,
+                "cumulative_dai": 17633391.55001954,
+                "cumulative_diff": 0.1501187865322397
+            },
+            {
+                "time": "2023-01-18T00:00:00Z",
+                "cumulative_tokens_value": 109651444.48182847,
+                "cumulative_format": 109.65144448182846,
+                "cumulative_usdt": 29771629.687724985,
+                "cumulative_weth": 9676319.860420818,
+                "cumulative_wbtc": 3699405.511934513,
+                "cumulative_usdc": 50296640.499549136,
+                "cumulative_dai": 16207448.922199015,
+                "cumulative_diff": 0.10514020976414468
+            },
+            {
+                "time": "2023-01-17T00:00:00Z",
+                "cumulative_tokens_value": 108997058.46388407,
+                "cumulative_format": 108.99705846388407,
+                "cumulative_usdt": 29441127.998257983,
+                "cumulative_weth": 10060206.745790247,
+                "cumulative_wbtc": 3736147.854571447,
+                "cumulative_usdc": 49771943.24086514,
+                "cumulative_dai": 15987632.624399267,
+                "cumulative_diff": 0.09312833260575684
+            },
+            {
+                "time": "2023-01-16T00:00:00Z",
+                "cumulative_tokens_value": 105860572.1905779,
+                "cumulative_format": 105.8605721905779,
+                "cumulative_usdt": 28549596.769288987,
+                "cumulative_weth": 9854806.31247617,
+                "cumulative_wbtc": 3666054.589393868,
+                "cumulative_usdc": 48022426.886464134,
+                "cumulative_dai": 15767687.632954739,
+                "cumulative_diff": 0.06938348408097006
+            },
+            {
+                "time": "2023-01-15T00:00:00Z",
+                "cumulative_tokens_value": 99939017.599597,
+                "cumulative_format": 99.93901759959701,
+                "cumulative_usdt": 27376421.083397985,
+                "cumulative_weth": 9241421.327447709,
+                "cumulative_wbtc": 3599334.2927548597,
+                "cumulative_usdc": 44670770.85119916,
+                "cumulative_dai": 15051070.044797286,
+                "cumulative_diff": 0.020973523529304375
+            },
+            {
+                "time": "2023-01-14T00:00:00Z",
+                "cumulative_tokens_value": 100139517.3242223,
+                "cumulative_format": 100.1395173242223,
+                "cumulative_usdt": 27561956.125403985,
+                "cumulative_weth": 9234282.5065239,
+                "cumulative_wbtc": 3622273.260610343,
+                "cumulative_usdc": 44580733.14156916,
+                "cumulative_dai": 15140272.290114904,
+                "cumulative_diff": 0.03341217541956644
+            },
+            {
+                "time": "2023-01-13T00:00:00Z",
+                "cumulative_tokens_value": 98726309.24329874,
+                "cumulative_format": 98.72630924329874,
+                "cumulative_usdt": 26718429.27793399,
+                "cumulative_weth": 8681115.657005716,
+                "cumulative_wbtc": 3226558.2312419075,
+                "cumulative_usdc": 44618522.17702616,
+                "cumulative_dai": 15481683.90009097,
+                "cumulative_diff": 0.019269992731112795
+            },
+            {
+                "time": "2023-01-12T00:00:00Z",
+                "cumulative_tokens_value": 98592710.79517557,
+                "cumulative_format": 98.59271079517556,
+                "cumulative_usdt": 26652649.387046985,
+                "cumulative_weth": 8423001.53150826,
+                "cumulative_wbtc": 3094270.074079901,
+                "cumulative_usdc": 44809838.82699216,
+                "cumulative_dai": 15612950.97554825,
+                "cumulative_diff": 0.018093734712843656
+            },
+            {
+                "time": "2023-01-11T00:00:00Z",
+                "cumulative_tokens_value": 98122668.60806756,
+                "cumulative_format": 98.12266860806756,
+                "cumulative_usdt": 26724191.499258988,
+                "cumulative_weth": 8035114.392376989,
+                "cumulative_wbtc": 2873352.093667224,
+                "cumulative_usdc": 44880117.00733716,
+                "cumulative_dai": 15609893.615427189,
+                "cumulative_diff": 0.01526340148341772
+            },
+            {
+                "time": "2023-01-10T00:00:00Z",
+                "cumulative_tokens_value": 98846344.15021035,
+                "cumulative_format": 98.84634415021036,
+                "cumulative_usdt": 26655399.400573984,
+                "cumulative_weth": 8071813.929110333,
+                "cumulative_wbtc": 2991167.332903598,
+                "cumulative_usdc": 45592945.21838316,
+                "cumulative_dai": 15535018.269239277,
+                "cumulative_diff": 0.033981366020200354
+            },
+            {
+                "time": "2023-01-09T00:00:00Z",
+                "cumulative_tokens_value": 98515596.86519055,
+                "cumulative_format": 98.51559686519055,
+                "cumulative_usdt": 26643470.825755987,
+                "cumulative_weth": 7887154.282041787,
+                "cumulative_wbtc": 2981405.233225384,
+                "cumulative_usdc": 45466230.63392616,
+                "cumulative_dai": 15537335.890241228,
+                "cumulative_diff": 0.03623745530341854
+            },
+            {
+                "time": "2023-01-08T00:00:00Z",
+                "cumulative_tokens_value": 97842944.2624763,
+                "cumulative_format": 97.8429442624763,
+                "cumulative_usdt": 26220971.315560985,
+                "cumulative_weth": 7369830.991743394,
+                "cumulative_wbtc": 2877896.505904978,
+                "cumulative_usdc": 45732301.40644916,
+                "cumulative_dai": 15641944.042817768,
+                "cumulative_diff": 0.04486951139872218
+            },
+            {
+                "time": "2023-01-07T00:00:00Z",
+                "cumulative_tokens_value": 96793638.20495467,
+                "cumulative_format": 96.79363820495468,
+                "cumulative_usdt": 26242027.465781987,
+                "cumulative_weth": 7104106.417467882,
+                "cumulative_wbtc": 2683475.826055819,
+                "cumulative_usdc": 45770254.34620816,
+                "cumulative_dai": 14993774.149440821,
+                "cumulative_diff": 0.04342052241782507
+            },
+            {
+                "time": "2023-01-06T00:00:00Z",
+                "cumulative_tokens_value": 96823853.98181078,
+                "cumulative_format": 96.82385398181079,
+                "cumulative_usdt": 26248826.819635987,
+                "cumulative_weth": 7039446.277195394,
+                "cumulative_wbtc": 2675601.484818366,
+                "cumulative_usdc": 45823266.70461116,
+                "cumulative_dai": 15036712.695549853,
+                "cumulative_diff": 0.05275889730979482
+            },
+            {
+                "time": "2023-01-05T00:00:00Z",
+                "cumulative_tokens_value": 96808800.44142754,
+                "cumulative_format": 96.80880044142755,
+                "cumulative_usdt": 26808494.02629199,
+                "cumulative_weth": 6996992.318846764,
+                "cumulative_wbtc": 2641166.922274338,
+                "cumulative_usdc": 45370951.385618165,
+                "cumulative_dai": 14991195.788396288,
+                "cumulative_diff": 0.018972117097891445
+            },
+            {
+                "time": "2023-01-04T00:00:00Z",
+                "cumulative_tokens_value": 96624982.92247827,
+                "cumulative_format": 96.62498292247827,
+                "cumulative_usdt": 26937162.89529699,
+                "cumulative_weth": 6975207.227827614,
+                "cumulative_wbtc": 2642299.7352727433,
+                "cumulative_usdc": 45129723.30524216,
+                "cumulative_dai": 14940589.758838765,
+                "cumulative_diff": 0.010899647568625851
+            },
+            {
+                "time": "2023-01-03T00:00:00Z",
+                "cumulative_tokens_value": 95487410.34988336,
+                "cumulative_format": 95.48741034988336,
+                "cumulative_usdt": 26939128.08688499,
+                "cumulative_weth": 6745912.921230982,
+                "cumulative_wbtc": 2595219.478283033,
+                "cumulative_usdc": 44114550.38284216,
+                "cumulative_dai": 15092599.480642196,
+                "cumulative_diff": -0.011843918378130154
+            },
+            {
+                "time": "2023-01-02T00:00:00Z",
+                "cumulative_tokens_value": 94945642.32709861,
+                "cumulative_format": 94.94564232709861,
+                "cumulative_usdt": 26844178.75396799,
+                "cumulative_weth": 7361134.476755725,
+                "cumulative_wbtc": 2542169.528308278,
+                "cumulative_usdc": 43577494.593814164,
+                "cumulative_dai": 14620664.974252459,
+                "cumulative_diff": -0.026680411727453317
+            },
+            {
+                "time": "2023-01-01T00:00:00Z",
+                "cumulative_tokens_value": 93452779.15960658,
+                "cumulative_format": 93.45277915960658,
+                "cumulative_usdt": 26771816.47359999,
+                "cumulative_weth": 6395605.71439698,
+                "cumulative_wbtc": 2472121.9979164405,
+                "cumulative_usdc": 43459477.51580016,
+                "cumulative_dai": 14353757.457893,
+                "cumulative_diff": -0.04401056264830678
+            },
+            {
+                "time": "2022-12-31T00:00:00Z",
+                "cumulative_tokens_value": 92590807.86737359,
+                "cumulative_format": 92.59080786737358,
+                "cumulative_usdt": 26739949.235443987,
+                "cumulative_weth": 6603461.341992224,
+                "cumulative_wbtc": 2441134.637423156,
+                "cumulative_usdc": 42719697.97096016,
+                "cumulative_dai": 14086564.681554057,
+                "cumulative_diff": -0.05440707723443475
+            },
+            {
+                "time": "2022-12-30T00:00:00Z",
+                "cumulative_tokens_value": 91715534.21244586,
+                "cumulative_format": 91.71553421244586,
+                "cumulative_usdt": 25928193.196652986,
+                "cumulative_weth": 6532044.975878526,
+                "cumulative_wbtc": 2453663.102256441,
+                "cumulative_usdc": 42822962.71426916,
+                "cumulative_dai": 13978670.223388739,
+                "cumulative_diff": -0.06506203468727521
+            },
+            {
+                "time": "2022-12-29T00:00:00Z",
+                "cumulative_tokens_value": 94972132.54334638,
+                "cumulative_format": 94.97213254334638,
+                "cumulative_usdt": 26387383.17235699,
+                "cumulative_weth": 6572497.552165937,
+                "cumulative_wbtc": 2499224.912262095,
+                "cumulative_usdc": 44789468.51139516,
+                "cumulative_dai": 14723558.395166207,
+                "cumulative_diff": -0.040666475521535746
+            },
+            {
+                "time": "2022-12-28T00:00:00Z",
+                "cumulative_tokens_value": 95571804.66229877,
+                "cumulative_format": 95.57180466229877,
+                "cumulative_usdt": 26837788.31113399,
+                "cumulative_weth": 6584037.567572353,
+                "cumulative_wbtc": 2471313.3608084917,
+                "cumulative_usdc": 44983662.33987116,
+                "cumulative_dai": 14695003.082912777,
+                "cumulative_diff": -0.04030517357267863
+            },
+            {
+                "time": "2022-12-27T00:00:00Z",
+                "cumulative_tokens_value": 96618355.4442064,
+                "cumulative_format": 96.6183554442064,
+                "cumulative_usdt": 27089245.609231986,
+                "cumulative_weth": 6825718.672678793,
+                "cumulative_wbtc": 2554743.9080770942,
+                "cumulative_usdc": 45874536.977495156,
+                "cumulative_dai": 14274110.27672337,
+                "cumulative_diff": -0.02604936832539351
+            },
+            {
+                "time": "2022-12-26T00:00:00Z",
+                "cumulative_tokens_value": 97478831.15611312,
+                "cumulative_format": 97.47883115611312,
+                "cumulative_usdt": 27543545.95327199,
+                "cumulative_weth": 7309278.182612105,
+                "cumulative_wbtc": 2563493.995243462,
+                "cumulative_usdc": 45869905.65933616,
+                "cumulative_dai": 14192607.365649402,
+                "cumulative_diff": -0.01997855547019791
+            },
+            {
+                "time": "2022-12-25T00:00:00Z",
+                "cumulative_tokens_value": 97565688.55146882,
+                "cumulative_format": 97.56568855146882,
+                "cumulative_usdt": 27724686.154384986,
+                "cumulative_weth": 6806180.736606859,
+                "cumulative_wbtc": 2557203.6333866213,
+                "cumulative_usdc": 46074920.108430155,
+                "cumulative_dai": 14402697.918660207,
+                "cumulative_diff": -0.011501247225111312
+            },
+            {
+                "time": "2022-12-24T00:00:00Z",
+                "cumulative_tokens_value": 97628403.10221249,
+                "cumulative_format": 97.62840310221249,
+                "cumulative_usdt": 27941490.477144986,
+                "cumulative_weth": 6891568.737859808,
+                "cumulative_wbtc": 2480780.3710524864,
+                "cumulative_usdc": 45873300.74582315,
+                "cumulative_dai": 14441262.77033206,
+                "cumulative_diff": -0.020870874843045204
+            },
+            {
+                "time": "2022-12-23T00:00:00Z",
+                "cumulative_tokens_value": 97682733.48073798,
+                "cumulative_format": 97.68273348073798,
+                "cumulative_usdt": 27788444.67381799,
+                "cumulative_weth": 6884923.063085439,
+                "cumulative_wbtc": 2417282.262449448,
+                "cumulative_usdc": 46210626.66397015,
+                "cumulative_dai": 14381456.817414965,
+                "cumulative_diff": -0.028359029517796615
+            },
+            {
+                "time": "2022-12-22T00:00:00Z",
+                "cumulative_tokens_value": 98834314.44664842,
+                "cumulative_format": 98.83431444664842,
+                "cumulative_usdt": 28104531.720975988,
+                "cumulative_weth": 6944459.69339692,
+                "cumulative_wbtc": 2321758.640745649,
+                "cumulative_usdc": 46607859.03735316,
+                "cumulative_dai": 14855705.354176708,
+                "cumulative_diff": -0.037127040790124154
+            },
+            {
+                "time": "2022-12-21T00:00:00Z",
+                "cumulative_tokens_value": 99423842.83786686,
+                "cumulative_format": 99.42384283786686,
+                "cumulative_usdt": 28323383.88581799,
+                "cumulative_weth": 6724738.363860728,
+                "cumulative_wbtc": 2369290.597236733,
+                "cumulative_usdc": 47108568.673134156,
+                "cumulative_dai": 14897861.317817252,
+                "cumulative_diff": -0.02995782621018795
+            },
+            {
+                "time": "2022-12-20T00:00:00Z",
+                "cumulative_tokens_value": 99135202.57216632,
+                "cumulative_format": 99.13520257216632,
+                "cumulative_usdt": 28169655.19618499,
+                "cumulative_weth": 6421108.2113806885,
+                "cumulative_wbtc": 2373033.02438355,
+                "cumulative_usdc": 47302096.56381816,
+                "cumulative_dai": 14869309.576398939,
+                "cumulative_diff": -0.01850142044870935
+            },
+            {
+                "time": "2022-12-19T00:00:00Z",
+                "cumulative_tokens_value": 99426317.39153558,
+                "cumulative_format": 99.42631739153558,
+                "cumulative_usdt": 27835524.29307399,
+                "cumulative_weth": 6584981.057154914,
+                "cumulative_wbtc": 2576277.647472741,
+                "cumulative_usdc": 47672364.86912415,
+                "cumulative_dai": 14757169.524709791,
+                "cumulative_diff": -0.016970258507268687
+            },
+            {
+                "time": "2022-12-18T00:00:00Z",
+                "cumulative_tokens_value": 98687815.65618747,
+                "cumulative_format": 98.68781565618748,
+                "cumulative_usdt": 27827859.222405992,
+                "cumulative_weth": 6544132.989046715,
+                "cumulative_wbtc": 1229694.6827681975,
+                "cumulative_usdc": 48308005.35455515,
+                "cumulative_dai": 14778123.407411424,
+                "cumulative_diff": 0.012926693189826956
+            },
+            {
+                "time": "2022-12-17T00:00:00Z",
+                "cumulative_tokens_value": 99665993.28448513,
+                "cumulative_format": 99.66599328448513,
+                "cumulative_usdt": 27246269.73900199,
+                "cumulative_weth": 6418014.157345011,
+                "cumulative_wbtc": 2478491.2581593962,
+                "cumulative_usdc": 48412891.86457215,
+                "cumulative_dai": 15110326.265406583,
+                "cumulative_diff": 0.07392589686465845
+            },
+            {
+                "time": "2022-12-16T00:00:00Z",
+                "cumulative_tokens_value": 100452921.00289729,
+                "cumulative_format": 100.4529210028973,
+                "cumulative_usdt": 27407235.81715399,
+                "cumulative_weth": 6797634.265582938,
+                "cumulative_wbtc": 2579876.6316623595,
+                "cumulative_usdc": 48462137.61691115,
+                "cumulative_dai": 15206036.671586834,
+                "cumulative_diff": 0.06527811420062848
+            },
+            {
+                "time": "2022-12-15T00:00:00Z",
+                "cumulative_tokens_value": 102503740.07057309,
+                "cumulative_format": 102.50374007057309,
+                "cumulative_usdt": 27882165.48581099,
+                "cumulative_weth": 6970294.44990827,
+                "cumulative_wbtc": 2648193.1937474264,
+                "cumulative_usdc": 48835625.229182154,
+                "cumulative_dai": 16167461.71192427,
+                "cumulative_diff": 0.08491713989579874
+            },
+            {
+                "time": "2022-12-14T00:00:00Z",
+                "cumulative_tokens_value": 102402365.04275271,
+                "cumulative_format": 102.4023650427527,
+                "cumulative_usdt": 27664232.31980099,
+                "cumulative_weth": 6836607.808415004,
+                "cumulative_wbtc": 2679486.0521162106,
+                "cumulative_usdc": 49445142.894676164,
+                "cumulative_dai": 15776895.967744343,
+                "cumulative_diff": 0.14555963582315287
+            },
+            {
+                "time": "2022-12-13T00:00:00Z",
+                "cumulative_tokens_value": 100969344.63622195,
+                "cumulative_format": 100.96934463622195,
+                "cumulative_usdt": 26051178.15993499,
+                "cumulative_weth": 6678212.429517113,
+                "cumulative_wbtc": 2591128.6879623206,
+                "cumulative_usdc": 49889603.750124164,
+                "cumulative_dai": 15759221.608683363,
+                "cumulative_diff": 0.15120815043215044
+            },
+            {
+                "time": "2022-12-12T00:00:00Z",
+                "cumulative_tokens_value": 101113607.70009568,
+                "cumulative_format": 101.11360770009568,
+                "cumulative_usdt": 25079927.72744599,
+                "cumulative_weth": 6411638.84635745,
+                "cumulative_wbtc": 2517995.433023274,
+                "cumulative_usdc": 51475398.05056216,
+                "cumulative_dai": 15628647.642706819,
+                "cumulative_diff": 0.15502385359511797
+            },
+            {
+                "time": "2022-12-11T00:00:00Z",
+                "cumulative_tokens_value": 97412108.54162574,
+                "cumulative_format": 97.41210854162574,
+                "cumulative_usdt": 23938751.63071199,
+                "cumulative_weth": 6317266.482171711,
+                "cumulative_wbtc": 2354455.065865471,
+                "cumulative_usdc": 49256624.42817816,
+                "cumulative_dai": 15545010.934698407,
+                "cumulative_diff": 0.1681451662494016
+            },
+            {
+                "time": "2022-12-10T00:00:00Z",
+                "cumulative_tokens_value": 92298095.34402254,
+                "cumulative_format": 92.29809534402254,
+                "cumulative_usdt": 22075192.11293099,
+                "cumulative_weth": 6122758.347449839,
+                "cumulative_wbtc": 2384475.6201711595,
+                "cumulative_usdc": 48507589.88086116,
+                "cumulative_dai": 13208079.382609388,
+                "cumulative_diff": 0.14499368681537272
+            },
+            {
+                "time": "2022-12-09T00:00:00Z",
+                "cumulative_tokens_value": 93895543.75388345,
+                "cumulative_format": 93.89554375388344,
+                "cumulative_usdt": 21465697.696529984,
+                "cumulative_weth": 6241630.880757969,
+                "cumulative_wbtc": 2376021.1642250237,
+                "cumulative_usdc": 47798858.009356104,
+                "cumulative_dai": 16013336.003014365,
+                "cumulative_diff": 0.17200812786750028
+            },
+            {
+                "time": "2022-12-08T00:00:00Z",
+                "cumulative_tokens_value": 93799415.63515764,
+                "cumulative_format": 93.79941563515764,
+                "cumulative_usdt": 20397645.553135987,
+                "cumulative_weth": 6104414.584279764,
+                "cumulative_wbtc": 2348556.4320418644,
+                "cumulative_usdc": 48244384.6931151,
+                "cumulative_dai": 16704414.372584928,
+                "cumulative_diff": 0.2202490593822572
+            },
+            {
+                "time": "2022-12-07T00:00:00Z",
+                "cumulative_tokens_value": 87496714.07970007,
+                "cumulative_format": 87.49671407970007,
+                "cumulative_usdt": 20623593.837598987,
+                "cumulative_weth": 5917077.591070443,
+                "cumulative_wbtc": 2285204.2422296936,
+                "cumulative_usdc": 45136707.38512911,
+                "cumulative_dai": 13534131.023671845,
+                "cumulative_diff": 0.17115808105632446
+            },
+            {
+                "time": "2022-12-06T00:00:00Z",
+                "cumulative_tokens_value": 85701956.78343245,
+                "cumulative_format": 85.70195678343245,
+                "cumulative_usdt": 20672402.99626799,
+                "cumulative_weth": 5956475.86462309,
+                "cumulative_wbtc": 2329633.6654234007,
+                "cumulative_usdc": 43370907.73095511,
+                "cumulative_dai": 13372536.52616287,
+                "cumulative_diff": -0.00982482112243078
+            },
+            {
+                "time": "2022-12-05T00:00:00Z",
+                "cumulative_tokens_value": 85438586.58352186,
+                "cumulative_format": 85.43858658352185,
+                "cumulative_usdt": 20464170.182101987,
+                "cumulative_weth": 6263195.332656017,
+                "cumulative_wbtc": 2133477.7550289608,
+                "cumulative_usdc": 43281220.167163104,
+                "cumulative_dai": 13296523.146571787,
+                "cumulative_diff": -0.019549531496547787
+            },
+            {
+                "time": "2022-12-04T00:00:00Z",
+                "cumulative_tokens_value": 81032733.35618933,
+                "cumulative_format": 81.03273335618933,
+                "cumulative_usdt": 20050841.901538987,
+                "cumulative_weth": 5748912.1285072565,
+                "cumulative_wbtc": 2120151.6330395807,
+                "cumulative_usdc": 41761134.33042011,
+                "cumulative_dai": 11351693.362683414,
+                "cumulative_diff": -0.03888412081756003
+            },
+            {
+                "time": "2022-12-03T00:00:00Z",
+                "cumulative_tokens_value": 78915454.21405593,
+                "cumulative_format": 78.91545421405593,
+                "cumulative_usdt": 18911843.19490499,
+                "cumulative_weth": 5912450.650014181,
+                "cumulative_wbtc": 2100375.514824712,
+                "cumulative_usdc": 40671073.1494451,
+                "cumulative_dai": 11319711.704866933,
+                "cumulative_diff": -0.04127087541231715
+            },
+            {
+                "time": "2022-12-02T00:00:00Z",
+                "cumulative_tokens_value": 77744747.057677,
+                "cumulative_format": 77.744747057677,
+                "cumulative_usdt": 16346791.110328991,
+                "cumulative_weth": 6081729.811526456,
+                "cumulative_wbtc": 2064759.0648143482,
+                "cumulative_usdc": 41179143.1607291,
+                "cumulative_dai": 12072323.910278112,
+                "cumulative_diff": -0.04152493188712122
+            },
+            {
+                "time": "2022-12-01T00:00:00Z",
+                "cumulative_tokens_value": 73140182.57090878,
+                "cumulative_format": 73.14018257090879,
+                "cumulative_usdt": 12036324.082070991,
+                "cumulative_weth": 6067823.4269961845,
+                "cumulative_wbtc": 2097635.9847342283,
+                "cumulative_usdc": 40685834.37775711,
+                "cumulative_dai": 12252564.699350266,
+                "cumulative_diff": -0.12814186360507718
+            },
+            {
+                "time": "2022-11-30T00:00:00Z",
+                "cumulative_tokens_value": 72520944.39908472,
+                "cumulative_format": 72.52094439908471,
+                "cumulative_usdt": 11605720.96455999,
+                "cumulative_weth": 5913182.710156357,
+                "cumulative_wbtc": 2041610.692832083,
+                "cumulative_usdc": 40705813.99770111,
+                "cumulative_dai": 12254616.033835188,
+                "cumulative_diff": -0.12590321705970317
+            },
+            {
+                "time": "2022-11-29T00:00:00Z",
+                "cumulative_tokens_value": 86543963.17867197,
+                "cumulative_format": 86.54396317867197,
+                "cumulative_usdt": 24617647.881655987,
+                "cumulative_weth": 5541616.691133985,
+                "cumulative_wbtc": 1976776.623411307,
+                "cumulative_usdc": 42102392.1526231,
+                "cumulative_dai": 12305529.829847591,
+                "cumulative_diff": -0.024628592217012857
+            },
+            {
+                "time": "2022-11-28T00:00:00Z",
+                "cumulative_tokens_value": 87108870.92295694,
+                "cumulative_format": 87.10887092295694,
+                "cumulative_usdt": 25744725.60617999,
+                "cumulative_weth": 5212681.435890566,
+                "cumulative_wbtc": 1560841.3522890424,
+                "cumulative_usdc": 42327507.417318135,
+                "cumulative_dai": 12263115.111279208,
+                "cumulative_diff": -0.03193867898425622
+            },
+            {
+                "time": "2022-11-27T00:00:00Z",
+                "cumulative_tokens_value": 84183619.95018852,
+                "cumulative_format": 84.18361995018851,
+                "cumulative_usdt": 24633831.79134999,
+                "cumulative_weth": 6118515.126324572,
+                "cumulative_wbtc": 1876593.4870034629,
+                "cumulative_usdc": 39582198.40871414,
+                "cumulative_dai": 11972481.136796359,
+                "cumulative_diff": -0.06569599106712949
+            },
+            {
+                "time": "2022-11-26T00:00:00Z",
+                "cumulative_tokens_value": 82172364.09303065,
+                "cumulative_format": 82.17236409303065,
+                "cumulative_usdt": 24779200.613002986,
+                "cumulative_weth": 6056911.58067695,
+                "cumulative_wbtc": 1851160.1084413412,
+                "cumulative_usdc": 38383152.95760417,
+                "cumulative_dai": 11101938.833305197,
+                "cumulative_diff": -0.07866475180524489
+            },
+            {
+                "time": "2022-11-25T00:00:00Z",
+                "cumulative_tokens_value": 80973092.3838285,
+                "cumulative_format": 80.9730923838285,
+                "cumulative_usdt": 24597792.27449999,
+                "cumulative_weth": 6155598.024383074,
+                "cumulative_wbtc": 1796691.5577277085,
+                "cumulative_usdc": 37331355.21353017,
+                "cumulative_dai": 11091655.313687563,
+                "cumulative_diff": -0.08331593613090195
+            },
+            {
+                "time": "2022-11-24T00:00:00Z",
+                "cumulative_tokens_value": 82512501.86996062,
+                "cumulative_format": 82.51250186996062,
+                "cumulative_usdt": 24253877.00864299,
+                "cumulative_weth": 5898815.40602197,
+                "cumulative_wbtc": 2132263.941127849,
+                "cumulative_usdc": 39171076.76446817,
+                "cumulative_dai": 11056468.749699645,
+                "cumulative_diff": -0.06771306076812192
+            },
+            {
+                "time": "2022-11-23T00:00:00Z",
+                "cumulative_tokens_value": 81651564.60313734,
+                "cumulative_format": 81.65156460313734,
+                "cumulative_usdt": 24310658.17878999,
+                "cumulative_weth": 5598318.691102541,
+                "cumulative_wbtc": 2206880.122339109,
+                "cumulative_usdc": 38481832.67405617,
+                "cumulative_dai": 11053874.936849536,
+                "cumulative_diff": -0.0313260849802161
+            },
+            {
+                "time": "2022-11-22T00:00:00Z",
+                "cumulative_tokens_value": 88675419.15664366,
+                "cumulative_format": 88.67541915664366,
+                "cumulative_usdt": 31751802.619698986,
+                "cumulative_weth": 5372599.423262704,
+                "cumulative_wbtc": 2190413.592382963,
+                "cumulative_usdc": 37759278.39643517,
+                "cumulative_dai": 11601325.124863824,
+                "cumulative_diff": 0.08544450859138272
+            },
+            {
+                "time": "2022-11-21T00:00:00Z",
+                "cumulative_tokens_value": 89891013.18804628,
+                "cumulative_format": 89.89101318804627,
+                "cumulative_usdt": 31797830.70833999,
+                "cumulative_weth": 5454339.928269194,
+                "cumulative_wbtc": 2400738.9750237926,
+                "cumulative_usdc": 38397256.54687917,
+                "cumulative_dai": 11840847.029534128,
+                "cumulative_diff": 0.10439309967786138
+            },
+            {
+                "time": "2022-11-20T00:00:00Z",
+                "cumulative_tokens_value": 89714146.29443473,
+                "cumulative_format": 89.71414629443473,
+                "cumulative_usdt": 31806868.43814499,
+                "cumulative_weth": 5816784.4506006,
+                "cumulative_wbtc": 2506977.547832099,
+                "cumulative_usdc": 38928469.68098417,
+                "cumulative_dai": 10655046.176872872,
+                "cumulative_diff": 0.03725856783313081
+            },
+            {
+                "time": "2022-11-19T00:00:00Z",
+                "cumulative_tokens_value": 88636432.71965912,
+                "cumulative_format": 88.63643271965913,
+                "cumulative_usdt": 31816346.237836987,
+                "cumulative_weth": 5857737.494529265,
+                "cumulative_wbtc": 2427382.5428155623,
+                "cumulative_usdc": 37883842.81723919,
+                "cumulative_dai": 10651123.627238119,
+                "cumulative_diff": 0.027417524830821122
+            },
+            {
+                "time": "2022-11-18T00:00:00Z",
+                "cumulative_tokens_value": 87719441.37720118,
+                "cumulative_format": 87.71944137720118,
+                "cumulative_usdt": 31804345.296309993,
+                "cumulative_weth": 5721795.348770887,
+                "cumulative_wbtc": 2166975.11786499,
+                "cumulative_usdc": 36562167.663466185,
+                "cumulative_dai": 11464157.950789131,
+                "cumulative_diff": 0.027659597028387647
+            },
+            {
+                "time": "2022-11-17T00:00:00Z",
+                "cumulative_tokens_value": 88099675.92321104,
+                "cumulative_format": 88.09967592321104,
+                "cumulative_usdt": 31804271.99964199,
+                "cumulative_weth": 5413150.737870997,
+                "cumulative_wbtc": 2148352.1820299383,
+                "cumulative_usdc": 37327865.558803186,
+                "cumulative_dai": 11406035.44486492,
+                "cumulative_diff": 0.04292927010648298
+            },
+            {
+                "time": "2022-11-16T00:00:00Z",
+                "cumulative_tokens_value": 84209388.45466283,
+                "cumulative_format": 84.20938845466283,
+                "cumulative_usdt": 31798303.90098899,
+                "cumulative_weth": 5888816.869297504,
+                "cumulative_wbtc": 2159969.2212680564,
+                "cumulative_usdc": 33540694.973027207,
+                "cumulative_dai": 10821603.490081076,
+                "cumulative_diff": -0.1222441191221423
+            },
+            {
+                "time": "2022-11-15T00:00:00Z",
+                "cumulative_tokens_value": 81098591.54266936,
+                "cumulative_format": 81.09859154266935,
+                "cumulative_usdt": 31804195.55205699,
+                "cumulative_weth": 5973523.0322555825,
+                "cumulative_wbtc": 1836730.5743201592,
+                "cumulative_usdc": 30150846.41204921,
+                "cumulative_dai": 11333295.971987402,
+                "cumulative_diff": -0.4875032093792416
+            },
+            {
+                "time": "2022-11-14T00:00:00Z",
+                "cumulative_tokens_value": 80507011.68816261,
+                "cumulative_format": 80.5070116881626,
+                "cumulative_usdt": 31787322.17620499,
+                "cumulative_weth": 5826567.596245392,
+                "cumulative_wbtc": 1772287.542858169,
+                "cumulative_usdc": 29634692.794173203,
+                "cumulative_dai": 11486141.578680854,
+                "cumulative_diff": -0.5498630921204595
+            },
+            {
+                "time": "2022-11-13T00:00:00Z",
+                "cumulative_tokens_value": 86371525.68913211,
+                "cumulative_format": 86.37152568913211,
+                "cumulative_usdt": 33208847.44358199,
+                "cumulative_weth": 5819367.823495801,
+                "cumulative_wbtc": 1762551.9092588439,
+                "cumulative_usdc": 34505779.09922223,
+                "cumulative_dai": 11074979.413573235,
+                "cumulative_diff": -0.40968451692320795
+            },
+            {
+                "time": "2022-11-12T00:00:00Z",
+                "cumulative_tokens_value": 86206241.12465246,
+                "cumulative_format": 86.20624112465246,
+                "cumulative_usdt": 33594765.99086699,
+                "cumulative_weth": 5546470.623048501,
+                "cumulative_wbtc": 1839921.1743514673,
+                "cumulative_usdc": 34198246.02590623,
+                "cumulative_dai": 11026837.310479283,
+                "cumulative_diff": -0.3982705395965037
+            },
+            {
+                "time": "2022-11-11T00:00:00Z",
+                "cumulative_tokens_value": 85293156.97715253,
+                "cumulative_format": 85.29315697715252,
+                "cumulative_usdt": 33549337.18723599,
+                "cumulative_weth": 5804989.283681783,
+                "cumulative_wbtc": 1827000.8476007027,
+                "cumulative_usdc": 33021126.609602228,
+                "cumulative_dai": 11090703.049031828,
+                "cumulative_diff": -0.34629004572467686
+            },
+            {
+                "time": "2022-11-10T00:00:00Z",
+                "cumulative_tokens_value": 84317621.1392099,
+                "cumulative_format": 84.31762113920989,
+                "cumulative_usdt": 34495560.36896599,
+                "cumulative_weth": 4732097.67633356,
+                "cumulative_wbtc": 1772335.8617619462,
+                "cumulative_usdc": 32543486.13062922,
+                "cumulative_dai": 10774141.101519179,
+                "cumulative_diff": -0.2945978985047478
+            },
+            {
+                "time": "2022-11-09T00:00:00Z",
+                "cumulative_tokens_value": 94503490.96811739,
+                "cumulative_format": 94.50349096811739,
+                "cumulative_usdt": 38509842.74069199,
+                "cumulative_weth": 5234491.556460573,
+                "cumulative_wbtc": 1775253.086988579,
+                "cumulative_usdc": 34353339.85109123,
+                "cumulative_dai": 14630563.732885014,
+                "cumulative_diff": -0.07416095270534681
+            },
+            {
+                "time": "2022-11-08T00:00:00Z",
+                "cumulative_tokens_value": 120634415.19585688,
+                "cumulative_format": 120.63441519585689,
+                "cumulative_usdt": 42206776.31755299,
+                "cumulative_weth": 7303705.639399315,
+                "cumulative_wbtc": 2783571.362744238,
+                "cumulative_usdc": 52641799.123533234,
+                "cumulative_dai": 15698562.752627108,
+                "cumulative_diff": 0.17512905739941828
+            },
+            {
+                "time": "2022-11-07T00:00:00Z",
+                "cumulative_tokens_value": 124774846.07239367,
+                "cumulative_format": 124.77484607239367,
+                "cumulative_usdt": 41501008.81498199,
+                "cumulative_weth": 8476834.855070151,
+                "cumulative_wbtc": 3433557.039567549,
+                "cumulative_usdc": 52566968.809374236,
+                "cumulative_dai": 18796476.55339976,
+                "cumulative_diff": 0.2713294872415326
+            },
+            {
+                "time": "2022-11-06T00:00:00Z",
+                "cumulative_tokens_value": 121756602.46700464,
+                "cumulative_format": 121.75660246700464,
+                "cumulative_usdt": 39237442.24198199,
+                "cumulative_weth": 8565393.756541345,
+                "cumulative_wbtc": 3530902.668476927,
+                "cumulative_usdc": 52935381.09322329,
+                "cumulative_dai": 17487482.706781093,
+                "cumulative_diff": 0.2650476674480429
+            },
+            {
+                "time": "2022-11-05T00:00:00Z",
+                "cumulative_tokens_value": 120539647.2939541,
+                "cumulative_format": 120.5396472939541,
+                "cumulative_usdt": 39205622.06995499,
+                "cumulative_weth": 7524816.584308669,
+                "cumulative_wbtc": 3546888.105960848,
+                "cumulative_usdc": 52973571.19815728,
+                "cumulative_dai": 17288749.33557232,
+                "cumulative_diff": 0.2615043477382311
+            },
+            {
+                "time": "2022-11-04T00:00:00Z",
+                "cumulative_tokens_value": 114829328.20677271,
+                "cumulative_format": 114.82932820677271,
+                "cumulative_usdt": 40372174.953366995,
+                "cumulative_weth": 7659603.541159412,
+                "cumulative_wbtc": 3230463.6673884448,
+                "cumulative_usdc": 47281314.53633128,
+                "cumulative_dai": 16285771.508526571,
+                "cumulative_diff": 0.23303928368774696
+            },
+            {
+                "time": "2022-11-03T00:00:00Z",
+                "cumulative_tokens_value": 109157415.13374063,
+                "cumulative_format": 109.15741513374063,
+                "cumulative_usdt": 39651267.52900499,
+                "cumulative_weth": 7911886.816554812,
+                "cumulative_wbtc": 3153533.7378864596,
+                "cumulative_usdc": 43231872.69406231,
+                "cumulative_dai": 15208854.35623208,
+                "cumulative_diff": 0.22379893893795705
+            },
+            {
+                "time": "2022-11-02T00:00:00Z",
+                "cumulative_tokens_value": 101511959.89229411,
+                "cumulative_format": 101.51195989229412,
+                "cumulative_usdt": 33653604.24517199,
+                "cumulative_weth": 8155824.774380907,
+                "cumulative_wbtc": 3071939.566915255,
+                "cumulative_usdc": 41780431.529803306,
+                "cumulative_dai": 14850159.776022641,
+                "cumulative_diff": 0.28127776848260067
+            },
+            {
+                "time": "2022-11-01T00:00:00Z",
+                "cumulative_tokens_value": 99507823.77267641,
+                "cumulative_format": 99.5078237726764,
+                "cumulative_usdt": 33337422.206641987,
+                "cumulative_weth": 7615035.020303183,
+                "cumulative_wbtc": 2727515.21067286,
+                "cumulative_usdc": 41662917.41153532,
+                "cumulative_dai": 14164933.923523052,
+                "cumulative_diff": 0.20594550215036386
+            },
+            {
+                "time": "2022-10-31T00:00:00Z",
+                "cumulative_tokens_value": 90919751.06692994,
+                "cumulative_format": 90.91975106692993,
+                "cumulative_usdt": 28248271.569474984,
+                "cumulative_weth": 7452242.089198887,
+                "cumulative_wbtc": 2407493.7527101543,
+                "cumulative_usdc": 39984496.10726132,
+                "cumulative_dai": 12827247.548284601,
+                "cumulative_diff": 0.0893964490915486
+            },
+            {
+                "time": "2022-10-30T00:00:00Z",
+                "cumulative_tokens_value": 89485298.98672643,
+                "cumulative_format": 89.48529898672643,
+                "cumulative_usdt": 27576813.786254987,
+                "cumulative_weth": 7489805.038738878,
+                "cumulative_wbtc": 2419168.2348396853,
+                "cumulative_usdc": 39303162.094832316,
+                "cumulative_dai": 12696349.832060575,
+                "cumulative_diff": 0.3208872456595532
+            },
+            {
+                "time": "2022-10-29T00:00:00Z",
+                "cumulative_tokens_value": 89018005.4517522,
+                "cumulative_format": 89.0180054517522,
+                "cumulative_usdt": 27524377.218805987,
+                "cumulative_weth": 7139933.873324595,
+                "cumulative_wbtc": 2426782.1288418504,
+                "cumulative_usdc": 39203884.19669531,
+                "cumulative_dai": 12723028.034084454,
+                "cumulative_diff": 0.37084657176372327
+            },
+            {
+                "time": "2022-10-28T00:00:00Z",
+                "cumulative_tokens_value": 88069583.8151212,
+                "cumulative_format": 88.0695838151212,
+                "cumulative_usdt": 26986354.258895986,
+                "cumulative_weth": 5959513.095037881,
+                "cumulative_wbtc": 2119469.465777197,
+                "cumulative_usdc": 40845670.311659314,
+                "cumulative_dai": 12158576.683750812,
+                "cumulative_diff": 0.34461114399149406
+            },
+            {
+                "time": "2022-10-27T00:00:00Z",
+                "cumulative_tokens_value": 84728101.44959939,
+                "cumulative_format": 84.72810144959938,
+                "cumulative_usdt": 26873905.45135399,
+                "cumulative_weth": 5954545.443088351,
+                "cumulative_wbtc": 2571912.0823650956,
+                "cumulative_usdc": 37316698.89911431,
+                "cumulative_dai": 12011039.57367764,
+                "cumulative_diff": 0.30033355348584617
+            },
+            {
+                "time": "2022-10-26T00:00:00Z",
+                "cumulative_tokens_value": 72958902.33949436,
+                "cumulative_format": 72.95890233949436,
+                "cumulative_usdt": 24799951.67521599,
+                "cumulative_weth": 5041848.248448404,
+                "cumulative_wbtc": 2743762.858146578,
+                "cumulative_usdc": 30755569.246876452,
+                "cumulative_dai": 9617770.310806941,
+                "cumulative_diff": -0.0383185546342193
+            },
+            {
+                "time": "2022-10-25T00:00:00Z",
+                "cumulative_tokens_value": 79014635.03792265,
+                "cumulative_format": 79.01463503792264,
+                "cumulative_usdt": 24169041.413712986,
+                "cumulative_weth": 4666495.413004471,
+                "cumulative_wbtc": 2842132.242236056,
+                "cumulative_usdc": 35468036.66243248,
+                "cumulative_dai": 11868929.306536667,
+                "cumulative_diff": -0.03686477531775998
+            },
+            {
+                "time": "2022-10-24T00:00:00Z",
+                "cumulative_tokens_value": 82791848.16925886,
+                "cumulative_format": 82.79184816925886,
+                "cumulative_usdt": 26972559.428906985,
+                "cumulative_weth": 4580272.515398543,
+                "cumulative_wbtc": 2494370.836492007,
+                "cumulative_usdc": 36068767.383356504,
+                "cumulative_dai": 12675878.00510483,
+                "cumulative_diff": 0.0030384040586443153
+            },
+            {
+                "time": "2022-10-23T00:00:00Z",
+                "cumulative_tokens_value": 60770607.867854185,
+                "cumulative_format": 60.77060786785419,
+                "cumulative_usdt": 21847243.808380984,
+                "cumulative_weth": 3346941.351394378,
+                "cumulative_wbtc": 2554475.5572933927,
+                "cumulative_usdc": 24490091.240957532,
+                "cumulative_dai": 8531855.909827895,
+                "cumulative_diff": -0.3556563653899873
+            },
+            {
+                "time": "2022-10-22T00:00:00Z",
+                "cumulative_tokens_value": 56005983.30472547,
+                "cumulative_format": 56.00598330472547,
+                "cumulative_usdt": 22477713.535118982,
+                "cumulative_weth": 3246131.0717966617,
+                "cumulative_wbtc": 2562707.3902871003,
+                "cumulative_usdc": 20078694.334645607,
+                "cumulative_dai": 7640736.972877126,
+                "cumulative_diff": -0.4479026250995689
+            },
+            {
+                "time": "2022-10-21T00:00:00Z",
+                "cumulative_tokens_value": 57719823.785737514,
+                "cumulative_format": 57.71982378573752,
+                "cumulative_usdt": 24485626.757767983,
+                "cumulative_weth": 3346381.051201733,
+                "cumulative_wbtc": 2538556.159819879,
+                "cumulative_usdc": 20072243.153776605,
+                "cumulative_dai": 7277016.663171305,
+                "cumulative_diff": -0.450744003671902
+            },
+            {
+                "time": "2022-10-20T00:00:00Z",
+                "cumulative_tokens_value": 59281409.661131926,
+                "cumulative_format": 59.281409661131924,
+                "cumulative_usdt": 24477311.303007983,
+                "cumulative_weth": 3668734.9564864906,
+                "cumulative_wbtc": 2555720.730080547,
+                "cumulative_usdc": 20904657.927424606,
+                "cumulative_dai": 7674984.744132305,
+                "cumulative_diff": -0.44865487900334455
+            },
+            {
+                "time": "2022-10-19T00:00:00Z",
+                "cumulative_tokens_value": 75754582.02484295,
+                "cumulative_format": 75.75458202484295,
+                "cumulative_usdt": 31446240.220502984,
+                "cumulative_weth": 4551902.98346531,
+                "cumulative_wbtc": 3077715.8101564506,
+                "cumulative_usdc": 25371329.306309603,
+                "cumulative_dai": 11307393.704408582,
+                "cumulative_diff": -0.15319595844376585
+            },
+            {
+                "time": "2022-10-18T00:00:00Z",
+                "cumulative_tokens_value": 81927491.80541047,
+                "cumulative_format": 81.92749180541047,
+                "cumulative_usdt": 30942952.580640983,
+                "cumulative_weth": 5613851.96722482,
+                "cumulative_wbtc": 3712854.6403970346,
+                "cumulative_usdc": 30357789.35385161,
+                "cumulative_dai": 11300043.26329603,
+                "cumulative_diff": -0.07229526021438966
+            },
+            {
+                "time": "2022-10-17T00:00:00Z",
+                "cumulative_tokens_value": 82540293.08175872,
+                "cumulative_format": 82.54029308175872,
+                "cumulative_usdt": 30990550.131875984,
+                "cumulative_weth": 4899973.395801144,
+                "cumulative_wbtc": 3737628.6628816584,
+                "cumulative_usdc": 31353562.465828612,
+                "cumulative_dai": 11558578.42537133,
+                "cumulative_diff": -0.12400569948638913
+            },
+            {
+                "time": "2022-10-16T00:00:00Z",
+                "cumulative_tokens_value": 82384061.38467537,
+                "cumulative_format": 82.38406138467536,
+                "cumulative_usdt": 30982369.890733987,
+                "cumulative_weth": 4881964.451685388,
+                "cumulative_wbtc": 3745673.146242873,
+                "cumulative_usdc": 31078717.723027617,
+                "cumulative_dai": 11695336.172985502,
+                "cumulative_diff": -0.49576129831328397
+            },
+            {
+                "time": "2022-10-15T00:00:00Z",
+                "cumulative_tokens_value": 81091210.24819463,
+                "cumulative_format": 81.09121024819464,
+                "cumulative_usdt": 30975163.61527898,
+                "cumulative_weth": 5705519.8006595215,
+                "cumulative_wbtc": 2347968.553456802,
+                "cumulative_usdc": 30371815.24351861,
+                "cumulative_dai": 11690743.035280716,
+                "cumulative_diff": -0.6408032203369896
+            },
+            {
+                "time": "2022-10-14T00:00:00Z",
+                "cumulative_tokens_value": 83736688.25015752,
+                "cumulative_format": 83.73668825015751,
+                "cumulative_usdt": 30974056.045246985,
+                "cumulative_weth": 5817896.2746495865,
+                "cumulative_wbtc": 4062203.7963932455,
+                "cumulative_usdc": 31801256.91019761,
+                "cumulative_dai": 11081275.223670106,
+                "cumulative_diff": -0.6403786130797828
+            },
+            {
+                "time": "2022-10-13T00:00:00Z",
+                "cumulative_tokens_value": 85878303.33979477,
+                "cumulative_format": 85.87830333979477,
+                "cumulative_usdt": 31464983.83315198,
+                "cumulative_weth": 5984827.625397206,
+                "cumulative_wbtc": 4032595.769259847,
+                "cumulative_usdc": 31838256.15238861,
+                "cumulative_dai": 12557639.959597118,
+                "cumulative_diff": -0.6624632867207778
+            },
+            {
+                "time": "2022-10-12T00:00:00Z",
+                "cumulative_tokens_value": 87359877.82464564,
+                "cumulative_format": 87.35987782464564,
+                "cumulative_usdt": 31497758.323236987,
+                "cumulative_weth": 6733633.178635614,
+                "cumulative_wbtc": 4075677.553135627,
+                "cumulative_usdc": 31972466.85016261,
+                "cumulative_dai": 13080341.919474788,
+                "cumulative_diff": -0.7607333467095402
+            },
+            {
+                "time": "2022-10-11T00:00:00Z",
+                "cumulative_tokens_value": 87850461.1441949,
+                "cumulative_format": 87.8504611441949,
+                "cumulative_usdt": 31590092.745837986,
+                "cumulative_weth": 7157500.960548986,
+                "cumulative_wbtc": 4064680.4145958554,
+                "cumulative_usdc": 31901048.619192608,
+                "cumulative_dai": 13137138.404019464,
+                "cumulative_diff": -0.7376544751380474
+            },
+            {
+                "time": "2022-10-10T00:00:00Z",
+                "cumulative_tokens_value": 92775759.86117378,
+                "cumulative_format": 92.77575986117378,
+                "cumulative_usdt": 37143178.410544984,
+                "cumulative_weth": 7418300.0938638225,
+                "cumulative_wbtc": 3998674.1529640798,
+                "cumulative_usdc": 31084123.246505603,
+                "cumulative_dai": 13131483.95729528,
+                "cumulative_diff": -0.7000195694051637
+            },
+            {
+                "time": "2022-10-09T00:00:00Z",
+                "cumulative_tokens_value": 123226890.61706331,
+                "cumulative_format": 123.22689061706332,
+                "cumulative_usdt": 38347086.99624498,
+                "cumulative_weth": 8540279.320451384,
+                "cumulative_wbtc": 4133477.4315226423,
+                "cumulative_usdc": 48088836.7428776,
+                "cumulative_dai": 24117210.12596669,
+                "cumulative_diff": -0.2988237831386055
+            },
+            {
+                "time": "2022-10-08T00:00:00Z",
+                "cumulative_tokens_value": 133054718.91626164,
+                "cumulative_format": 133.05471891626163,
+                "cumulative_usdt": 43476840.12562898,
+                "cumulative_weth": 8902034.292518804,
+                "cumulative_wbtc": 2544921.012314412,
+                "cumulative_usdc": 54001863.05712118,
+                "cumulative_dai": 24129060.42867825,
+                "cumulative_diff": -0.23014140603001748
+            },
+            {
+                "time": "2022-10-07T00:00:00Z",
+                "cumulative_tokens_value": 137359872.53568754,
+                "cumulative_format": 137.35987253568754,
+                "cumulative_usdt": 43807909.592413984,
+                "cumulative_weth": 8535492.598965997,
+                "cumulative_wbtc": 4196763.749735245,
+                "cumulative_usdc": 55801045.940563165,
+                "cumulative_dai": 25018660.65400915,
+                "cumulative_diff": -0.16165712892289252
+            },
+            {
+                "time": "2022-10-06T00:00:00Z",
+                "cumulative_tokens_value": 142769526.42827916,
+                "cumulative_format": 142.76952642827916,
+                "cumulative_usdt": 46543640.17226298,
+                "cumulative_weth": 8676406.575335786,
+                "cumulative_wbtc": 3804974.077826921,
+                "cumulative_usdc": 58268503.87708322,
+                "cumulative_dai": 25476001.72577026,
+                "cumulative_diff": -0.2616830368482655
+            },
+            {
+                "time": "2022-10-05T00:00:00Z",
+                "cumulative_tokens_value": 153817450.05032486,
+                "cumulative_format": 153.81745005032485,
+                "cumulative_usdt": 48599358.19820899,
+                "cumulative_weth": 10620078.37449276,
+                "cumulative_wbtc": 4615090.8984009,
+                "cumulative_usdc": 64462461.86647422,
+                "cumulative_dai": 25520460.712748013,
+                "cumulative_diff": -0.20945579507695353
+            },
+            {
+                "time": "2022-10-04T00:00:00Z",
+                "cumulative_tokens_value": 152653746.9501514,
+                "cumulative_format": 152.6537469501514,
+                "cumulative_usdt": 48638042.97795098,
+                "cumulative_weth": 9903622.170444777,
+                "cumulative_wbtc": 4355167.8909492,
+                "cumulative_usdc": 64432522.73704322,
+                "cumulative_dai": 25324391.173763253,
+                "cumulative_diff": -0.2267355847001111
+            },
+            {
+                "time": "2022-10-03T00:00:00Z",
+                "cumulative_tokens_value": 157720607.33042952,
+                "cumulative_format": 157.72060733042952,
+                "cumulative_usdt": 53467355.555196986,
+                "cumulative_weth": 9659647.347103648,
+                "cumulative_wbtc": 3858917.123970601,
+                "cumulative_usdc": 64724902.65848322,
+                "cumulative_dai": 26009784.64567508,
+                "cumulative_diff": -0.1819688245249786
+            },
+            {
+                "time": "2022-10-02T00:00:00Z",
+                "cumulative_tokens_value": 160050016.2556613,
+                "cumulative_format": 160.05001625566132,
+                "cumulative_usdt": 55555172.337319985,
+                "cumulative_weth": 10337990.66834933,
+                "cumulative_wbtc": 4619756.468177279,
+                "cumulative_usdc": 63067558.256073214,
+                "cumulative_dai": 26469538.525741503,
+                "cumulative_diff": -0.14797045041022588
+            },
+            {
+                "time": "2022-10-01T00:00:00Z",
+                "cumulative_tokens_value": 163676119.00657886,
+                "cumulative_format": 163.67611900657886,
+                "cumulative_usdt": 57542745.02075899,
+                "cumulative_weth": 11798768.448557274,
+                "cumulative_wbtc": 3849809.3878829116,
+                "cumulative_usdc": 64004923.002582215,
+                "cumulative_dai": 26479873.14679749,
+                "cumulative_diff": -0.14365063319818575
+            },
+            {
+                "time": "2022-09-30T00:00:00Z",
+                "cumulative_tokens_value": 159565075.15902126,
+                "cumulative_format": 159.56507515902126,
+                "cumulative_usdt": 57594953.83364698,
+                "cumulative_weth": 6531992.026751362,
+                "cumulative_wbtc": 4741550.100764844,
+                "cumulative_usdc": 64202115.30068521,
+                "cumulative_dai": 26494463.89717287,
+                "cumulative_diff": -0.19640899027063888
+            },
+            {
+                "time": "2022-09-29T00:00:00Z",
+                "cumulative_tokens_value": 180129889.67341995,
+                "cumulative_format": 180.12988967341994,
+                "cumulative_usdt": 62142921.11863598,
+                "cumulative_weth": 12224877.369657403,
+                "cumulative_wbtc": 4752460.260700748,
+                "cumulative_usdc": 73581143.0040372,
+                "cumulative_dai": 27428487.92038858,
+                "cumulative_diff": -0.11592970216652605
+            },
+            {
+                "time": "2022-09-28T00:00:00Z",
+                "cumulative_tokens_value": 186035406.34732524,
+                "cumulative_format": 186.03540634732525,
+                "cumulative_usdt": 63952858.50756298,
+                "cumulative_weth": 12331565.21322069,
+                "cumulative_wbtc": 4968486.147383998,
+                "cumulative_usdc": 76964706.80602719,
+                "cumulative_dai": 27817789.67313037,
+                "cumulative_diff": -0.08844469135890967
+            },
+            {
+                "time": "2022-09-27T00:00:00Z",
+                "cumulative_tokens_value": 187265783.5215568,
+                "cumulative_format": 187.26578352155678,
+                "cumulative_usdt": 64017609.043476984,
+                "cumulative_weth": 12703264.016579522,
+                "cumulative_wbtc": 5974425.189364947,
+                "cumulative_usdc": 76751576.4255652,
+                "cumulative_dai": 27818908.846570157,
+                "cumulative_diff": -0.10002990636823257
+            },
+            {
+                "time": "2022-09-26T00:00:00Z",
+                "cumulative_tokens_value": 186420840.8497135,
+                "cumulative_format": 186.4208408497135,
+                "cumulative_usdt": 63941198.672725976,
+                "cumulative_weth": 12256846.324361363,
+                "cumulative_wbtc": 5734357.868984186,
+                "cumulative_usdc": 76666481.98795219,
+                "cumulative_dai": 27821955.995689794,
+                "cumulative_diff": -0.10842038979261456
+            },
+            {
+                "time": "2022-09-25T00:00:00Z",
+                "cumulative_tokens_value": 183732689.2491755,
+                "cumulative_format": 183.73268924917548,
+                "cumulative_usdt": 64153477.70470798,
+                "cumulative_weth": 12267135.115737721,
+                "cumulative_wbtc": 6303193.091581478,
+                "cumulative_usdc": 73192520.07177319,
+                "cumulative_dai": 27816363.265375137,
+                "cumulative_diff": -0.1245981958512698
+            },
+            {
+                "time": "2022-09-24T00:00:00Z",
+                "cumulative_tokens_value": 187188297.14129552,
+                "cumulative_format": 187.18829714129552,
+                "cumulative_usdt": 64413751.476327986,
+                "cumulative_weth": 13837700.125852847,
+                "cumulative_wbtc": 6301518.784045905,
+                "cumulative_usdc": 74790512.69430418,
+                "cumulative_dai": 27844814.06076459,
+                "cumulative_diff": -0.08051577837737624
+            },
+            {
+                "time": "2022-09-23T00:00:00Z",
+                "cumulative_tokens_value": 190905090.45346323,
+                "cumulative_format": 190.90509045346323,
+                "cumulative_usdt": 64519157.996150985,
+                "cumulative_weth": 14090548.856462177,
+                "cumulative_wbtc": 6275007.536445596,
+                "cumulative_usdc": 74826183.1233162,
+                "cumulative_dai": 31194192.94108828,
+                "cumulative_diff": 0.05298782345268195
+            },
+            {
+                "time": "2022-09-22T00:00:00Z",
+                "cumulative_tokens_value": 201012294.13454872,
+                "cumulative_format": 201.0122941345487,
+                "cumulative_usdt": 65402149.300062984,
+                "cumulative_weth": 14477004.174620925,
+                "cumulative_wbtc": 6360634.134135406,
+                "cumulative_usdc": 83514180.09356318,
+                "cumulative_dai": 31258326.432166222,
+                "cumulative_diff": 0.1624803931697776
+            },
+            {
+                "time": "2022-09-21T00:00:00Z",
+                "cumulative_tokens_value": 202489250.44354376,
+                "cumulative_format": 202.48925044354377,
+                "cumulative_usdt": 65336727.126459986,
+                "cumulative_weth": 15339984.979579156,
+                "cumulative_wbtc": 6339824.864789954,
+                "cumulative_usdc": 83843470.86497918,
+                "cumulative_dai": 31629242.6077355,
+                "cumulative_diff": 0.11356829468465611
+            },
+            {
+                "time": "2022-09-20T00:00:00Z",
+                "cumulative_tokens_value": 205997962.31319183,
+                "cumulative_format": 205.99796231319183,
+                "cumulative_usdt": 64978618.16763398,
+                "cumulative_weth": 15763733.562044708,
+                "cumulative_wbtc": 6461336.581774492,
+                "cumulative_usdc": 86087831.41065818,
+                "cumulative_dai": 32706442.59108044,
+                "cumulative_diff": 0.09088261634478868
+            },
+            {
+                "time": "2022-09-19T00:00:00Z",
+                "cumulative_tokens_value": 206632661.0801064,
+                "cumulative_format": 206.6326610801064,
+                "cumulative_usdt": 68162619.23135397,
+                "cumulative_weth": 13313576.381706197,
+                "cumulative_wbtc": 6219844.740268427,
+                "cumulative_usdc": 86390888.21944518,
+                "cumulative_dai": 32545732.507332623,
+                "cumulative_diff": 0.07495123054861431
+            },
+            {
+                "time": "2022-09-18T00:00:00Z",
+                "cumulative_tokens_value": 206625450.84852475,
+                "cumulative_format": 206.62545084852474,
+                "cumulative_usdt": 69426079.16672298,
+                "cumulative_weth": 12562581.54467227,
+                "cumulative_wbtc": 5577933.748511987,
+                "cumulative_usdc": 86464599.66264418,
+                "cumulative_dai": 32594256.725973316,
+                "cumulative_diff": -0.04320936482947792
+            },
+            {
+                "time": "2022-09-17T00:00:00Z",
+                "cumulative_tokens_value": 202259908.58876252,
+                "cumulative_format": 202.25990858876253,
+                "cumulative_usdt": 67130698.16207299,
+                "cumulative_weth": 11717255.2154176,
+                "cumulative_wbtc": 5837061.729858076,
+                "cumulative_usdc": 84542503.54200017,
+                "cumulative_dai": 33032389.939413704,
+                "cumulative_diff": -0.04201372753318874
+            },
+            {
+                "time": "2022-09-16T00:00:00Z",
+                "cumulative_tokens_value": 180789445.22429684,
+                "cumulative_format": 180.78944522429683,
+                "cumulative_usdt": 57979304.560833976,
+                "cumulative_weth": 10467751.531565601,
+                "cumulative_wbtc": 5812392.367856251,
+                "cumulative_usdc": 80089359.74039418,
+                "cumulative_dai": 26440637.023646824,
+                "cumulative_diff": -0.21108026275763758
+            },
+            {
+                "time": "2022-09-15T00:00:00Z",
+                "cumulative_tokens_value": 168351737.55160826,
+                "cumulative_format": 168.35173755160827,
+                "cumulative_usdt": 51811891.44289297,
+                "cumulative_weth": 8280535.5096758995,
+                "cumulative_wbtc": 5320862.697523285,
+                "cumulative_usdc": 78692207.74162619,
+                "cumulative_dai": 24246240.159889918,
+                "cumulative_diff": -0.3208054392748806
+            },
+            {
+                "time": "2022-09-14T00:00:00Z",
+                "cumulative_tokens_value": 179492891.57869625,
+                "cumulative_format": 179.49289157869626,
+                "cumulative_usdt": 56699203.877459966,
+                "cumulative_weth": 8199579.572065584,
+                "cumulative_wbtc": 6309540.134844617,
+                "cumulative_usdc": 84565984.14529918,
+                "cumulative_dai": 23718583.849026885,
+                "cumulative_diff": -0.30996656826836244
+            },
+            {
+                "time": "2022-09-13T00:00:00Z",
+                "cumulative_tokens_value": 187276328.53647378,
+                "cumulative_format": 187.27632853647378,
+                "cumulative_usdt": 58152305.62853697,
+                "cumulative_weth": 9468848.338107951,
+                "cumulative_wbtc": 7250965.403082011,
+                "cumulative_usdc": 87492381.55164817,
+                "cumulative_dai": 24911827.61509868,
+                "cumulative_diff": -0.38833320991107617
+            },
+            {
+                "time": "2022-09-12T00:00:00Z",
+                "cumulative_tokens_value": 191145288.86061767,
+                "cumulative_format": 191.14528886061765,
+                "cumulative_usdt": 57647950.41527397,
+                "cumulative_weth": 10143953.247045232,
+                "cumulative_wbtc": 7732267.754344555,
+                "cumulative_usdc": 88874140.00262216,
+                "cumulative_dai": 26746977.441331707,
+                "cumulative_diff": -0.4047431768983288
+            },
+            {
+                "time": "2022-09-11T00:00:00Z",
+                "cumulative_tokens_value": 215553605.337294,
+                "cumulative_format": 215.55360533729402,
+                "cumulative_usdt": 62776663.165606976,
+                "cumulative_weth": 16138302.961075349,
+                "cumulative_wbtc": 7505283.793616353,
+                "cumulative_usdc": 99057740.87188417,
+                "cumulative_dai": 30075614.545111135,
+                "cumulative_diff": -0.36394559598813636
+            },
+            {
+                "time": "2022-09-10T00:00:00Z",
+                "cumulative_tokens_value": 210757601.27909845,
+                "cumulative_format": 210.75760127909845,
+                "cumulative_usdt": 61347275.364916965,
+                "cumulative_weth": 11958212.35744787,
+                "cumulative_wbtc": 7322151.185273442,
+                "cumulative_usdc": 99457795.56119917,
+                "cumulative_dai": 30672166.810260974,
+                "cumulative_diff": -0.40777244746637376
+            },
+            {
+                "time": "2022-09-09T00:00:00Z",
+                "cumulative_tokens_value": 218950528.82604894,
+                "cumulative_format": 218.95052882604895,
+                "cumulative_usdt": 74864789.35325897,
+                "cumulative_weth": 13058368.521369036,
+                "cumulative_wbtc": 7066430.186762722,
+                "cumulative_usdc": 93141014.33854218,
+                "cumulative_dai": 30819926.426116064,
+                "cumulative_diff": -0.39951056170130034
+            },
+            {
+                "time": "2022-09-08T00:00:00Z",
+                "cumulative_tokens_value": 222359890.66954136,
+                "cumulative_format": 222.35989066954136,
+                "cumulative_usdt": 74712656.18407996,
+                "cumulative_weth": 14892785.57456975,
+                "cumulative_wbtc": 6039870.31980256,
+                "cumulative_usdc": 93635868.45145518,
+                "cumulative_dai": 33078710.139633924,
+                "cumulative_diff": -0.31611716534953443
+            },
+            {
+                "time": "2022-09-07T00:00:00Z",
+                "cumulative_tokens_value": 235129687.20990998,
+                "cumulative_format": 235.12968720990997,
+                "cumulative_usdt": 85098497.81409396,
+                "cumulative_weth": 15588858.203758309,
+                "cumulative_wbtc": 5904435.5584398005,
+                "cumulative_usdc": 92340571.09761918,
+                "cumulative_dai": 36197324.53599875,
+                "cumulative_diff": -0.16811293575095407
+            },
+            {
+                "time": "2022-09-06T00:00:00Z",
+                "cumulative_tokens_value": 260001946.33740392,
+                "cumulative_format": 260.0019463374039,
+                "cumulative_usdt": 87090181.56800097,
+                "cumulative_weth": 23760733.743495878,
+                "cumulative_wbtc": 6525866.944716405,
+                "cumulative_usdc": 106343713.62724417,
+                "cumulative_dai": 36281450.453946516,
+                "cumulative_diff": -0.04103427368490145
+            },
+            {
+                "time": "2022-09-05T00:00:00Z",
+                "cumulative_tokens_value": 268510040.3232128,
+                "cumulative_format": 268.5100403232128,
+                "cumulative_usdt": 86543817.39652596,
+                "cumulative_weth": 28941319.81757064,
+                "cumulative_wbtc": 9564329.540455384,
+                "cumulative_usdc": 104948825.38745117,
+                "cumulative_dai": 38511748.18120961,
+                "cumulative_diff": -0.23876028114976713
+            },
+            {
+                "time": "2022-09-04T00:00:00Z",
+                "cumulative_tokens_value": 294003390.699167,
+                "cumulative_format": 294.003390699167,
+                "cumulative_usdt": 93382980.35432696,
+                "cumulative_weth": 31978130.086285263,
+                "cumulative_wbtc": 11329670.10492042,
+                "cumulative_usdc": 118334737.69458115,
+                "cumulative_dai": 38977872.45905316,
+                "cumulative_diff": -0.13457842052867658
+            },
+            {
+                "time": "2022-09-03T00:00:00Z",
+                "cumulative_tokens_value": 296698744.1748186,
+                "cumulative_format": 296.69874417481856,
+                "cumulative_usdt": 96074227.56307496,
+                "cumulative_weth": 32205759.102841042,
+                "cumulative_wbtc": 5610303.56334822,
+                "cumulative_usdc": 122083827.91133916,
+                "cumulative_dai": 40724626.03421515,
+                "cumulative_diff": -0.14779723459481475
+            },
+            {
+                "time": "2022-09-02T00:00:00Z",
+                "cumulative_tokens_value": 306423577.5821405,
+                "cumulative_format": 306.4235775821405,
+                "cumulative_usdt": 97900497.86325395,
+                "cumulative_weth": 33024583.817753896,
+                "cumulative_wbtc": 12250435.762217717,
+                "cumulative_usdc": 122297529.26724017,
+                "cumulative_dai": 40950530.871674694,
+                "cumulative_diff": -0.13511130495730037
+            },
+            {
+                "time": "2022-09-01T00:00:00Z",
+                "cumulative_tokens_value": 292651668.99542916,
+                "cumulative_format": 292.65166899542913,
+                "cumulative_usdt": 95291838.83701196,
+                "cumulative_weth": 32560954.216934443,
+                "cumulative_wbtc": 12215052.100436177,
+                "cumulative_usdc": 111996767.61077017,
+                "cumulative_dai": 40587056.23027638,
+                "cumulative_diff": -0.21454010698218906
+            },
+            {
+                "time": "2022-08-31T00:00:00Z",
+                "cumulative_tokens_value": 274658029.2089715,
+                "cumulative_format": 274.6580292089715,
+                "cumulative_usdt": 74078785.35462996,
+                "cumulative_weth": 29874653.46371922,
+                "cumulative_wbtc": 12327917.009470453,
+                "cumulative_usdc": 108214614.05986515,
+                "cumulative_dai": 50162059.32128666,
+                "cumulative_diff": -0.2927313879209546
+            },
+            {
+                "time": "2022-08-30T00:00:00Z",
+                "cumulative_tokens_value": 270670937.36202,
+                "cumulative_format": 270.67093736202,
+                "cumulative_usdt": 75515132.72789097,
+                "cumulative_weth": 29899563.394272193,
+                "cumulative_wbtc": 12849455.568993311,
+                "cumulative_usdc": 106215102.84765016,
+                "cumulative_dai": 46191682.823213376,
+                "cumulative_diff": -0.3020843541033472
+            },
+            {
+                "time": "2022-08-29T00:00:00Z",
+                "cumulative_tokens_value": 332619573.0423184,
+                "cumulative_format": 332.6195730423184,
+                "cumulative_usdt": 99464316.83361396,
+                "cumulative_weth": 34779130.31601563,
+                "cumulative_wbtc": 14255167.374318965,
+                "cumulative_usdc": 122568240.65808715,
+                "cumulative_dai": 61552717.86028275,
+                "cumulative_diff": -0.1573110456942903
+            },
+            {
+                "time": "2022-08-28T00:00:00Z",
+                "cumulative_tokens_value": 333569902.6495363,
+                "cumulative_format": 333.5699026495363,
+                "cumulative_usdt": 99146565.50756596,
+                "cumulative_weth": 37415183.89777866,
+                "cumulative_wbtc": 14260469.150263503,
+                "cumulative_usdc": 125688202.85135116,
+                "cumulative_dai": 57059481.242576934,
+                "cumulative_diff": -0.17685084450796526
+            },
+            {
+                "time": "2022-08-27T00:00:00Z",
+                "cumulative_tokens_value": 340549998.07161117,
+                "cumulative_format": 340.5499980716112,
+                "cumulative_usdt": 100210023.34944396,
+                "cumulative_weth": 37803565.363586776,
+                "cumulative_wbtc": 14456607.462105647,
+                "cumulative_usdc": 129330592.53510118,
+                "cumulative_dai": 58749209.3613736,
+                "cumulative_diff": -0.1803804874168908
+            },
+            {
+                "time": "2022-08-26T00:00:00Z",
+                "cumulative_tokens_value": 347824867.0189481,
+                "cumulative_format": 347.82486701894805,
+                "cumulative_usdt": 101356522.38692696,
+                "cumulative_weth": 39973379.604438186,
+                "cumulative_wbtc": 15700056.31956199,
+                "cumulative_usdc": 132916164.85096717,
+                "cumulative_dai": 57878743.8570538,
+                "cumulative_diff": -0.20305175928253338
+            },
+            {
+                "time": "2022-08-25T00:00:00Z",
+                "cumulative_tokens_value": 355437189.3702247,
+                "cumulative_format": 355.4371893702247,
+                "cumulative_usdt": 106517769.25221996,
+                "cumulative_weth": 41727864.07422328,
+                "cumulative_wbtc": 16035107.988815807,
+                "cumulative_usdc": 133981764.38368016,
+                "cumulative_dai": 57174683.67128557,
+                "cumulative_diff": -0.20256329173341633
+            },
+            {
+                "time": "2022-08-24T00:00:00Z",
+                "cumulative_tokens_value": 355059055.3029478,
+                "cumulative_format": 355.0590553029478,
+                "cumulative_usdt": 107791811.09453796,
+                "cumulative_weth": 40625457.510790795,
+                "cumulative_wbtc": 15909096.247289384,
+                "cumulative_usdc": 134955790.19783416,
+                "cumulative_dai": 55776900.25249551,
+                "cumulative_diff": -0.2082371432122228
+            },
+            {
+                "time": "2022-08-23T00:00:00Z",
+                "cumulative_tokens_value": 352436392.6495734,
+                "cumulative_format": 352.4363926495734,
+                "cumulative_usdt": 107418434.19730596,
+                "cumulative_weth": 39600275.853556305,
+                "cumulative_wbtc": 15782572.872077558,
+                "cumulative_usdc": 135024804.38669816,
+                "cumulative_dai": 54610305.33993541,
+                "cumulative_diff": -0.22590825493855152
+            },
+            {
+                "time": "2022-08-22T00:00:00Z",
+                "cumulative_tokens_value": 384944305.8959939,
+                "cumulative_format": 384.94430589599386,
+                "cumulative_usdt": 104810776.91032197,
+                "cumulative_weth": 43261201.978192165,
+                "cumulative_wbtc": 15938666.006552415,
+                "cumulative_usdc": 137195941.31777015,
+                "cumulative_dai": 83737719.68315716,
+                "cumulative_diff": -0.30253622423432097
+            },
+            {
+                "time": "2022-08-21T00:00:00Z",
+                "cumulative_tokens_value": 392562021.63554657,
+                "cumulative_format": 392.56202163554656,
+                "cumulative_usdt": 104315426.15134597,
+                "cumulative_weth": 44259670.618243694,
+                "cumulative_wbtc": 15951696.301939206,
+                "cumulative_usdc": 142357541.38397413,
+                "cumulative_dai": 85677687.1800436,
+                "cumulative_diff": -0.33940607284419455
+            },
+            {
+                "time": "2022-08-20T00:00:00Z",
+                "cumulative_tokens_value": 401978572.7135896,
+                "cumulative_format": 401.9785727135896,
+                "cumulative_usdt": 105668611.04105896,
+                "cumulative_weth": 45415760.99494681,
+                "cumulative_wbtc": 14701704.234351125,
+                "cumulative_usdc": 146451658.79777816,
+                "cumulative_dai": 89740837.64545459,
+                "cumulative_diff": -0.28131732191175507
+            },
+            {
+                "time": "2022-08-19T00:00:00Z",
+                "cumulative_tokens_value": 418451318.1893587,
+                "cumulative_format": 418.4513181893587,
+                "cumulative_usdt": 106700381.29032797,
+                "cumulative_weth": 48716179.55154967,
+                "cumulative_wbtc": 15176380.76257838,
+                "cumulative_usdc": 155534507.34025615,
+                "cumulative_dai": 92323869.24464653,
+                "cumulative_diff": -0.23573199178327964
+            },
+            {
+                "time": "2022-08-18T00:00:00Z",
+                "cumulative_tokens_value": 427435716.4535311,
+                "cumulative_format": 427.4357164535311,
+                "cumulative_usdt": 105604899.15093496,
+                "cumulative_weth": 52489738.097395025,
+                "cumulative_wbtc": 16576568.518823279,
+                "cumulative_usdc": 159593631.10488814,
+                "cumulative_dai": 93170879.58148965,
+                "cumulative_diff": -0.0824325302508028
+            },
+            {
+                "time": "2022-08-17T00:00:00Z",
+                "cumulative_tokens_value": 428995538.6508643,
+                "cumulative_format": 428.9955386508643,
+                "cumulative_usdt": 103598727.54238597,
+                "cumulative_weth": 52931291.66248298,
+                "cumulative_wbtc": 16703492.032087542,
+                "cumulative_usdc": 161523798.24155316,
+                "cumulative_dai": 94238229.1723547,
+                "cumulative_diff": 0.060928046762618426
+            },
+            {
+                "time": "2022-08-16T00:00:00Z",
+                "cumulative_tokens_value": 432054683.08987665,
+                "cumulative_format": 432.0546830898767,
+                "cumulative_usdt": 101611010.93942598,
+                "cumulative_weth": 54825298.04940386,
+                "cumulative_wbtc": 16912711.03359589,
+                "cumulative_usdc": 164016600.96269715,
+                "cumulative_dai": 94689062.10475378,
+                "cumulative_diff": 0.077406985191537
+            },
+            {
+                "time": "2022-08-15T00:00:00Z",
+                "cumulative_tokens_value": 501403902.74226934,
+                "cumulative_format": 501.40390274226934,
+                "cumulative_usdt": 138332159.48605695,
+                "cumulative_weth": 57171934.92079618,
+                "cumulative_wbtc": 17200374.554613177,
+                "cumulative_usdc": 171787336.14914015,
+                "cumulative_dai": 116912097.63166283,
+                "cumulative_diff": 0.21732487535768105
+            },
+            {
+                "time": "2022-08-14T00:00:00Z",
+                "cumulative_tokens_value": 525799955.74664515,
+                "cumulative_format": 525.7999557466452,
+                "cumulative_usdt": 130533526.40858394,
+                "cumulative_weth": 71048878.21884742,
+                "cumulative_wbtc": 18974323.256507672,
+                "cumulative_usdc": 187371527.63073915,
+                "cumulative_dai": 117871700.23196694,
+                "cumulative_diff": 0.3489026283063645
+            },
+            {
+                "time": "2022-08-13T00:00:00Z",
+                "cumulative_tokens_value": 515062108.25528634,
+                "cumulative_format": 515.0621082552864,
+                "cumulative_usdt": 125063863.53563896,
+                "cumulative_weth": 63413392.24192716,
+                "cumulative_wbtc": 18831637.77629547,
+                "cumulative_usdc": 184977942.63995317,
+                "cumulative_dai": 122775272.06147155,
+                "cumulative_diff": 0.3925571479671261
+            },
+            {
+                "time": "2022-08-12T00:00:00Z",
+                "cumulative_tokens_value": 517093680.89047515,
+                "cumulative_format": 517.0936808904752,
+                "cumulative_usdt": 131228720.23962894,
+                "cumulative_weth": 59729234.75170998,
+                "cumulative_wbtc": 17300110.221648354,
+                "cumulative_usdc": 185270541.12939614,
+                "cumulative_dai": 123565074.5480917,
+                "cumulative_diff": 0.4276099085709453
+            },
+            {
+                "time": "2022-08-11T00:00:00Z",
+                "cumulative_tokens_value": 462670324.08036035,
+                "cumulative_format": 462.67032408036033,
+                "cumulative_usdt": 126971634.20103694,
+                "cumulative_weth": 50134576.99714783,
+                "cumulative_wbtc": 15839538.114259224,
+                "cumulative_usdc": 177582626.66099414,
+                "cumulative_dai": 92141948.10692221,
+                "cumulative_diff": 0.43363436004168465
+            },
+            {
+                "time": "2022-08-10T00:00:00Z",
+                "cumulative_tokens_value": 402857678.41098976,
+                "cumulative_format": 402.85767841098976,
+                "cumulative_usdt": 108632541.72000393,
+                "cumulative_weth": 45693346.45196138,
+                "cumulative_wbtc": 16615276.287934422,
+                "cumulative_usdc": 141929302.95279315,
+                "cumulative_dai": 89987210.99829686,
+                "cumulative_diff": 0.46097140129128605
+            },
+            {
+                "time": "2022-08-09T00:00:00Z",
+                "cumulative_tokens_value": 398610632.63400435,
+                "cumulative_format": 398.61063263400433,
+                "cumulative_usdt": 108074358.59563693,
+                "cumulative_weth": 45931612.11886345,
+                "cumulative_wbtc": 16629001.186207574,
+                "cumulative_usdc": 141418349.04948115,
+                "cumulative_dai": 86557311.68381524,
+                "cumulative_diff": 0.4992375893920828
+            },
+            {
+                "time": "2022-08-08T00:00:00Z",
+                "cumulative_tokens_value": 392436362.0749508,
+                "cumulative_format": 392.4363620749508,
+                "cumulative_usdt": 106861008.67989694,
+                "cumulative_weth": 51605465.85243954,
+                "cumulative_wbtc": 13059247.871972755,
+                "cumulative_usdc": 141979542.7127571,
+                "cumulative_dai": 78931096.95788446,
+                "cumulative_diff": 0.5047062591068838
+            },
+            {
+                "time": "2022-08-07T00:00:00Z",
+                "cumulative_tokens_value": 342346969.22327054,
+                "cumulative_format": 342.34696922327055,
+                "cumulative_usdt": 95824413.17971095,
+                "cumulative_weth": 40936397.90039708,
+                "cumulative_wbtc": 9295024.318085175,
+                "cumulative_usdc": 120456578.6071311,
+                "cumulative_dai": 75834555.21794626,
+                "cumulative_diff": 0.4511792916090583
+            },
+            {
+                "time": "2022-08-06T00:00:00Z",
+                "cumulative_tokens_value": 312870796.012656,
+                "cumulative_format": 312.870796012656,
+                "cumulative_usdt": 85697074.44078693,
+                "cumulative_weth": 39564022.37348277,
+                "cumulative_wbtc": 8564740.749954704,
+                "cumulative_usdc": 115164665.75256911,
+                "cumulative_dai": 63880292.6958624,
+                "cumulative_diff": 0.3369439816988998
+            },
+            {
+                "time": "2022-08-05T00:00:00Z",
+                "cumulative_tokens_value": 295979299.2822855,
+                "cumulative_format": 295.9792992822855,
+                "cumulative_usdt": 83816416.61742994,
+                "cumulative_weth": 38476209.77244889,
+                "cumulative_wbtc": 8082017.4633302,
+                "cumulative_usdc": 102508613.2772151,
+                "cumulative_dai": 63096042.151861414,
+                "cumulative_diff": 0.21291750502470863
+            },
+            {
+                "time": "2022-08-04T00:00:00Z",
+                "cumulative_tokens_value": 262040574.18749446,
+                "cumulative_format": 262.0405741874945,
+                "cumulative_usdt": 68071070.64746594,
+                "cumulative_weth": 36829520.429124065,
+                "cumulative_wbtc": 8243580.43962176,
+                "cumulative_usdc": 88095033.6163501,
+                "cumulative_dai": 60801369.05493261,
+                "cumulative_diff": 0.03136014754030885
+            },
+            {
+                "time": "2022-08-03T00:00:00Z",
+                "cumulative_tokens_value": 217151809.87292153,
+                "cumulative_format": 217.15180987292152,
+                "cumulative_usdt": 56364973.82716595,
+                "cumulative_weth": 26779307.596167475,
+                "cumulative_wbtc": 7399027.034947785,
+                "cumulative_usdc": 81840438.21767512,
+                "cumulative_dai": 44768063.19696518,
+                "cumulative_diff": -0.21011963405291856
+            },
+            {
+                "time": "2022-08-02T00:00:00Z",
+                "cumulative_tokens_value": 199609221.29175094,
+                "cumulative_format": 199.60922129175094,
+                "cumulative_usdt": 54621905.54456295,
+                "cumulative_weth": 25646195.35852047,
+                "cumulative_wbtc": 7396602.396871537,
+                "cumulative_usdc": 70038283.47317912,
+                "cumulative_dai": 41906234.51861689,
+                "cumulative_diff": -1.5192393413835246
+            },
+            {
+                "time": "2022-08-01T00:00:00Z",
+                "cumulative_tokens_value": 194371273.8345878,
+                "cumulative_format": 194.3712738345878,
+                "cumulative_usdt": 54852574.35896894,
+                "cumulative_weth": 24601445.563640088,
+                "cumulative_wbtc": 8500898.810953278,
+                "cumulative_usdc": 68479374.21324112,
+                "cumulative_dai": 37936980.88778439,
+                "cumulative_diff": 0.5761284917879607
+            },
+            {
+                "time": "2022-07-31T00:00:00Z",
+                "cumulative_tokens_value": 187887106.16460726,
+                "cumulative_format": 187.88710616460725,
+                "cumulative_usdt": 55494837.168757945,
+                "cumulative_weth": 24436939.694890052,
+                "cumulative_wbtc": 8720933.342761384,
+                "cumulative_usdc": 66702188.08564611,
+                "cumulative_dai": 32532207.872551776,
+                "cumulative_diff": 0.9772016328504474
+            },
+            {
+                "time": "2022-07-30T00:00:00Z",
+                "cumulative_tokens_value": 207450864.24684742,
+                "cumulative_format": 207.45086424684743,
+                "cumulative_usdt": 52319555.41706095,
+                "cumulative_weth": 27397908.593105465,
+                "cumulative_wbtc": 12199013.253950667,
+                "cumulative_usdc": 65550971.59236611,
+                "cumulative_dai": 49983415.390364245,
+                "cumulative_diff": null
+            },
+            {
+                "time": "2022-07-29T00:00:00Z",
+                "cumulative_tokens_value": 232960125.34013975,
+                "cumulative_format": 232.96012534013974,
+                "cumulative_usdt": 59959863.94858995,
+                "cumulative_weth": 27857114.859555557,
+                "cumulative_wbtc": 12192652.314070184,
+                "cumulative_usdc": 75632738.9329871,
+                "cumulative_dai": 57317755.28493698,
+                "cumulative_diff": null
+            },
+            {
+                "time": "2022-07-28T00:00:00Z",
+                "cumulative_tokens_value": 253822943.11942738,
+                "cumulative_format": 253.82294311942738,
+                "cumulative_usdt": 63383588.85754395,
+                "cumulative_weth": 31183762.27562146,
+                "cumulative_wbtc": 12618475.115708293,
+                "cumulative_usdc": 82379041.98751709,
+                "cumulative_dai": 64258074.8830366,
+                "cumulative_diff": null
+            },
+            {
+                "time": "2022-07-27T00:00:00Z",
+                "cumulative_tokens_value": 262779668.69734874,
+                "cumulative_format": 262.77966869734877,
+                "cumulative_usdt": 62062523.99512495,
+                "cumulative_weth": 28404384.264278717,
+                "cumulative_wbtc": 15942237.150919396,
+                "cumulative_usdc": 84862187.8973651,
+                "cumulative_dai": 71508335.38966058,
+                "cumulative_diff": null
+            },
+            {
+                "time": "2022-07-26T00:00:00Z",
+                "cumulative_tokens_value": 502863403.18110883,
+                "cumulative_format": 502.8634031811088,
+                "cumulative_usdt": 121200032.12086895,
+                "cumulative_weth": 80386569.41692254,
+                "cumulative_wbtc": 16422252.041602802,
+                "cumulative_usdc": 176558937.7280531,
+                "cumulative_dai": 108295611.87366149,
+                "cumulative_diff": null
+            },
+            {
+                "time": "2022-07-25T00:00:00Z",
+                "cumulative_tokens_value": 82388444.99336204,
+                "cumulative_format": 82.38844499336204,
+                "cumulative_usdt": 16040278.890364008,
+                "cumulative_weth": 14191961.407983603,
+                "cumulative_wbtc": 6901763.273186539,
+                "cumulative_usdc": 22317944.456347995,
+                "cumulative_dai": 22936496.965479895,
+                "cumulative_diff": null
+            },
+            {
+                "time": "2022-07-24T00:00:00Z",
+                "cumulative_tokens_value": 4283519.229007683,
+                "cumulative_format": 4.283519229007683,
+                "cumulative_usdt": 478428.3149500005,
+                "cumulative_weth": 1215038.4427669435,
+                "cumulative_wbtc": 1161293.1804823251,
+                "cumulative_usdc": 960777.6827150004,
+                "cumulative_dai": 467981.60809341306,
+                "cumulative_diff": null
+            }
+        ]
+    };
+});
 define("@scom/scom-dune/dummy/dashboard.json.ts", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -36851,6 +46462,380 @@ define("@scom/scom-dune/dummy/dashboard.json.ts", ["require", "exports"], functi
                             "__typename": "visualizations"
                         },
                         "__typename": "visualization_widgets"
+                    },
+                    {
+                        "id": 416309,
+                        "created_at": "2022-08-12T10:22:52.398565+00:00",
+                        "updated_at": "2023-04-20T07:24:55.367512+00:00",
+                        "options": {
+                            "position": {
+                                "col": 1,
+                                "row": 24,
+                                "sizeX": 5,
+                                "sizeY": 9
+                            }
+                        },
+                        "visualization": {
+                            "id": 1972041,
+                            "type": "chart",
+                            "name": "$RDNT Price Chart",
+                            "options": {
+                                "sortX": true,
+                                "xAxis": {
+                                    "type": "-"
+                                },
+                                "yAxis": [
+                                    {
+                                        "type": "-",
+                                        "tickFormat": "$0[].00a"
+                                    },
+                                    {
+                                        "type": "-",
+                                        "tickFormat": "$0[].00a"
+                                    }
+                                ],
+                                "legend": {
+                                    "enabled": false
+                                },
+                                "reverseX": false,
+                                "numberFormat": "$0[.,].00",
+                                "columnMapping": {
+                                    "time": "x",
+                                    "rdnt_price": "y",
+                                    "red_volume": "y",
+                                    "green_volume": "y"
+                                },
+                                "seriesOptions": {
+                                    "rdnt_price": {
+                                        "name": "Price",
+                                        "type": "area",
+                                        "yAxis": 0,
+                                        "zIndex": 0
+                                    },
+                                    "red_volume": {
+                                        "name": "$USD Volume",
+                                        "type": "column",
+                                        "color": "#f51818",
+                                        "yAxis": 1,
+                                        "zIndex": 2
+                                    },
+                                    "green_volume": {
+                                        "name": "$USD Volume",
+                                        "type": "column",
+                                        "color": "#4fa0e0",
+                                        "yAxis": 1,
+                                        "zIndex": 1
+                                    }
+                                },
+                                "valuesOptions": {},
+                                "globalSeriesType": "line",
+                                "numberFormatRightYAxisSeries": "$0[.,].00"
+                            },
+                            "created_at": "2022-08-10T03:35:14.946473+00:00",
+                            "query_details": {
+                                "query_id": 1154848,
+                                "name": "RDNT Price Chart on Arbitrum and BSC",
+                                "description": "RDNT Price and Volume Chart on Arbitrum and BSC",
+                                "show_watermark": true,
+                                "parameters": [],
+                                "dataset_id": 1,
+                                "user": {
+                                    "id": 26781,
+                                    "name": "shogun",
+                                    "profile_image_url": "https://prod-dune-media.s3.eu-west-1.amazonaws.com/profile_img_a2d00e92-d62e-4d60-a92d-f15cf1421ee9_tgatu.png",
+                                    "__typename": "users"
+                                },
+                                "team": null,
+                                "__typename": "query_details"
+                            },
+                            "__typename": "visualizations"
+                        },
+                        "__typename": "visualization_widgets"
+                    },
+                    {
+                        "id": 889832,
+                        "created_at": "2023-02-11T10:46:06.481704+00:00",
+                        "updated_at": "2023-04-20T07:24:55.367512+00:00",
+                        "options": {
+                            "position": {
+                                "col": 0,
+                                "row": 36,
+                                "sizeX": 6,
+                                "sizeY": 7
+                            }
+                        },
+                        "visualization": {
+                            "id": 3290785,
+                            "type": "chart",
+                            "name": "Holders OverTime",
+                            "options": {
+                                "sortX": true,
+                                "xAxis": {
+                                    "type": "-"
+                                },
+                                "yAxis": [
+                                    {
+                                        "type": "linear"
+                                    },
+                                    {
+                                        "type": "linear"
+                                    }
+                                ],
+                                "legend": {
+                                    "enabled": false
+                                },
+                                "reverseX": false,
+                                "columnMapping": {
+                                    "time": "x",
+                                    "red_change": "y",
+                                    "green_change": "y",
+                                    "total_holders": "y"
+                                },
+                                "seriesOptions": {
+                                    "red_change": {
+                                        "name": "Change",
+                                        "type": "column",
+                                        "color": "#ff0000",
+                                        "yAxis": 1,
+                                        "zIndex": 2
+                                    },
+                                    "green_change": {
+                                        "name": "Change",
+                                        "type": "column",
+                                        "color": "#00ff17",
+                                        "yAxis": 1,
+                                        "zIndex": 1
+                                    },
+                                    "total_holders": {
+                                        "name": "Total Holders",
+                                        "type": "line",
+                                        "yAxis": 0,
+                                        "zIndex": 0
+                                    }
+                                },
+                                "valuesOptions": {},
+                                "globalSeriesType": "line"
+                            },
+                            "created_at": "2023-02-11T10:17:12.865265+00:00",
+                            "query_details": {
+                                "query_id": 947867,
+                                "name": "RDNT and RDNT V2 Holders Overtime",
+                                "description": "",
+                                "show_watermark": true,
+                                "parameters": [],
+                                "dataset_id": 11,
+                                "user": {
+                                    "id": 26781,
+                                    "name": "shogun",
+                                    "profile_image_url": "https://prod-dune-media.s3.eu-west-1.amazonaws.com/profile_img_a2d00e92-d62e-4d60-a92d-f15cf1421ee9_tgatu.png",
+                                    "__typename": "users"
+                                },
+                                "team": null,
+                                "__typename": "query_details"
+                            },
+                            "__typename": "visualizations"
+                        },
+                        "__typename": "visualization_widgets"
+                    },
+                    {
+                        "id": 774920,
+                        "created_at": "2023-01-15T03:09:40.193204+00:00",
+                        "updated_at": "2023-04-20T07:24:55.367512+00:00",
+                        "options": {
+                            "position": {
+                                "col": 4,
+                                "row": 46,
+                                "sizeX": 2,
+                                "sizeY": 9
+                            }
+                        },
+                        "visualization": {
+                            "id": 3115958,
+                            "type": "chart",
+                            "name": "RDNT/WETH LP Staked Supply",
+                            "options": {
+                                "sortX": true,
+                                "xAxis": {
+                                    "type": "-"
+                                },
+                                "yAxis": [
+                                    {
+                                        "type": "linear"
+                                    }
+                                ],
+                                "legend": {
+                                    "enabled": true
+                                },
+                                "series": {
+                                    "stacking": "stack",
+                                    "percentValues": true
+                                },
+                                "reverseX": false,
+                                "columnMapping": {
+                                    "time": "x",
+                                    "masterchef_pool": "y",
+                                    "non_masterchef_pool": "y"
+                                },
+                                "seriesOptions": {
+                                    "masterchef_pool": {
+                                        "name": "Staked",
+                                        "type": "area",
+                                        "color": "#2793cb",
+                                        "yAxis": 0,
+                                        "zIndex": 0
+                                    },
+                                    "non_masterchef_pool": {
+                                        "name": "Unstaked",
+                                        "type": "area",
+                                        "color": "#ff0000",
+                                        "yAxis": 0,
+                                        "zIndex": 1
+                                    }
+                                },
+                                "valuesOptions": {},
+                                "globalSeriesType": "area"
+                            },
+                            "created_at": "2023-01-15T02:53:31.494863+00:00",
+                            "query_details": {
+                                "query_id": 283918,
+                                "name": "Radiant Capital Pool2 Staking LP",
+                                "description": "",
+                                "show_watermark": true,
+                                "parameters": [],
+                                "dataset_id": 11,
+                                "user": {
+                                    "id": 26781,
+                                    "name": "shogun",
+                                    "profile_image_url": "https://prod-dune-media.s3.eu-west-1.amazonaws.com/profile_img_a2d00e92-d62e-4d60-a92d-f15cf1421ee9_tgatu.png",
+                                    "__typename": "users"
+                                },
+                                "team": null,
+                                "__typename": "query_details"
+                            },
+                            "__typename": "visualizations"
+                        },
+                        "__typename": "visualization_widgets"
+                    },
+                    {
+                        "id": 515766,
+                        "created_at": "2022-10-01T02:15:06.598275+00:00",
+                        "updated_at": "2023-04-20T07:24:55.367512+00:00",
+                        "options": {
+                            "position": {
+                                "col": 0,
+                                "row": 169,
+                                "sizeX": 6,
+                                "sizeY": 10
+                            }
+                        },
+                        "visualization": {
+                            "id": 2279265,
+                            "type": "chart",
+                            "name": "Reserve Cumulative Value",
+                            "options": {
+                                "sortX": true,
+                                "xAxis": {
+                                    "type": "-"
+                                },
+                                "yAxis": [
+                                    {
+                                        "type": "linear",
+                                        "tickFormat": "$0[].0a"
+                                    },
+                                    {
+                                        "type": "linear",
+                                        "tickFormat": "0[].0%"
+                                    }
+                                ],
+                                "legend": {
+                                    "enabled": true
+                                },
+                                "series": {
+                                    "stacking": "stack"
+                                },
+                                "reverseX": false,
+                                "numberFormat": "$0[].00a",
+                                "columnMapping": {
+                                    "": "y",
+                                    "time": "x",
+                                    "market": "series",
+                                    "cumulative_dai": "y",
+                                    "cumulative_diff": "y",
+                                    "cumulative_usdc": "y",
+                                    "cumulative_usdt": "y",
+                                    "cumulative_wbtc": "y",
+                                    "cumulative_weth": "y",
+                                    "cumulative_tokens_value": "y"
+                                },
+                                "seriesOptions": {
+                                    "cumulative_dai": {
+                                        "name": "DAI",
+                                        "type": "area",
+                                        "yAxis": 0,
+                                        "zIndex": 6
+                                    },
+                                    "cumulative_diff": {
+                                        "name": "% Change",
+                                        "type": "line",
+                                        "color": "#ff0000",
+                                        "yAxis": 1,
+                                        "zIndex": 0
+                                    },
+                                    "cumulative_usdc": {
+                                        "name": "USDC",
+                                        "type": "area",
+                                        "yAxis": 0,
+                                        "zIndex": 5
+                                    },
+                                    "cumulative_usdt": {
+                                        "name": "USDT",
+                                        "type": "area",
+                                        "yAxis": 0,
+                                        "zIndex": 2
+                                    },
+                                    "cumulative_wbtc": {
+                                        "name": "WBTC",
+                                        "type": "area",
+                                        "yAxis": 0,
+                                        "zIndex": 4
+                                    },
+                                    "cumulative_weth": {
+                                        "name": "WETH",
+                                        "type": "area",
+                                        "yAxis": 0,
+                                        "zIndex": 3
+                                    },
+                                    "cumulative_tokens_value": {
+                                        "name": "Total",
+                                        "type": "scatter",
+                                        "yAxis": 0,
+                                        "zIndex": 1
+                                    }
+                                },
+                                "valuesOptions": {},
+                                "globalSeriesType": "area",
+                                "numberFormatRightYAxisSeries": "0[].0%"
+                            },
+                            "created_at": "2022-09-30T23:03:10.721689+00:00",
+                            "query_details": {
+                                "query_id": 1333833,
+                                "name": "Radiant Capital Reserve Markets (Weekly % change)",
+                                "description": "",
+                                "show_watermark": true,
+                                "parameters": [],
+                                "dataset_id": 1,
+                                "user": {
+                                    "id": 26781,
+                                    "name": "shogun",
+                                    "profile_image_url": "https://prod-dune-media.s3.eu-west-1.amazonaws.com/profile_img_a2d00e92-d62e-4d60-a92d-f15cf1421ee9_tgatu.png",
+                                    "__typename": "users"
+                                },
+                                "team": null,
+                                "__typename": "query_details"
+                            },
+                            "__typename": "visualizations"
+                        },
+                        "__typename": "visualization_widgets"
                     }
                 ],
                 "param_widgets": [],
@@ -36871,7 +46856,7 @@ define("@scom/scom-dune/dummy/dashboard.json.ts", ["require", "exports"], functi
         ]
     };
 });
-define("@scom/scom-dune/dummy/index.ts", ["require", "exports", "@scom/scom-dune/dummy/2030664.json.ts", "@scom/scom-dune/dummy/2030745.json.ts", "@scom/scom-dune/dummy/2360788.json.ts", "@scom/scom-dune/dummy/2360815.json.ts", "@scom/scom-dune/dummy/2360905.json.ts", "@scom/scom-dune/dummy/dashboard.json.ts"], function (require, exports, _2030664_json_1, _2030745_json_1, _2360788_json_1, _2360815_json_1, _2360905_json_1, dashboard_json_1) {
+define("@scom/scom-dune/dummy/index.ts", ["require", "exports", "@scom/scom-dune/dummy/2030664.json.ts", "@scom/scom-dune/dummy/2030745.json.ts", "@scom/scom-dune/dummy/2360788.json.ts", "@scom/scom-dune/dummy/2360815.json.ts", "@scom/scom-dune/dummy/2360905.json.ts", "@scom/scom-dune/dummy/1154848.json.ts", "@scom/scom-dune/dummy/283918.json.ts", "@scom/scom-dune/dummy/947867.json.ts", "@scom/scom-dune/dummy/1333833.json.ts", "@scom/scom-dune/dummy/dashboard.json.ts"], function (require, exports, _2030664_json_1, _2030745_json_1, _2360788_json_1, _2360815_json_1, _2360905_json_1, _1154848_json_1, _283918_json_1, _947867_json_1, _1333833_json_1, dashboard_json_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.queryIdData = exports.dashboards = void 0;
@@ -36883,6 +46868,10 @@ define("@scom/scom-dune/dummy/index.ts", ["require", "exports", "@scom/scom-dune
     queryIdData[2360788] = _2360788_json_1.query_id_2360788;
     queryIdData[2360815] = _2360815_json_1.query_id_2360815;
     queryIdData[2360905] = _2360905_json_1.query_id_2360905;
+    queryIdData[1154848] = _1154848_json_1.query_id_1154848;
+    queryIdData[283918] = _283918_json_1.query_id_283918;
+    queryIdData[947867] = _947867_json_1.query_id_947867;
+    queryIdData[1333833] = _1333833_json_1.query_id_1333833;
 });
 define("@scom/scom-dune/charts/dunePieChart.tsx", ["require", "exports", "@ijstech/components", "@scom/scom-dune/global/index.ts"], function (require, exports, components_2, index_1) {
     "use strict";
@@ -36907,7 +46896,7 @@ define("@scom/scom-dune/charts/dunePieChart.tsx", ["require", "exports", "@ijste
             var _a, _b;
             if (!this.pieChart)
                 return;
-            const { options, chartData } = this.data;
+            const { options, chartData, theme } = this.data;
             const { columns, data } = chartData;
             const { columnMapping, seriesOptions, legend, showDataLabels, valuesOptions, numberFormat } = options;
             let xCol = '', yCol = '';
@@ -36980,6 +46969,9 @@ define("@scom/scom-dune/charts/dunePieChart.tsx", ["require", "exports", "@ijste
                 ]
             };
             this.pieChart.data = _chartData;
+            if (theme) {
+                this.pieChart.theme = theme;
+            }
             this.pieChart.drawChart();
         }
         init() {
@@ -37045,10 +47037,10 @@ define("@scom/scom-dune/charts/duneDefaultChart.tsx", ["require", "exports", "@i
             }, {});
         }
         initDefaultChart() {
-            var _a, _b, _c, _d;
+            var _a, _b, _c, _d, _e;
             if (!this.defaultChart)
                 return;
-            const { options, chartData } = this.data;
+            const { options, chartData, theme } = this.data;
             const { columns, data } = chartData;
             const { columnMapping, series, seriesOptions, numberFormatRightYAxisSeries, legend, globalSeriesType, showDataLabels, xAxis, yAxis, numberFormat } = options;
             const xTitle = (_a = xAxis === null || xAxis === void 0 ? void 0 : xAxis.title) === null || _a === void 0 ? void 0 : _a.text;
@@ -37071,20 +47063,30 @@ define("@scom/scom-dune/charts/duneDefaultChart.tsx", ["require", "exports", "@i
             const types = Object.values(seriesOptions);
             const type = (_d = types[0]) === null || _d === void 0 ? void 0 : _d.type;
             const isTypeDifferent = types.some(s => s.type !== type);
-            let rightFormat;
+            const yAxisLenght = (_e = options.yAxis) === null || _e === void 0 ? void 0 : _e.length;
+            let rightFormat = [];
             let _series = [];
             if (seriesCol) {
                 const group = this.groupByCategory(data, seriesCol, xCol, yCol);
                 const times = this.extractUniqueTimes(data, xCol);
                 _series = Object.keys(group).map(v => {
-                    const seriesOpt = seriesOptions[v];
+                    const seriesOpt = seriesOptions[v] || {};
                     const _data = this.concatUnique(times, group[v]);
+                    if (yAxisLenght > 1 && seriesOpt.yAxis === yAxisLenght - 1) {
+                        rightFormat.push(v);
+                    }
+                    const isArea = !seriesOpt.type || seriesOpt.type === 'area';
+                    const lineStyle = isArea ? {
+                        border: 'transparent',
+                        width: 0
+                    } : undefined;
                     return {
                         name: v,
-                        type: index_2.getChartType((seriesOpt === null || seriesOpt === void 0 ? void 0 : seriesOpt.type) || globalSeriesType, 'line'),
-                        stack: (series === null || series === void 0 ? void 0 : series.stacking) === 'stack' ? 'Total' : undefined,
-                        itemStyle: (seriesOpt === null || seriesOpt === void 0 ? void 0 : seriesOpt.color) ? { color: seriesOpt.color } : undefined,
-                        areaStyle: !(seriesOpt === null || seriesOpt === void 0 ? void 0 : seriesOpt.type) || seriesOpt.type === 'area' ? {} : undefined,
+                        type: index_2.getChartType(seriesOpt.type || globalSeriesType, 'line'),
+                        stack: (series === null || series === void 0 ? void 0 : series.stacking) === 'stack' ? (isNaN(seriesOpt.yAxis) ? 'Total' : `Total_${seriesOpt.type}_${seriesOpt.yAxis}`) : undefined,
+                        itemStyle: seriesOpt.color ? { color: seriesOpt.color } : undefined,
+                        lineStyle,
+                        areaStyle: isArea ? {} : undefined,
                         emphasis: {
                             focus: 'series'
                         },
@@ -37097,12 +47099,21 @@ define("@scom/scom-dune/charts/duneDefaultChart.tsx", ["require", "exports", "@i
             else {
                 _series = Object.keys(seriesOptions).map(v => {
                     const seriesOpt = seriesOptions[v];
+                    if (yAxisLenght > 1 && (seriesOpt === null || seriesOpt === void 0 ? void 0 : seriesOpt.yAxis) === yAxisLenght - 1) {
+                        rightFormat.push((seriesOpt === null || seriesOpt === void 0 ? void 0 : seriesOpt.name) || v);
+                    }
+                    const isArea = (seriesOpt === null || seriesOpt === void 0 ? void 0 : seriesOpt.type) === 'area';
+                    const lineStyle = isArea ? {
+                        border: 'transparent',
+                        width: 0
+                    } : undefined;
                     return {
-                        name: (seriesOpt === null || seriesOpt === void 0 ? void 0 : seriesOpt.name) || v,
+                        name: seriesOpt.name || v,
                         type: index_2.getChartType((seriesOpt === null || seriesOpt === void 0 ? void 0 : seriesOpt.type) || globalSeriesType, 'line'),
-                        stack: (series === null || series === void 0 ? void 0 : series.stacking) === 'stack' ? 'Total' : undefined,
-                        itemStyle: (seriesOpt === null || seriesOpt === void 0 ? void 0 : seriesOpt.color) ? { color: seriesOpt.color } : undefined,
-                        areaStyle: !(seriesOpt === null || seriesOpt === void 0 ? void 0 : seriesOpt.type) || seriesOpt.type === 'area' ? {} : undefined,
+                        stack: (series === null || series === void 0 ? void 0 : series.stacking) === 'stack' ? (isNaN(seriesOpt.yAxis) ? 'Total' : `Total_${seriesOpt.type}_${seriesOpt.yAxis}`) : undefined,
+                        itemStyle: seriesOpt.color ? { color: seriesOpt.color } : undefined,
+                        lineStyle,
+                        areaStyle: isArea ? {} : undefined,
                         emphasis: {
                             focus: 'series'
                         },
@@ -37113,7 +47124,8 @@ define("@scom/scom-dune/charts/duneDefaultChart.tsx", ["require", "exports", "@i
                                 return index_2.formatNumber(params.value);
                             }
                         } : undefined,
-                        data: data.map(m => [new Date(m[xCol]), m[v]]),
+                        data: data.map(m => [new Date(m[xCol]), m[percentValues ? `${v}_percent` : v]]),
+                        z: seriesOpt.zIndex,
                         yAxisIndex: isTypeDifferent && seriesOpt ? seriesOpt.yAxis : undefined
                     };
                 });
@@ -37155,13 +47167,14 @@ define("@scom/scom-dune/charts/duneDefaultChart.tsx", ["require", "exports", "@i
             };
             let _yAxis = isTypeDifferent ? [] : defaultYAxis;
             if (isTypeDifferent) {
-                for (let i = 0; i < _series.length; i++) {
-                    if (i < _series.length - 1) {
+                for (let i = 0; i < yAxisLenght; i++) {
+                    if (i < yAxisLenght - 1) {
                         _yAxis.push(defaultYAxis);
                     }
                     else {
-                        _yAxis.push(Object.assign(Object.assign({}, defaultYAxis), { position: 'right' }));
-                        rightFormat = _series.sort((a, b) => a.yAxisIndex - b.yAxisIndex)[i].name;
+                        _yAxis.push(Object.assign(Object.assign({}, defaultYAxis), { position: 'right', axisLabel: Object.assign(Object.assign({}, defaultYAxis.axisLabel), { formatter: (value, index) => {
+                                    return index_2.formatNumber(value, { decimals: 2, percentValues, format: numberFormatRightYAxisSeries });
+                                } }) }));
                     }
                 }
             }
@@ -37194,7 +47207,9 @@ define("@scom/scom-dune/charts/duneDefaultChart.tsx", ["require", "exports", "@i
                         }
                         else {
                             for (const param of params) {
-                                res += `<div style="display: flex; justify-content: space-between; gap: 10px"><span>${param.marker} ${param.seriesName}</span> ${index_2.formatNumber(param.value[1], { format: rightFormat === param.seriesName && numberFormatRightYAxisSeries ? numberFormatRightYAxisSeries : undefined, percentValues })}</div>`;
+                                if (param.value[1] !== null) {
+                                    res += `<div style="display: flex; justify-content: space-between; gap: 10px"><span>${param.marker} ${param.seriesName}</span> ${index_2.formatNumber(param.value[1], { format: rightFormat.includes(param.seriesName) && numberFormatRightYAxisSeries ? numberFormatRightYAxisSeries : undefined, percentValues })}</div>`;
+                                }
                             }
                         }
                         return res;
@@ -37229,6 +47244,9 @@ define("@scom/scom-dune/charts/duneDefaultChart.tsx", ["require", "exports", "@i
                 series: _series
             };
             this.defaultChart.data = _chartData;
+            if (theme) {
+                this.defaultChart.theme = theme;
+            }
             this.defaultChart.drawChart();
         }
         init() {
@@ -37261,9 +47279,8 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
         constructor(parent, options) {
             super(parent, options);
             this.dashboard = [];
-            this.chartsData = [];
-            this._oldData = { url: '' };
-            this._data = { url: '' };
+            this._oldData = { chartName: '' };
+            this._data = { chartName: '' };
             this.oldTag = {};
             this.tag = {};
             this.defaultEdit = true;
@@ -37278,14 +47295,20 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
         }
         async setData(data) {
             this._data = data;
-            this.getDashboardData();
-            this.onUpdateBlock();
+            this.updateChartData();
         }
         getTag() {
             return this.tag;
         }
         async setTag(value) {
             this.tag = value || {};
+            this.width = this.tag.width;
+            if (this.tag.theme === 'dark') {
+                this.classList.add('dune-chart--dark');
+            }
+            else {
+                this.classList.remove('dune-chart--dark');
+            }
             this.onUpdateBlock();
         }
         getConfigSchema() {
@@ -37296,22 +47319,37 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             this.onUpdateBlock();
         }
         async edit() {
-            // this.pnlDune.visible = false
+            // this.hStackDune.visible = false
         }
         async confirm() {
             this.onUpdateBlock();
-            // this.pnlDune.visible = true
+            // this.hStackDune.visible = true
         }
         async discard() {
-            // this.pnlDune.visible = true
+            // this.hStackDune.visible = true
         }
         async config() { }
         getPropertiesSchema(readOnly) {
             const propertiesSchema = {
                 type: 'object',
                 properties: {
-                    url: {
+                    chartName: {
                         type: 'string',
+                        enum: [
+                            'Ethereum Beacon Chain Deposits Entity',
+                            'Chart (ETH Staked - Cumulative)',
+                            'Liquid Staking validators - All',
+                            'ETH withdrawals cumsum (ETH Withdrawals after Shanghai Unlock)',
+                            'Validators (ETH Withdrawals after Shanghai Unlock)',
+                            'ETH withdrawals (ETH Withdrawals after Shanghai Unlock)',
+                            'ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
+                            'Validators and ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
+                            'ETH withdrawals (ETH Withdrawals after Shanghai Unlock vs ETH price)',
+                            '$RDNT Price Chart (RDNT Price Chart on Arbitrum and BSC)',
+                            'Reserve Cumulative Value (Radiant Capital Reserve Markets (Weekly % change))',
+                            'RDNT/WETH LP Staked Supply (Radiant Capital Pool2 Staking LP)',
+                            'Holders OverTime (RDNT and RDNT V2 Holders Overtime)'
+                        ],
                         required: true,
                         readOnly
                     }
@@ -37322,7 +47360,24 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
         getThemeSchema(readOnly) {
             const themeSchema = {
                 type: 'object',
-                properties: {}
+                properties: {
+                    width: {
+                        type: 'string',
+                        readOnly
+                    },
+                    height: {
+                        type: 'string',
+                        readOnly
+                    },
+                    theme: {
+                        type: 'string',
+                        enum: [
+                            'light',
+                            'theme'
+                        ],
+                        readOnly
+                    }
+                }
             };
             return themeSchema;
         }
@@ -37382,6 +47437,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
         }
         onUpdateBlock() {
             if (this._data) {
+                this.renderChart();
             }
         }
         async getDashboardData() {
@@ -37393,44 +47449,63 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             else {
                 this.dashboard = [];
             }
-            this.getQueryData();
         }
-        async getQueryData() {
-            let _queryDataIds = {};
-            const _chartsData = [];
-            for (const dashboard of this.dashboard) {
-                const { query_details, name, options } = dashboard.visualization;
-                const _queryId = query_details.query_id;
-                if (!_queryDataIds[_queryId]) {
-                    _queryDataIds[_queryId] = index_3.queryIdData[_queryId];
+        async updateChartData() {
+            var _a;
+            if ((_a = this._data) === null || _a === void 0 ? void 0 : _a.chartName) {
+                // TODO - fetch data
+                const chartInfo = this.dashboard.find(v => {
+                    const { name, query_details } = v.visualization;
+                    const subName = query_details.name;
+                    let fullName = name;
+                    if (fullName && subName) {
+                        fullName = `${fullName} (${subName})`;
+                    }
+                    else if (subName) {
+                        fullName = subName;
+                    }
+                    return fullName === this._data.chartName;
+                });
+                if (chartInfo) {
+                    const { options, name, query_details } = chartInfo.visualization;
+                    const chartOpt = {
+                        options,
+                        name,
+                        subName: query_details.name,
+                        info: query_details.user || query_details.team,
+                        chartData: index_3.queryIdData[query_details.query_id]
+                    };
+                    this.chartData = chartOpt;
                 }
-                const _chartOpt = {
-                    options,
-                    name,
-                    subName: query_details.name,
-                    info: query_details.user || query_details.team,
-                    chartData: index_3.queryIdData[_queryId]
-                };
-                _chartsData.push(_chartOpt);
+                else {
+                    this.chartData = null;
+                }
             }
-            this.chartsData = _chartsData;
-            console.log(this.chartsData);
-            for (const chart of this.chartsData) {
-                this.initChart(chart, chart.options.globalSeriesType);
+            else {
+                this.chartData = null;
+            }
+            this.renderChart();
+        }
+        async renderChart() {
+            this.hStackDune.clearInnerHTML();
+            if (this.chartData) {
+                this.initChart(this.chartData, this.chartData.options.globalSeriesType);
             }
         }
         initChart(chart, type) {
+            this.hStackDune.clearInnerHTML();
             const { name, subName, info } = chart;
-            const hStack = new components_4.HStack(this.pnlDune, {
+            const { width, height, theme } = this.tag || {};
+            const hStack = new components_4.HStack(this.hStackDune, {
                 gap: 10,
-                width: '100%',
-                maxWidth: 650,
-                margin: { top: 20, left: 'auto', right: 'auto' },
+                width: width || 700,
+                maxWidth: '100%',
+                margin: { left: 'auto', right: 'auto' },
                 padding: { top: 10, bottom: 10, left: 10, right: 10 },
-                border: { width: 1, style: 'solid', color: '#ffbdb6' },
                 verticalAlignment: 'center',
                 wrap: 'wrap'
             });
+            hStack.style.boxShadow = 'rgba(0, 0, 0, 0.16) 0px 1px 4px';
             if (name) {
                 new components_4.Label(hStack, {
                     caption: name,
@@ -37466,43 +47541,47 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             if (type === 'pie') {
                 chartElm = new index_4.DunePieChart(undefined, {
                     width: '100%',
-                    height: 500,
-                    data: chart
+                    height: height || 500,
+                    data: Object.assign(Object.assign({}, chart), { theme })
                 });
             }
             else {
                 chartElm = new index_4.DuneDefaultChart(undefined, {
                     width: '100%',
-                    height: 500,
-                    data: chart
+                    height: height || 500,
+                    data: Object.assign(Object.assign({}, chart), { theme })
                 });
             }
-            if (chartElm)
-                hStack.appendChild(chartElm);
+            hStack.appendChild(chartElm);
         }
-        resizeCharts() {
-            const charts = this.pnlDune.querySelectorAll('[role=dune-chart]');
-            for (const chart of charts) {
-                chart.resize();
-            }
+        resizeChart() {
+            var _a;
+            const chart = this.hStackDune.querySelector('[role=dune-chart]');
+            (_a = chart) === null || _a === void 0 ? void 0 : _a.resize();
         }
-        init() {
+        async init() {
+            var _a;
             this.isReadyCallbackQueued = true;
             super.init();
-            const url = this.getAttribute('url', true);
-            if (url) {
-                this.setData({ url });
+            this.classList.add(index_css_1.duneChartStyle);
+            if (((_a = this.tag) === null || _a === void 0 ? void 0 : _a.theme) === 'dark') {
+                this.classList.add('dune-chart--dark');
+            }
+            await this.getDashboardData();
+            const chartName = this.getAttribute('chartName', true);
+            if (chartName) {
+                this.setData({ chartName });
             }
             this.isReadyCallbackQueued = false;
             this.executeReadyCallback();
             window.addEventListener('resize', () => {
                 setTimeout(() => {
-                    this.resizeCharts();
+                    this.resizeChart();
                 }, 300);
             });
         }
         render() {
-            return (this.$render("i-panel", { id: "pnlDune", class: index_css_1.containerStyle }));
+            return (this.$render("i-hstack", { id: "hStackDune", gap: 20, wrap: "wrap", verticalAlignment: "center", class: index_css_1.containerStyle }));
         }
     };
     ScomDune = __decorate([

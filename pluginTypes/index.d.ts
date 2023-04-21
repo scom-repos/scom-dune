@@ -33,6 +33,7 @@ declare module "@scom/scom-dune/global/interfaces.ts" {
                 type?: string;
                 name?: string;
                 yAxis?: number;
+                zIndex?: number;
             };
         };
         globalSeriesType?: string;
@@ -57,6 +58,7 @@ declare module "@scom/scom-dune/global/interfaces.ts" {
         };
         name: string;
         subName: string;
+        theme?: 'light' | 'dark';
     }
     export interface IDunePieOptions extends IDuneOptions {
         valuesOptions: {
@@ -95,7 +97,7 @@ declare module "@scom/scom-dune/global/interfaces.ts" {
         options: IDuneDefaultOptions;
     }
     export interface IDuneConfig {
-        url: string;
+        chartName: string;
     }
 }
 /// <amd-module name="@scom/scom-dune/global/utils.ts" />
@@ -104,8 +106,8 @@ declare module "@scom/scom-dune/global/utils.ts" {
         format?: string;
         decimals?: number;
         percentValues?: boolean;
-    }) => string;
-    export const formatNumberByFormat: (num: number, format: string) => string;
+    }) => any;
+    export const formatNumberByFormat: (num: number, format: string) => any;
     export const getChartType: (type: string, defaultType?: string) => string;
 }
 /// <amd-module name="@scom/scom-dune/global/index.ts" />
@@ -132,6 +134,7 @@ declare module "@scom/scom-dune/global/index.ts" {
 /// <amd-module name="@scom/scom-dune/index.css.ts" />
 declare module "@scom/scom-dune/index.css.ts" {
     export const containerStyle: string;
+    export const duneChartStyle: string;
 }
 /// <amd-module name="@scom/scom-dune/dummy/2030664.json.ts" />
 declare module "@scom/scom-dune/dummy/2030664.json.ts" {
@@ -209,6 +212,91 @@ declare module "@scom/scom-dune/dummy/2360905.json.ts" {
         }[];
     };
 }
+/// <amd-module name="@scom/scom-dune/dummy/1154848.json.ts" />
+declare module "@scom/scom-dune/dummy/1154848.json.ts" {
+    export const query_id_1154848: {
+        execution_id: string;
+        runtime_seconds: number;
+        generated_at: string;
+        columns: string[];
+        data: ({
+            time: string;
+            usd_volume: number;
+            rdnt_price: number;
+            green_volume: number;
+            red_volume: any;
+            last_price: number;
+            rdnt_volume: number;
+        } | {
+            time: string;
+            usd_volume: number;
+            rdnt_price: number;
+            green_volume: any;
+            red_volume: number;
+            last_price: number;
+            rdnt_volume: number;
+        })[];
+    };
+}
+/// <amd-module name="@scom/scom-dune/dummy/283918.json.ts" />
+declare module "@scom/scom-dune/dummy/283918.json.ts" {
+    export const query_id_283918: {
+        execution_id: string;
+        runtime_seconds: number;
+        generated_at: string;
+        columns: string[];
+        data: {
+            time: string;
+            slp_value: number;
+            masterchef_pool: number;
+            masterchef_pool_percent: number;
+            non_masterchef_pool: number;
+            non_masterchef_pool_percent: number;
+        }[];
+    };
+}
+/// <amd-module name="@scom/scom-dune/dummy/947867.json.ts" />
+declare module "@scom/scom-dune/dummy/947867.json.ts" {
+    export const query_id_947867: {
+        execution_id: string;
+        runtime_seconds: number;
+        generated_at: string;
+        columns: string[];
+        data: ({
+            time: string;
+            total_holders: number;
+            green_change: number;
+            red_change: any;
+            holding_change_format: string;
+        } | {
+            time: string;
+            total_holders: number;
+            green_change: any;
+            red_change: number;
+            holding_change_format: string;
+        })[];
+    };
+}
+/// <amd-module name="@scom/scom-dune/dummy/1333833.json.ts" />
+declare module "@scom/scom-dune/dummy/1333833.json.ts" {
+    export const query_id_1333833: {
+        execution_id: string;
+        runtime_seconds: number;
+        generated_at: string;
+        columns: string[];
+        data: {
+            time: string;
+            cumulative_tokens_value: number;
+            cumulative_format: number;
+            cumulative_usdt: number;
+            cumulative_weth: number;
+            cumulative_wbtc: number;
+            cumulative_usdc: number;
+            cumulative_dai: number;
+            cumulative_diff: number;
+        }[];
+    };
+}
 /// <amd-module name="@scom/scom-dune/dummy/dashboard.json.ts" />
 declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
     export const dashboards: {
@@ -280,6 +368,7 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                         };
                         series: {
                             stacking: string;
+                            percentValues?: undefined;
                         };
                         reverseX: boolean;
                         columnMapping: {
@@ -295,6 +384,23 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             ETH_cum?: undefined;
                             date?: undefined;
                             total_eth?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         seriesOptions: {
                             Reward: {
@@ -320,6 +426,21 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             Unidentified?: undefined;
                             "Staking Pools"?: undefined;
                             "Liquid Staking"?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         valuesOptions: {
                             CEX?: undefined;
@@ -405,6 +526,23 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             ETH_cum?: undefined;
                             date?: undefined;
                             total_eth?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         seriesOptions: {
                             staked: {
@@ -425,6 +563,21 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             Unidentified?: undefined;
                             "Staking Pools"?: undefined;
                             "Liquid Staking"?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         valuesOptions: {
                             CEX: {
@@ -579,6 +732,23 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             ETH_cum?: undefined;
                             date?: undefined;
                             total_eth?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         seriesOptions: {
                             eth_price: {
@@ -600,6 +770,21 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             Unidentified?: undefined;
                             "Staking Pools"?: undefined;
                             "Liquid Staking"?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         valuesOptions: {
                             CEX?: undefined;
@@ -687,6 +872,23 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             ETH_cum?: undefined;
                             date?: undefined;
                             total_eth?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         seriesOptions: {
                             ETH: {
@@ -714,6 +916,21 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             Unidentified?: undefined;
                             "Staking Pools"?: undefined;
                             "Liquid Staking"?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         valuesOptions: {
                             CEX?: undefined;
@@ -857,6 +1074,23 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             ETH_cum?: undefined;
                             date?: undefined;
                             total_eth?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         seriesOptions: {
                             eth_price: {
@@ -884,6 +1118,21 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             Unidentified?: undefined;
                             "Staking Pools"?: undefined;
                             "Liquid Staking"?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         valuesOptions: {
                             CEX?: undefined;
@@ -969,6 +1218,23 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             ETH_cum?: undefined;
                             date?: undefined;
                             total_eth?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         seriesOptions: {
                             eth_deposited: {
@@ -989,6 +1255,21 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             Unidentified?: undefined;
                             "Staking Pools"?: undefined;
                             "Liquid Staking"?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         valuesOptions: {
                             Lido: {
@@ -1076,6 +1357,7 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                         };
                         series: {
                             stacking: string;
+                            percentValues?: undefined;
                         };
                         reverseX: boolean;
                         numberFormat: string;
@@ -1092,6 +1374,23 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             eth_deposited?: undefined;
                             date?: undefined;
                             total_eth?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         seriesOptions: {
                             ETH_cum: {
@@ -1113,6 +1412,21 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             Unidentified?: undefined;
                             "Staking Pools"?: undefined;
                             "Liquid Staking"?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         valuesOptions: {
                             CEX?: undefined;
@@ -1322,6 +1636,7 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                         };
                         series: {
                             stacking: string;
+                            percentValues?: undefined;
                         };
                         reverseX: boolean;
                         numberFormat: string;
@@ -1338,6 +1653,23 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             entity?: undefined;
                             eth_deposited?: undefined;
                             ETH_cum?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         seriesOptions: {
                             CEX: {
@@ -1378,6 +1710,21 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             validators?: undefined;
                             eth_deposited?: undefined;
                             ETH_cum?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         valuesOptions: {
                             CEX?: undefined;
@@ -1454,6 +1801,7 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                         };
                         series: {
                             stacking: string;
+                            percentValues?: undefined;
                         };
                         reverseX: boolean;
                         numberFormat: string;
@@ -1470,6 +1818,23 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             ETH_cum?: undefined;
                             date?: undefined;
                             total_eth?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         seriesOptions: {
                             Reward: {
@@ -1495,6 +1860,21 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                             Unidentified?: undefined;
                             "Staking Pools"?: undefined;
                             "Liquid Staking"?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
                         };
                         valuesOptions: {
                             CEX?: undefined;
@@ -1512,6 +1892,624 @@ declare module "@scom/scom-dune/dummy/dashboard.json.ts" {
                         rowNumber?: undefined;
                         counterColName?: undefined;
                         numberFormatRightYAxisSeries?: undefined;
+                        stringSuffix?: undefined;
+                        stringDecimal?: undefined;
+                        columns?: undefined;
+                    };
+                    created_at: string;
+                    query_details: {
+                        query_id: number;
+                        name: string;
+                        description: string;
+                        show_watermark: boolean;
+                        parameters: any[];
+                        dataset_id: number;
+                        user: {
+                            id: number;
+                            name: string;
+                            profile_image_url: string;
+                            __typename: string;
+                        };
+                        team: any;
+                        __typename: string;
+                    };
+                    __typename: string;
+                };
+                __typename: string;
+            } | {
+                id: number;
+                created_at: string;
+                updated_at: string;
+                options: {
+                    position: {
+                        col: number;
+                        row: number;
+                        sizeX: number;
+                        sizeY: number;
+                    };
+                };
+                visualization: {
+                    id: number;
+                    type: string;
+                    name: string;
+                    options: {
+                        sortX: boolean;
+                        xAxis: {
+                            type: string;
+                            title?: undefined;
+                        };
+                        yAxis: {
+                            type: string;
+                            tickFormat: string;
+                        }[];
+                        legend: {
+                            enabled: boolean;
+                        };
+                        reverseX: boolean;
+                        numberFormat: string;
+                        columnMapping: {
+                            time: string;
+                            rdnt_price: string;
+                            red_volume: string;
+                            green_volume: string;
+                            category?: undefined;
+                            validators?: undefined;
+                            staked?: undefined;
+                            depositor_entity_category?: undefined;
+                            eth_price?: undefined;
+                            ETH?: undefined;
+                            entity?: undefined;
+                            eth_deposited?: undefined;
+                            ETH_cum?: undefined;
+                            date?: undefined;
+                            total_eth?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
+                        };
+                        seriesOptions: {
+                            rdnt_price: {
+                                name: string;
+                                type: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            red_volume: {
+                                name: string;
+                                type: string;
+                                color: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            green_volume: {
+                                name: string;
+                                type: string;
+                                color: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            Reward?: undefined;
+                            "Full Withdraw"?: undefined;
+                            staked?: undefined;
+                            eth_price?: undefined;
+                            ETH?: undefined;
+                            validators?: undefined;
+                            eth_deposited?: undefined;
+                            ETH_cum?: undefined;
+                            CEX?: undefined;
+                            Others?: undefined;
+                            Unidentified?: undefined;
+                            "Staking Pools"?: undefined;
+                            "Liquid Staking"?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
+                        };
+                        valuesOptions: {
+                            CEX?: undefined;
+                            Other?: undefined;
+                            Others?: undefined;
+                            "Staking Pools"?: undefined;
+                            "Liquid Staking"?: undefined;
+                            Lido?: undefined;
+                            Kraken?: undefined;
+                            Binance?: undefined;
+                            Coinbase?: undefined;
+                        };
+                        globalSeriesType: string;
+                        numberFormatRightYAxisSeries: string;
+                        series?: undefined;
+                        showDataLabels?: undefined;
+                        rowNumber?: undefined;
+                        counterColName?: undefined;
+                        stringSuffix?: undefined;
+                        stringDecimal?: undefined;
+                        columns?: undefined;
+                    };
+                    created_at: string;
+                    query_details: {
+                        query_id: number;
+                        name: string;
+                        description: string;
+                        show_watermark: boolean;
+                        parameters: any[];
+                        dataset_id: number;
+                        user: {
+                            id: number;
+                            name: string;
+                            profile_image_url: string;
+                            __typename: string;
+                        };
+                        team: any;
+                        __typename: string;
+                    };
+                    __typename: string;
+                };
+                __typename: string;
+            } | {
+                id: number;
+                created_at: string;
+                updated_at: string;
+                options: {
+                    position: {
+                        col: number;
+                        row: number;
+                        sizeX: number;
+                        sizeY: number;
+                    };
+                };
+                visualization: {
+                    id: number;
+                    type: string;
+                    name: string;
+                    options: {
+                        sortX: boolean;
+                        xAxis: {
+                            type: string;
+                            title?: undefined;
+                        };
+                        yAxis: {
+                            type: string;
+                        }[];
+                        legend: {
+                            enabled: boolean;
+                        };
+                        reverseX: boolean;
+                        columnMapping: {
+                            time: string;
+                            red_change: string;
+                            green_change: string;
+                            total_holders: string;
+                            category?: undefined;
+                            validators?: undefined;
+                            staked?: undefined;
+                            depositor_entity_category?: undefined;
+                            eth_price?: undefined;
+                            ETH?: undefined;
+                            entity?: undefined;
+                            eth_deposited?: undefined;
+                            ETH_cum?: undefined;
+                            date?: undefined;
+                            total_eth?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
+                        };
+                        seriesOptions: {
+                            red_change: {
+                                name: string;
+                                type: string;
+                                color: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            green_change: {
+                                name: string;
+                                type: string;
+                                color: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            total_holders: {
+                                name: string;
+                                type: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            Reward?: undefined;
+                            "Full Withdraw"?: undefined;
+                            staked?: undefined;
+                            eth_price?: undefined;
+                            ETH?: undefined;
+                            validators?: undefined;
+                            eth_deposited?: undefined;
+                            ETH_cum?: undefined;
+                            CEX?: undefined;
+                            Others?: undefined;
+                            Unidentified?: undefined;
+                            "Staking Pools"?: undefined;
+                            "Liquid Staking"?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
+                        };
+                        valuesOptions: {
+                            CEX?: undefined;
+                            Other?: undefined;
+                            Others?: undefined;
+                            "Staking Pools"?: undefined;
+                            "Liquid Staking"?: undefined;
+                            Lido?: undefined;
+                            Kraken?: undefined;
+                            Binance?: undefined;
+                            Coinbase?: undefined;
+                        };
+                        globalSeriesType: string;
+                        series?: undefined;
+                        showDataLabels?: undefined;
+                        numberFormat?: undefined;
+                        rowNumber?: undefined;
+                        counterColName?: undefined;
+                        numberFormatRightYAxisSeries?: undefined;
+                        stringSuffix?: undefined;
+                        stringDecimal?: undefined;
+                        columns?: undefined;
+                    };
+                    created_at: string;
+                    query_details: {
+                        query_id: number;
+                        name: string;
+                        description: string;
+                        show_watermark: boolean;
+                        parameters: any[];
+                        dataset_id: number;
+                        user: {
+                            id: number;
+                            name: string;
+                            profile_image_url: string;
+                            __typename: string;
+                        };
+                        team: any;
+                        __typename: string;
+                    };
+                    __typename: string;
+                };
+                __typename: string;
+            } | {
+                id: number;
+                created_at: string;
+                updated_at: string;
+                options: {
+                    position: {
+                        col: number;
+                        row: number;
+                        sizeX: number;
+                        sizeY: number;
+                    };
+                };
+                visualization: {
+                    id: number;
+                    type: string;
+                    name: string;
+                    options: {
+                        sortX: boolean;
+                        xAxis: {
+                            type: string;
+                            title?: undefined;
+                        };
+                        yAxis: {
+                            type: string;
+                        }[];
+                        legend: {
+                            enabled: boolean;
+                        };
+                        series: {
+                            stacking: string;
+                            percentValues: boolean;
+                        };
+                        reverseX: boolean;
+                        columnMapping: {
+                            time: string;
+                            masterchef_pool: string;
+                            non_masterchef_pool: string;
+                            category?: undefined;
+                            validators?: undefined;
+                            staked?: undefined;
+                            depositor_entity_category?: undefined;
+                            eth_price?: undefined;
+                            ETH?: undefined;
+                            entity?: undefined;
+                            eth_deposited?: undefined;
+                            ETH_cum?: undefined;
+                            date?: undefined;
+                            total_eth?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            ""?: undefined;
+                            market?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
+                        };
+                        seriesOptions: {
+                            masterchef_pool: {
+                                name: string;
+                                type: string;
+                                color: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            non_masterchef_pool: {
+                                name: string;
+                                type: string;
+                                color: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            Reward?: undefined;
+                            "Full Withdraw"?: undefined;
+                            staked?: undefined;
+                            eth_price?: undefined;
+                            ETH?: undefined;
+                            validators?: undefined;
+                            eth_deposited?: undefined;
+                            ETH_cum?: undefined;
+                            CEX?: undefined;
+                            Others?: undefined;
+                            Unidentified?: undefined;
+                            "Staking Pools"?: undefined;
+                            "Liquid Staking"?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            cumulative_dai?: undefined;
+                            cumulative_diff?: undefined;
+                            cumulative_usdc?: undefined;
+                            cumulative_usdt?: undefined;
+                            cumulative_wbtc?: undefined;
+                            cumulative_weth?: undefined;
+                            cumulative_tokens_value?: undefined;
+                        };
+                        valuesOptions: {
+                            CEX?: undefined;
+                            Other?: undefined;
+                            Others?: undefined;
+                            "Staking Pools"?: undefined;
+                            "Liquid Staking"?: undefined;
+                            Lido?: undefined;
+                            Kraken?: undefined;
+                            Binance?: undefined;
+                            Coinbase?: undefined;
+                        };
+                        globalSeriesType: string;
+                        showDataLabels?: undefined;
+                        numberFormat?: undefined;
+                        rowNumber?: undefined;
+                        counterColName?: undefined;
+                        numberFormatRightYAxisSeries?: undefined;
+                        stringSuffix?: undefined;
+                        stringDecimal?: undefined;
+                        columns?: undefined;
+                    };
+                    created_at: string;
+                    query_details: {
+                        query_id: number;
+                        name: string;
+                        description: string;
+                        show_watermark: boolean;
+                        parameters: any[];
+                        dataset_id: number;
+                        user: {
+                            id: number;
+                            name: string;
+                            profile_image_url: string;
+                            __typename: string;
+                        };
+                        team: any;
+                        __typename: string;
+                    };
+                    __typename: string;
+                };
+                __typename: string;
+            } | {
+                id: number;
+                created_at: string;
+                updated_at: string;
+                options: {
+                    position: {
+                        col: number;
+                        row: number;
+                        sizeX: number;
+                        sizeY: number;
+                    };
+                };
+                visualization: {
+                    id: number;
+                    type: string;
+                    name: string;
+                    options: {
+                        sortX: boolean;
+                        xAxis: {
+                            type: string;
+                            title?: undefined;
+                        };
+                        yAxis: {
+                            type: string;
+                            tickFormat: string;
+                        }[];
+                        legend: {
+                            enabled: boolean;
+                        };
+                        series: {
+                            stacking: string;
+                            percentValues?: undefined;
+                        };
+                        reverseX: boolean;
+                        numberFormat: string;
+                        columnMapping: {
+                            "": string;
+                            time: string;
+                            market: string;
+                            cumulative_dai: string;
+                            cumulative_diff: string;
+                            cumulative_usdc: string;
+                            cumulative_usdt: string;
+                            cumulative_wbtc: string;
+                            cumulative_weth: string;
+                            cumulative_tokens_value: string;
+                            category?: undefined;
+                            validators?: undefined;
+                            staked?: undefined;
+                            depositor_entity_category?: undefined;
+                            eth_price?: undefined;
+                            ETH?: undefined;
+                            entity?: undefined;
+                            eth_deposited?: undefined;
+                            ETH_cum?: undefined;
+                            date?: undefined;
+                            total_eth?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                        };
+                        seriesOptions: {
+                            cumulative_dai: {
+                                name: string;
+                                type: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            cumulative_diff: {
+                                name: string;
+                                type: string;
+                                color: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            cumulative_usdc: {
+                                name: string;
+                                type: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            cumulative_usdt: {
+                                name: string;
+                                type: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            cumulative_wbtc: {
+                                name: string;
+                                type: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            cumulative_weth: {
+                                name: string;
+                                type: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            cumulative_tokens_value: {
+                                name: string;
+                                type: string;
+                                yAxis: number;
+                                zIndex: number;
+                            };
+                            Reward?: undefined;
+                            "Full Withdraw"?: undefined;
+                            staked?: undefined;
+                            eth_price?: undefined;
+                            ETH?: undefined;
+                            validators?: undefined;
+                            eth_deposited?: undefined;
+                            ETH_cum?: undefined;
+                            CEX?: undefined;
+                            Others?: undefined;
+                            Unidentified?: undefined;
+                            "Staking Pools"?: undefined;
+                            "Liquid Staking"?: undefined;
+                            rdnt_price?: undefined;
+                            red_volume?: undefined;
+                            green_volume?: undefined;
+                            red_change?: undefined;
+                            green_change?: undefined;
+                            total_holders?: undefined;
+                            masterchef_pool?: undefined;
+                            non_masterchef_pool?: undefined;
+                        };
+                        valuesOptions: {
+                            CEX?: undefined;
+                            Other?: undefined;
+                            Others?: undefined;
+                            "Staking Pools"?: undefined;
+                            "Liquid Staking"?: undefined;
+                            Lido?: undefined;
+                            Kraken?: undefined;
+                            Binance?: undefined;
+                            Coinbase?: undefined;
+                        };
+                        globalSeriesType: string;
+                        numberFormatRightYAxisSeries: string;
+                        showDataLabels?: undefined;
+                        rowNumber?: undefined;
+                        counterColName?: undefined;
                         stringSuffix?: undefined;
                         stringDecimal?: undefined;
                         columns?: undefined;
@@ -1632,9 +2630,9 @@ declare module "@scom/scom-dune" {
         }
     }
     export default class ScomDune extends Module implements PageBlock {
-        private pnlDune;
+        private hStackDune;
         private dashboard;
-        private chartsData;
+        private chartData;
         private _oldData;
         private _data;
         private oldTag;
@@ -1689,10 +2687,11 @@ declare module "@scom/scom-dune" {
         }[];
         private onUpdateBlock;
         private getDashboardData;
-        private getQueryData;
+        private updateChartData;
+        private renderChart;
         private initChart;
-        private resizeCharts;
-        init(): void;
+        private resizeChart;
+        init(): Promise<void>;
         render(): any;
     }
 }

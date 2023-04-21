@@ -36,7 +36,7 @@ export class DunePieChart extends Module {
 
   private initPieChart() {
     if (!this.pieChart) return;
-    const { options, chartData } = this.data;
+    const { options, chartData, theme } = this.data;
     const { columns, data } = chartData;
     const { columnMapping, seriesOptions, legend, showDataLabels, valuesOptions, numberFormat } = options;
     let xCol = '', yCol = '';
@@ -107,6 +107,9 @@ export class DunePieChart extends Module {
       ]
     };
     this.pieChart.data = _chartData;
+    if (theme) {
+      this.pieChart.theme = theme;
+    }
     this.pieChart.drawChart();
   }
 

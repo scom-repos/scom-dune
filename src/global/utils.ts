@@ -30,19 +30,17 @@ export const formatNumber = (num: number, options?: { format?: string, decimals?
 }
 
 export const formatNumberByFormat = (num: number, format: string) => {
-  const separator = format.indexOf(",") !== -1 ? "," : ".";
-  const decimalSeparator = format.indexOf(".") !== -1 ? "." : ",";
-  const currencySymbol = format.indexOf("$") !== -1 ? "$" : "";
   const decimalPlaces = format.split(".")[1] ? format.split(".").length : 0;
-
+  if (format.includes('%')) {
+    return (num * 100).toFixed(decimalPlaces) + '%';
+  }
+  const currencySymbol = format.indexOf("$") !== -1 ? "$" : "";
   const roundedNum = num.toFixed(decimalPlaces);
   const parts = roundedNum.split(".");
-  const integerPart = parts[0];
   const decimalPart = parts.length > 1 ? parts[1] : "";
+  const integerPart = formatNumber(parseInt(parts[0]), { decimals: decimalPart.length });
 
-  const integerWithSeparator = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, separator);
-
-  return currencySymbol + integerWithSeparator + (decimalPart ? decimalSeparator + decimalPart.slice(0, decimalPlaces) : "");
+  return `${currencySymbol}${integerPart}`;
 }
 
 export const getChartType = (type: string, defaultType?: string) => {

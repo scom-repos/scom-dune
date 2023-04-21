@@ -66,7 +66,7 @@ export class DuneDefaultChart extends Module {
 
   private initDefaultChart() {
     if (!this.defaultChart) return;
-    const { options, chartData } = this.data;
+    const { options, chartData, theme } = this.data;
     const { columns, data } = chartData;
     const { columnMapping, series, seriesOptions, numberFormatRightYAxisSeries, legend, globalSeriesType, showDataLabels, xAxis, yAxis, numberFormat } = options;
     const xTitle = xAxis?.title?.text;
@@ -89,20 +89,30 @@ export class DuneDefaultChart extends Module {
     const types = Object.values(seriesOptions);
     const type = types[0]?.type;
     const isTypeDifferent = types.some(s => s.type !== type);
-    let rightFormat: string;
+    const yAxisLenght = options.yAxis?.length;
+    let rightFormat: string[] = [];
     let _series = [];
     if (seriesCol) {
       const group = this.groupByCategory(data, seriesCol, xCol, yCol);
       const times = this.extractUniqueTimes(data, xCol);
       _series = Object.keys(group).map(v => {
-        const seriesOpt = seriesOptions[v];
+        const seriesOpt = seriesOptions[v] || {};
         const _data = this.concatUnique(times, group[v]);
+        if (yAxisLenght > 1 && seriesOpt.yAxis === yAxisLenght - 1) {
+          rightFormat.push(v);
+        }
+        const isArea = !seriesOpt.type || seriesOpt.type === 'area';
+        const lineStyle = isArea ? {
+          border: 'transparent',
+          width: 0
+        } : undefined;
         return {
           name: v,
-          type: getChartType(seriesOpt?.type || globalSeriesType, 'line'),
-          stack: series?.stacking === 'stack' ? 'Total' : undefined,
-          itemStyle: seriesOpt?.color ? { color: seriesOpt.color } : undefined,
-          areaStyle: !seriesOpt?.type || seriesOpt.type === 'area' ? {} : undefined,
+          type: getChartType(seriesOpt.type || globalSeriesType, 'line'),
+          stack: series?.stacking === 'stack' ? (isNaN(seriesOpt.yAxis) ? 'Total' : `Total_${seriesOpt.type}_${seriesOpt.yAxis}`) : undefined,
+          itemStyle: seriesOpt.color ? { color: seriesOpt.color } : undefined,
+          lineStyle,
+          areaStyle: isArea ? {} : undefined,
           emphasis: {
             focus: 'series'
           },
@@ -114,12 +124,21 @@ export class DuneDefaultChart extends Module {
     } else {
       _series = Object.keys(seriesOptions).map(v => {
         const seriesOpt = seriesOptions[v];
+        if (yAxisLenght > 1 && seriesOpt?.yAxis === yAxisLenght - 1) {
+          rightFormat.push(seriesOpt?.name || v);
+        }
+        const isArea = seriesOpt?.type === 'area';
+        const lineStyle = isArea ? {
+          border: 'transparent',
+          width: 0
+        } : undefined;
         return {
-          name: seriesOpt?.name || v,
+          name: seriesOpt.name || v,
           type: getChartType(seriesOpt?.type || globalSeriesType, 'line'),
-          stack: series?.stacking === 'stack' ? 'Total' : undefined,
-          itemStyle: seriesOpt?.color ? { color: seriesOpt.color } : undefined,
-          areaStyle: !seriesOpt?.type || seriesOpt.type === 'area' ? {} : undefined,
+          stack: series?.stacking === 'stack' ? (isNaN(seriesOpt.yAxis) ? 'Total' : `Total_${seriesOpt.type}_${seriesOpt.yAxis}`) : undefined,
+          itemStyle: seriesOpt.color ? { color: seriesOpt.color } : undefined,
+          lineStyle,
+          areaStyle: isArea ? {} : undefined,
           emphasis: {
             focus: 'series'
           },
@@ -130,7 +149,8 @@ export class DuneDefaultChart extends Module {
               return formatNumber(params.value);
             }
           } : undefined,
-          data: data.map(m => [new Date(m[xCol]), m[v]]),
+          data: data.map(m => [new Date(m[xCol]), m[percentValues ? `${v}_percent` : v]]),
+          z: seriesOpt.zIndex,
           yAxisIndex: isTypeDifferent && seriesOpt ? seriesOpt.yAxis : undefined
         }
       });
@@ -172,15 +192,20 @@ export class DuneDefaultChart extends Module {
     };
     let _yAxis: any = isTypeDifferent ? [] : defaultYAxis;
     if (isTypeDifferent) {
-      for (let i = 0; i < _series.length; i++) {
-        if (i < _series.length - 1) {
+      for (let i = 0; i < yAxisLenght; i++) {
+        if (i < yAxisLenght - 1) {
           _yAxis.push(defaultYAxis);
         } else {
           _yAxis.push({
             ...defaultYAxis,
-            position: 'right'
+            position: 'right',
+            axisLabel: {
+              ...defaultYAxis.axisLabel,
+              formatter: (value: number, index: number) => {
+                return formatNumber(value, { decimals: 2, percentValues, format: numberFormatRightYAxisSeries })
+              }
+            }
           });
-          rightFormat = _series.sort((a, b) => a.yAxisIndex - b.yAxisIndex)[i].name;
         }
       }
     }
@@ -210,7 +235,9 @@ export class DuneDefaultChart extends Module {
             res += `<div style="display: flex; justify-content: space-between; gap: 10px"><span>${params[0].marker} ${params[0].seriesName}</span> ${formatNumber(params[0].value[1], { percentValues })}</div>`;
           } else {
             for (const param of params) {
-              res += `<div style="display: flex; justify-content: space-between; gap: 10px"><span>${param.marker} ${param.seriesName}</span> ${formatNumber(param.value[1], { format: rightFormat === param.seriesName && numberFormatRightYAxisSeries ? numberFormatRightYAxisSeries : undefined, percentValues })}</div>`
+              if (param.value[1] !== null) {
+                res += `<div style="display: flex; justify-content: space-between; gap: 10px"><span>${param.marker} ${param.seriesName}</span> ${formatNumber(param.value[1], { format: rightFormat.includes(param.seriesName) && numberFormatRightYAxisSeries ? numberFormatRightYAxisSeries : undefined, percentValues })}</div>`;
+              }
             }
           }
           return res;
@@ -245,6 +272,9 @@ export class DuneDefaultChart extends Module {
       series: _series
     };
     this.defaultChart.data = _chartData;
+    if (theme) {
+      this.defaultChart.theme = theme;
+    }
     this.defaultChart.drawChart();
   }
 

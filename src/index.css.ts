@@ -7,3 +7,17 @@ export const containerStyle = Styles.style({
   margin: '0 auto',
   padding: 10
 })
+
+export const duneChartStyle = Styles.style({
+  display: 'block',
+  $nest: {
+    '&.dune-chart--dark': {
+      background: '#100c2a',
+      $nest: {
+        'i-label': {
+          color: '#fff !important'
+        }
+      }
+    }
+  }
+})

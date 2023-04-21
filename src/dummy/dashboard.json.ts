@@ -1536,7 +1536,381 @@ export const dashboards = {
                       "__typename": "visualizations"
                   },
                   "__typename": "visualization_widgets"
-              }
+              },
+              {
+                "id": 416309,
+                "created_at": "2022-08-12T10:22:52.398565+00:00",
+                "updated_at": "2023-04-20T07:24:55.367512+00:00",
+                "options": {
+                    "position": {
+                        "col": 1,
+                        "row": 24,
+                        "sizeX": 5,
+                        "sizeY": 9
+                    }
+                },
+                "visualization": {
+                    "id": 1972041,
+                    "type": "chart",
+                    "name": "$RDNT Price Chart",
+                    "options": {
+                        "sortX": true,
+                        "xAxis": {
+                            "type": "-"
+                        },
+                        "yAxis": [
+                            {
+                                "type": "-",
+                                "tickFormat": "$0[].00a"
+                            },
+                            {
+                                "type": "-",
+                                "tickFormat": "$0[].00a"
+                            }
+                        ],
+                        "legend": {
+                            "enabled": false
+                        },
+                        "reverseX": false,
+                        "numberFormat": "$0[.,].00",
+                        "columnMapping": {
+                            "time": "x",
+                            "rdnt_price": "y",
+                            "red_volume": "y",
+                            "green_volume": "y"
+                        },
+                        "seriesOptions": {
+                            "rdnt_price": {
+                                "name": "Price",
+                                "type": "area",
+                                "yAxis": 0,
+                                "zIndex": 0
+                            },
+                            "red_volume": {
+                                "name": "$USD Volume",
+                                "type": "column",
+                                "color": "#f51818",
+                                "yAxis": 1,
+                                "zIndex": 2
+                            },
+                            "green_volume": {
+                                "name": "$USD Volume",
+                                "type": "column",
+                                "color": "#4fa0e0",
+                                "yAxis": 1,
+                                "zIndex": 1
+                            }
+                        },
+                        "valuesOptions": {},
+                        "globalSeriesType": "line",
+                        "numberFormatRightYAxisSeries": "$0[.,].00"
+                    },
+                    "created_at": "2022-08-10T03:35:14.946473+00:00",
+                    "query_details": {
+                        "query_id": 1154848,
+                        "name": "RDNT Price Chart on Arbitrum and BSC",
+                        "description": "RDNT Price and Volume Chart on Arbitrum and BSC",
+                        "show_watermark": true,
+                        "parameters": [],
+                        "dataset_id": 1,
+                        "user": {
+                            "id": 26781,
+                            "name": "shogun",
+                            "profile_image_url": "https://prod-dune-media.s3.eu-west-1.amazonaws.com/profile_img_a2d00e92-d62e-4d60-a92d-f15cf1421ee9_tgatu.png",
+                            "__typename": "users"
+                        },
+                        "team": null,
+                        "__typename": "query_details"
+                    },
+                    "__typename": "visualizations"
+                },
+                "__typename": "visualization_widgets"
+            },
+            {
+                "id": 889832,
+                "created_at": "2023-02-11T10:46:06.481704+00:00",
+                "updated_at": "2023-04-20T07:24:55.367512+00:00",
+                "options": {
+                    "position": {
+                        "col": 0,
+                        "row": 36,
+                        "sizeX": 6,
+                        "sizeY": 7
+                    }
+                },
+                "visualization": {
+                    "id": 3290785,
+                    "type": "chart",
+                    "name": "Holders OverTime",
+                    "options": {
+                        "sortX": true,
+                        "xAxis": {
+                            "type": "-"
+                        },
+                        "yAxis": [
+                            {
+                                "type": "linear"
+                            },
+                            {
+                                "type": "linear"
+                            }
+                        ],
+                        "legend": {
+                            "enabled": false
+                        },
+                        "reverseX": false,
+                        "columnMapping": {
+                            "time": "x",
+                            "red_change": "y",
+                            "green_change": "y",
+                            "total_holders": "y"
+                        },
+                        "seriesOptions": {
+                            "red_change": {
+                                "name": "Change",
+                                "type": "column",
+                                "color": "#ff0000",
+                                "yAxis": 1,
+                                "zIndex": 2
+                            },
+                            "green_change": {
+                                "name": "Change",
+                                "type": "column",
+                                "color": "#00ff17",
+                                "yAxis": 1,
+                                "zIndex": 1
+                            },
+                            "total_holders": {
+                                "name": "Total Holders",
+                                "type": "line",
+                                "yAxis": 0,
+                                "zIndex": 0
+                            }
+                        },
+                        "valuesOptions": {},
+                        "globalSeriesType": "line"
+                    },
+                    "created_at": "2023-02-11T10:17:12.865265+00:00",
+                    "query_details": {
+                        "query_id": 947867,
+                        "name": "RDNT and RDNT V2 Holders Overtime",
+                        "description": "",
+                        "show_watermark": true,
+                        "parameters": [],
+                        "dataset_id": 11,
+                        "user": {
+                            "id": 26781,
+                            "name": "shogun",
+                            "profile_image_url": "https://prod-dune-media.s3.eu-west-1.amazonaws.com/profile_img_a2d00e92-d62e-4d60-a92d-f15cf1421ee9_tgatu.png",
+                            "__typename": "users"
+                        },
+                        "team": null,
+                        "__typename": "query_details"
+                    },
+                    "__typename": "visualizations"
+                },
+                "__typename": "visualization_widgets"
+            },
+            {
+                "id": 774920,
+                "created_at": "2023-01-15T03:09:40.193204+00:00",
+                "updated_at": "2023-04-20T07:24:55.367512+00:00",
+                "options": {
+                    "position": {
+                        "col": 4,
+                        "row": 46,
+                        "sizeX": 2,
+                        "sizeY": 9
+                    }
+                },
+                "visualization": {
+                    "id": 3115958,
+                    "type": "chart",
+                    "name": "RDNT/WETH LP Staked Supply",
+                    "options": {
+                        "sortX": true,
+                        "xAxis": {
+                            "type": "-"
+                        },
+                        "yAxis": [
+                            {
+                                "type": "linear"
+                            }
+                        ],
+                        "legend": {
+                            "enabled": true
+                        },
+                        "series": {
+                            "stacking": "stack",
+                            "percentValues": true
+                        },
+                        "reverseX": false,
+                        "columnMapping": {
+                            "time": "x",
+                            "masterchef_pool": "y",
+                            "non_masterchef_pool": "y"
+                        },
+                        "seriesOptions": {
+                            "masterchef_pool": {
+                                "name": "Staked",
+                                "type": "area",
+                                "color": "#2793cb",
+                                "yAxis": 0,
+                                "zIndex": 0
+                            },
+                            "non_masterchef_pool": {
+                                "name": "Unstaked",
+                                "type": "area",
+                                "color": "#ff0000",
+                                "yAxis": 0,
+                                "zIndex": 1
+                            }
+                        },
+                        "valuesOptions": {},
+                        "globalSeriesType": "area"
+                    },
+                    "created_at": "2023-01-15T02:53:31.494863+00:00",
+                    "query_details": {
+                        "query_id": 283918,
+                        "name": "Radiant Capital Pool2 Staking LP",
+                        "description": "",
+                        "show_watermark": true,
+                        "parameters": [],
+                        "dataset_id": 11,
+                        "user": {
+                            "id": 26781,
+                            "name": "shogun",
+                            "profile_image_url": "https://prod-dune-media.s3.eu-west-1.amazonaws.com/profile_img_a2d00e92-d62e-4d60-a92d-f15cf1421ee9_tgatu.png",
+                            "__typename": "users"
+                        },
+                        "team": null,
+                        "__typename": "query_details"
+                    },
+                    "__typename": "visualizations"
+                },
+                "__typename": "visualization_widgets"
+            },
+            {
+                "id": 515766,
+                "created_at": "2022-10-01T02:15:06.598275+00:00",
+                "updated_at": "2023-04-20T07:24:55.367512+00:00",
+                "options": {
+                    "position": {
+                        "col": 0,
+                        "row": 169,
+                        "sizeX": 6,
+                        "sizeY": 10
+                    }
+                },
+                "visualization": {
+                    "id": 2279265,
+                    "type": "chart",
+                    "name": "Reserve Cumulative Value",
+                    "options": {
+                        "sortX": true,
+                        "xAxis": {
+                            "type": "-"
+                        },
+                        "yAxis": [
+                            {
+                                "type": "linear",
+                                "tickFormat": "$0[].0a"
+                            },
+                            {
+                                "type": "linear",
+                                "tickFormat": "0[].0%"
+                            }
+                        ],
+                        "legend": {
+                            "enabled": true
+                        },
+                        "series": {
+                            "stacking": "stack"
+                        },
+                        "reverseX": false,
+                        "numberFormat": "$0[].00a",
+                        "columnMapping": {
+                            "": "y",
+                            "time": "x",
+                            "market": "series",
+                            "cumulative_dai": "y",
+                            "cumulative_diff": "y",
+                            "cumulative_usdc": "y",
+                            "cumulative_usdt": "y",
+                            "cumulative_wbtc": "y",
+                            "cumulative_weth": "y",
+                            "cumulative_tokens_value": "y"
+                        },
+                        "seriesOptions": {
+                            "cumulative_dai": {
+                                "name": "DAI",
+                                "type": "area",
+                                "yAxis": 0,
+                                "zIndex": 6
+                            },
+                            "cumulative_diff": {
+                                "name": "% Change",
+                                "type": "line",
+                                "color": "#ff0000",
+                                "yAxis": 1,
+                                "zIndex": 0
+                            },
+                            "cumulative_usdc": {
+                                "name": "USDC",
+                                "type": "area",
+                                "yAxis": 0,
+                                "zIndex": 5
+                            },
+                            "cumulative_usdt": {
+                                "name": "USDT",
+                                "type": "area",
+                                "yAxis": 0,
+                                "zIndex": 2
+                            },
+                            "cumulative_wbtc": {
+                                "name": "WBTC",
+                                "type": "area",
+                                "yAxis": 0,
+                                "zIndex": 4
+                            },
+                            "cumulative_weth": {
+                                "name": "WETH",
+                                "type": "area",
+                                "yAxis": 0,
+                                "zIndex": 3
+                            },
+                            "cumulative_tokens_value": {
+                                "name": "Total",
+                                "type": "scatter",
+                                "yAxis": 0,
+                                "zIndex": 1
+                            }
+                        },
+                        "valuesOptions": {},
+                        "globalSeriesType": "area",
+                        "numberFormatRightYAxisSeries": "0[].0%"
+                    },
+                    "created_at": "2022-09-30T23:03:10.721689+00:00",
+                    "query_details": {
+                        "query_id": 1333833,
+                        "name": "Radiant Capital Reserve Markets (Weekly % change)",
+                        "description": "",
+                        "show_watermark": true,
+                        "parameters": [],
+                        "dataset_id": 1,
+                        "user": {
+                            "id": 26781,
+                            "name": "shogun",
+                            "profile_image_url": "https://prod-dune-media.s3.eu-west-1.amazonaws.com/profile_img_a2d00e92-d62e-4d60-a92d-f15cf1421ee9_tgatu.png",
+                            "__typename": "users"
+                        },
+                        "team": null,
+                        "__typename": "query_details"
+                    },
+                    "__typename": "visualizations"
+                },
+                "__typename": "visualization_widgets"
+            }
           ],
           "param_widgets": [],
           "dashboard_favorite_count_all": {

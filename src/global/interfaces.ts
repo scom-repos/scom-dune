@@ -25,7 +25,7 @@ export interface IVisualization {
 
 export interface IDuneOptions {
   columnMapping?: { [key: string]: string },
-  seriesOptions?: { [key: string]: { color?: string, type?: string, name?: string, yAxis?: number } },
+  seriesOptions?: { [key: string]: { color?: string, type?: string, name?: string, yAxis?: number, zIndex?: number } },
   globalSeriesType?: string,
   showDataLabels?: boolean,
   numberFormatRightYAxisSeries?: string,
@@ -44,7 +44,8 @@ export interface IDuneChart {
     profile_image_url: string
   },
   name: string,
-  subName: string
+  subName: string,
+  theme?: 'light' | 'dark'
 }
 
 // Pie chart
@@ -53,7 +54,7 @@ export interface IDunePieOptions extends IDuneOptions {
 }
 
 export interface IDunePieChart extends IDuneChart {
-  options: IDunePieOptions
+  options: IDunePieOptions,
 }
 
 // Default charts
@@ -75,5 +76,5 @@ export interface IDuneDefaultChart extends IDuneChart {
 }
 
 export interface IDuneConfig {
-  url: string;
+  chartName: string;
 }
