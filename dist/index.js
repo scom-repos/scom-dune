@@ -47294,6 +47294,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             return this._data;
         }
         async setData(data) {
+            this._oldData = this._data;
             this._data = data;
             this.updateChartData();
         }
@@ -47395,12 +47396,16 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                     command: (builder, userInputData) => {
                         return {
                             execute: async () => {
-                                this._oldData = Object.assign({}, this._data);
-                                this.onUpdateBlock();
+                                if (builder === null || builder === void 0 ? void 0 : builder.setData) {
+                                    builder.setData(userInputData);
+                                }
+                                this.setData(userInputData);
                             },
                             undo: () => {
-                                this._data = Object.assign({}, this._oldData);
-                                this.onUpdateBlock();
+                                if (builder === null || builder === void 0 ? void 0 : builder.setData) {
+                                    builder.setData(this._oldData);
+                                }
+                                this.setData(this._oldData);
                             },
                             redo: () => { }
                         };

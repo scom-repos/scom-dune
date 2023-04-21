@@ -59,6 +59,7 @@ export default class ScomDune extends Module implements PageBlock {
   }
 
   async setData(data: IDuneConfig) {
+    this._oldData = this._data;
     this._data = data;
     this.updateChartData();
   }
@@ -172,12 +173,16 @@ export default class ScomDune extends Module implements PageBlock {
         command: (builder: any, userInputData: any) => {
           return {
             execute: async () => {
-              this._oldData = { ...this._data };
-              this.onUpdateBlock();
+              if (builder?.setData) {
+                builder.setData(userInputData);
+              }
+              this.setData(userInputData);
             },
             undo: () => {
-              this._data = { ...this._oldData };
-              this.onUpdateBlock();
+              if (builder?.setData) {
+                builder.setData(this._oldData);
+              }
+              this.setData(this._oldData);
             },
             redo: () => { }
           }
