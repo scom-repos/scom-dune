@@ -5,12 +5,13 @@ declare module "@scom/scom-dune/global/interfaces.ts" {
     }
     export interface IVisualization {
         id: number;
-        type: string;
+        type: 'chart' | 'counter' | 'table' | string;
         name: string;
-        options: IDuneOptions;
+        options: IDuneOptions | ICounterOptions | ITableOptions;
         query_details: {
             query_id: number;
             name: string;
+            description?: string;
             user: null | {
                 id: number;
                 name: string;
@@ -22,6 +23,18 @@ declare module "@scom/scom-dune/global/interfaces.ts" {
                 profile_image_url: string;
             };
         };
+    }
+    export interface IDuneInfo {
+        info?: {
+            id: number;
+            name: string;
+            profile_image_url: string;
+        };
+        type: 'chart' | 'counter' | 'table';
+        name: string;
+        subName: string;
+        description?: string;
+        theme?: 'light' | 'dark';
     }
     export interface IDuneOptions {
         columnMapping?: {
@@ -44,21 +57,13 @@ declare module "@scom/scom-dune/global/interfaces.ts" {
         };
         numberFormat?: string;
     }
-    export interface IDuneChart {
+    export interface IDuneChart extends IDuneInfo {
         chartData: {
             columns: string[];
             data: {
                 [key: string]: string | number;
             }[];
         };
-        info?: {
-            id: number;
-            name: string;
-            profile_image_url: string;
-        };
-        name: string;
-        subName: string;
-        theme?: 'light' | 'dark';
     }
     export interface IDunePieOptions extends IDuneOptions {
         valuesOptions: {
@@ -96,8 +101,48 @@ declare module "@scom/scom-dune/global/interfaces.ts" {
     export interface IDuneDefaultChart extends IDuneChart {
         options: IDuneDefaultOptions;
     }
+    export interface ICounterOptions {
+        counterColName: string;
+        rowNumber: number;
+        counterLabel?: string;
+        stringDecimal?: number;
+        stringPrefix?: string;
+        stringSuffix?: string;
+        coloredPositiveValues?: boolean;
+        coloredNegativeValues?: boolean;
+    }
+    export interface IDuneCounter extends IDuneInfo {
+        options: ICounterOptions;
+        counterData: {
+            columns: string[];
+            data: {
+                [key: string]: string | number;
+            }[];
+        };
+    }
+    export interface ITableOptions {
+        columns: {
+            name: string;
+            title?: string;
+            alignContent?: string;
+            isHidden?: boolean;
+            numberFormat?: string;
+            type?: 'normal' | 'progressbar' | string;
+            coloredPositiveValues?: boolean;
+            coloredNegativeValues?: boolean;
+        }[];
+    }
+    export interface IDuneTable extends IDuneInfo {
+        options: ITableOptions;
+        tableData: {
+            columns: string[];
+            data: {
+                [key: string]: string | number;
+            }[];
+        };
+    }
     export interface IDuneConfig {
-        chartName: string;
+        visualizationName: string;
     }
 }
 /// <amd-module name="@scom/scom-dune/global/utils.ts" />
@@ -107,7 +152,8 @@ declare module "@scom/scom-dune/global/utils.ts" {
         decimals?: number;
         percentValues?: boolean;
     }) => any;
-    export const formatNumberByFormat: (num: number, format: string) => any;
+    export const formatNumberByFormat: (num: number, format: string, separators?: boolean) => any;
+    export const formatNumberWithSeparators: (value: number, precision?: number) => string;
     export const getChartType: (type: string, defaultType?: string) => string;
 }
 /// <amd-module name="@scom/scom-dune/global/index.ts" />
@@ -134,7 +180,7 @@ declare module "@scom/scom-dune/global/index.ts" {
 /// <amd-module name="@scom/scom-dune/index.css.ts" />
 declare module "@scom/scom-dune/index.css.ts" {
     export const containerStyle: string;
-    export const duneChartStyle: string;
+    export const duneStyle: string;
 }
 /// <amd-module name="@scom/scom-dune/dummy/2030664.json.ts" />
 declare module "@scom/scom-dune/dummy/2030664.json.ts" {
@@ -294,6 +340,49 @@ declare module "@scom/scom-dune/dummy/1333833.json.ts" {
             cumulative_usdc: number;
             cumulative_dai: number;
             cumulative_diff: number;
+        }[];
+    };
+}
+/// <amd-module name="@scom/scom-dune/dummy/2030584.json.ts" />
+declare module "@scom/scom-dune/dummy/2030584.json.ts" {
+    export const query_id_2030584: {
+        execution_id: string;
+        runtime_seconds: number;
+        generated_at: string;
+        columns: string[];
+        data: {
+            deposited: number;
+            depositors: number;
+            validators: number;
+            pct_of_depositors: number;
+        }[];
+    };
+}
+/// <amd-module name="@scom/scom-dune/dummy/2377304.json.ts" />
+declare module "@scom/scom-dune/dummy/2377304.json.ts" {
+    export const query_id_2377304: {
+        execution_id: string;
+        runtime_seconds: number;
+        generated_at: string;
+        columns: string[];
+        data: {
+            address: string;
+            validators: number;
+            ETH: number;
+        }[];
+    };
+}
+/// <amd-module name="@scom/scom-dune/dummy/2377402.json.ts" />
+declare module "@scom/scom-dune/dummy/2377402.json.ts" {
+    export const query_id_2377402: {
+        execution_id: string;
+        runtime_seconds: number;
+        generated_at: string;
+        columns: string[];
+        data: {
+            address: string;
+            validators: number;
+            ETH: number;
         }[];
     };
 }
@@ -2616,6 +2705,70 @@ declare module "@scom/scom-dune/charts/index.tsx" {
     export { DunePieChart } from "@scom/scom-dune/charts/dunePieChart.tsx";
     export { DuneDefaultChart } from "@scom/scom-dune/charts/duneDefaultChart.tsx";
 }
+/// <amd-module name="@scom/scom-dune/counter/index.tsx" />
+declare module "@scom/scom-dune/counter/index.tsx" {
+    import { Container, ControlElement, Module } from '@ijstech/components';
+    import { IDuneCounter } from "@scom/scom-dune/global/index.ts";
+    interface IDuneCounterElement extends ControlElement {
+        data: IDuneCounter;
+    }
+    global {
+        namespace JSX {
+            interface IntrinsicElements {
+                ['scom-dune-counter']: IDuneCounter;
+            }
+        }
+    }
+    export default class DuneCounter extends Module {
+        private vStackCounter;
+        private _data;
+        set data(value: IDuneCounter);
+        get data(): IDuneCounter;
+        constructor(parent?: Container, options?: IDuneCounterElement);
+        private formatCounter;
+        private initCounter;
+        init(): void;
+        render(): any;
+    }
+}
+/// <amd-module name="@scom/scom-dune/table/index.tsx" />
+declare module "@scom/scom-dune/table/index.tsx" {
+    import { Container, ControlElement, Module } from '@ijstech/components';
+    import { IDuneTable } from "@scom/scom-dune/global/index.ts";
+    interface IDuneTableElement extends ControlElement {
+        data: IDuneTable;
+    }
+    global {
+        namespace JSX {
+            interface IntrinsicElements {
+                ['scom-dune-table']: IDuneTable;
+            }
+        }
+    }
+    export default class DuneTable extends Module {
+        private tableElm;
+        private paginationElm;
+        private lbTotal;
+        private inputSearch;
+        private list;
+        private _data;
+        private totalPage;
+        private pageNumber;
+        private itemStart;
+        private itemEnd;
+        set data(value: IDuneTable);
+        get data(): IDuneTable;
+        private get dataListFiltered();
+        private get dataListPagination();
+        constructor(parent?: Container, options?: IDuneTableElement);
+        private initTable;
+        private renderTable;
+        private onSelectIndex;
+        private onSearch;
+        init(): void;
+        render(): any;
+    }
+}
 /// <amd-module name="@scom/scom-dune" />
 declare module "@scom/scom-dune" {
     import { Module, ControlElement, Container, IDataSchema } from '@ijstech/components';
@@ -2630,9 +2783,9 @@ declare module "@scom/scom-dune" {
         }
     }
     export default class ScomDune extends Module implements PageBlock {
-        private hStackDune;
+        private vStackDune;
         private dashboard;
-        private chartData;
+        private duneData;
         private _oldData;
         private _data;
         private oldTag;
@@ -2687,10 +2840,12 @@ declare module "@scom/scom-dune" {
         }[];
         private onUpdateBlock;
         private getDashboardData;
-        private updateChartData;
+        private updateDuneData;
+        private renderDuneUI;
+        private renderCounter;
+        private renderTable;
         private renderChart;
-        private initChart;
-        private resizeChart;
+        private resizeDune;
         init(): Promise<void>;
         render(): any;
     }
