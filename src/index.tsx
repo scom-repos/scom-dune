@@ -9,12 +9,15 @@ import {
   HStack,
   Image,
   Label,
-  LineChart
+  LineChart,
+  VStack
 } from '@ijstech/components';
-import { PageBlock, IDuneConfig, IDunePieChart, IVisualizationWidgets, IDuneDefaultChart } from './global/index';
-import { containerStyle, duneChartStyle } from './index.css';
+import { PageBlock, IDuneConfig, IDunePieChart, IVisualizationWidgets, IDuneDefaultChart, IDuneCounter, IDuneInfo, IDuneTable } from './global/index';
+import { containerStyle, duneStyle } from './index.css';
 import { dashboards, queryIdData } from './dummy/index';
 import { DuneDefaultChart, DunePieChart } from './charts/index';
+import DuneCounter from './counter/index';
+import DuneTable from './table/index';
 
 interface ScomSocialMediaElement extends ControlElement, IDuneConfig {
 
@@ -31,12 +34,12 @@ declare global {
 @customModule
 @customElements('i-scom-dune')
 export default class ScomDune extends Module implements PageBlock {
-  private hStackDune: Panel;
+  private vStackDune: VStack;
   private dashboard: IVisualizationWidgets[] = [];
-  private chartData: IDunePieChart | IDuneDefaultChart;
+  private duneData: IDunePieChart | IDuneDefaultChart | IDuneCounter | IDuneTable;
 
-  private _oldData: IDuneConfig = { chartName: '' };
-  private _data: IDuneConfig = { chartName: '' };
+  private _oldData: IDuneConfig = { visualizationName: '' };
+  private _data: IDuneConfig = { visualizationName: '' };
   private oldTag: any = {};
   tag: any = {};
   defaultEdit: boolean = true;
@@ -61,7 +64,7 @@ export default class ScomDune extends Module implements PageBlock {
   async setData(data: IDuneConfig) {
     this._oldData = this._data;
     this._data = data;
-    this.updateChartData();
+    this.updateDuneData();
   }
 
   getTag() {
@@ -70,11 +73,11 @@ export default class ScomDune extends Module implements PageBlock {
 
   async setTag(value: any) {
     this.tag = value || {};
-    this.width = this.tag.width;
+    this.width = this.tag.width || 700;
     if (this.tag.theme === 'dark') {
-      this.classList.add('dune-chart--dark');
+      this.classList.add('dune-dark--theme');
     } else {
-      this.classList.remove('dune-chart--dark');
+      this.classList.remove('dune-dark--theme');
     }
     this.onUpdateBlock();
   }
@@ -89,16 +92,16 @@ export default class ScomDune extends Module implements PageBlock {
   }
 
   async edit() {
-    // this.hStackDune.visible = false
+    // this.vStackDune.visible = false
   }
 
   async confirm() {
     this.onUpdateBlock();
-    // this.hStackDune.visible = true
+    // this.vStackDune.visible = true
   }
 
   async discard() {
-    // this.hStackDune.visible = true
+    // this.vStackDune.visible = true
   }
 
   async config() { }
@@ -107,22 +110,26 @@ export default class ScomDune extends Module implements PageBlock {
     const propertiesSchema = {
       type: 'object',
       properties: {
-        chartName: {
+        visualizationName: {
           type: 'string',
           enum: [
-            'Ethereum Beacon Chain Deposits Entity',
-            'Chart (ETH Staked - Cumulative)',
-            'Liquid Staking validators - All',
-            'ETH withdrawals cumsum (ETH Withdrawals after Shanghai Unlock)',
-            'Validators (ETH Withdrawals after Shanghai Unlock)',
-            'ETH withdrawals (ETH Withdrawals after Shanghai Unlock)',
-            'ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
-            'Validators and ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
-            'ETH withdrawals (ETH Withdrawals after Shanghai Unlock vs ETH price)',
-            '$RDNT Price Chart (RDNT Price Chart on Arbitrum and BSC)',
-            'Reserve Cumulative Value (Radiant Capital Reserve Markets (Weekly % change))',
-            'RDNT/WETH LP Staked Supply (Radiant Capital Pool2 Staking LP)',
-            'Holders OverTime (RDNT and RDNT V2 Holders Overtime)'
+            '[Chart] Ethereum Beacon Chain Deposits Entity',
+            '[Counter] ETH deposited (Ethereum Beacon Chain Deposits)',
+            '[Table] Ethereum Beacon Chain Deposits Entity',
+            '[Table] [Rewards] Top ETH withdraw recipients after Shanghai Unlock',
+            '[Table] [Full withdraw] Top ETH withdraw recipients after Shanghai Unlock',
+            '[Chart] Chart (ETH Staked - Cumulative)',
+            '[Chart] Liquid Staking validators - All',
+            '[Chart] ETH withdrawals cumsum (ETH Withdrawals after Shanghai Unlock)',
+            '[Chart] Validators (ETH Withdrawals after Shanghai Unlock)',
+            '[Chart] ETH withdrawals (ETH Withdrawals after Shanghai Unlock)',
+            '[Chart] ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
+            '[Chart] Validators and ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
+            '[Chart] ETH withdrawals (ETH Withdrawals after Shanghai Unlock vs ETH price)',
+            '[Chart] $RDNT Price Chart (RDNT Price Chart on Arbitrum and BSC)',
+            '[Chart] Reserve Cumulative Value (Radiant Capital Reserve Markets (Weekly % change))',
+            '[Chart] RDNT/WETH LP Staked Supply (Radiant Capital Pool2 Staking LP)',
+            '[Chart] Holders OverTime (RDNT and RDNT V2 Holders Overtime)'
           ],
           required: true
         }
@@ -215,24 +222,40 @@ export default class ScomDune extends Module implements PageBlock {
 
   private onUpdateBlock() {
     if (this._data) {
-      this.renderChart();
+      switch (this.duneData?.type) {
+        case 'chart':
+          this.renderChart();
+          break;
+        case 'counter':
+          this.renderCounter();
+          break;
+        case 'table':
+          this.renderTable();
+          break;
+        default:
+          this.vStackDune?.clearInnerHTML();
+      }
     }
   }
 
   private async getDashboardData() {
     const _dashboard = dashboards;
-    if (_dashboard?.dashboards?.length && _dashboard.dashboards[0].visualization_widgets?.length) {
-      this.dashboard = _dashboard.dashboards[0].visualization_widgets.filter(v => v.visualization?.type === 'chart').sort((a, b) => a.id - b.id);
+    if (_dashboard?.dashboards?.length && _dashboard.dashboards[0].visualization_widgets) {
+      this.dashboard = _dashboard.dashboards[0].visualization_widgets;
     } else {
       this.dashboard = [];
     }
   }
 
-  private async updateChartData() {
-    if (this._data?.chartName) {
+  private async updateDuneData() {
+    if (this._data?.visualizationName) {
       // TODO - fetch data
-      const chartInfo = this.dashboard.find(v => {
-        const { name, query_details } = v.visualization;
+      const prefixRegex = /^\[[^\]]+\]\s+/;
+      const visualizationName = this._data.visualizationName.replace(prefixRegex, '');
+      const visualizationType = this._data.visualizationName.match(prefixRegex)[0].trim().toLowerCase().slice(1, -1);
+      const duneInfo = this.dashboard.find(v => {
+        const { name, query_details, type } = v.visualization;
+        if (type !== visualizationType) return false;
         const subName = query_details.name;
         let fullName = name;
         if (fullName && subName) {
@@ -240,49 +263,47 @@ export default class ScomDune extends Module implements PageBlock {
         } else if (subName) {
           fullName = subName;
         }
-        return fullName === this._data.chartName;
+        if (type === 'table' && query_details.description) {
+          fullName = `[${query_details.description}] ${fullName}`;
+        }
+        return fullName === visualizationName;
       });
 
-      if (chartInfo) {
-        const { options, name, query_details } = chartInfo.visualization;
-        const chartOpt = {
+      if (duneInfo) {
+        const { options, name, query_details, type } = duneInfo.visualization;
+        const duneData = queryIdData[query_details.query_id];
+        const duneOpt = {
           options,
           name,
+          type,
           subName: query_details.name,
           info: query_details.user || query_details.team,
-          chartData: queryIdData[query_details.query_id]
+          description: query_details.description,
+          chartData: type === 'chart' ? duneData : undefined,
+          counterData: type === 'counter' ? duneData : undefined,
+          tableData: type === 'table' ? duneData : undefined
         }
-        this.chartData = chartOpt as IDunePieChart | IDuneDefaultChart;
+        this.duneData = duneOpt as IDunePieChart | IDuneDefaultChart | IDuneCounter;
       } else {
-        this.chartData = null;
+        this.duneData = null;
       }
     } else {
-      this.chartData = null;
+      this.duneData = null;
     }
-    this.renderChart();
+    this.onUpdateBlock();
   }
 
-  private async renderChart() {
-    this.hStackDune.clearInnerHTML();
-    if (this.chartData) {
-      this.initChart(this.chartData as IDunePieChart | IDuneDefaultChart, this.chartData.options.globalSeriesType);
-    }
-  }
-
-  private initChart(chart: IDunePieChart | IDuneDefaultChart, type: string) {
-    this.hStackDune.clearInnerHTML();
-    const { name, subName, info } = chart;
-    const { width, height, theme } = this.tag || {};
-    const hStack = new HStack(this.hStackDune, {
+  private renderDuneUI(duneInfo: IDuneInfo) {
+    this.vStackDune.clearInnerHTML();
+    const { name, subName, info } = duneInfo;
+    const hStack = new HStack(this.vStackDune, {
       gap: 10,
-      width: width || 700,
+      width: '100%',
       maxWidth: '100%',
       margin: { left: 'auto', right: 'auto' },
-      padding: { top: 10, bottom: 10, left: 10, right: 10 },
       verticalAlignment: 'center',
       wrap: 'wrap'
     });
-    hStack.style.boxShadow = 'rgba(0, 0, 0, 0.16) 0px 1px 4px';
     if (name) {
       new Label(hStack, {
         caption: name,
@@ -314,58 +335,142 @@ export default class ScomDune extends Module implements PageBlock {
         caption: info.name,
       });
     }
-    let chartElm: DunePieChart | DuneDefaultChart;
-    if (type === 'pie') {
-      chartElm = new DunePieChart(undefined, {
-        width: '100%',
-        height: height || 500,
-        data: {
-          ...chart,
-          theme
-        } as IDunePieChart
-      });
-    } else {
-      chartElm = new DuneDefaultChart(undefined, {
-        width: '100%',
-        height: height || 500,
-        data: {
-          ...chart,
-          theme
-        } as IDuneDefaultChart
-      });
-    }
-    hStack.appendChild(chartElm);
+    return hStack;
   }
 
-  private resizeChart() {
-    const chart = this.hStackDune.querySelector('[role=dune-chart]');
-    (chart as LineChart)?.resize();
+  private async renderCounter() {
+    this.vStackDune.clearInnerHTML();
+    if (this.duneData) {
+      this.height = this.tag?.height || 200;
+      const data = this.duneData as IDuneCounter;
+      const hStack = this.renderDuneUI(data);
+      const theme = this.duneData.theme;
+      if (theme !== 'dark') {
+        this.vStackDune.background = { color: '#FDF4F5' };
+      }
+      const counterElm = new DuneCounter(undefined, {
+        width: '100%',
+        height: `calc(100% - ${hStack.offsetHeight + 30}px)`,
+        data
+      });
+      this.vStackDune.clearInnerHTML();
+      this.vStackDune.appendChild(hStack);
+      this.vStackDune.appendChild(counterElm);
+    }
+  }
+
+  private async renderTable() {
+    this.vStackDune.clearInnerHTML();
+    this.vStackDune.background = { color: 'transparent' };
+    if (this.duneData) {
+      this.height = this.tag?.height || 500;
+      const data = this.duneData as IDuneTable;
+      const hStack = this.renderDuneUI(data);
+      let _offset = hStack.offsetHeight;
+      if (data.description) {
+        const lb = new Label(hStack, {
+          caption: data.description,
+          width: '100%',
+          font: { size: '12px' }
+        });
+        lb.style.fontStyle = 'italic';
+        _offset += (lb.offsetHeight - 5);
+      }
+      const tableElm = new DuneTable(undefined, {
+        width: '100%',
+        height: `calc(100% - ${_offset + 30}px)`,
+        data
+      });
+      this.vStackDune.clearInnerHTML();
+      this.vStackDune.appendChild(hStack);
+      this.vStackDune.appendChild(tableElm);
+    }
+  }
+
+  private async renderChart() {
+    this.vStackDune.clearInnerHTML();
+    this.vStackDune.background = { color: 'transparent' };
+    if (this.duneData) {
+      this.height = this.tag?.height || 500;
+      const data = this.duneData as IDunePieChart | IDuneDefaultChart;
+      const hStack = this.renderDuneUI(data);
+      const { height, theme } = this.tag || {};
+      let chartElm: DunePieChart | DuneDefaultChart;
+      if (data.options.globalSeriesType === 'pie') {
+        chartElm = new DunePieChart(undefined, {
+          width: '100%',
+          height: `calc(100% - ${hStack.offsetHeight + 30}px)`,
+          data: {
+            ...data,
+            theme
+          } as IDunePieChart
+        });
+      } else {
+        chartElm = new DuneDefaultChart(undefined, {
+          width: '100%',
+          height: `calc(100% - ${hStack.offsetHeight + 30}px)`,
+          data: {
+            ...data,
+            theme
+          } as IDuneDefaultChart
+        });
+      }
+      this.vStackDune.clearInnerHTML();
+      this.vStackDune.appendChild(hStack);
+      this.vStackDune.appendChild(chartElm);
+    }
+  }
+
+  private resizeDune() {
+    switch (this.duneData?.type) {
+      case 'chart':
+        const chart = this.vStackDune.querySelector('[role=dune-chart]');
+        (chart as LineChart)?.resize();
+        break;
+      case 'counter':
+        this.renderCounter();
+        break;
+      case 'table':
+        this.renderTable();
+        break;
+      default:
+        this.vStackDune?.clearInnerHTML();
+    }
   }
 
   async init() {
     this.isReadyCallbackQueued = true;
     super.init();
-    this.classList.add(duneChartStyle);
+    this.classList.add(duneStyle);
     if (this.tag?.theme === 'dark') {
-      this.classList.add('dune-chart--dark');
+      this.classList.add('dune-dark--theme');
     }
+    this.width = this.tag.width || 700;
+    this.maxWidth = '100%';
+    this.vStackDune.style.boxShadow = 'rgba(0, 0, 0, 0.16) 0px 1px 4px';
     await this.getDashboardData();
-    const chartName = this.getAttribute('chartName', true);
-    if (chartName) {
-      this.setData({ chartName });
+    const visualizationName = this.getAttribute('visualizationName', true);
+    if (visualizationName) {
+      this.setData({ visualizationName });
     }
     this.isReadyCallbackQueued = false;
     this.executeReadyCallback();
     window.addEventListener('resize', () => {
       setTimeout(() => {
-        this.resizeChart();
+        this.resizeDune();
       }, 300);
     });
   }
 
   render() {
     return (
-      <i-hstack id="hStackDune" gap={20} wrap="wrap" verticalAlignment="center" class={containerStyle} />
+      <i-vstack
+        id="vStackDune"
+        gap={20}
+        height="100%"
+        padding={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        class={containerStyle}
+      />
     )
   }
 }

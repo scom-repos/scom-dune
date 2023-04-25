@@ -4,12 +4,13 @@ export interface IVisualizationWidgets {
 
 export interface IVisualization {
   id: number,
-  type: string,
+  type: 'chart' | 'counter' | 'table' | string,
   name: string,
-  options: IDuneOptions,
+  options: IDuneOptions | ICounterOptions | ITableOptions,
   query_details: {
     query_id: number,
     name: string,
+    description?: string,
     user: null | {
       id: number,
       name: string,
@@ -23,6 +24,21 @@ export interface IVisualization {
   }
 }
 
+// Info
+export interface IDuneInfo {
+  info?: {
+    id: number,
+    name: string,
+    profile_image_url: string
+  },
+  type: 'chart' | 'counter' | 'table',
+  name: string,
+  subName: string,
+  description?: string,
+  theme?: 'light' | 'dark'
+}
+
+// Charts
 export interface IDuneOptions {
   columnMapping?: { [key: string]: string },
   seriesOptions?: { [key: string]: { color?: string, type?: string, name?: string, yAxis?: number, zIndex?: number } },
@@ -33,19 +49,11 @@ export interface IDuneOptions {
   numberFormat?: string
 }
 
-export interface IDuneChart {
+export interface IDuneChart extends IDuneInfo {
   chartData: {
     columns: string[],
     data: { [key: string]: string | number }[],
-  },
-  info?: {
-    id: number,
-    name: string,
-    profile_image_url: string
-  },
-  name: string,
-  subName: string,
-  theme?: 'light' | 'dark'
+  }
 }
 
 // Pie chart
@@ -75,6 +83,48 @@ export interface IDuneDefaultChart extends IDuneChart {
   options: IDuneDefaultOptions
 }
 
+// Counter
+export interface ICounterOptions {
+  counterColName: string,
+  rowNumber: number,
+  counterLabel?: string,
+  stringDecimal?: number,
+  stringPrefix?: string,
+  stringSuffix?: string,
+  coloredPositiveValues?: boolean,
+  coloredNegativeValues?: boolean
+}
+
+export interface IDuneCounter extends IDuneInfo {
+  options: ICounterOptions,
+  counterData: {
+    columns: string[],
+    data: { [key: string]: string | number }[],
+  }
+}
+
+// Table
+
+export interface ITableOptions {
+  columns: {
+    name: string,
+    title?: string,
+    alignContent?: string,
+    isHidden?: boolean,
+    numberFormat?: string,
+    type?: 'normal' | 'progressbar' | string,
+    coloredPositiveValues?: boolean,
+    coloredNegativeValues?: boolean
+  }[]
+}
+export interface IDuneTable extends IDuneInfo {
+  options: ITableOptions,
+  tableData: {
+    columns: string[],
+    data: { [key: string]: string | number }[],
+  }
+}
+
 export interface IDuneConfig {
-  chartName: string;
+  visualizationName: string;
 }
