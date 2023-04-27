@@ -143,6 +143,8 @@ declare module "@scom/scom-dune/global/interfaces.ts" {
     }
     export interface IDuneConfig {
         visualizationName: string;
+        showHeader?: boolean;
+        showFooter?: boolean;
     }
 }
 /// <amd-module name="@scom/scom-dune/global/utils.ts" />
@@ -2786,6 +2788,7 @@ declare module "@scom/scom-dune" {
         private vStackDune;
         private dashboard;
         private duneData;
+        private dappContainer;
         private _oldData;
         private _data;
         private oldTag;
@@ -2796,6 +2799,10 @@ declare module "@scom/scom-dune" {
         readonly onEdit: () => Promise<void>;
         static create(options?: ScomSocialMediaElement, parent?: Container): Promise<ScomDune>;
         constructor(parent?: Container, options?: ScomSocialMediaElement);
+        get showFooter(): boolean;
+        set showFooter(value: boolean);
+        get showHeader(): boolean;
+        set showHeader(value: boolean);
         getData(): IDuneConfig;
         setData(data: IDuneConfig): Promise<void>;
         getTag(): any;

@@ -12,7 +12,8 @@
     }
   },
   "dependencies": {
-    "@scom/scom-dune": "*"
+    "@scom/scom-dune": "*",
+    "@scom/scom-dapp-container": "*"
   },
   "menus": [
     {

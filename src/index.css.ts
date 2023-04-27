@@ -70,10 +70,19 @@ export const duneStyle = Styles.style({
           height: 'inherit'
         },
         'thead': {
-          background: '#ffeceb',
+          background: 'var(--background-modal)',
           position: 'sticky',
           top: 0,
           zIndex: 1
+        },
+        'tr:hover td': {
+          background: 'var(--colors-secondary-main)',
+          color: 'var(--colors-secondary-contrast_text)',
+          $nest: {
+            'i-label': {
+              color: 'var(--colors-secondary-contrast_text)'
+            }
+          }
         }
       }
     },
@@ -104,6 +113,9 @@ export const duneStyle = Styles.style({
     '::-webkit-scrollbar-thumb': {
       background: 'rgba(0, 0, 0, 0.35)',
       borderRadius: '10px'
+    },
+    '#pnlModule': {
+      height: '100%'
     }
   }
 })

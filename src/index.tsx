@@ -18,6 +18,9 @@ import { dashboards, queryIdData } from './dummy/index';
 import { DuneDefaultChart, DunePieChart } from './charts/index';
 import DuneCounter from './counter/index';
 import DuneTable from './table/index';
+import {} from '@ijstech/eth-contract'
+import {} from '@ijstech/eth-wallet'
+import ScomDappContainer from '@scom/scom-dapp-container'
 
 interface ScomSocialMediaElement extends ControlElement, IDuneConfig {
 
@@ -37,6 +40,7 @@ export default class ScomDune extends Module implements PageBlock {
   private vStackDune: VStack;
   private dashboard: IVisualizationWidgets[] = [];
   private duneData: IDunePieChart | IDuneDefaultChart | IDuneCounter | IDuneTable;
+  private dappContainer: ScomDappContainer;
 
   private _oldData: IDuneConfig = { visualizationName: '' };
   private _data: IDuneConfig = { visualizationName: '' };
@@ -55,6 +59,22 @@ export default class ScomDune extends Module implements PageBlock {
 
   constructor(parent?: Container, options?: ScomSocialMediaElement) {
     super(parent, options);
+  }
+
+  get showFooter() {
+    return this._data.showFooter ?? true
+  }
+  set showFooter(value: boolean) {
+    this._data.showFooter = value
+    if (this.dappContainer) this.dappContainer.showFooter = this.showFooter;
+  }
+
+  get showHeader() {
+    return this._data.showHeader ?? true
+  }
+  set showHeader(value: boolean) {
+    this._data.showHeader = value
+    if (this.dappContainer) this.dappContainer.showHeader = this.showHeader;
   }
 
   getData() {
@@ -248,6 +268,10 @@ export default class ScomDune extends Module implements PageBlock {
   }
 
   private async updateDuneData() {
+    if (this.dappContainer) {
+      this.dappContainer.showHeader = this.showHeader;
+      this.dappContainer.showFooter = this.showFooter;
+    }
     if (this._data?.visualizationName) {
       // TODO - fetch data
       const prefixRegex = /^\[[^\]]+\]\s+/;
@@ -392,6 +416,7 @@ export default class ScomDune extends Module implements PageBlock {
     this.vStackDune.background = { color: 'transparent' };
     if (this.duneData) {
       this.height = this.tag?.height || 500;
+      this.dappContainer.height = this.height;
       const data = this.duneData as IDunePieChart | IDuneDefaultChart;
       const hStack = this.renderDuneUI(data);
       const { height, theme } = this.tag || {};
@@ -446,6 +471,7 @@ export default class ScomDune extends Module implements PageBlock {
       this.classList.add('dune-dark--theme');
     }
     this.width = this.tag.width || 700;
+    this.dappContainer.width = this.width;
     this.maxWidth = '100%';
     this.vStackDune.style.boxShadow = 'rgba(0, 0, 0, 0.16) 0px 1px 4px';
     await this.getDashboardData();
@@ -453,6 +479,8 @@ export default class ScomDune extends Module implements PageBlock {
     if (visualizationName) {
       this.setData({ visualizationName });
     }
+    this.showHeader = this.getAttribute('showHeader', true, true);
+    this.showFooter = this.getAttribute('showFooter', true, true);
     this.isReadyCallbackQueued = false;
     this.executeReadyCallback();
     window.addEventListener('resize', () => {
@@ -464,13 +492,15 @@ export default class ScomDune extends Module implements PageBlock {
 
   render() {
     return (
-      <i-vstack
-        id="vStackDune"
-        gap={20}
-        height="100%"
-        padding={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        class={containerStyle}
-      />
+      <i-scom-dapp-container id="dappContainer" showWalletNetwork={false} display="flex" height="100%" width="100%">
+        <i-vstack
+          id="vStackDune"
+          gap={20}
+          height="100%"
+          padding={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          class={containerStyle}
+        />
+      </i-scom-dapp-container>
     )
   }
 }
