@@ -127,4 +127,6 @@ export interface IDuneTable extends IDuneInfo {
 
 export interface IDuneConfig {
   visualizationName: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
 }
