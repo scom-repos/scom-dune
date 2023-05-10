@@ -2774,7 +2774,7 @@ declare module "@scom/scom-dune/table/index.tsx" {
 /// <amd-module name="@scom/scom-dune" />
 declare module "@scom/scom-dune" {
     import { Module, ControlElement, Container, IDataSchema } from '@ijstech/components';
-    import { PageBlock, IDuneConfig } from "@scom/scom-dune/global/index.ts";
+    import { IDuneConfig } from "@scom/scom-dune/global/index.ts";
     interface ScomSocialMediaElement extends ControlElement, IDuneConfig {
     }
     global {
@@ -2784,7 +2784,7 @@ declare module "@scom/scom-dune" {
             }
         }
     }
-    export default class ScomDune extends Module implements PageBlock {
+    export default class ScomDune extends Module {
         private vStackDune;
         private dashboard;
         private duneData;
@@ -2803,47 +2803,30 @@ declare module "@scom/scom-dune" {
         set showFooter(value: boolean);
         get showHeader(): boolean;
         set showHeader(value: boolean);
-        getData(): IDuneConfig;
-        setData(data: IDuneConfig): Promise<void>;
-        getTag(): any;
-        setTag(value: any): Promise<void>;
-        getConfigSchema(): IDataSchema;
-        onConfigSave(config: any): void;
-        edit(): Promise<void>;
-        confirm(): Promise<void>;
-        discard(): Promise<void>;
-        config(): Promise<void>;
+        private getData;
+        private setData;
+        private getTag;
+        private setTag;
         private getPropertiesSchema;
         private getThemeSchema;
-        getEmbedderActions(): {
+        private _getActions;
+        getConfigurators(): {
             name: string;
-            icon: string;
-            command: (builder: any, userInputData: any) => {
-                execute: () => Promise<void>;
-                undo: () => void;
-                redo: () => void;
-            };
-            userInputDataSchema: IDataSchema;
-        }[];
-        getActions(): {
-            name: string;
-            icon: string;
-            command: (builder: any, userInputData: any) => {
-                execute: () => Promise<void>;
-                undo: () => void;
-                redo: () => void;
-            };
-            userInputDataSchema: IDataSchema;
-        }[];
-        _getActions(propertiesSchema: IDataSchema, themeSchema: IDataSchema): {
-            name: string;
-            icon: string;
-            command: (builder: any, userInputData: any) => {
-                execute: () => Promise<void>;
-                undo: () => void;
-                redo: () => void;
-            };
-            userInputDataSchema: IDataSchema;
+            target: string;
+            getActions: () => {
+                name: string;
+                icon: string;
+                command: (builder: any, userInputData: any) => {
+                    execute: () => Promise<void>;
+                    undo: () => void;
+                    redo: () => void;
+                };
+                userInputDataSchema: IDataSchema;
+            }[];
+            getData: any;
+            setData: any;
+            getTag: any;
+            setTag: any;
         }[];
         private onUpdateBlock;
         private getDashboardData;

@@ -12,7 +12,7 @@ import {
   LineChart,
   VStack
 } from '@ijstech/components';
-import { PageBlock, IDuneConfig, IDunePieChart, IVisualizationWidgets, IDuneDefaultChart, IDuneCounter, IDuneInfo, IDuneTable } from './global/index';
+import { IDuneConfig, IDunePieChart, IVisualizationWidgets, IDuneDefaultChart, IDuneCounter, IDuneInfo, IDuneTable } from './global/index';
 import { containerStyle, duneStyle } from './index.css';
 import { dashboards, queryIdData } from './dummy/index';
 import { DuneDefaultChart, DunePieChart } from './charts/index';
@@ -36,7 +36,7 @@ declare global {
 
 @customModule
 @customElements('i-scom-dune')
-export default class ScomDune extends Module implements PageBlock {
+export default class ScomDune extends Module {
   private vStackDune: VStack;
   private dashboard: IVisualizationWidgets[] = [];
   private duneData: IDunePieChart | IDuneDefaultChart | IDuneCounter | IDuneTable;
@@ -77,22 +77,27 @@ export default class ScomDune extends Module implements PageBlock {
     if (this.dappContainer) this.dappContainer.showHeader = this.showHeader;
   }
 
-  getData() {
+  private getData() {
     return this._data;
   }
 
-  async setData(data: IDuneConfig) {
+  private async setData(data: IDuneConfig) {
     this._oldData = this._data;
     this._data = data;
     this.updateDuneData();
   }
 
-  getTag() {
+  private getTag() {
     return this.tag;
   }
 
-  async setTag(value: any) {
-    this.tag = value || {};
+  private async setTag(value: any) {
+    const newValue = value || {};
+    for (let prop in newValue) {
+      if (newValue.hasOwnProperty(prop)) {
+        this.tag[prop] = newValue[prop];
+      }
+    }
     this.width = this.tag.width || 700;
     if (this.tag.theme === 'dark') {
       this.classList.add('dune-dark--theme');
@@ -102,29 +107,29 @@ export default class ScomDune extends Module implements PageBlock {
     this.onUpdateBlock();
   }
 
-  getConfigSchema() {
-    return this.getThemeSchema();
-  }
+  // getConfigSchema() {
+  //   return this.getThemeSchema();
+  // }
 
-  onConfigSave(config: any) {
-    this.tag = config;
-    this.onUpdateBlock();
-  }
+  // onConfigSave(config: any) {
+  //   this.tag = config;
+  //   this.onUpdateBlock();
+  // }
 
-  async edit() {
-    // this.vStackDune.visible = false
-  }
+  // async edit() {
+  //   // this.vStackDune.visible = false
+  // }
 
-  async confirm() {
-    this.onUpdateBlock();
-    // this.vStackDune.visible = true
-  }
+  // async confirm() {
+  //   this.onUpdateBlock();
+  //   // this.vStackDune.visible = true
+  // }
 
-  async discard() {
-    // this.vStackDune.visible = true
-  }
+  // async discard() {
+  //   // this.vStackDune.visible = true
+  // }
 
-  async config() { }
+  // async config() { }
 
   private getPropertiesSchema(readOnly?: boolean) {
     const propertiesSchema = {
@@ -183,15 +188,7 @@ export default class ScomDune extends Module implements PageBlock {
     return themeSchema as IDataSchema;
   }
 
-  getEmbedderActions() {
-    return this._getActions(this.getPropertiesSchema(true), this.getThemeSchema(true));
-  }
-
-  getActions() {
-    return this._getActions(this.getPropertiesSchema(), this.getThemeSchema());
-  }
-
-  _getActions(propertiesSchema: IDataSchema, themeSchema: IDataSchema) {
+  private _getActions(propertiesSchema: IDataSchema, themeSchema: IDataSchema) {
     const actions = [
       {
         name: 'Settings',
@@ -222,7 +219,7 @@ export default class ScomDune extends Module implements PageBlock {
           return {
             execute: async () => {
               if (!userInputData) return;
-              this.oldTag = { ...this.tag };
+              this.oldTag = JSON.parse(JSON.stringify(this.tag));
               this.setTag(userInputData);
               if (builder) builder.setTag(userInputData);
             },
@@ -238,6 +235,33 @@ export default class ScomDune extends Module implements PageBlock {
       }
     ]
     return actions
+  }
+
+  getConfigurators() {
+    return [
+      {
+        name: 'Builder Configurator',
+        target: 'Builders',
+        getActions: () => {
+          return this._getActions(this.getPropertiesSchema(), this.getThemeSchema());
+        },
+        getData: this.getData.bind(this),
+        setData: this.setData.bind(this),
+        getTag: this.getTag.bind(this),
+        setTag: this.setTag.bind(this)
+      },
+      {
+        name: 'Emdedder Configurator',
+        target: 'Embedders',
+        getActions: () => {
+          return this._getActions(this.getPropertiesSchema(true), this.getThemeSchema(true))
+        },
+        getData: this.getData.bind(this),
+        setData: this.setData.bind(this),
+        getTag: this.getTag.bind(this),
+        setTag: this.setTag.bind(this)
+      }
+    ]
   }
 
   private onUpdateBlock() {
