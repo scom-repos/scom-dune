@@ -1,64 +1,51 @@
-import { Module, customModule, Container, ComboBox, IComboItem } from '@ijstech/components';
+import { Module, customModule, Container, Modal, Panel } from '@ijstech/components';
 import ScomDune from '@scom/scom-dune';
-
-const visualizationList = [
-    '[Chart] Ethereum Beacon Chain Deposits Entity',
-    '[Counter] ETH deposited (Ethereum Beacon Chain Deposits)',
-    '[Table] Ethereum Beacon Chain Deposits Entity',
-    '[Table] [Rewards] Top ETH withdraw recipients after Shanghai Unlock',
-    '[Table] [Full withdraw] Top ETH withdraw recipients after Shanghai Unlock',
-    '[Chart] Chart (ETH Staked - Cumulative)',
-    '[Chart] Liquid Staking validators - All',
-    '[Chart] ETH withdrawals cumsum (ETH Withdrawals after Shanghai Unlock)',
-    '[Chart] Validators (ETH Withdrawals after Shanghai Unlock)',
-    '[Chart] ETH withdrawals (ETH Withdrawals after Shanghai Unlock)',
-    '[Chart] ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
-    '[Chart] Validators and ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
-    '[Chart] ETH withdrawals (ETH Withdrawals after Shanghai Unlock vs ETH price)',
-    '[Chart] $RDNT Price Chart (RDNT Price Chart on Arbitrum and BSC)',
-    '[Chart] Reserve Cumulative Value (Radiant Capital Reserve Markets (Weekly % change))',
-    '[Chart] RDNT/WETH LP Staked Supply (Radiant Capital Pool2 Staking LP)',
-    '[Chart] Holders OverTime (RDNT and RDNT V2 Holders Overtime)'
-].map((v => { return { value: v, label: v } }));
 
 @customModule
 export default class Module1 extends Module {
     private scomDuneElm: ScomDune;
-    private visualizationName = visualizationList[0].value;
+    private mdConfig: Modal;
+    private pnlConfig: Panel;
     constructor(parent?: Container, options?: any) {
         super(parent, options);
     }
 
-    private onCbbChanged(cbb: ComboBox) {
-        const name = (cbb.selectedItem as IComboItem).value;
-        if (name !== this.visualizationName) {
-            this.visualizationName = name;
-            this.scomDuneElm.setData({ visualizationName: name });
-        }
-    }
-
     async init() {
         super.init();
+        this.pnlConfig.appendChild(this.scomDuneElm.getConfigurators()[0].getActions()[0].customUI.render(() => { this.mdConfig.visible = false }));
+    }
+
+    showSettings() {
+        this.mdConfig.visible = true;
     }
 
     render() {
-        return <i-panel>
-            <i-hstack
-                gap={5}
-                verticalAlignment="center"
-                horizontalAlignment="center" padding={{ top: 20, bottom: 20, left: 20, right: 20 }}
-                wrap="wrap"
-            >
-                <i-label caption="Visualization Name" />
-                <i-combo-box
-                    width={600}
-                    maxWidth="100%"
-                    items={visualizationList}
-                    selectedItem={visualizationList[0]}
-                    onChanged={(cbb: ComboBox) => this.onCbbChanged(cbb)}
-                />
-            </i-hstack>
-            <i-scom-dune id="scomDuneElm" margin={{ left: 'auto', right: 'auto' }} visualizationName={visualizationList[0].value} />
-        </i-panel>
+        return <i-vstack gap={10} padding={{ top: 20, bottom: 20 }} verticalAlignment="center" horizontalAlignment="center">
+            <i-button caption="Settings (Dune 1)" width={200} height={36} onClick={this.showSettings} font={{ color: '#fff' }} margin={{ bottom: 10 }} />
+            <i-label caption="Dune 1" font={{ size: '16px', bold: true }} />
+            <i-scom-dune
+                id="scomDuneElm"
+                margin={{ left: 'auto', right: 'auto', bottom: 20 }}
+            />
+
+            <i-label caption="Dune 2" font={{ size: '16px', bold: true }} />
+            <i-scom-dune
+                margin={{ left: 'auto', right: 'auto' }}
+                componentId={0}
+                apiEndpoint="https://api.dune.com/api/v1/query/2030584/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j"
+                options={{
+                    "title": "Ethereum Beacon Chain Deposits",
+                    "counterColName": "deposited",
+                    "counterLabel": "ETH deposited"
+                }}
+                tag={{
+                    "counterNumberColor": '#b12b2b',
+                    "counterLabelColor": '#f0310f'
+                }}
+            />
+            <i-modal id="mdConfig" width={750}>
+                <i-panel id="pnlConfig" />
+            </i-modal>
+        </i-vstack>
     }
 }

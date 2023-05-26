@@ -8,6 +8,22 @@ export const containerStyle = Styles.style({
   padding: 10
 })
 
+export const customContainerDapp = Styles.style({
+ '$nest': {
+  '&> i-vstack > i-panel': {
+    overflow: 'visible',
+    $nest: {
+      '&> i-grid-layout': {
+        display: 'block'
+      }
+    }
+  },
+  'dapp-container-body': {
+    overflow: 'visible'
+  }
+ }
+});
+
 export const duneStyle = Styles.style({
   display: 'block',
   $nest: {
