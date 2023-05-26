@@ -1,3 +1,5 @@
+import { application } from "@ijstech/components";
+
 export const formatNumber = (num: number, options?: { format?: string, decimals?: number, percentValues?: boolean }) => {
   if (num === null) return '-';
   const { decimals, format, percentValues } = options || {};
@@ -68,4 +70,13 @@ export const getChartType = (type: string, defaultType?: string) => {
     default:
       return type || defaultType;
   }
+}
+
+export const getComponent = async (path: string) => {
+  application.currentModuleDir = path;
+  await application.loadScript(`${path}/index.js`);
+  application.currentModuleDir = '';
+  const elementName = `i-${path.split('/').pop()}`;
+  const element = document.createElement(elementName);
+  return element;
 }

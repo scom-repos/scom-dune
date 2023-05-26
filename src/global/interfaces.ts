@@ -126,7 +126,9 @@ export interface IDuneTable extends IDuneInfo {
 }
 
 export interface IDuneConfig {
-  visualizationName: string;
+  componentId?: number;
+  apiEndpoint?: string;
+  options?: { [key: string]: any };
   showHeader?: boolean;
   showFooter?: boolean;
 }

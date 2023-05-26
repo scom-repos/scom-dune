@@ -5,31 +5,28 @@ import {
   customElements,
   Container,
   IDataSchema,
-  Panel,
-  HStack,
-  Image,
-  Label,
-  LineChart,
-  VStack
+  VStack,
+  Styles,
+  Panel
 } from '@ijstech/components';
-import { IDuneConfig, IDunePieChart, IVisualizationWidgets, IDuneDefaultChart, IDuneCounter, IDuneInfo, IDuneTable } from './global/index';
-import { containerStyle, duneStyle } from './index.css';
-import { dashboards, queryIdData } from './dummy/index';
-import { DuneDefaultChart, DunePieChart } from './charts/index';
-import DuneCounter from './counter/index';
-import DuneTable from './table/index';
-import {} from '@ijstech/eth-contract'
-import {} from '@ijstech/eth-wallet'
-import ScomDappContainer from '@scom/scom-dapp-container'
+import { IDuneConfig, getComponent } from './global/index';
+import { containerStyle, customContainerDapp, duneStyle } from './index.css';
+import { } from '@ijstech/eth-contract';
+import { } from '@ijstech/eth-wallet';
+import ScomDappContainer from '@scom/scom-dapp-container';
+import dataJson from './data.json';
+import ConfiguratorSettings from '@scom/scom-configurator-settings';
 
-interface ScomSocialMediaElement extends ControlElement, IDuneConfig {
+const Theme = Styles.Theme.ThemeVars;
+
+interface ScomDuneElement extends ControlElement, IDuneConfig {
 
 }
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      ['i-scom-dune']: ScomSocialMediaElement;
+      ['i-scom-dune']: ScomDuneElement;
     }
   }
 }
@@ -38,26 +35,22 @@ declare global {
 @customElements('i-scom-dune')
 export default class ScomDune extends Module {
   private vStackDune: VStack;
-  private dashboard: IVisualizationWidgets[] = [];
-  private duneData: IDunePieChart | IDuneDefaultChart | IDuneCounter | IDuneTable;
   private dappContainer: ScomDappContainer;
 
-  private _oldData: IDuneConfig = { visualizationName: '' };
-  private _data: IDuneConfig = { visualizationName: '' };
-  private oldTag: any = {};
+  private _data: IDuneConfig = { componentId: 0 };
   tag: any = {};
   defaultEdit: boolean = true;
   readonly onConfirm: () => Promise<void>;
   readonly onDiscard: () => Promise<void>;
   readonly onEdit: () => Promise<void>;
 
-  static async create(options?: ScomSocialMediaElement, parent?: Container) {
+  static async create(options?: ScomDuneElement, parent?: Container) {
     let self = new this(parent, options);
     await self.ready();
     return self;
   }
 
-  constructor(parent?: Container, options?: ScomSocialMediaElement) {
+  constructor(parent?: Container, options?: ScomDuneElement) {
     super(parent, options);
   }
 
@@ -77,12 +70,21 @@ export default class ScomDune extends Module {
     if (this.dappContainer) this.dappContainer.showHeader = this.showHeader;
   }
 
+  get existingCharts() {
+    const data = dataJson;
+    return data.map(v => {
+      return {
+        title: `${v.title} ${v.description ? `(${v.description})` : ''}`,
+        id: v.id
+      }
+    });
+  }
+
   private getData() {
     return this._data;
   }
 
   private async setData(data: IDuneConfig) {
-    this._oldData = this._data;
     this._data = data;
     this.updateDuneData();
   }
@@ -91,7 +93,10 @@ export default class ScomDune extends Module {
     return this.tag;
   }
 
-  private async setTag(value: any) {
+  private async setTag(value: any, newTag?: boolean) {
+    if (newTag) {
+      this.tag = {};
+    }
     const newValue = value || {};
     for (let prop in newValue) {
       if (newValue.hasOwnProperty(prop)) {
@@ -99,89 +104,47 @@ export default class ScomDune extends Module {
       }
     }
     this.width = this.tag.width || 700;
-    if (this.tag.theme === 'dark') {
-      this.classList.add('dune-dark--theme');
-    } else {
-      this.classList.remove('dune-dark--theme');
+    this.dappContainer.width = this.width;
+    this.dappContainer.maxWidth = '100%';
+    const containerBody = this.dappContainer.querySelector('dapp-container-body') as Panel;
+    if (containerBody) {
+      containerBody.width = this.width;
+      containerBody.maxWidth = '100%';
     }
     this.onUpdateBlock();
   }
 
-  // getConfigSchema() {
-  //   return this.getThemeSchema();
-  // }
-
-  // onConfigSave(config: any) {
-  //   this.tag = config;
-  //   this.onUpdateBlock();
-  // }
-
-  // async edit() {
-  //   // this.vStackDune.visible = false
-  // }
-
-  // async confirm() {
-  //   this.onUpdateBlock();
-  //   // this.vStackDune.visible = true
-  // }
-
-  // async discard() {
-  //   // this.vStackDune.visible = true
-  // }
-
-  // async config() { }
-
   private getPropertiesSchema(readOnly?: boolean) {
-    const propertiesSchema = {
+    const propertiesSchema: any = {
       type: 'object',
       properties: {
-        visualizationName: {
-          type: 'string',
-          enum: [
-            '[Chart] Ethereum Beacon Chain Deposits Entity',
-            '[Counter] ETH deposited (Ethereum Beacon Chain Deposits)',
-            '[Table] Ethereum Beacon Chain Deposits Entity',
-            '[Table] [Rewards] Top ETH withdraw recipients after Shanghai Unlock',
-            '[Table] [Full withdraw] Top ETH withdraw recipients after Shanghai Unlock',
-            '[Chart] Chart (ETH Staked - Cumulative)',
-            '[Chart] Liquid Staking validators - All',
-            '[Chart] ETH withdrawals cumsum (ETH Withdrawals after Shanghai Unlock)',
-            '[Chart] Validators (ETH Withdrawals after Shanghai Unlock)',
-            '[Chart] ETH withdrawals (ETH Withdrawals after Shanghai Unlock)',
-            '[Chart] ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
-            '[Chart] Validators and ETH price (ETH Withdrawals after Shanghai Unlock vs ETH price)',
-            '[Chart] ETH withdrawals (ETH Withdrawals after Shanghai Unlock vs ETH price)',
-            '[Chart] $RDNT Price Chart (RDNT Price Chart on Arbitrum and BSC)',
-            '[Chart] Reserve Cumulative Value (Radiant Capital Reserve Markets (Weekly % change))',
-            '[Chart] RDNT/WETH LP Staked Supply (Radiant Capital Pool2 Staking LP)',
-            '[Chart] Holders OverTime (RDNT and RDNT V2 Holders Overtime)'
-          ],
+        componentId: {
+          type: 'number',
+          oneOf: this.existingCharts,
           required: true
         }
       }
     }
-    return propertiesSchema as IDataSchema;
+    return propertiesSchema;
   }
 
   private getThemeSchema(readOnly?: boolean) {
     const themeSchema = {
       type: 'object',
       properties: {
-        width: {
+        fontColor: {
           type: 'string',
-          readOnly
+          format: 'color'
+        },
+        backgroundColor: {
+          type: 'string',
+          format: 'color'
+        },
+        width: {
+          type: 'string'
         },
         height: {
-          type: 'string',
-          readOnly
-        },
-        theme: {
-          type: 'string',
-          enum: [
-            'light',
-            'theme'
-          ],
-          readOnly
+          type: 'string'
         }
       }
     }
@@ -194,20 +157,33 @@ export default class ScomDune extends Module {
         name: 'Settings',
         icon: 'cog',
         command: (builder: any, userInputData: any) => {
+          let _oldData: any = { componentId: -1 };
           return {
             execute: async () => {
-              if (builder?.setData) {
-                builder.setData(userInputData);
-              }
-              this.setData(userInputData);
+              _oldData = { ...this._data };
+              if (userInputData?.componentId !== undefined) this._data.componentId = userInputData.componentId;
+              if (builder?.setData) builder.setData(userInputData);
+              this.setData(this._data);
             },
             undo: () => {
-              if (builder?.setData) {
-                builder.setData(this._oldData);
-              }
-              this.setData(this._oldData);
+              if (builder?.setData) builder.setData(_oldData);
+              this.setData(_oldData);
             },
             redo: () => { }
+          }
+        },
+        customUI: {
+          render: (onSave?: () => void) => {
+            const vstack = new VStack();
+            const config = new ConfiguratorSettings();
+            config.data = dataJson;
+            config.onSaveConfigData = (_data: any, _tag: any) => {
+              if (_tag) this.setTag(_tag, true);
+              if (_data) this.setData(_data);
+              if (onSave) onSave();
+            }
+            vstack.append(config);
+            return vstack;
           }
         },
         userInputDataSchema: propertiesSchema,
@@ -216,17 +192,19 @@ export default class ScomDune extends Module {
         name: 'Theme Settings',
         icon: 'palette',
         command: (builder: any, userInputData: any) => {
+          let oldTag = {};
           return {
             execute: async () => {
               if (!userInputData) return;
-              this.oldTag = JSON.parse(JSON.stringify(this.tag));
-              this.setTag(userInputData);
-              if (builder) builder.setTag(userInputData);
+              oldTag = { ...this.tag }
+              if (builder?.setTag) builder.setTag(userInputData);
+              else this.setTag(userInputData);
             },
             undo: () => {
               if (!userInputData) return;
-              this.setTag(this.oldTag);
-              if (builder) builder.setTag(this.oldTag);
+              this.tag = { ...oldTag };
+              if (builder?.setTag) builder.setTag(oldTag);
+              else this.setTag(oldTag);
             },
             redo: () => { }
           }
@@ -237,7 +215,17 @@ export default class ScomDune extends Module {
     return actions
   }
 
+  saveConfigData(data: any, tag: any) {
+    if (data) {
+      this.setData(data);
+    }
+    if (tag) {
+      this.setTag(tag, true);
+    }
+  }
+
   getConfigurators() {
+    const self = this;
     return [
       {
         name: 'Builder Configurator',
@@ -256,6 +244,24 @@ export default class ScomDune extends Module {
         getActions: () => {
           return this._getActions(this.getPropertiesSchema(true), this.getThemeSchema(true))
         },
+        getLinkParams: () => {
+          const data = this._data || {};
+          return {
+            data: window.btoa(JSON.stringify(data))
+          }
+        },
+        setLinkParams: async (params: any) => {
+          if (params.data) {
+            const utf8String = decodeURIComponent(params.data);
+            const decodedString = window.atob(utf8String);
+            const newData = JSON.parse(decodedString);
+            let resultingData = {
+              ...self._data,
+              ...newData
+            };
+            await this.setData(resultingData);
+          }
+        },
         getData: this.getData.bind(this),
         setData: this.setData.bind(this),
         getTag: this.getTag.bind(this),
@@ -264,31 +270,21 @@ export default class ScomDune extends Module {
     ]
   }
 
-  private onUpdateBlock() {
-    if (this._data) {
-      switch (this.duneData?.type) {
-        case 'chart':
-          this.renderChart();
-          break;
-        case 'counter':
-          this.renderCounter();
-          break;
-        case 'table':
-          this.renderTable();
-          break;
-        default:
-          this.vStackDune?.clearInnerHTML();
-      }
-    }
+  private updateStyle(name: string, value: any) {
+    value ? this.style.setProperty(name, value) : this.style.removeProperty(name);
   }
 
-  private async getDashboardData() {
-    const _dashboard = dashboards;
-    if (_dashboard?.dashboards?.length && _dashboard.dashboards[0].visualization_widgets) {
-      this.dashboard = _dashboard.dashboards[0].visualization_widgets;
-    } else {
-      this.dashboard = [];
+  private updateTheme() {
+    this.updateStyle('--text-primary', this.tag?.fontColor);
+    this.updateStyle('--background-main', this.tag?.backgroundColor);
+  }
+
+  private onUpdateBlock() {
+    const containerModule = this.vStackDune.firstChild as any;
+    if (containerModule?.setTag) {
+      containerModule.setTag(this.tag);
     }
+    this.updateTheme();
   }
 
   private async updateDuneData() {
@@ -296,231 +292,67 @@ export default class ScomDune extends Module {
       this.dappContainer.showHeader = this.showHeader;
       this.dappContainer.showFooter = this.showFooter;
     }
-    if (this._data?.visualizationName) {
-      // TODO - fetch data
-      const prefixRegex = /^\[[^\]]+\]\s+/;
-      const visualizationName = this._data.visualizationName.replace(prefixRegex, '');
-      const visualizationType = this._data.visualizationName.match(prefixRegex)[0].trim().toLowerCase().slice(1, -1);
-      const duneInfo = this.dashboard.find(v => {
-        const { name, query_details, type } = v.visualization;
-        if (type !== visualizationType) return false;
-        const subName = query_details.name;
-        let fullName = name;
-        if (fullName && subName) {
-          fullName = `${fullName} (${subName})`;
-        } else if (subName) {
-          fullName = subName;
+    this.vStackDune.clearInnerHTML();
+    const componentId = Number(this._data?.componentId);
+    if (!isNaN(componentId) && componentId >= 0) {
+      const duneChart = dataJson.find(v => v.id === this._data.componentId);
+      const containerModule: any = await getComponent(duneChart.name);
+      this.vStackDune.appendChild(containerModule);
+      await containerModule.ready();
+      if (containerModule?.getConfigurators) {
+        const configurator = containerModule.getConfigurators().find((configurator: any) => configurator.target === "Builders");
+        if (configurator?.setData) {
+          await configurator.setData(this._data || duneChart.properties);
         }
-        if (type === 'table' && query_details.description) {
-          fullName = `[${query_details.description}] ${fullName}`;
+        const tag = this.tag || (duneChart as any).tag;
+        if (configurator?.setTag && tag) {
+          await configurator.setTag(tag);
         }
-        return fullName === visualizationName;
-      });
-
-      if (duneInfo) {
-        const { options, name, query_details, type } = duneInfo.visualization;
-        const duneData = queryIdData[query_details.query_id];
-        const duneOpt = {
-          options,
-          name,
-          type,
-          subName: query_details.name,
-          info: query_details.user || query_details.team,
-          description: query_details.description,
-          chartData: type === 'chart' ? duneData : undefined,
-          counterData: type === 'counter' ? duneData : undefined,
-          tableData: type === 'table' ? duneData : undefined
-        }
-        this.duneData = duneOpt as IDunePieChart | IDuneDefaultChart | IDuneCounter;
-      } else {
-        this.duneData = null;
       }
     } else {
-      this.duneData = null;
+      this.vStackDune.appendChild(<i-vstack horizontalAlignment="center" verticalAlignment="center" height={100} maxHeight="100%">
+        <i-label caption="No Configurations" font={{ size: '20px' }} />
+      </i-vstack>);
     }
     this.onUpdateBlock();
-  }
-
-  private renderDuneUI(duneInfo: IDuneInfo) {
-    this.vStackDune.clearInnerHTML();
-    const { name, subName, info } = duneInfo;
-    const hStack = new HStack(this.vStackDune, {
-      gap: 10,
-      width: '100%',
-      maxWidth: '100%',
-      margin: { left: 'auto', right: 'auto' },
-      verticalAlignment: 'center',
-      wrap: 'wrap'
-    });
-    if (name) {
-      new Label(hStack, {
-        caption: name,
-        font: { bold: true }
-      });
-    }
-    if (subName) {
-      new Label(hStack, {
-        caption: subName,
-        font: { bold: !name }
-      });
-    }
-    if (info?.name) {
-      const hStackUser = new HStack(hStack, {
-        gap: 10,
-        verticalAlignment: 'center',
-        wrap: 'wrap',
-        margin: { left: 'auto' }
-      });
-      if (info.profile_image_url) {
-        new Image(hStackUser, {
-          url: info.profile_image_url,
-          margin: { left: 'auto' },
-          width: 20,
-          height: 20
-        });
-      }
-      new Label(hStackUser, {
-        caption: info.name,
-      });
-    }
-    return hStack;
-  }
-
-  private async renderCounter() {
-    this.vStackDune.clearInnerHTML();
-    if (this.duneData) {
-      this.height = this.tag?.height || 200;
-      const data = this.duneData as IDuneCounter;
-      const hStack = this.renderDuneUI(data);
-      const theme = this.duneData.theme;
-      if (theme !== 'dark') {
-        this.vStackDune.background = { color: '#FDF4F5' };
-      }
-      const counterElm = new DuneCounter(undefined, {
-        width: '100%',
-        height: `calc(100% - ${hStack.offsetHeight + 30}px)`,
-        data
-      });
-      this.vStackDune.clearInnerHTML();
-      this.vStackDune.appendChild(hStack);
-      this.vStackDune.appendChild(counterElm);
-    }
-  }
-
-  private async renderTable() {
-    this.vStackDune.clearInnerHTML();
-    this.vStackDune.background = { color: 'transparent' };
-    if (this.duneData) {
-      this.height = this.tag?.height || 500;
-      const data = this.duneData as IDuneTable;
-      const hStack = this.renderDuneUI(data);
-      let _offset = hStack.offsetHeight;
-      if (data.description) {
-        const lb = new Label(hStack, {
-          caption: data.description,
-          width: '100%',
-          font: { size: '12px' }
-        });
-        lb.style.fontStyle = 'italic';
-        _offset += (lb.offsetHeight - 5);
-      }
-      const tableElm = new DuneTable(undefined, {
-        width: '100%',
-        height: `calc(100% - ${_offset + 30}px)`,
-        data
-      });
-      this.vStackDune.clearInnerHTML();
-      this.vStackDune.appendChild(hStack);
-      this.vStackDune.appendChild(tableElm);
-    }
-  }
-
-  private async renderChart() {
-    this.vStackDune.clearInnerHTML();
-    this.vStackDune.background = { color: 'transparent' };
-    if (this.duneData) {
-      this.height = this.tag?.height || 500;
-      this.dappContainer.height = this.height;
-      const data = this.duneData as IDunePieChart | IDuneDefaultChart;
-      const hStack = this.renderDuneUI(data);
-      const { height, theme } = this.tag || {};
-      let chartElm: DunePieChart | DuneDefaultChart;
-      if (data.options.globalSeriesType === 'pie') {
-        chartElm = new DunePieChart(undefined, {
-          width: '100%',
-          height: `calc(100% - ${hStack.offsetHeight + 30}px)`,
-          data: {
-            ...data,
-            theme
-          } as IDunePieChart
-        });
-      } else {
-        chartElm = new DuneDefaultChart(undefined, {
-          width: '100%',
-          height: `calc(100% - ${hStack.offsetHeight + 30}px)`,
-          data: {
-            ...data,
-            theme
-          } as IDuneDefaultChart
-        });
-      }
-      this.vStackDune.clearInnerHTML();
-      this.vStackDune.appendChild(hStack);
-      this.vStackDune.appendChild(chartElm);
-    }
-  }
-
-  private resizeDune() {
-    switch (this.duneData?.type) {
-      case 'chart':
-        const chart = this.vStackDune.querySelector('[role=dune-chart]');
-        (chart as LineChart)?.resize();
-        break;
-      case 'counter':
-        this.renderCounter();
-        break;
-      case 'table':
-        this.renderTable();
-        break;
-      default:
-        this.vStackDune?.clearInnerHTML();
-    }
   }
 
   async init() {
     this.isReadyCallbackQueued = true;
     super.init();
+    this.updateTheme();
     this.classList.add(duneStyle);
-    if (this.tag?.theme === 'dark') {
-      this.classList.add('dune-dark--theme');
-    }
     this.width = this.tag.width || 700;
     this.dappContainer.width = this.width;
+    this.dappContainer.maxWidth = '100%';
     this.maxWidth = '100%';
-    this.vStackDune.style.boxShadow = 'rgba(0, 0, 0, 0.16) 0px 1px 4px';
-    await this.getDashboardData();
-    const visualizationName = this.getAttribute('visualizationName', true);
-    if (visualizationName) {
-      this.setData({ visualizationName });
+    const containerBody = this.dappContainer.querySelector('dapp-container-body') as Panel;
+    if (containerBody) {
+      containerBody.width = this.width;
+      containerBody.maxWidth = '100%';
     }
+    const tag = this.getAttribute('tag', true);
+    if (tag) {
+      this.setTag(tag);
+    }
+    const componentId = this.getAttribute('componentId', true, -1);
+    const apiEndpoint = this.getAttribute('apiEndpoint', true);
+    const options = this.getAttribute('options', true);
+    this.setData({ componentId, apiEndpoint, options });
     this.showHeader = this.getAttribute('showHeader', true, true);
     this.showFooter = this.getAttribute('showFooter', true, true);
     this.isReadyCallbackQueued = false;
     this.executeReadyCallback();
-    window.addEventListener('resize', () => {
-      setTimeout(() => {
-        this.resizeDune();
-      }, 300);
-    });
   }
 
   render() {
     return (
-      <i-scom-dapp-container id="dappContainer" showWalletNetwork={false} display="flex" height="100%" width="100%">
+      <i-scom-dapp-container id="dappContainer" class={customContainerDapp} showWalletNetwork={false} display="flex" height="100%" width="100%">
         <i-vstack
           id="vStackDune"
           gap={20}
           height="100%"
+          background={{ color: Theme.background.main }}
           padding={{ top: 10, bottom: 10, left: 10, right: 10 }}
           class={containerStyle}
         />
