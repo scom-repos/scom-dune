@@ -5,8 +5,8 @@ export default [
     "name": "libs/@scom/scom-counter",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2030584/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
+      "title": "Ethereum Beacon Chain Deposits",
       "options": {
-        "title": "Ethereum Beacon Chain Deposits",
         "counterColName": "deposited",
         "counterLabel": "ETH deposited"
       }
@@ -18,8 +18,8 @@ export default [
     "name": "libs/@scom/scom-table",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2030664/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
+      "title": "Ethereum Beacon Chain Deposits Entity",
       "options": {
-        "title": "Ethereum Beacon Chain Deposits Entity",
         "columns": [
           {
             "name": "ranking",
@@ -56,9 +56,9 @@ export default [
     "name": "libs/@scom/scom-table",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2377402/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
+      "title": "Top ETH withdraw recipients after Shanghai Unlock",
+      "description": "Reward",
       "options": {
-        "title": "Top ETH withdraw recipients after Shanghai Unlock",
-        "description": "Reward",
         "columns": [
           {
             "name": "address",
@@ -86,9 +86,9 @@ export default [
     "name": "libs/@scom/scom-table",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2377304/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
+      "title": "Top ETH withdraw recipients after Shanghai Unlock",
+      "description": "Full withdraw",
       "options": {
-        "title": "Top ETH withdraw recipients after Shanghai Unlock",
-        "description": "Full withdraw",
         "columns": [
           {
             "name": "address",
@@ -114,22 +114,20 @@ export default [
     "name": "libs/@scom/scom-pie-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2030664/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
+      "title": "Ethereum Beacon Chain Deposits Entity",
       "options": {
-        "title": "Ethereum Beacon Chain Deposits Entity",
-        "options": {
-          "xColumn": "entity",
-          "yColumn": "eth_deposited",
-          "serieName": "ETH deposited",
-          "numberFormat": "0,000.00ma",
-          "showDataLabels": true,
-          "valuesOptions": [
-            { "name": "Lido", "color": "#e58f8f" },
-            { "name": "Other", "color": "#a9a4a4" },
-            { "name": "Kraken", "color": "#0077ff" },
-            { "name": "Binance", "color": "#f4f000" },
-            { "name": "Coinbase", "color": "#0c22e3" }
-          ]
-        }
+        "xColumn": "entity",
+        "yColumn": "eth_deposited",
+        "serieName": "ETH deposited",
+        "numberFormat": "0,000.00ma",
+        "showDataLabels": true,
+        "valuesOptions": [
+          { "name": "Lido", "color": "#e58f8f" },
+          { "name": "Other", "color": "#a9a4a4" },
+          { "name": "Kraken", "color": "#0077ff" },
+          { "name": "Binance", "color": "#f4f000" },
+          { "name": "Coinbase", "color": "#0c22e3" }
+        ]
       }
     }
   },
@@ -139,22 +137,20 @@ export default [
     "name": "libs/@scom/scom-pie-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2360788/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
+      "title": "Liquid Staking validators - All",
       "options": {
-        "title": "Liquid Staking validators - All",
-        "options": {
-          "xColumn": "depositor_entity_category",
-          "yColumn": "staked",
-          "serieName": "ETH Staked",
-          "numberFormat": "0,000",
-          "showDataLabels": true,
-          "valuesOptions": [
-            { "name": "CEX", "color": "#f00c0c" },
-            { "name": "Other", "color": "#000000" },
-            { "name": "Others", "color": "#000000" },
-            { "name": "Staking Pools", "color": "#3995ce" },
-            { "name": "Liquid Staking", "color": "#c1ba2a" }
-          ]
-        }
+        "xColumn": "depositor_entity_category",
+        "yColumn": "staked",
+        "serieName": "ETH Staked",
+        "numberFormat": "0,000",
+        "showDataLabels": true,
+        "valuesOptions": [
+          { "name": "CEX", "color": "#f00c0c" },
+          { "name": "Other", "color": "#000000" },
+          { "name": "Others", "color": "#000000" },
+          { "name": "Staking Pools", "color": "#3995ce" },
+          { "name": "Liquid Staking", "color": "#c1ba2a" }
+        ]
       }
     }
   },
@@ -164,40 +160,38 @@ export default [
     "name": "libs/@scom/scom-bar-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2360815/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+      "title": "ETH Withdrawals after Shanghai Unlock",
       "options": {
-        "title": "ETH Withdrawals after Shanghai Unlock",
-        "options": {
-          "xColumn": {
-            "key": "time",
-            "type": "time"
+        "xColumn": {
+          "key": "time",
+          "type": "time"
+        },
+        "yColumns": [
+          "ETH"
+        ],
+        "groupBy": "category",
+        "stacking": true,
+        "legend": {
+          "show": true
+        },
+        "seriesOptions": [
+          {
+            "key": "Reward",
+            "color": "#378944"
           },
-          "yColumns": [
-            "ETH"
-          ],
-          "groupBy": "category",
-          "stacking": true,
-          "legend": {
-            "show": true
-          },
-          "seriesOptions": [
-            {
-              "key": "Reward",
-              "color": "#378944"
-            },
-            {
-              "key": "Full Withdraw",
-              "color": "#b03030"
-            }
-          ],
-          "xAxis": {
-            "title": "Date",
-            "tickFormat": "MMM DD"
-          },
-          "yAxis": {
-            "title": "ETH",
-            "position": "left",
-            "labelFormat": "0,000.ma"
+          {
+            "key": "Full Withdraw",
+            "color": "#b03030"
           }
+        ],
+        "xAxis": {
+          "title": "Date",
+          "tickFormat": "MMM DD"
+        },
+        "yAxis": {
+          "title": "ETH",
+          "position": "left",
+          "labelFormat": "0,000.ma"
         }
       }
     }
@@ -208,31 +202,29 @@ export default [
     "name": "libs/@scom/scom-line-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2360905/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+      "title": "ETH Withdrawals after Shanghai Unlock vs ETH price",
       "options": {
-        "title": "ETH Withdrawals after Shanghai Unlock vs ETH price",
-        "options": {
-          "xColumn": {
-            "key": "time",
-            "type": "time"
-          },
-          "yColumns": [
-            "eth_price"
-          ],
-          "seriesOptions": [
-            {
-              "key": "eth_price",
-              "title": "ETH Price",
-              "color": "#000"
-            }
-          ],
-          "xAxis": {
-            "title": "Date",
-            "tickFormat": "MMM DD"
-          },
-          "yAxis": {
-            "labelFormat": "$0,000.00",
-            "position": "left"
+        "xColumn": {
+          "key": "time",
+          "type": "time"
+        },
+        "yColumns": [
+          "eth_price"
+        ],
+        "seriesOptions": [
+          {
+            "key": "eth_price",
+            "title": "ETH Price",
+            "color": "#000"
           }
+        ],
+        "xAxis": {
+          "title": "Date",
+          "tickFormat": "MMM DD"
+        },
+        "yAxis": {
+          "labelFormat": "$0,000.00",
+          "position": "left"
         }
       }
     }
@@ -244,42 +236,40 @@ export default [
     "name": "libs/@scom/scom-area-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/284022/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+      "title": "LP Value Overtime",
+      "description": "RDNT/WETH LP Value",
       "options": {
-        "title": "LP Value Overtime",
-        "description": "RDNT/WETH LP Value",
-        "options": {
-          "xColumn": {
-            "key": "time",
-            "type": "time"
+        "xColumn": {
+          "key": "time",
+          "type": "time"
+        },
+        "yColumns": [
+          "rdnt_value",
+          "weth_value"
+        ],
+        "stacking": true,
+        "legend": {
+          "show": true
+        },
+        "seriesOptions": [
+          {
+            "key": "rdnt_value",
+            "title": "RDNT",
+            "color": "#2793cb"
           },
-          "yColumns": [
-            "rdnt_value",
-            "weth_value"
-          ],
-          "stacking": true,
-          "legend": {
-            "show": true
-          },
-          "seriesOptions": [
-            {
-              "key": "rdnt_value",
-              "title": "RDNT",
-              "color": "#2793cb"
-            },
-            {
-              "key": "weth_value",
-              "title": "WETH",
-              "color": "#aaace6"
-            }
-          ],
-          "xAxis": {
-            "tickFormat": "MMM YYYY"
-          },
-          "yAxis": {
-            "labelFormat": "$0[,].00",
-            "tickerFormat": "$0[,].00ma",
-            "position": "left"
+          {
+            "key": "weth_value",
+            "title": "WETH",
+            "color": "#aaace6"
           }
+        ],
+        "xAxis": {
+          "tickFormat": "MMM YYYY"
+        },
+        "yAxis": {
+          "labelFormat": "$0[,].00",
+          "tickerFormat": "$0[,].00ma",
+          "position": "left"
         }
       }
     }
@@ -291,36 +281,34 @@ export default [
     "name": "libs/@scom/scom-area-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2360815/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+      "title": "ETH Withdrawals after Shanghai Unlock",
+      "description": "ETH withdrawals cumsum",
       "options": {
-        "title": "ETH Withdrawals after Shanghai Unlock",
-        "description": "ETH withdrawals cumsum",
-        "options": {
-          "xColumn": {
-            "key": "time",
-            "type": "time"
-          },
-          "yColumns": [
-            "ETH_cum"
-          ],
-          "stacking": true,
-          "legend": {
-            "show": true
-          },
-          "seriesOptions": [
-            {
-              "key": "ETH_cum",
-              "title": "ETH total",
-              "color": "#000000"
-            }
-          ],
-          "xAxis": {
-            "tickFormat": "MMM YYYY"
-          },
-          "yAxis": {
-            "labelFormat": "$0[,].00",
-            "tickerFormat": "$0[,].00ma",
-            "position": "left"
+        "xColumn": {
+          "key": "time",
+          "type": "time"
+        },
+        "yColumns": [
+          "ETH_cum"
+        ],
+        "stacking": true,
+        "legend": {
+          "show": true
+        },
+        "seriesOptions": [
+          {
+            "key": "ETH_cum",
+            "title": "ETH total",
+            "color": "#000000"
           }
+        ],
+        "xAxis": {
+          "tickFormat": "MMM YYYY"
+        },
+        "yAxis": {
+          "labelFormat": "$0[,].00",
+          "tickerFormat": "$0[,].00ma",
+          "position": "left"
         }
       }
     }
@@ -332,38 +320,36 @@ export default [
     "name": "libs/@scom/scom-area-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/283918/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+      "title": "RDNT/WETH LP Staked Supply",
+      "description": "Radiant Capital Pool2 Staking LP",
       "options": {
-        "title": "RDNT/WETH LP Staked Supply",
-        "description": "Radiant Capital Pool2 Staking LP",
-        "options": {
-          "xColumn": {
-            "key": "time",
-            "type": "time"
+        "xColumn": {
+          "key": "time",
+          "type": "time"
+        },
+        "yColumns": [
+          "masterchef_pool",
+          "non_masterchef_pool"
+        ],
+        "stacking": true,
+        "percentage": true,
+        "legend": {
+          "show": true
+        },
+        "seriesOptions": [
+          {
+            "key": "masterchef_pool",
+            "title": "Staked",
+            "color": "#2793cb"
           },
-          "yColumns": [
-            "masterchef_pool",
-            "non_masterchef_pool"
-          ],
-          "stacking": true,
-          "percentage": true,
-          "legend": {
-            "show": true
-          },
-          "seriesOptions": [
-            {
-              "key": "masterchef_pool",
-              "title": "Staked",
-              "color": "#2793cb"
-            },
-            {
-              "key": "non_masterchef_pool",
-              "title": "Unstaked",
-              "color": "#ff0000"
-            }
-          ],
-          "xAxis": {
-            "tickFormat": "MMM YYYY"
+          {
+            "key": "non_masterchef_pool",
+            "title": "Unstaked",
+            "color": "#ff0000"
           }
+        ],
+        "xAxis": {
+          "tickFormat": "MMM YYYY"
         }
       }
     }
@@ -374,30 +360,28 @@ export default [
     "name": "libs/@scom/scom-scatter-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2360905/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+      "title": "ETH Withdrawals after Shanghai Unlock vs ETH price",
       "options": {
-        "title": "ETH Withdrawals after Shanghai Unlock vs ETH price",
-        "options": {
-          "xColumn": {
-            "key": "time",
-            "type": "time"
-          },
-          "yColumns": [
-            "eth_price"
-          ],
-          "seriesOptions": [
-            {
-              "key": "eth_price",
-              "title": "ETH Price"
-            }
-          ],
-          "xAxis": {
-            "title": "Date",
-            "tickFormat": "MMM DD"
-          },
-          "yAxis": {
-            "labelFormat": "$0[].0a",
-            "position": "left"
+        "xColumn": {
+          "key": "time",
+          "type": "time"
+        },
+        "yColumns": [
+          "eth_price"
+        ],
+        "seriesOptions": [
+          {
+            "key": "eth_price",
+            "title": "ETH Price"
           }
+        ],
+        "xAxis": {
+          "title": "Date",
+          "tickFormat": "MMM DD"
+        },
+        "yAxis": {
+          "labelFormat": "$0[].0a",
+          "position": "left"
         }
       }
     }
@@ -408,81 +392,79 @@ export default [
     "name": "libs/@scom/scom-mixed-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/1333833/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+      "title": "Reserve Cumulative Value",
+      "description": "Radiant Capital Reserve Markets (Weekly % change)",
       "options": {
-        "title": "Reserve Cumulative Value",
-        "description": "Radiant Capital Reserve Markets (Weekly % change)",
-        "options": {
-          "xColumn": {
-            "key": "time",
-            "type": "time"
+        "xColumn": {
+          "key": "time",
+          "type": "time"
+        },
+        "yColumns": [
+          "cumulative_dai",
+          "cumulative_usdc",
+          "cumulative_usdt",
+          "cumulative_wbtc",
+          "cumulative_weth",
+          "cumulative_tokens_value",
+          "cumulative_diff"
+        ],
+        "globalSeriesType": "area",
+        "stacking": true,
+        "seriesOptions": [
+          {
+            "key": "cumulative_dai",
+            "title": "DAI",
+            "type": "area",
+            "yAxis": "left"
           },
-          "yColumns": [
-            "cumulative_dai",
-            "cumulative_usdc",
-            "cumulative_usdt",
-            "cumulative_wbtc",
-            "cumulative_weth",
-            "cumulative_tokens_value",
-            "cumulative_diff"
-          ],
-          "globalSeriesType": "area",
-          "stacking": true,
-          "seriesOptions": [
-            {
-              "key": "cumulative_dai",
-              "title": "DAI",
-              "type": "area",
-              "yAxis": "left"
-            },
-            {
-              "key": "cumulative_usdc",
-              "title": "USDC",
-              "type": "area",
-              "yAxis": "left"
-            },
-            {
-              "key": "cumulative_usdt",
-              "title": "USDT",
-              "type": "area",
-              "yAxis": "left"
-            },
-            {
-              "key": "cumulative_wbtc",
-              "title": "WBTC",
-              "type": "area",
-              "yAxis": "left"
-            },
-            {
-              "key": "cumulative_weth",
-              "title": "WETH",
-              "type": "area",
-              "yAxis": "left"
-            },
-            {
-              "key": "cumulative_tokens_value",
-              "title": "Total",
-              "type": "scatter",
-              "yAxis": "left"
-            },
-            {
-              "key": "cumulative_diff",
-              "title": "% Change",
-              "type": "line",
-              "yAxis": "right",
-              "color": "#ff0000"
-            }
-          ],
-          "xAxis": {
-            "title": "Date",
-            "tickFormat": "MMM DD"
+          {
+            "key": "cumulative_usdc",
+            "title": "USDC",
+            "type": "area",
+            "yAxis": "left"
           },
-          "leftYAxis": {
-            "labelFormat": "$0[].0a"
+          {
+            "key": "cumulative_usdt",
+            "title": "USDT",
+            "type": "area",
+            "yAxis": "left"
           },
-          "rightYAxis": {
-            "tickFormat": "0[].0%",
-            "labelFormat": "0[].0%"
+          {
+            "key": "cumulative_wbtc",
+            "title": "WBTC",
+            "type": "area",
+            "yAxis": "left"
+          },
+          {
+            "key": "cumulative_weth",
+            "title": "WETH",
+            "type": "area",
+            "yAxis": "left"
+          },
+          {
+            "key": "cumulative_tokens_value",
+            "title": "Total",
+            "type": "scatter",
+            "yAxis": "left"
+          },
+          {
+            "key": "cumulative_diff",
+            "title": "% Change",
+            "type": "line",
+            "yAxis": "right",
+            "color": "#ff0000"
           }
+        ],
+        "xAxis": {
+          "title": "Date",
+          "tickFormat": "MMM DD"
+        },
+        "leftYAxis": {
+          "labelFormat": "$0[].0a"
+        },
+        "rightYAxis": {
+          "tickFormat": "0[].0%",
+          "labelFormat": "0[].0%"
         }
       }
     }
@@ -494,58 +476,56 @@ export default [
     "name": "libs/@scom/scom-mixed-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/1154848/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+      "title": "$RDNT Price Chart",
+      "description": "RDNT Price Chart on Arbitrum and BSC",
       "options": {
-        "title": "$RDNT Price Chart",
-        "description": "RDNT Price Chart on Arbitrum and BSC",
-        "options": {
-          "xColumn": {
-            "key": "time",
-            "type": "time"
+        "xColumn": {
+          "key": "time",
+          "type": "time"
+        },
+        "yColumns": [
+          "rdnt_price",
+          "red_volume",
+          "green_volume"
+        ],
+        "globalSeriesType": "area",
+        "seriesOptions": [
+          {
+            "key": "rdnt_price",
+            "title": "Price",
+            "type": "area",
+            "color": "#aaaacd",
+            "yAxis": "left",
+            "zIndex": 0
           },
-          "yColumns": [
-            "rdnt_price",
-            "red_volume",
-            "green_volume"
-          ],
-          "globalSeriesType": "area",
-          "seriesOptions": [
-            {
-              "key": "rdnt_price",
-              "title": "Price",
-              "type": "area",
-              "color": "#aaaacd",
-              "yAxis": "left",
-              "zIndex": 0
-            },
-            {
-              "key": "red_volume",
-              "title": "$USD Volume",
-              "type": "bar",
-              "color": "#f51818",
-              "yAxis": "right",
-              "zIndex": 1
-            },
-            {
-              "key": "green_volume",
-              "title": "$USD Volume",
-              "type": "bar",
-              "color": "#4fa0e0",
-              "yAxis": "right",
-              "zIndex": 2
-            }
-          ],
-          "xAxis": {
-            "title": "Date",
-            "tickFormat": "MMM DD"
+          {
+            "key": "red_volume",
+            "title": "$USD Volume",
+            "type": "bar",
+            "color": "#f51818",
+            "yAxis": "right",
+            "zIndex": 1
           },
-          "leftYAxis": {
-            "tickFormat": "$0[].000",
-            "labelFormat": "$0[.,].00"
-          },
-          "rightYAxis": {
-            "tickFormat": "$0[].00a",
-            "labelFormat": "$0[.,].00"
+          {
+            "key": "green_volume",
+            "title": "$USD Volume",
+            "type": "bar",
+            "color": "#4fa0e0",
+            "yAxis": "right",
+            "zIndex": 2
           }
+        ],
+        "xAxis": {
+          "title": "Date",
+          "tickFormat": "MMM DD"
+        },
+        "leftYAxis": {
+          "tickFormat": "$0[].000",
+          "labelFormat": "$0[.,].00"
+        },
+        "rightYAxis": {
+          "tickFormat": "$0[].00a",
+          "labelFormat": "$0[.,].00"
         }
       }
     }
@@ -557,51 +537,57 @@ export default [
     "name": "libs/@scom/scom-mixed-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/947867/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+      "title": "Holders OverTime",
+      "description": "RDNT and RDNT V2 Holders Overtime",
       "options": {
-        "title": "Holders OverTime",
-        "description": "RDNT and RDNT V2 Holders Overtime",
-        "options": {
-          "xColumn": {
-            "key": "time",
-            "type": "time"
+        "xColumn": {
+          "key": "time",
+          "type": "time"
+        },
+        "yColumns": [
+          "red_change",
+          "green_change",
+          "total_holders"
+        ],
+        "globalSeriesType": "line",
+        "seriesOptions": [
+          {
+            "key": "red_change",
+            "title": "Change",
+            "type": "bar",
+            "color": "#ff0000",
+            "yAxis": "right",
+            "zIndex": 2
           },
-          "yColumns": [
-            "red_change",
-            "green_change",
-            "total_holders"
-          ],
-          "globalSeriesType": "line",
-          "seriesOptions": [
-            {
-              "key": "red_change",
-              "title": "Change",
-              "type": "bar",
-              "color": "#ff0000",
-              "yAxis": "right",
-              "zIndex": 2
-            },
-            {
-              "key": "green_change",
-              "title": "Change",
-              "type": "bar",
-              "color": "#00ff17",
-              "yAxis": "right",
-              "zIndex": 1
-            },
-            {
-              "key": "total_holders",
-              "title": "Total Holders",
-              "type": "line",
-              "yAxis": "left",
-              "zIndex": 0
-            }
-          ],
-          "xAxis": {
-            "title": "Date",
-            "tickFormat": "MMM DD"
+          {
+            "key": "green_change",
+            "title": "Change",
+            "type": "bar",
+            "color": "#00ff17",
+            "yAxis": "right",
+            "zIndex": 1
+          },
+          {
+            "key": "total_holders",
+            "title": "Total Holders",
+            "type": "line",
+            "yAxis": "left",
+            "zIndex": 0
           }
+        ],
+        "xAxis": {
+          "title": "Date",
+          "tickFormat": "MMM DD"
         }
       }
     }
   }
-]
+] as {
+  id: number;
+  title: string;
+  description?: string;
+  name: string;
+  properties: {
+    [key: string]: string | number | object
+  }
+}[]
