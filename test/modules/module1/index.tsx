@@ -43,7 +43,7 @@ export default class Module1 extends Module {
                     "counterLabelColor": '#f0310f'
                 }}
             />
-            <i-modal id="mdConfig" width={750}>
+            <i-modal id="mdConfig" width={1000}>
                 <i-panel id="pnlConfig" />
             </i-modal>
         </i-vstack>
