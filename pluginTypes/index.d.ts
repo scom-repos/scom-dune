@@ -219,6 +219,8 @@ declare module "@scom/scom-dune" {
     export default class ScomDune extends Module {
         private vStackDune;
         private dappContainer;
+        private mdConfig;
+        private pnlConfig;
         private _data;
         tag: any;
         defaultEdit: boolean;
@@ -246,29 +248,7 @@ declare module "@scom/scom-dune" {
         getConfigurators(): ({
             name: string;
             target: string;
-            getActions: () => ({
-                name: string;
-                icon: string;
-                command: (builder: any, userInputData: any) => {
-                    execute: () => Promise<void>;
-                    undo: () => void;
-                    redo: () => void;
-                };
-                customUI: {
-                    render: (onSave?: () => void) => VStack;
-                };
-                userInputDataSchema: IDataSchema;
-            } | {
-                name: string;
-                icon: string;
-                command: (builder: any, userInputData: any) => {
-                    execute: () => Promise<void>;
-                    undo: () => void;
-                    redo: () => void;
-                };
-                userInputDataSchema: IDataSchema;
-                customUI?: undefined;
-            })[];
+            getActions: () => any;
             getData: any;
             setData: any;
             getTag: any;
@@ -278,7 +258,7 @@ declare module "@scom/scom-dune" {
         } | {
             name: string;
             target: string;
-            getActions: () => ({
+            getActions: () => {
                 name: string;
                 icon: string;
                 command: (builder: any, userInputData: any) => {
@@ -287,20 +267,10 @@ declare module "@scom/scom-dune" {
                     redo: () => void;
                 };
                 customUI: {
-                    render: (onSave?: () => void) => VStack;
+                    render: (data?: any, onConfirm?: (result: boolean, data: any) => void) => VStack;
                 };
                 userInputDataSchema: IDataSchema;
-            } | {
-                name: string;
-                icon: string;
-                command: (builder: any, userInputData: any) => {
-                    execute: () => Promise<void>;
-                    undo: () => void;
-                    redo: () => void;
-                };
-                userInputDataSchema: IDataSchema;
-                customUI?: undefined;
-            })[];
+            }[];
             getLinkParams: () => {
                 data: string;
             };
@@ -314,6 +284,7 @@ declare module "@scom/scom-dune" {
         private updateTheme;
         private onUpdateBlock;
         private updateDuneData;
+        private showConfig;
         init(): Promise<void>;
         render(): any;
     }
