@@ -7,7 +7,9 @@ import {
   IDataSchema,
   VStack,
   Styles,
-  Panel
+  Panel,
+  Modal,
+  Button
 } from '@ijstech/components';
 import { IDuneConfig, getComponent } from './global/index';
 import { containerStyle, customContainerDapp, duneStyle } from './index.css';
@@ -36,6 +38,8 @@ declare global {
 export default class ScomDune extends Module {
   private vStackDune: VStack;
   private dappContainer: ScomDappContainer;
+  private mdConfig: Modal;
+  private pnlConfig: Panel;
 
   private _data: IDuneConfig = { componentId: 0 };
   tag: any = {};
@@ -86,7 +90,7 @@ export default class ScomDune extends Module {
 
   private async setData(data: IDuneConfig) {
     this._data = data;
-    this.updateDuneData();
+    await this.updateDuneData();
   }
 
   private getTag() {
@@ -114,7 +118,7 @@ export default class ScomDune extends Module {
     this.onUpdateBlock();
   }
 
-  private getPropertiesSchema(readOnly?: boolean) {
+  private getPropertiesSchema() {
     const propertiesSchema: any = {
       type: 'object',
       properties: {
@@ -128,10 +132,13 @@ export default class ScomDune extends Module {
     return propertiesSchema;
   }
 
-  private getThemeSchema(readOnly?: boolean) {
+  private getThemeSchema() {
     const themeSchema = {
       type: 'object',
       properties: {
+        darkShadow: {
+          type: 'boolean'
+        },
         fontColor: {
           type: 'string',
           format: 'color'
@@ -173,22 +180,29 @@ export default class ScomDune extends Module {
           }
         },
         customUI: {
-          render: (onSave?: () => void) => {
+          render: (data?: any, onConfirm?: (result: boolean, data: any) => void) => {
             const vstack = new VStack();
             const config = new ConfiguratorSettings();
             config.data = dataJson;
-            config.onSaveConfigData = (_data: any, _tag: any) => {
+            if (this._data.options) {
+              config.showDetail({ properties: { ...this._data }, id: this._data.componentId, tag: { ...this.tag } });
+            }
+            config.onSaveConfigData = async (_data: any, _tag: any) => {
               if (_tag) this.setTag(_tag, true);
-              if (_data) this.setData(_data);
-              if (onSave) onSave();
+              if (_data) await this.setData(_data);
+              if (onConfirm) {
+                onConfirm(true, { properties: { ...this._data }, id: this._data.componentId, tag: { ...this.tag } });
+              }
             }
             vstack.append(config);
             return vstack;
           }
         },
         userInputDataSchema: propertiesSchema,
-      },
-      {
+      }
+    ]
+    if (themeSchema) {
+      actions.push({
         name: 'Theme Settings',
         icon: 'palette',
         command: (builder: any, userInputData: any) => {
@@ -210,8 +224,8 @@ export default class ScomDune extends Module {
           }
         },
         userInputDataSchema: themeSchema
-      }
-    ]
+      } as any);
+    }
     return actions
   }
 
@@ -231,6 +245,10 @@ export default class ScomDune extends Module {
         name: 'Builder Configurator',
         target: 'Builders',
         getActions: () => {
+          const containerModule = self.vStackDune.firstChild as any;
+          if (containerModule?.getConfigurators && containerModule.getConfigurators()[1]) {
+            return containerModule.getConfigurators()[1].getActions();
+          }
           return this._getActions(this.getPropertiesSchema(), this.getThemeSchema());
         },
         getData: this.getData.bind(this),
@@ -242,7 +260,7 @@ export default class ScomDune extends Module {
         name: 'Emdedder Configurator',
         target: 'Embedders',
         getActions: () => {
-          return this._getActions(this.getPropertiesSchema(true), this.getThemeSchema(true))
+          return this._getActions(this.getPropertiesSchema(), this.getThemeSchema())
         },
         getLinkParams: () => {
           const data = this._data || {};
@@ -310,11 +328,51 @@ export default class ScomDune extends Module {
         }
       }
     } else {
-      this.vStackDune.appendChild(<i-vstack horizontalAlignment="center" verticalAlignment="center" height={100} maxHeight="100%">
-        <i-label caption="No Configurations" font={{ size: '20px' }} />
-      </i-vstack>);
+      this.vStackDune.appendChild(
+        <i-vstack
+          gap={20}
+          horizontalAlignment="center"
+          verticalAlignment="center"
+          height={100}
+          maxHeight="100%"
+          onClick={this.showConfig}
+          class="pointer"
+        >
+          <i-label caption="Dune Blocks" font={{ size: '20px' }} />
+          <i-icon
+            name="plus"
+            fill={Theme.colors.primary.contrastText}
+            width={36}
+            height={36}
+          />
+        </i-vstack>
+      );
     }
     this.onUpdateBlock();
+  }
+
+  private showConfig = () => {
+    const ideToolbar = this.closest('ide-toolbar');
+    if (ideToolbar) {
+      const btnSettings = ideToolbar.querySelector('#toolsStack')?.querySelector('#toolbar')?.firstElementChild as Button;
+      if (btnSettings) {
+        btnSettings.click();
+        return;
+      }
+    }
+    if (!this.pnlConfig.hasChildNodes()) {
+      const config = new ConfiguratorSettings();
+      config.direction = true;
+      config.data = dataJson;
+      config.onSaveConfigData = (_data: any, _tag: any) => {
+        if (_tag) this.setTag(_tag, true);
+        if (_data) this.setData(_data);
+        this.mdConfig.visible = false;
+        this.pnlConfig.clearInnerHTML();
+      }
+      this.pnlConfig.appendChild(config);
+    }
+    this.mdConfig.visible = true;
   }
 
   async init() {
@@ -356,6 +414,9 @@ export default class ScomDune extends Module {
           padding={{ top: 10, bottom: 10, left: 10, right: 10 }}
           class={containerStyle}
         />
+        <i-modal id="mdConfig" width={1000}>
+          <i-panel id="pnlConfig" />
+        </i-modal>
       </i-scom-dapp-container>
     )
   }

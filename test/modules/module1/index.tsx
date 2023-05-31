@@ -1,27 +1,18 @@
-import { Module, customModule, Container, Modal, Panel } from '@ijstech/components';
+import { Module, customModule, Container } from '@ijstech/components';
 import ScomDune from '@scom/scom-dune';
 
 @customModule
 export default class Module1 extends Module {
-    private scomDuneElm: ScomDune;
-    private mdConfig: Modal;
-    private pnlConfig: Panel;
     constructor(parent?: Container, options?: any) {
         super(parent, options);
     }
 
     async init() {
         super.init();
-        this.pnlConfig.appendChild(this.scomDuneElm.getConfigurators()[0].getActions()[0].customUI.render(() => { this.mdConfig.visible = false }));
-    }
-
-    showSettings() {
-        this.mdConfig.visible = true;
     }
 
     render() {
         return <i-vstack gap={10} padding={{ top: 20, bottom: 20 }} verticalAlignment="center" horizontalAlignment="center">
-            <i-button caption="Settings (Dune 1)" width={200} height={36} onClick={this.showSettings} font={{ color: '#fff' }} margin={{ bottom: 10 }} />
             <i-label caption="Dune 1" font={{ size: '16px', bold: true }} />
             <i-scom-dune
                 id="scomDuneElm"
