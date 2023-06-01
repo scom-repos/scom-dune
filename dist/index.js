@@ -851,6 +851,32 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             this._data = { componentId: 0 };
             this.tag = {};
             this.defaultEdit = true;
+            this.showConfig = () => {
+                var _a, _b;
+                const ideToolbar = this.closest('ide-toolbar');
+                if (ideToolbar) {
+                    const btnSettings = (_b = (_a = ideToolbar.querySelector('#toolsStack')) === null || _a === void 0 ? void 0 : _a.querySelector('#toolbar')) === null || _b === void 0 ? void 0 : _b.querySelector('[tool-name="Settings"]');
+                    if (btnSettings) {
+                        btnSettings.click();
+                        return;
+                    }
+                }
+                if (!this.pnlConfig.hasChildNodes()) {
+                    const config = new scom_configurator_settings_1.default();
+                    config.direction = true;
+                    config.data = data_json_1.default;
+                    config.onSaveConfigData = (_data, _tag) => {
+                        if (_tag)
+                            this.setTag(_tag, true);
+                        if (_data)
+                            this.setData(_data);
+                        this.mdConfig.visible = false;
+                        this.pnlConfig.clearInnerHTML();
+                    };
+                    this.pnlConfig.appendChild(config);
+                }
+                this.mdConfig.visible = true;
+            };
         }
         static async create(options, parent) {
             let self = new this(parent, options);
@@ -889,7 +915,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
         }
         async setData(data) {
             this._data = data;
-            this.updateDuneData();
+            await this.updateDuneData();
         }
         getTag() {
             return this.tag;
@@ -914,7 +940,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             }
             this.onUpdateBlock();
         }
-        getPropertiesSchema(readOnly) {
+        getPropertiesSchema() {
             const propertiesSchema = {
                 type: 'object',
                 properties: {
@@ -927,10 +953,13 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             };
             return propertiesSchema;
         }
-        getThemeSchema(readOnly) {
+        getThemeSchema() {
             const themeSchema = {
                 type: 'object',
                 properties: {
+                    darkShadow: {
+                        type: 'boolean'
+                    },
                     fontColor: {
                         type: 'string',
                         format: 'color'
@@ -974,25 +1003,31 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                         };
                     },
                     customUI: {
-                        render: (onSave) => {
+                        render: (data, onConfirm) => {
                             const vstack = new components_3.VStack();
                             const config = new scom_configurator_settings_1.default();
                             config.data = data_json_1.default;
-                            config.onSaveConfigData = (_data, _tag) => {
+                            if (this._data.options) {
+                                config.showDetail({ properties: Object.assign({}, this._data), id: this._data.componentId, tag: Object.assign({}, this.tag) });
+                            }
+                            config.onSaveConfigData = async (_data, _tag) => {
                                 if (_tag)
                                     this.setTag(_tag, true);
                                 if (_data)
-                                    this.setData(_data);
-                                if (onSave)
-                                    onSave();
+                                    await this.setData(_data);
+                                if (onConfirm) {
+                                    onConfirm(true, { properties: Object.assign({}, this._data), id: this._data.componentId, tag: Object.assign({}, this.tag) });
+                                }
                             };
                             vstack.append(config);
                             return vstack;
                         }
                     },
                     userInputDataSchema: propertiesSchema,
-                },
-                {
+                }
+            ];
+            if (themeSchema) {
+                actions.push({
                     name: 'Theme Settings',
                     icon: 'palette',
                     command: (builder, userInputData) => {
@@ -1010,7 +1045,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                             undo: () => {
                                 if (!userInputData)
                                     return;
-                                this.tag = Object.assign({}, oldTag);
+                                this.tag = JSON.parse(JSON.stringify(oldTag));
                                 if (builder === null || builder === void 0 ? void 0 : builder.setTag)
                                     builder.setTag(oldTag);
                                 else
@@ -1020,8 +1055,8 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                         };
                     },
                     userInputDataSchema: themeSchema
-                }
-            ];
+                });
+            }
             return actions;
         }
         saveConfigData(data, tag) {
@@ -1039,6 +1074,62 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                     name: 'Builder Configurator',
                     target: 'Builders',
                     getActions: () => {
+                        const containerModule = self.vStackDune.firstChild;
+                        if ((containerModule === null || containerModule === void 0 ? void 0 : containerModule.getConfigurators) && containerModule.getConfigurators()) {
+                            const target = containerModule.getConfigurators().find((f) => f.target === 'Builders');
+                            if (target) {
+                                return target.getActions().map((v) => {
+                                    return Object.assign(Object.assign({}, v), { command: (builder, userInputData) => {
+                                            const { execute, undo, redo } = v.command(builder, userInputData);
+                                            const isTheme = v.name === 'Theme Settings';
+                                            let oldData = isTheme ? Object.assign({}, this.tag) : Object.assign({}, self._data);
+                                            return {
+                                                execute: async () => {
+                                                    if (v.name === 'Theme Settings') {
+                                                        if (!userInputData)
+                                                            return;
+                                                        oldData = JSON.parse(JSON.stringify(self.tag));
+                                                        if (builder === null || builder === void 0 ? void 0 : builder.setTag)
+                                                            builder.setTag(userInputData);
+                                                        else
+                                                            self.setTag(userInputData);
+                                                    }
+                                                    else {
+                                                        oldData = Object.assign({}, self._data);
+                                                        if ((userInputData === null || userInputData === void 0 ? void 0 : userInputData.componentId) !== undefined)
+                                                            self._data.componentId = userInputData.componentId;
+                                                        if (builder === null || builder === void 0 ? void 0 : builder.setData)
+                                                            builder.setData(Object.assign(Object.assign({}, oldData), userInputData));
+                                                        self._data = Object.assign(Object.assign({}, oldData), userInputData);
+                                                    }
+                                                    execute();
+                                                },
+                                                undo: async () => {
+                                                    if (v.name === 'Theme Settings') {
+                                                        if (!userInputData)
+                                                            return;
+                                                        self.tag = JSON.parse(JSON.stringify(oldData));
+                                                        if (builder === null || builder === void 0 ? void 0 : builder.setTag)
+                                                            builder.setTag(oldData);
+                                                        else
+                                                            this.setTag(oldData);
+                                                    }
+                                                    else {
+                                                        oldData = Object.assign(Object.assign({}, self._data), oldData);
+                                                        if (builder === null || builder === void 0 ? void 0 : builder.setData)
+                                                            builder.setData(oldData);
+                                                        self._data = Object.assign({}, oldData);
+                                                    }
+                                                    undo();
+                                                },
+                                                redo: async () => {
+                                                    redo();
+                                                },
+                                            };
+                                        }, useRenderUI: true });
+                                });
+                            }
+                        }
                         return this._getActions(this.getPropertiesSchema(), this.getThemeSchema());
                     },
                     getData: this.getData.bind(this),
@@ -1050,7 +1141,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                     name: 'Emdedder Configurator',
                     target: 'Embedders',
                     getActions: () => {
-                        return this._getActions(this.getPropertiesSchema(true), this.getThemeSchema(true));
+                        return this._getActions(this.getPropertiesSchema(), this.getThemeSchema());
                     },
                     getLinkParams: () => {
                         const data = this._data || {};
@@ -1114,8 +1205,9 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                 }
             }
             else {
-                this.vStackDune.appendChild(this.$render("i-vstack", { horizontalAlignment: "center", verticalAlignment: "center", height: 100, maxHeight: "100%" },
-                    this.$render("i-label", { caption: "No Configurations", font: { size: '20px' } })));
+                this.vStackDune.appendChild(this.$render("i-vstack", { gap: 20, horizontalAlignment: "center", verticalAlignment: "center", height: 100, maxHeight: "100%", onClick: this.showConfig, class: "pointer" },
+                    this.$render("i-label", { caption: "Dune Blocks", font: { size: '20px' } }),
+                    this.$render("i-icon", { name: "plus", fill: Theme.colors.primary.contrastText, width: 36, height: 36 })));
             }
             this.onUpdateBlock();
         }
@@ -1148,7 +1240,9 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
         }
         render() {
             return (this.$render("i-scom-dapp-container", { id: "dappContainer", class: index_css_1.customContainerDapp, showWalletNetwork: false, display: "flex", height: "100%", width: "100%" },
-                this.$render("i-vstack", { id: "vStackDune", gap: 20, height: "100%", background: { color: Theme.background.main }, padding: { top: 10, bottom: 10, left: 10, right: 10 }, class: index_css_1.containerStyle })));
+                this.$render("i-vstack", { id: "vStackDune", gap: 20, height: "100%", background: { color: Theme.background.main }, padding: { top: 10, bottom: 10, left: 10, right: 10 }, class: index_css_1.containerStyle }),
+                this.$render("i-modal", { id: "mdConfig", width: 1000 },
+                    this.$render("i-panel", { id: "pnlConfig" }))));
         }
     };
     ScomDune = __decorate([
