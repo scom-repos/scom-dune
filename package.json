@@ -15,15 +15,15 @@
   },
   "dependencies": {
     "@scom/scom-dapp-container": "^0.1.4",
-    "@scom/scom-table": "https://github.com/scom-repos/scom-table.git",
-    "@scom/scom-counter": "https://github.com/scom-repos/scom-counter.git",
-    "@scom/scom-pie-chart": "https://github.com/scom-repos/scom-pie-chart.git",
-    "@scom/scom-bar-chart": "https://github.com/scom-repos/scom-bar-chart.git",
-    "@scom/scom-line-chart": "https://github.com/scom-repos/scom-line-chart.git",
-    "@scom/scom-area-chart": "https://github.com/scom-repos/scom-area-chart.git",
-    "@scom/scom-scatter-chart": "https://github.com/scom-repos/scom-scatter-chart.git",
-    "@scom/scom-mixed-chart": "https://github.com/scom-repos/scom-mixed-chart.git",
-    "@scom/scom-configurator-settings": "https://github.com/scom-repos/scom-configurator-settings.git"
+    "@scom/scom-table": "^0.1.3",
+    "@scom/scom-counter": "^0.1.3",
+    "@scom/scom-pie-chart": "^0.1.3",
+    "@scom/scom-bar-chart": "^0.1.2",
+    "@scom/scom-line-chart": "^0.1.2",
+    "@scom/scom-area-chart": "^0.1.2",
+    "@scom/scom-scatter-chart": "^0.1.2",
+    "@scom/scom-mixed-chart": "^0.1.2",
+    "@scom/scom-configurator-settings": "^0.1.0"
   },
   "devDependencies": {
     "@ijstech/cli": "^0.1.26",
