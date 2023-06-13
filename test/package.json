@@ -5,7 +5,8 @@
         "node": ">=18.0.0"
     },
     "dependencies": {
-        "@ijstech/components": "^0.1.39"
+        "@ijstech/components": "^0.1.39",
+        "@scom/dapp": "^0.1.21"
     },
     "devDependencies": {
         "@ijstech/cli": "^0.1.28",

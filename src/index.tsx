@@ -12,10 +12,7 @@ import {
   Button
 } from '@ijstech/components';
 import { IDuneConfig, getComponent } from './global/index';
-import { containerStyle, customContainerDapp, duneStyle } from './index.css';
-import { } from '@ijstech/eth-contract';
-import { } from '@ijstech/eth-wallet';
-import ScomDappContainer from '@scom/scom-dapp-container';
+import { containerStyle, duneStyle } from './index.css';
 import dataJson from './data.json';
 import ConfiguratorSettings from '@scom/scom-configurator-settings';
 
@@ -37,7 +34,6 @@ declare global {
 @customElements('i-scom-dune')
 export default class ScomDune extends Module {
   private vStackDune: VStack;
-  private dappContainer: ScomDappContainer;
   private mdConfig: Modal;
   private pnlConfig: Panel;
 
@@ -63,7 +59,7 @@ export default class ScomDune extends Module {
   }
   set showFooter(value: boolean) {
     this._data.showFooter = value
-    if (this.dappContainer) this.dappContainer.showFooter = this.showFooter;
+    // if (this.dappContainer) this.dappContainer.showFooter = this.showFooter;
   }
 
   get showHeader() {
@@ -71,7 +67,7 @@ export default class ScomDune extends Module {
   }
   set showHeader(value: boolean) {
     this._data.showHeader = value
-    if (this.dappContainer) this.dappContainer.showHeader = this.showHeader;
+    // if (this.dappContainer) this.dappContainer.showHeader = this.showHeader;
   }
 
   get existingCharts() {
@@ -108,13 +104,13 @@ export default class ScomDune extends Module {
       }
     }
     this.width = this.tag.width || 700;
-    this.dappContainer.width = this.width;
-    this.dappContainer.maxWidth = '100%';
-    const containerBody = this.dappContainer.querySelector('dapp-container-body') as Panel;
-    if (containerBody) {
-      containerBody.width = this.width;
-      containerBody.maxWidth = '100%';
-    }
+    // this.dappContainer.width = this.width;
+    // this.dappContainer.maxWidth = '100%';
+    // const containerBody = this.dappContainer.querySelector('dapp-container-body') as Panel;
+    // if (containerBody) {
+    //   containerBody.width = this.width;
+    //   containerBody.maxWidth = '100%';
+    // }
     this.onUpdateBlock();
   }
 
@@ -351,10 +347,10 @@ export default class ScomDune extends Module {
   }
 
   private async updateDuneData() {
-    if (this.dappContainer) {
-      this.dappContainer.showHeader = this.showHeader;
-      this.dappContainer.showFooter = this.showFooter;
-    }
+    // if (this.dappContainer) {
+    //   this.dappContainer.showHeader = this.showHeader;
+    //   this.dappContainer.showFooter = this.showFooter;
+    // }
     this.vStackDune.clearInnerHTML();
     const componentId = Number(this._data?.componentId);
     if (!isNaN(componentId) && componentId >= 0) {
@@ -426,14 +422,14 @@ export default class ScomDune extends Module {
     this.updateTheme();
     this.classList.add(duneStyle);
     this.width = this.tag.width || 700;
-    this.dappContainer.width = this.width;
-    this.dappContainer.maxWidth = '100%';
     this.maxWidth = '100%';
-    const containerBody = this.dappContainer.querySelector('dapp-container-body') as Panel;
-    if (containerBody) {
-      containerBody.width = this.width;
-      containerBody.maxWidth = '100%';
-    }
+    // this.dappContainer.width = this.width;
+    // this.dappContainer.maxWidth = '100%';
+    // const containerBody = this.dappContainer.querySelector('dapp-container-body') as Panel;
+    // if (containerBody) {
+    //   containerBody.width = this.width;
+    //   containerBody.maxWidth = '100%';
+    // }
     const tag = this.getAttribute('tag', true);
     if (tag) {
       this.setTag(tag);
@@ -450,7 +446,7 @@ export default class ScomDune extends Module {
 
   render() {
     return (
-      <i-scom-dapp-container id="dappContainer" class={customContainerDapp} showWalletNetwork={false} display="flex" height="100%" width="100%">
+      <i-panel display="flex" height="100%" width="100%">
         <i-vstack
           id="vStackDune"
           gap={20}
@@ -462,7 +458,7 @@ export default class ScomDune extends Module {
         <i-modal id="mdConfig" width={1000}>
           <i-panel id="pnlConfig" />
         </i-modal>
-      </i-scom-dapp-container>
+      </i-panel>
     )
   }
 }
