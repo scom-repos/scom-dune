@@ -1,6 +1,10 @@
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -27,46 +31,46 @@ define("@scom/scom-dune/global/utils.ts", ["require", "exports", "@ijstech/compo
             return '-';
         const { decimals, format, percentValues } = options || {};
         if (percentValues) {
-            return `${exports.formatNumberWithSeparators(num, 2)}%`;
+            return `${(0, exports.formatNumberWithSeparators)(num, 2)}%`;
         }
         if (format) {
-            return exports.formatNumberByFormat(num, format);
+            return (0, exports.formatNumberByFormat)(num, format);
         }
         const absNum = Math.abs(num);
         if (absNum >= 1000000000) {
-            return exports.formatNumberWithSeparators((num / 1000000000), decimals || 3) + 'B';
+            return (0, exports.formatNumberWithSeparators)((num / 1000000000), decimals || 3) + 'B';
         }
         if (absNum >= 1000000) {
-            return exports.formatNumberWithSeparators((num / 1000000), decimals || 3) + 'M';
+            return (0, exports.formatNumberWithSeparators)((num / 1000000), decimals || 3) + 'M';
         }
         if (absNum >= 1000) {
-            return exports.formatNumberWithSeparators((num / 1000), decimals || 3) + 'K';
+            return (0, exports.formatNumberWithSeparators)((num / 1000), decimals || 3) + 'K';
         }
         if (absNum < 0.0000001) {
-            return exports.formatNumberWithSeparators(num);
+            return (0, exports.formatNumberWithSeparators)(num);
         }
         if (absNum < 0.00001) {
-            return exports.formatNumberWithSeparators(num, 6);
+            return (0, exports.formatNumberWithSeparators)(num, 6);
         }
         if (absNum < 0.001) {
-            return exports.formatNumberWithSeparators(num, 4);
+            return (0, exports.formatNumberWithSeparators)(num, 4);
         }
-        return exports.formatNumberWithSeparators(num, 2);
+        return (0, exports.formatNumberWithSeparators)(num, 2);
     };
     exports.formatNumber = formatNumber;
     const formatNumberByFormat = (num, format, separators) => {
         const decimalPlaces = format.split('.')[1] ? format.split('.').length : 0;
         if (format.includes('%')) {
-            return exports.formatNumberWithSeparators((num * 100), decimalPlaces) + '%';
+            return (0, exports.formatNumberWithSeparators)((num * 100), decimalPlaces) + '%';
         }
         const currencySymbol = format.indexOf('$') !== -1 ? '$' : '';
-        const roundedNum = exports.formatNumberWithSeparators(num, decimalPlaces);
+        const roundedNum = (0, exports.formatNumberWithSeparators)(num, decimalPlaces);
         if (separators && !format.includes('.ma')) {
             return `${currencySymbol}${roundedNum}`;
         }
         const parts = roundedNum.split('.');
         const decimalPart = parts.length > 1 ? parts[1] : '';
-        const integerPart = exports.formatNumber(parseInt(parts[0].replace(/,/g, '')), { decimals: decimalPart.length });
+        const integerPart = (0, exports.formatNumber)(parseInt(parts[0].replace(/,/g, '')), { decimals: decimalPart.length });
         return `${currencySymbol}${integerPart}`;
     };
     exports.formatNumberByFormat = formatNumberByFormat;
@@ -846,6 +850,11 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
     Object.defineProperty(exports, "__esModule", { value: true });
     const Theme = components_3.Styles.Theme.ThemeVars;
     let ScomDune = class ScomDune extends components_3.Module {
+        static async create(options, parent) {
+            let self = new this(parent, options);
+            await self.ready();
+            return self;
+        }
         constructor(parent, options) {
             super(parent, options);
             this._data = { componentId: 0 };
@@ -878,19 +887,13 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                 this.mdConfig.visible = true;
             };
         }
-        static async create(options, parent) {
-            let self = new this(parent, options);
-            await self.ready();
-            return self;
-        }
         get showFooter() {
             var _a;
             return (_a = this._data.showFooter) !== null && _a !== void 0 ? _a : true;
         }
         set showFooter(value) {
             this._data.showFooter = value;
-            if (this.dappContainer)
-                this.dappContainer.showFooter = this.showFooter;
+            // if (this.dappContainer) this.dappContainer.showFooter = this.showFooter;
         }
         get showHeader() {
             var _a;
@@ -898,8 +901,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
         }
         set showHeader(value) {
             this._data.showHeader = value;
-            if (this.dappContainer)
-                this.dappContainer.showHeader = this.showHeader;
+            // if (this.dappContainer) this.dappContainer.showHeader = this.showHeader;
         }
         get existingCharts() {
             const data = data_json_1.default;
@@ -931,13 +933,13 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                 }
             }
             this.width = this.tag.width || 700;
-            this.dappContainer.width = this.width;
-            this.dappContainer.maxWidth = '100%';
-            const containerBody = this.dappContainer.querySelector('dapp-container-body');
-            if (containerBody) {
-                containerBody.width = this.width;
-                containerBody.maxWidth = '100%';
-            }
+            // this.dappContainer.width = this.width;
+            // this.dappContainer.maxWidth = '100%';
+            // const containerBody = this.dappContainer.querySelector('dapp-container-body') as Panel;
+            // if (containerBody) {
+            //   containerBody.width = this.width;
+            //   containerBody.maxWidth = '100%';
+            // }
             this.onUpdateBlock();
         }
         getPropertiesSchema() {
@@ -1182,15 +1184,15 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
         }
         async updateDuneData() {
             var _a;
-            if (this.dappContainer) {
-                this.dappContainer.showHeader = this.showHeader;
-                this.dappContainer.showFooter = this.showFooter;
-            }
+            // if (this.dappContainer) {
+            //   this.dappContainer.showHeader = this.showHeader;
+            //   this.dappContainer.showFooter = this.showFooter;
+            // }
             this.vStackDune.clearInnerHTML();
             const componentId = Number((_a = this._data) === null || _a === void 0 ? void 0 : _a.componentId);
             if (!isNaN(componentId) && componentId >= 0) {
                 const duneChart = data_json_1.default.find(v => v.id === this._data.componentId);
-                const containerModule = await index_1.getComponent(duneChart.name);
+                const containerModule = await (0, index_1.getComponent)(duneChart.name);
                 this.vStackDune.appendChild(containerModule);
                 await containerModule.ready();
                 if (containerModule === null || containerModule === void 0 ? void 0 : containerModule.getConfigurators) {
@@ -1217,14 +1219,14 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             this.updateTheme();
             this.classList.add(index_css_1.duneStyle);
             this.width = this.tag.width || 700;
-            this.dappContainer.width = this.width;
-            this.dappContainer.maxWidth = '100%';
             this.maxWidth = '100%';
-            const containerBody = this.dappContainer.querySelector('dapp-container-body');
-            if (containerBody) {
-                containerBody.width = this.width;
-                containerBody.maxWidth = '100%';
-            }
+            // this.dappContainer.width = this.width;
+            // this.dappContainer.maxWidth = '100%';
+            // const containerBody = this.dappContainer.querySelector('dapp-container-body') as Panel;
+            // if (containerBody) {
+            //   containerBody.width = this.width;
+            //   containerBody.maxWidth = '100%';
+            // }
             const tag = this.getAttribute('tag', true);
             if (tag) {
                 this.setTag(tag);
@@ -1239,7 +1241,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             this.executeReadyCallback();
         }
         render() {
-            return (this.$render("i-scom-dapp-container", { id: "dappContainer", class: index_css_1.customContainerDapp, showWalletNetwork: false, display: "flex", height: "100%", width: "100%" },
+            return (this.$render("i-panel", { display: "flex", height: "100%", width: "100%" },
                 this.$render("i-vstack", { id: "vStackDune", gap: 20, height: "100%", background: { color: Theme.background.main }, padding: { top: 10, bottom: 10, left: 10, right: 10 }, class: index_css_1.containerStyle }),
                 this.$render("i-modal", { id: "mdConfig", width: 1000 },
                     this.$render("i-panel", { id: "pnlConfig" }))));
@@ -1247,7 +1249,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
     };
     ScomDune = __decorate([
         components_3.customModule,
-        components_3.customElements('i-scom-dune')
+        (0, components_3.customElements)('i-scom-dune')
     ], ScomDune);
     exports.default = ScomDune;
 });

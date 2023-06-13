@@ -1,6 +1,6 @@
 {
   "env": "testnet",
-  "main": "@modules/module1",
+  "main": "@scom/dapp",
   "assets": "@modules/assets",
   "moduleDir": "modules",
   "modules": {
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@scom/scom-dune": "*",
-    "@scom/scom-dapp-container": "*"
+    "@scom/dapp": "*"
   },
   "menus": [
     {
@@ -61,10 +61,19 @@
         "fontFamily": "Raleway"
       }
     },
-    "light": {}
+    "light": {
+      "colors": {
+        "info": {
+          "contrastText": "#000"
+        }
+      }
+    }
   },
   "copyrightInfo": "&#169; 2022 IJS Technologies. All rights reserved.",
   "version": "0.1.0-beta",
+  "header": {
+    "visible": false
+  },
   "breakpoints": {
     "mobile": 414,
     "tablet": 1280,

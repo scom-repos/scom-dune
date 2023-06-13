@@ -218,7 +218,6 @@ declare module "@scom/scom-dune" {
     }
     export default class ScomDune extends Module {
         private vStackDune;
-        private dappContainer;
         private mdConfig;
         private pnlConfig;
         private _data;
