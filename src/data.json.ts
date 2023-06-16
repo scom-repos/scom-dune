@@ -2,7 +2,7 @@ export default [
   {
     "id": 0,
     "title": "[Counter] Ethereum Beacon Chain Deposits",
-    "name": "libs/@scom/scom-counter",
+    "path": "libs/@scom/scom-counter",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2030584/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
       "title": "Ethereum Beacon Chain Deposits",
@@ -15,7 +15,7 @@ export default [
   {
     "id": 1,
     "title": "[Table] Ethereum Beacon Chain Deposits Entity",
-    "name": "libs/@scom/scom-table",
+    "path": "libs/@scom/scom-table",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2030664/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
       "title": "Ethereum Beacon Chain Deposits Entity",
@@ -53,7 +53,7 @@ export default [
     "id": 2,
     "title": "[Table] Top ETH withdraw recipients after Shanghai Unlock",
     "description": "Reward",
-    "name": "libs/@scom/scom-table",
+    "path": "libs/@scom/scom-table",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2377402/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
       "title": "Top ETH withdraw recipients after Shanghai Unlock",
@@ -83,7 +83,7 @@ export default [
     "type": "table",
     "title": "[Table] Top ETH withdraw recipients after Shanghai Unlock",
     "description": "Full withdraw",
-    "name": "libs/@scom/scom-table",
+    "path": "libs/@scom/scom-table",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2377304/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
       "title": "Top ETH withdraw recipients after Shanghai Unlock",
@@ -111,7 +111,7 @@ export default [
   {
     "id": 4,
     "title": "[Pie Chart] Ethereum Beacon Chain Deposits Entity",
-    "name": "libs/@scom/scom-pie-chart",
+    "path": "libs/@scom/scom-pie-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2030664/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
       "title": "Ethereum Beacon Chain Deposits Entity",
@@ -134,7 +134,7 @@ export default [
   {
     "id": 5,
     "title": "[Pie Chart] Liquid Staking validators - All",
-    "name": "libs/@scom/scom-pie-chart",
+    "path": "libs/@scom/scom-pie-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2360788/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
       "title": "Liquid Staking validators - All",
@@ -157,7 +157,7 @@ export default [
   {
     "id": 6,
     "title": "[Bar Chart] ETH Withdrawals after Shanghai Unlock",
-    "name": "libs/@scom/scom-bar-chart",
+    "path": "libs/@scom/scom-bar-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2360815/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
       "title": "ETH Withdrawals after Shanghai Unlock",
@@ -199,7 +199,7 @@ export default [
   {
     "id": 7,
     "title": "[Line Chart] ETH Withdrawals after Shanghai Unlock vs ETH price",
-    "name": "libs/@scom/scom-line-chart",
+    "path": "libs/@scom/scom-line-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2360905/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
       "title": "ETH Withdrawals after Shanghai Unlock vs ETH price",
@@ -233,7 +233,7 @@ export default [
     "id": 8,
     "title": "[Area Chart] LP Value Overtime",
     "description": "RDNT/WETH LP Value",
-    "name": "libs/@scom/scom-area-chart",
+    "path": "libs/@scom/scom-area-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/284022/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
       "title": "LP Value Overtime",
@@ -278,7 +278,7 @@ export default [
     "id": 9,
     "title": "[Area Chart] ETH Withdrawals after Shanghai Unlock",
     "description": "ETH withdrawals cumsum",
-    "name": "libs/@scom/scom-area-chart",
+    "path": "libs/@scom/scom-area-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2360815/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
       "title": "ETH Withdrawals after Shanghai Unlock",
@@ -317,7 +317,7 @@ export default [
     "id": 10,
     "title": "[Area Chart] RDNT/WETH LP Staked Supply",
     "description": "Radiant Capital Pool2 Staking LP",
-    "name": "libs/@scom/scom-area-chart",
+    "path": "libs/@scom/scom-area-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/283918/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
       "title": "RDNT/WETH LP Staked Supply",
@@ -357,7 +357,7 @@ export default [
   {
     "id": 11,
     "title": "[Scatter Chart] ETH Withdrawals after Shanghai Unlock vs ETH price",
-    "name": "libs/@scom/scom-scatter-chart",
+    "path": "libs/@scom/scom-scatter-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/2360905/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
       "title": "ETH Withdrawals after Shanghai Unlock vs ETH price",
@@ -389,7 +389,7 @@ export default [
   {
     "id": 12,
     "title": "[Mixed Chart] Reserve Cumulative Value",
-    "name": "libs/@scom/scom-mixed-chart",
+    "path": "libs/@scom/scom-mixed-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/1333833/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
       "title": "Reserve Cumulative Value",
@@ -473,7 +473,7 @@ export default [
     "id": 13,
     "title": "[Mixed Chart] $RDNT Price Chart",
     "description": "RDNT Price Chart on Arbitrum and BSC",
-    "name": "libs/@scom/scom-mixed-chart",
+    "path": "libs/@scom/scom-mixed-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/1154848/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
       "title": "$RDNT Price Chart",
@@ -534,7 +534,7 @@ export default [
     "id": 14,
     "title": "[Mixed Chart] Holders OverTime",
     "description": "RDNT and RDNT V2 Holders Overtime",
-    "name": "libs/@scom/scom-mixed-chart",
+    "path": "libs/@scom/scom-mixed-chart",
     "properties": {
       "apiEndpoint": "https://api.dune.com/api/v1/query/947867/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
       "title": "Holders OverTime",
@@ -586,7 +586,7 @@ export default [
   id: number;
   title: string;
   description?: string;
-  name: string;
+  path: string;
   properties: {
     [key: string]: string | number | object
   }

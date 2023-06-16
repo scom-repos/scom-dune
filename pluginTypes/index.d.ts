@@ -196,7 +196,7 @@ declare module "@scom/scom-dune/data.json.ts" {
         id: number;
         title: string;
         description?: string;
-        name: string;
+        path: string;
         properties: {
             [key: string]: string | number | object;
         };
@@ -247,7 +247,20 @@ declare module "@scom/scom-dune" {
         getConfigurators(): ({
             name: string;
             target: string;
-            getActions: () => any;
+            getActions: () => {
+                name: string;
+                icon: string;
+                command: (builder: any, userInputData: any) => {
+                    execute: () => Promise<void>;
+                    undo: () => void;
+                    redo: () => void;
+                };
+                isReplacement: boolean;
+                customUI: {
+                    render: (data?: any, onReplace?: (data: any) => void) => VStack;
+                };
+                userInputDataSchema: IDataSchema;
+            }[];
             getData: any;
             setData: any;
             getTag: any;
@@ -265,8 +278,9 @@ declare module "@scom/scom-dune" {
                     undo: () => void;
                     redo: () => void;
                 };
+                isReplacement: boolean;
                 customUI: {
-                    render: (data?: any, onConfirm?: (result: boolean, data: any) => void) => VStack;
+                    render: (data?: any, onReplace?: (data: any) => void) => VStack;
                 };
                 userInputDataSchema: IDataSchema;
             }[];
