@@ -132,9 +132,9 @@ export default class ScomDune extends Module {
     const themeSchema = {
       type: 'object',
       properties: {
-        darkShadow: {
-          type: 'boolean'
-        },
+        // darkShadow: {
+        //   type: 'boolean'
+        // },
         fontColor: {
           type: 'string',
           format: 'color'
@@ -143,9 +143,9 @@ export default class ScomDune extends Module {
           type: 'string',
           format: 'color'
         },
-        width: {
-          type: 'string'
-        },
+        // width: {
+        //   type: 'string'
+        // },
         height: {
           type: 'string'
         }
@@ -175,19 +175,28 @@ export default class ScomDune extends Module {
             redo: () => { }
           }
         },
+        isReplacement: true,
         customUI: {
-          render: (data?: any, onConfirm?: (result: boolean, data: any) => void) => {
+          render: (data?: any, onReplace?: (data: any) => void) => {
             const vstack = new VStack();
             const config = new ConfiguratorSettings();
             config.data = dataJson;
             if (this._data.options) {
               config.showDetail({ properties: { ...this._data }, id: this._data.componentId, tag: { ...this.tag } });
+            } else if (this.tag) {
+              config.parentTags = { ...this.tag };
             }
-            config.onSaveConfigData = async (_data: any, _tag: any) => {
-              if (_tag) this.setTag(_tag, true);
-              if (_data) await this.setData(_data);
-              if (onConfirm) {
-                onConfirm(true, { properties: { ...this._data }, id: this._data.componentId, tag: { ...this.tag } });
+            config.onSaveConfigData = (configData) => {
+              if (configData && onReplace) {
+                const { path } = configData;
+                onReplace({
+                  ...configData,
+                  module: {
+                    name: 'Dune Blocks',
+                    path: path.replace('libs/@scom/', ''),
+                    category: 'charts'
+                  }
+                });
               }
             }
             vstack.append(config);
@@ -241,55 +250,6 @@ export default class ScomDune extends Module {
         name: 'Builder Configurator',
         target: 'Builders',
         getActions: () => {
-          const containerModule = self.vStackDune.firstChild as any;
-          if (containerModule?.getConfigurators && containerModule.getConfigurators()) {
-            const target = containerModule.getConfigurators().find((f: any) => f.target === 'Builders');
-            if (target) {
-              return target.getActions().map((v: any) => {
-                return {
-                  ...v,
-                  command: (builder: any, userInputData: any) => {
-                    const { execute, undo, redo } = v.command(builder, userInputData);
-                    const isTheme = v.name === 'Theme Settings';
-                    let oldData = isTheme ? { ...this.tag } : { ...self._data };
-                    return {
-                      execute: async () => {
-                        if (v.name === 'Theme Settings') {
-                          if (!userInputData) return;
-                          oldData = JSON.parse(JSON.stringify(self.tag));
-                          if (builder?.setTag) builder.setTag(userInputData);
-                          else self.setTag(userInputData);
-                        } else {
-                          oldData = { ...self._data };
-                          if (userInputData?.componentId !== undefined) self._data.componentId = userInputData.componentId;
-                          if (builder?.setData) builder.setData({ ...oldData, ...userInputData });
-                          self._data = { ...oldData, ...userInputData };
-                        }
-                        execute();
-                      },
-                      undo: async () => {
-                        if (v.name === 'Theme Settings') {
-                          if (!userInputData) return;
-                          self.tag = JSON.parse(JSON.stringify(oldData));
-                          if (builder?.setTag) builder.setTag(oldData);
-                          else this.setTag(oldData);
-                        } else {
-                          oldData = { ...self._data, ...oldData };
-                          if (builder?.setData) builder.setData(oldData);
-                          self._data = { ...oldData };
-                        }
-                        undo();
-                      },
-                      redo: async () => {
-                        redo();
-                      },
-                    }
-                  },
-                  useRenderUI: true
-                }
-              });
-            }
-          }
           return this._getActions(this.getPropertiesSchema(), this.getThemeSchema());
         },
         getData: this.getData.bind(this),
@@ -355,7 +315,7 @@ export default class ScomDune extends Module {
     const componentId = Number(this._data?.componentId);
     if (!isNaN(componentId) && componentId >= 0) {
       const duneChart = dataJson.find(v => v.id === this._data.componentId);
-      const containerModule: any = await getComponent(duneChart.name);
+      const containerModule: any = await getComponent(duneChart.path);
       this.vStackDune.appendChild(containerModule);
       await containerModule.ready();
       if (containerModule?.getConfigurators) {
@@ -405,9 +365,10 @@ export default class ScomDune extends Module {
       const config = new ConfiguratorSettings();
       config.direction = true;
       config.data = dataJson;
-      config.onSaveConfigData = (_data: any, _tag: any) => {
-        if (_tag) this.setTag(_tag, true);
-        if (_data) this.setData(_data);
+      config.onSaveConfigData = (configData) => {
+        const { tag, properties } = configData || {};
+        if (tag) this.setTag(tag, true);
+        if (properties) this.setData(properties);
         this.mdConfig.visible = false;
         this.pnlConfig.clearInnerHTML();
       }

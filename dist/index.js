@@ -263,7 +263,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 0,
             "title": "[Counter] Ethereum Beacon Chain Deposits",
-            "name": "libs/@scom/scom-counter",
+            "path": "libs/@scom/scom-counter",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2030584/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Ethereum Beacon Chain Deposits",
@@ -276,7 +276,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 1,
             "title": "[Table] Ethereum Beacon Chain Deposits Entity",
-            "name": "libs/@scom/scom-table",
+            "path": "libs/@scom/scom-table",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2030664/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Ethereum Beacon Chain Deposits Entity",
@@ -314,7 +314,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 2,
             "title": "[Table] Top ETH withdraw recipients after Shanghai Unlock",
             "description": "Reward",
-            "name": "libs/@scom/scom-table",
+            "path": "libs/@scom/scom-table",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2377402/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Top ETH withdraw recipients after Shanghai Unlock",
@@ -344,7 +344,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "type": "table",
             "title": "[Table] Top ETH withdraw recipients after Shanghai Unlock",
             "description": "Full withdraw",
-            "name": "libs/@scom/scom-table",
+            "path": "libs/@scom/scom-table",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2377304/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Top ETH withdraw recipients after Shanghai Unlock",
@@ -372,7 +372,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 4,
             "title": "[Pie Chart] Ethereum Beacon Chain Deposits Entity",
-            "name": "libs/@scom/scom-pie-chart",
+            "path": "libs/@scom/scom-pie-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2030664/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Ethereum Beacon Chain Deposits Entity",
@@ -395,7 +395,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 5,
             "title": "[Pie Chart] Liquid Staking validators - All",
-            "name": "libs/@scom/scom-pie-chart",
+            "path": "libs/@scom/scom-pie-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2360788/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Liquid Staking validators - All",
@@ -418,7 +418,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 6,
             "title": "[Bar Chart] ETH Withdrawals after Shanghai Unlock",
-            "name": "libs/@scom/scom-bar-chart",
+            "path": "libs/@scom/scom-bar-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2360815/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "ETH Withdrawals after Shanghai Unlock",
@@ -460,7 +460,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 7,
             "title": "[Line Chart] ETH Withdrawals after Shanghai Unlock vs ETH price",
-            "name": "libs/@scom/scom-line-chart",
+            "path": "libs/@scom/scom-line-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2360905/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "ETH Withdrawals after Shanghai Unlock vs ETH price",
@@ -494,7 +494,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 8,
             "title": "[Area Chart] LP Value Overtime",
             "description": "RDNT/WETH LP Value",
-            "name": "libs/@scom/scom-area-chart",
+            "path": "libs/@scom/scom-area-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/284022/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "LP Value Overtime",
@@ -539,7 +539,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 9,
             "title": "[Area Chart] ETH Withdrawals after Shanghai Unlock",
             "description": "ETH withdrawals cumsum",
-            "name": "libs/@scom/scom-area-chart",
+            "path": "libs/@scom/scom-area-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2360815/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "ETH Withdrawals after Shanghai Unlock",
@@ -578,7 +578,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 10,
             "title": "[Area Chart] RDNT/WETH LP Staked Supply",
             "description": "Radiant Capital Pool2 Staking LP",
-            "name": "libs/@scom/scom-area-chart",
+            "path": "libs/@scom/scom-area-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/283918/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "RDNT/WETH LP Staked Supply",
@@ -618,7 +618,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 11,
             "title": "[Scatter Chart] ETH Withdrawals after Shanghai Unlock vs ETH price",
-            "name": "libs/@scom/scom-scatter-chart",
+            "path": "libs/@scom/scom-scatter-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2360905/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "ETH Withdrawals after Shanghai Unlock vs ETH price",
@@ -650,7 +650,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 12,
             "title": "[Mixed Chart] Reserve Cumulative Value",
-            "name": "libs/@scom/scom-mixed-chart",
+            "path": "libs/@scom/scom-mixed-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/1333833/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "Reserve Cumulative Value",
@@ -734,7 +734,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 13,
             "title": "[Mixed Chart] $RDNT Price Chart",
             "description": "RDNT Price Chart on Arbitrum and BSC",
-            "name": "libs/@scom/scom-mixed-chart",
+            "path": "libs/@scom/scom-mixed-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/1154848/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "$RDNT Price Chart",
@@ -795,7 +795,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 14,
             "title": "[Mixed Chart] Holders OverTime",
             "description": "RDNT and RDNT V2 Holders Overtime",
-            "name": "libs/@scom/scom-mixed-chart",
+            "path": "libs/@scom/scom-mixed-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/947867/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "Holders OverTime",
@@ -874,11 +874,12 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                     const config = new scom_configurator_settings_1.default();
                     config.direction = true;
                     config.data = data_json_1.default;
-                    config.onSaveConfigData = (_data, _tag) => {
-                        if (_tag)
-                            this.setTag(_tag, true);
-                        if (_data)
-                            this.setData(_data);
+                    config.onSaveConfigData = (configData) => {
+                        const { tag, properties } = configData || {};
+                        if (tag)
+                            this.setTag(tag, true);
+                        if (properties)
+                            this.setData(properties);
                         this.mdConfig.visible = false;
                         this.pnlConfig.clearInnerHTML();
                     };
@@ -959,9 +960,9 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             const themeSchema = {
                 type: 'object',
                 properties: {
-                    darkShadow: {
-                        type: 'boolean'
-                    },
+                    // darkShadow: {
+                    //   type: 'boolean'
+                    // },
                     fontColor: {
                         type: 'string',
                         format: 'color'
@@ -970,9 +971,9 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                         type: 'string',
                         format: 'color'
                     },
-                    width: {
-                        type: 'string'
-                    },
+                    // width: {
+                    //   type: 'string'
+                    // },
                     height: {
                         type: 'string'
                     }
@@ -1004,21 +1005,26 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                             redo: () => { }
                         };
                     },
+                    isReplacement: true,
                     customUI: {
-                        render: (data, onConfirm) => {
+                        render: (data, onReplace) => {
                             const vstack = new components_3.VStack();
                             const config = new scom_configurator_settings_1.default();
                             config.data = data_json_1.default;
                             if (this._data.options) {
                                 config.showDetail({ properties: Object.assign({}, this._data), id: this._data.componentId, tag: Object.assign({}, this.tag) });
                             }
-                            config.onSaveConfigData = async (_data, _tag) => {
-                                if (_tag)
-                                    this.setTag(_tag, true);
-                                if (_data)
-                                    await this.setData(_data);
-                                if (onConfirm) {
-                                    onConfirm(true, { properties: Object.assign({}, this._data), id: this._data.componentId, tag: Object.assign({}, this.tag) });
+                            else if (this.tag) {
+                                config.parentTags = Object.assign({}, this.tag);
+                            }
+                            config.onSaveConfigData = (configData) => {
+                                if (configData && onReplace) {
+                                    const { path } = configData;
+                                    onReplace(Object.assign(Object.assign({}, configData), { module: {
+                                            name: 'Dune Blocks',
+                                            path: path.replace('libs/@scom/', ''),
+                                            category: 'charts'
+                                        } }));
                                 }
                             };
                             vstack.append(config);
@@ -1076,62 +1082,6 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                     name: 'Builder Configurator',
                     target: 'Builders',
                     getActions: () => {
-                        const containerModule = self.vStackDune.firstChild;
-                        if ((containerModule === null || containerModule === void 0 ? void 0 : containerModule.getConfigurators) && containerModule.getConfigurators()) {
-                            const target = containerModule.getConfigurators().find((f) => f.target === 'Builders');
-                            if (target) {
-                                return target.getActions().map((v) => {
-                                    return Object.assign(Object.assign({}, v), { command: (builder, userInputData) => {
-                                            const { execute, undo, redo } = v.command(builder, userInputData);
-                                            const isTheme = v.name === 'Theme Settings';
-                                            let oldData = isTheme ? Object.assign({}, this.tag) : Object.assign({}, self._data);
-                                            return {
-                                                execute: async () => {
-                                                    if (v.name === 'Theme Settings') {
-                                                        if (!userInputData)
-                                                            return;
-                                                        oldData = JSON.parse(JSON.stringify(self.tag));
-                                                        if (builder === null || builder === void 0 ? void 0 : builder.setTag)
-                                                            builder.setTag(userInputData);
-                                                        else
-                                                            self.setTag(userInputData);
-                                                    }
-                                                    else {
-                                                        oldData = Object.assign({}, self._data);
-                                                        if ((userInputData === null || userInputData === void 0 ? void 0 : userInputData.componentId) !== undefined)
-                                                            self._data.componentId = userInputData.componentId;
-                                                        if (builder === null || builder === void 0 ? void 0 : builder.setData)
-                                                            builder.setData(Object.assign(Object.assign({}, oldData), userInputData));
-                                                        self._data = Object.assign(Object.assign({}, oldData), userInputData);
-                                                    }
-                                                    execute();
-                                                },
-                                                undo: async () => {
-                                                    if (v.name === 'Theme Settings') {
-                                                        if (!userInputData)
-                                                            return;
-                                                        self.tag = JSON.parse(JSON.stringify(oldData));
-                                                        if (builder === null || builder === void 0 ? void 0 : builder.setTag)
-                                                            builder.setTag(oldData);
-                                                        else
-                                                            this.setTag(oldData);
-                                                    }
-                                                    else {
-                                                        oldData = Object.assign(Object.assign({}, self._data), oldData);
-                                                        if (builder === null || builder === void 0 ? void 0 : builder.setData)
-                                                            builder.setData(oldData);
-                                                        self._data = Object.assign({}, oldData);
-                                                    }
-                                                    undo();
-                                                },
-                                                redo: async () => {
-                                                    redo();
-                                                },
-                                            };
-                                        }, useRenderUI: true });
-                                });
-                            }
-                        }
                         return this._getActions(this.getPropertiesSchema(), this.getThemeSchema());
                     },
                     getData: this.getData.bind(this),
@@ -1192,7 +1142,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             const componentId = Number((_a = this._data) === null || _a === void 0 ? void 0 : _a.componentId);
             if (!isNaN(componentId) && componentId >= 0) {
                 const duneChart = data_json_1.default.find(v => v.id === this._data.componentId);
-                const containerModule = await (0, index_1.getComponent)(duneChart.name);
+                const containerModule = await (0, index_1.getComponent)(duneChart.path);
                 this.vStackDune.appendChild(containerModule);
                 await containerModule.ready();
                 if (containerModule === null || containerModule === void 0 ? void 0 : containerModule.getConfigurators) {
