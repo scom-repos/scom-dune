@@ -73,10 +73,11 @@ export const getChartType = (type: string, defaultType?: string) => {
 }
 
 export const getComponent = async (path: string) => {
-  application.currentModuleDir = path;
-  await application.loadScript(`${path}/index.js`);
-  application.currentModuleDir = '';
-  const elementName = `i-${path.split('/').pop()}`;
-  const element = document.createElement(elementName);
+  const element = await application.createElement(path);
+  // application.currentModuleDir = path;
+  // await application.loadScript(`${path}/index.js`);
+  // application.currentModuleDir = '';
+  // const elementName = `i-${path.split('/').pop()}`;
+  // const element = document.createElement(elementName);
   return element;
 }
