@@ -193,7 +193,7 @@ export default class ScomDune extends Module {
                   ...configData,
                   module: {
                     name: 'Dune Blocks',
-                    path: path.replace('libs/@scom/', ''),
+                    path,
                     category: 'charts'
                   }
                 });

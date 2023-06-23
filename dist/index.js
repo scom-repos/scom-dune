@@ -1023,7 +1023,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                                     const { path } = configData;
                                     onReplace(Object.assign(Object.assign({}, configData), { module: {
                                             name: 'Dune Blocks',
-                                            path: path.replace('libs/@scom/', ''),
+                                            path,
                                             category: 'charts'
                                         } }));
                                 }
