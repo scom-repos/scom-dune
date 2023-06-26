@@ -102,11 +102,12 @@ define("@scom/scom-dune/global/utils.ts", ["require", "exports", "@ijstech/compo
     };
     exports.getChartType = getChartType;
     const getComponent = async (path) => {
-        components_1.application.currentModuleDir = path;
-        await components_1.application.loadScript(`${path}/index.js`);
-        components_1.application.currentModuleDir = '';
-        const elementName = `i-${path.split('/').pop()}`;
-        const element = document.createElement(elementName);
+        const element = await components_1.application.createElement(path);
+        // application.currentModuleDir = path;
+        // await application.loadScript(`${path}/index.js`);
+        // application.currentModuleDir = '';
+        // const elementName = `i-${path.split('/').pop()}`;
+        // const element = document.createElement(elementName);
         return element;
     };
     exports.getComponent = getComponent;
@@ -263,7 +264,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 0,
             "title": "[Counter] Ethereum Beacon Chain Deposits",
-            "path": "libs/@scom/scom-counter",
+            "path": "scom-counter",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2030584/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Ethereum Beacon Chain Deposits",
@@ -276,7 +277,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 1,
             "title": "[Table] Ethereum Beacon Chain Deposits Entity",
-            "path": "libs/@scom/scom-table",
+            "path": "scom-table",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2030664/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Ethereum Beacon Chain Deposits Entity",
@@ -314,7 +315,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 2,
             "title": "[Table] Top ETH withdraw recipients after Shanghai Unlock",
             "description": "Reward",
-            "path": "libs/@scom/scom-table",
+            "path": "scom-table",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2377402/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Top ETH withdraw recipients after Shanghai Unlock",
@@ -344,7 +345,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "type": "table",
             "title": "[Table] Top ETH withdraw recipients after Shanghai Unlock",
             "description": "Full withdraw",
-            "path": "libs/@scom/scom-table",
+            "path": "scom-table",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2377304/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Top ETH withdraw recipients after Shanghai Unlock",
@@ -372,7 +373,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 4,
             "title": "[Pie Chart] Ethereum Beacon Chain Deposits Entity",
-            "path": "libs/@scom/scom-pie-chart",
+            "path": "scom-pie-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2030664/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Ethereum Beacon Chain Deposits Entity",
@@ -395,7 +396,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 5,
             "title": "[Pie Chart] Liquid Staking validators - All",
-            "path": "libs/@scom/scom-pie-chart",
+            "path": "scom-pie-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2360788/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
                 "title": "Liquid Staking validators - All",
@@ -418,7 +419,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 6,
             "title": "[Bar Chart] ETH Withdrawals after Shanghai Unlock",
-            "path": "libs/@scom/scom-bar-chart",
+            "path": "scom-bar-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2360815/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "ETH Withdrawals after Shanghai Unlock",
@@ -460,7 +461,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 7,
             "title": "[Line Chart] ETH Withdrawals after Shanghai Unlock vs ETH price",
-            "path": "libs/@scom/scom-line-chart",
+            "path": "scom-line-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2360905/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "ETH Withdrawals after Shanghai Unlock vs ETH price",
@@ -494,7 +495,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 8,
             "title": "[Area Chart] LP Value Overtime",
             "description": "RDNT/WETH LP Value",
-            "path": "libs/@scom/scom-area-chart",
+            "path": "scom-area-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/284022/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "LP Value Overtime",
@@ -539,7 +540,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 9,
             "title": "[Area Chart] ETH Withdrawals after Shanghai Unlock",
             "description": "ETH withdrawals cumsum",
-            "path": "libs/@scom/scom-area-chart",
+            "path": "scom-area-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2360815/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "ETH Withdrawals after Shanghai Unlock",
@@ -578,7 +579,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 10,
             "title": "[Area Chart] RDNT/WETH LP Staked Supply",
             "description": "Radiant Capital Pool2 Staking LP",
-            "path": "libs/@scom/scom-area-chart",
+            "path": "scom-area-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/283918/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "RDNT/WETH LP Staked Supply",
@@ -618,7 +619,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 11,
             "title": "[Scatter Chart] ETH Withdrawals after Shanghai Unlock vs ETH price",
-            "path": "libs/@scom/scom-scatter-chart",
+            "path": "scom-scatter-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/2360905/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "ETH Withdrawals after Shanghai Unlock vs ETH price",
@@ -650,7 +651,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         {
             "id": 12,
             "title": "[Mixed Chart] Reserve Cumulative Value",
-            "path": "libs/@scom/scom-mixed-chart",
+            "path": "scom-mixed-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/1333833/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "Reserve Cumulative Value",
@@ -734,7 +735,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 13,
             "title": "[Mixed Chart] $RDNT Price Chart",
             "description": "RDNT Price Chart on Arbitrum and BSC",
-            "path": "libs/@scom/scom-mixed-chart",
+            "path": "scom-mixed-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/1154848/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "$RDNT Price Chart",
@@ -795,7 +796,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
             "id": 14,
             "title": "[Mixed Chart] Holders OverTime",
             "description": "RDNT and RDNT V2 Holders Overtime",
-            "path": "libs/@scom/scom-mixed-chart",
+            "path": "scom-mixed-chart",
             "properties": {
                 "apiEndpoint": "https://api.dune.com/api/v1/query/947867/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
                 "title": "Holders OverTime",
@@ -1022,7 +1023,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                                     const { path } = configData;
                                     onReplace(Object.assign(Object.assign({}, configData), { module: {
                                             name: 'Dune Blocks',
-                                            path: path.replace('libs/@scom/', ''),
+                                            path,
                                             category: 'charts'
                                         } }));
                                 }
