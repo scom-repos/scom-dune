@@ -200,6 +200,7 @@ export default class ScomDune extends Module {
               }
             }
             vstack.append(config);
+            config.showSaveBtn = false;
             return vstack;
           }
         },
@@ -373,6 +374,7 @@ export default class ScomDune extends Module {
         this.pnlConfig.clearInnerHTML();
       }
       this.pnlConfig.appendChild(config);
+      config.showSaveBtn = false;
     }
     this.mdConfig.visible = true;
   }

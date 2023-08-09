@@ -885,6 +885,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                         this.pnlConfig.clearInnerHTML();
                     };
                     this.pnlConfig.appendChild(config);
+                    config.showSaveBtn = false;
                 }
                 this.mdConfig.visible = true;
             };
@@ -1029,6 +1030,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                                 }
                             };
                             vstack.append(config);
+                            config.showSaveBtn = false;
                             return vstack;
                         }
                     },
