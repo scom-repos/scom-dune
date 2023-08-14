@@ -49,65 +49,65 @@ export default [
       }
     }
   },
-  {
-    "id": 2,
-    "title": "[Table] Top ETH withdraw recipients after Shanghai Unlock",
-    "description": "Reward",
-    "path": "scom-table",
-    "properties": {
-      "apiEndpoint": "https://api.dune.com/api/v1/query/2377402/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
-      "title": "Top ETH withdraw recipients after Shanghai Unlock",
-      "description": "Reward",
-      "options": {
-        "columns": [
-          {
-            "name": "address",
-            "title": "ETH receivers"
-          },
-          {
-            "name": "validators",
-            "title": "Validators",
-            "numberFormat": "0,000.ma"
-          },
-          {
-            "name": "ETH",
-            "title": "ETH received",
-            "numberFormat": "0,000.ma"
-          }
-        ]
-      }
-    }
-  },
-  {
-    "id": 3,
-    "type": "table",
-    "title": "[Table] Top ETH withdraw recipients after Shanghai Unlock",
-    "description": "Full withdraw",
-    "path": "scom-table",
-    "properties": {
-      "apiEndpoint": "https://api.dune.com/api/v1/query/2377304/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
-      "title": "Top ETH withdraw recipients after Shanghai Unlock",
-      "description": "Full withdraw",
-      "options": {
-        "columns": [
-          {
-            "name": "address",
-            "title": "ETH receivers"
-          },
-          {
-            "name": "validators",
-            "title": "Validators",
-            "numberFormat": "0,000.ma"
-          },
-          {
-            "name": "ETH",
-            "title": "ETH received",
-            "numberFormat": "0,000.ma"
-          }
-        ]
-      }
-    }
-  },
+  // {
+  //   "id": 2,
+  //   "title": "[Table] Top ETH withdraw recipients after Shanghai Unlock",
+  //   "description": "Reward",
+  //   "path": "scom-table",
+  //   "properties": {
+  //     "apiEndpoint": "https://api.dune.com/api/v1/query/2377402/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
+  //     "title": "Top ETH withdraw recipients after Shanghai Unlock",
+  //     "description": "Reward",
+  //     "options": {
+  //       "columns": [
+  //         {
+  //           "name": "address",
+  //           "title": "ETH receivers"
+  //         },
+  //         {
+  //           "name": "validators",
+  //           "title": "Validators",
+  //           "numberFormat": "0,000.ma"
+  //         },
+  //         {
+  //           "name": "ETH",
+  //           "title": "ETH received",
+  //           "numberFormat": "0,000.ma"
+  //         }
+  //       ]
+  //     }
+  //   }
+  // },
+  // {
+  //   "id": 3,
+  //   "type": "table",
+  //   "title": "[Table] Top ETH withdraw recipients after Shanghai Unlock",
+  //   "description": "Full withdraw",
+  //   "path": "scom-table",
+  //   "properties": {
+  //     "apiEndpoint": "https://api.dune.com/api/v1/query/2377304/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
+  //     "title": "Top ETH withdraw recipients after Shanghai Unlock",
+  //     "description": "Full withdraw",
+  //     "options": {
+  //       "columns": [
+  //         {
+  //           "name": "address",
+  //           "title": "ETH receivers"
+  //         },
+  //         {
+  //           "name": "validators",
+  //           "title": "Validators",
+  //           "numberFormat": "0,000.ma"
+  //         },
+  //         {
+  //           "name": "ETH",
+  //           "title": "ETH received",
+  //           "numberFormat": "0,000.ma"
+  //         }
+  //       ]
+  //     }
+  //   }
+  // },
   {
     "id": 4,
     "title": "[Pie Chart] Ethereum Beacon Chain Deposits Entity",
@@ -131,29 +131,29 @@ export default [
       }
     }
   },
-  {
-    "id": 5,
-    "title": "[Pie Chart] Liquid Staking validators - All",
-    "path": "scom-pie-chart",
-    "properties": {
-      "apiEndpoint": "https://api.dune.com/api/v1/query/2360788/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
-      "title": "Liquid Staking validators - All",
-      "options": {
-        "xColumn": "depositor_entity_category",
-        "yColumn": "staked",
-        "serieName": "ETH Staked",
-        "numberFormat": "0,000",
-        "showDataLabels": true,
-        "valuesOptions": [
-          { "name": "CEX", "color": "#f00c0c" },
-          { "name": "Other", "color": "#000000" },
-          { "name": "Others", "color": "#000000" },
-          { "name": "Staking Pools", "color": "#3995ce" },
-          { "name": "Liquid Staking", "color": "#c1ba2a" }
-        ]
-      }
-    }
-  },
+  // {
+  //   "id": 5,
+  //   "title": "[Pie Chart] Liquid Staking validators - All",
+  //   "path": "scom-pie-chart",
+  //   "properties": {
+  //     "apiEndpoint": "https://api.dune.com/api/v1/query/2360788/results?api_key=GZ0R7Jim7TWLY7umXitxtiswiaD4eM7j",
+  //     "title": "Liquid Staking validators - All",
+  //     "options": {
+  //       "xColumn": "depositor_entity_category",
+  //       "yColumn": "staked",
+  //       "serieName": "ETH Staked",
+  //       "numberFormat": "0,000",
+  //       "showDataLabels": true,
+  //       "valuesOptions": [
+  //         { "name": "CEX", "color": "#f00c0c" },
+  //         { "name": "Other", "color": "#000000" },
+  //         { "name": "Others", "color": "#000000" },
+  //         { "name": "Staking Pools", "color": "#3995ce" },
+  //         { "name": "Liquid Staking", "color": "#c1ba2a" }
+  //       ]
+  //     }
+  //   }
+  // },
   {
     "id": 6,
     "title": "[Bar Chart] ETH Withdrawals after Shanghai Unlock",
@@ -274,86 +274,86 @@ export default [
       }
     }
   },
-  {
-    "id": 9,
-    "title": "[Area Chart] ETH Withdrawals after Shanghai Unlock",
-    "description": "ETH withdrawals cumsum",
-    "path": "scom-area-chart",
-    "properties": {
-      "apiEndpoint": "https://api.dune.com/api/v1/query/2360815/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
-      "title": "ETH Withdrawals after Shanghai Unlock",
-      "description": "ETH withdrawals cumsum",
-      "options": {
-        "xColumn": {
-          "key": "time",
-          "type": "time"
-        },
-        "yColumns": [
-          "ETH_cum"
-        ],
-        "stacking": true,
-        "legend": {
-          "show": true
-        },
-        "seriesOptions": [
-          {
-            "key": "ETH_cum",
-            "title": "ETH total",
-            "color": "#000000"
-          }
-        ],
-        "xAxis": {
-          "tickFormat": "MMM YYYY"
-        },
-        "yAxis": {
-          "labelFormat": "$0[,].00",
-          "tickerFormat": "$0[,].00ma",
-          "position": "left"
-        }
-      }
-    }
-  },
-  {
-    "id": 10,
-    "title": "[Area Chart] RDNT/WETH LP Staked Supply",
-    "description": "Radiant Capital Pool2 Staking LP",
-    "path": "scom-area-chart",
-    "properties": {
-      "apiEndpoint": "https://api.dune.com/api/v1/query/283918/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
-      "title": "RDNT/WETH LP Staked Supply",
-      "description": "Radiant Capital Pool2 Staking LP",
-      "options": {
-        "xColumn": {
-          "key": "time",
-          "type": "time"
-        },
-        "yColumns": [
-          "masterchef_pool",
-          "non_masterchef_pool"
-        ],
-        "stacking": true,
-        "percentage": true,
-        "legend": {
-          "show": true
-        },
-        "seriesOptions": [
-          {
-            "key": "masterchef_pool",
-            "title": "Staked",
-            "color": "#2793cb"
-          },
-          {
-            "key": "non_masterchef_pool",
-            "title": "Unstaked",
-            "color": "#ff0000"
-          }
-        ],
-        "xAxis": {
-          "tickFormat": "MMM YYYY"
-        }
-      }
-    }
-  },
+  // {
+  //   "id": 9,
+  //   "title": "[Area Chart] ETH Withdrawals after Shanghai Unlock",
+  //   "description": "ETH withdrawals cumsum",
+  //   "path": "scom-area-chart",
+  //   "properties": {
+  //     "apiEndpoint": "https://api.dune.com/api/v1/query/2360815/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+  //     "title": "ETH Withdrawals after Shanghai Unlock",
+  //     "description": "ETH withdrawals cumsum",
+  //     "options": {
+  //       "xColumn": {
+  //         "key": "time",
+  //         "type": "time"
+  //       },
+  //       "yColumns": [
+  //         "ETH_cum"
+  //       ],
+  //       "stacking": true,
+  //       "legend": {
+  //         "show": true
+  //       },
+  //       "seriesOptions": [
+  //         {
+  //           "key": "ETH_cum",
+  //           "title": "ETH total",
+  //           "color": "#000000"
+  //         }
+  //       ],
+  //       "xAxis": {
+  //         "tickFormat": "MMM YYYY"
+  //       },
+  //       "yAxis": {
+  //         "labelFormat": "$0[,].00",
+  //         "tickerFormat": "$0[,].00ma",
+  //         "position": "left"
+  //       }
+  //     }
+  //   }
+  // },
+  // {
+  //   "id": 10,
+  //   "title": "[Area Chart] RDNT/WETH LP Staked Supply",
+  //   "description": "Radiant Capital Pool2 Staking LP",
+  //   "path": "scom-area-chart",
+  //   "properties": {
+  //     "apiEndpoint": "https://api.dune.com/api/v1/query/283918/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+  //     "title": "RDNT/WETH LP Staked Supply",
+  //     "description": "Radiant Capital Pool2 Staking LP",
+  //     "options": {
+  //       "xColumn": {
+  //         "key": "time",
+  //         "type": "time"
+  //       },
+  //       "yColumns": [
+  //         "masterchef_pool",
+  //         "non_masterchef_pool"
+  //       ],
+  //       "stacking": true,
+  //       "percentage": true,
+  //       "legend": {
+  //         "show": true
+  //       },
+  //       "seriesOptions": [
+  //         {
+  //           "key": "masterchef_pool",
+  //           "title": "Staked",
+  //           "color": "#2793cb"
+  //         },
+  //         {
+  //           "key": "non_masterchef_pool",
+  //           "title": "Unstaked",
+  //           "color": "#ff0000"
+  //         }
+  //       ],
+  //       "xAxis": {
+  //         "tickFormat": "MMM YYYY"
+  //       }
+  //     }
+  //   }
+  // },
   {
     "id": 11,
     "title": "[Scatter Chart] ETH Withdrawals after Shanghai Unlock vs ETH price",
@@ -469,119 +469,119 @@ export default [
       }
     }
   },
-  {
-    "id": 13,
-    "title": "[Mixed Chart] $RDNT Price Chart",
-    "description": "RDNT Price Chart on Arbitrum and BSC",
-    "path": "scom-mixed-chart",
-    "properties": {
-      "apiEndpoint": "https://api.dune.com/api/v1/query/1154848/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
-      "title": "$RDNT Price Chart",
-      "description": "RDNT Price Chart on Arbitrum and BSC",
-      "options": {
-        "xColumn": {
-          "key": "time",
-          "type": "time"
-        },
-        "yColumns": [
-          "rdnt_price",
-          "red_volume",
-          "green_volume"
-        ],
-        "globalSeriesType": "area",
-        "seriesOptions": [
-          {
-            "key": "rdnt_price",
-            "title": "Price",
-            "type": "area",
-            "color": "#aaaacd",
-            "yAxis": "left",
-            "zIndex": 0
-          },
-          {
-            "key": "red_volume",
-            "title": "$USD Volume",
-            "type": "bar",
-            "color": "#f51818",
-            "yAxis": "right",
-            "zIndex": 1
-          },
-          {
-            "key": "green_volume",
-            "title": "$USD Volume",
-            "type": "bar",
-            "color": "#4fa0e0",
-            "yAxis": "right",
-            "zIndex": 2
-          }
-        ],
-        "xAxis": {
-          "title": "Date",
-          "tickFormat": "MMM DD"
-        },
-        "leftYAxis": {
-          "tickFormat": "$0[].000",
-          "labelFormat": "$0[.,].00"
-        },
-        "rightYAxis": {
-          "tickFormat": "$0[].00a",
-          "labelFormat": "$0[.,].00"
-        }
-      }
-    }
-  },
-  {
-    "id": 14,
-    "title": "[Mixed Chart] Holders OverTime",
-    "description": "RDNT and RDNT V2 Holders Overtime",
-    "path": "scom-mixed-chart",
-    "properties": {
-      "apiEndpoint": "https://api.dune.com/api/v1/query/947867/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
-      "title": "Holders OverTime",
-      "description": "RDNT and RDNT V2 Holders Overtime",
-      "options": {
-        "xColumn": {
-          "key": "time",
-          "type": "time"
-        },
-        "yColumns": [
-          "red_change",
-          "green_change",
-          "total_holders"
-        ],
-        "globalSeriesType": "line",
-        "seriesOptions": [
-          {
-            "key": "red_change",
-            "title": "Change",
-            "type": "bar",
-            "color": "#ff0000",
-            "yAxis": "right",
-            "zIndex": 2
-          },
-          {
-            "key": "green_change",
-            "title": "Change",
-            "type": "bar",
-            "color": "#00ff17",
-            "yAxis": "right",
-            "zIndex": 1
-          },
-          {
-            "key": "total_holders",
-            "title": "Total Holders",
-            "type": "line",
-            "yAxis": "left",
-            "zIndex": 0
-          }
-        ],
-        "xAxis": {
-          "title": "Date",
-          "tickFormat": "MMM DD"
-        }
-      }
-    }
-  }
+  // {
+  //   "id": 13,
+  //   "title": "[Mixed Chart] $RDNT Price Chart",
+  //   "description": "RDNT Price Chart on Arbitrum and BSC",
+  //   "path": "scom-mixed-chart",
+  //   "properties": {
+  //     "apiEndpoint": "https://api.dune.com/api/v1/query/1154848/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+  //     "title": "$RDNT Price Chart",
+  //     "description": "RDNT Price Chart on Arbitrum and BSC",
+  //     "options": {
+  //       "xColumn": {
+  //         "key": "time",
+  //         "type": "time"
+  //       },
+  //       "yColumns": [
+  //         "rdnt_price",
+  //         "red_volume",
+  //         "green_volume"
+  //       ],
+  //       "globalSeriesType": "area",
+  //       "seriesOptions": [
+  //         {
+  //           "key": "rdnt_price",
+  //           "title": "Price",
+  //           "type": "area",
+  //           "color": "#aaaacd",
+  //           "yAxis": "left",
+  //           "zIndex": 0
+  //         },
+  //         {
+  //           "key": "red_volume",
+  //           "title": "$USD Volume",
+  //           "type": "bar",
+  //           "color": "#f51818",
+  //           "yAxis": "right",
+  //           "zIndex": 1
+  //         },
+  //         {
+  //           "key": "green_volume",
+  //           "title": "$USD Volume",
+  //           "type": "bar",
+  //           "color": "#4fa0e0",
+  //           "yAxis": "right",
+  //           "zIndex": 2
+  //         }
+  //       ],
+  //       "xAxis": {
+  //         "title": "Date",
+  //         "tickFormat": "MMM DD"
+  //       },
+  //       "leftYAxis": {
+  //         "tickFormat": "$0[].000",
+  //         "labelFormat": "$0[.,].00"
+  //       },
+  //       "rightYAxis": {
+  //         "tickFormat": "$0[].00a",
+  //         "labelFormat": "$0[.,].00"
+  //       }
+  //     }
+  //   }
+  // },
+  // {
+  //   "id": 14,
+  //   "title": "[Mixed Chart] Holders OverTime",
+  //   "description": "RDNT and RDNT V2 Holders Overtime",
+  //   "path": "scom-mixed-chart",
+  //   "properties": {
+  //     "apiEndpoint": "https://api.dune.com/api/v1/query/947867/results?api_key=324WhvsCHWCji2pkgtfa0JDqDu8j0FdD",
+  //     "title": "Holders OverTime",
+  //     "description": "RDNT and RDNT V2 Holders Overtime",
+  //     "options": {
+  //       "xColumn": {
+  //         "key": "time",
+  //         "type": "time"
+  //       },
+  //       "yColumns": [
+  //         "red_change",
+  //         "green_change",
+  //         "total_holders"
+  //       ],
+  //       "globalSeriesType": "line",
+  //       "seriesOptions": [
+  //         {
+  //           "key": "red_change",
+  //           "title": "Change",
+  //           "type": "bar",
+  //           "color": "#ff0000",
+  //           "yAxis": "right",
+  //           "zIndex": 2
+  //         },
+  //         {
+  //           "key": "green_change",
+  //           "title": "Change",
+  //           "type": "bar",
+  //           "color": "#00ff17",
+  //           "yAxis": "right",
+  //           "zIndex": 1
+  //         },
+  //         {
+  //           "key": "total_holders",
+  //           "title": "Total Holders",
+  //           "type": "line",
+  //           "yAxis": "left",
+  //           "zIndex": 0
+  //         }
+  //       ],
+  //       "xAxis": {
+  //         "title": "Date",
+  //         "tickFormat": "MMM DD"
+  //       }
+  //     }
+  //   }
+  // }
 ] as {
   id: number;
   title: string;
