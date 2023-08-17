@@ -9,10 +9,29 @@ declare module "@scom/scom-dune/global/interfaces.ts" {
         showHeader?: boolean;
         showFooter?: boolean;
     }
+    export interface IProjectBlockWidget {
+        guid: string;
+        projectBlockGuid: string;
+        widgetName: string;
+        title: string;
+        description: string;
+        img: string;
+        dataUri: string;
+        status: 'active' | 'inactive';
+    }
+    export interface IFetchProjectBlockWidgetsResult {
+        data: IProjectBlockWidget[];
+    }
+}
+/// <amd-module name="@scom/scom-dune/global/utils.ts" />
+declare module "@scom/scom-dune/global/utils.ts" {
+    import { IFetchProjectBlockWidgetsResult } from "@scom/scom-dune/global/interfaces.ts";
+    export function fetchProjectBlockWidgets(): Promise<IFetchProjectBlockWidgetsResult>;
 }
 /// <amd-module name="@scom/scom-dune/global/index.ts" />
 declare module "@scom/scom-dune/global/index.ts" {
     export * from "@scom/scom-dune/global/interfaces.ts";
+    export * from "@scom/scom-dune/global/utils.ts";
 }
 /// <amd-module name="@scom/scom-dune/index.css.ts" />
 declare module "@scom/scom-dune/index.css.ts" {
@@ -76,7 +95,7 @@ declare module "@scom/scom-dune" {
                 };
                 isReplacement: boolean;
                 customUI: {
-                    render: (data?: any, onReplace?: (data: any) => void) => VStack;
+                    render: (data?: any, onReplace?: (data: any) => void) => Promise<VStack>;
                 };
             }[];
             getData: any;

@@ -22,11 +22,30 @@ define("@scom/scom-dune/global/interfaces.ts", ["require", "exports"], function 
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
 });
-define("@scom/scom-dune/global/index.ts", ["require", "exports", "@scom/scom-dune/global/interfaces.ts"], function (require, exports, interfaces_1) {
+define("@scom/scom-dune/global/utils.ts", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.fetchProjectBlockWidgets = void 0;
+    const API_URL = "/api/embed/v0";
+    async function fetchProjectBlockWidgets() {
+        let result;
+        try {
+            let response = await fetch(`${API_URL}/projectBlockWidgets`);
+            result = await response.json();
+        }
+        catch (err) {
+            console.error("[fetchProjectBlockWidgets] error: ", err);
+        }
+        return result;
+    }
+    exports.fetchProjectBlockWidgets = fetchProjectBlockWidgets;
+});
+define("@scom/scom-dune/global/index.ts", ["require", "exports", "@scom/scom-dune/global/interfaces.ts", "@scom/scom-dune/global/utils.ts"], function (require, exports, interfaces_1, utils_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     ///<amd-module name='@scom/scom-dune/global/index.ts'/> 
     __exportStar(interfaces_1, exports);
+    __exportStar(utils_1, exports);
 });
 define("@scom/scom-dune/index.css.ts", ["require", "exports", "@ijstech/components"], function (require, exports, components_1) {
     "use strict";
@@ -756,7 +775,7 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         // }
     ];
 });
-define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/scom-dune/index.css.ts", "@scom/scom-dune/data.json.ts", "@scom/scom-configurator-settings"], function (require, exports, components_2, index_css_1, data_json_1, scom_configurator_settings_1) {
+define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/scom-dune/global/index.ts", "@scom/scom-dune/index.css.ts", "@scom/scom-configurator-settings"], function (require, exports, components_2, index_1, index_css_1, scom_configurator_settings_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const Theme = components_2.Styles.Theme.ThemeVars;
@@ -844,10 +863,20 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                     },
                     isReplacement: true,
                     customUI: {
-                        render: (data, onReplace) => {
+                        render: async (data, onReplace) => {
                             const vstack = new components_2.VStack();
                             const config = new scom_configurator_settings_1.default();
-                            config.data = data_json_1.default;
+                            // config.data = dataJson;
+                            const result = await (0, index_1.fetchProjectBlockWidgets)();
+                            config.data = result.data.map((item, v) => {
+                                return {
+                                    id: v,
+                                    title: item.title,
+                                    description: item.description,
+                                    path: item.widgetName,
+                                    dataUri: item.dataUri
+                                };
+                            });
                             if (this._data.options) {
                                 config.showDetail({ properties: Object.assign({}, this._data), id: this._data.componentId, tag: Object.assign({}, this.tag) });
                             }

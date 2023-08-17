@@ -11,7 +11,7 @@ import {
   Modal,
   Button
 } from '@ijstech/components';
-import { IDuneConfig } from './global/index';
+import { fetchProjectBlockWidgets, IDuneConfig } from './global/index';
 import { containerStyle, duneStyle } from './index.css';
 import dataJson from './data.json';
 import ConfiguratorSettings from '@scom/scom-configurator-settings';
@@ -112,10 +112,20 @@ export default class ScomDune extends Module {
         },
         isReplacement: true,
         customUI: {
-          render: (data?: any, onReplace?: (data: any) => void) => {
+          render: async (data?: any, onReplace?: (data: any) => void) => {
             const vstack = new VStack();
             const config = new ConfiguratorSettings();
-            config.data = dataJson;
+            // config.data = dataJson;
+            const result = await fetchProjectBlockWidgets();
+            config.data = result.data.map((item, v) => {
+              return {
+                id: v,
+                title: item.title,
+                description: item.description,
+                path: item.widgetName,
+                dataUri: item.dataUri
+              }
+            });
             if (this._data.options) {
               config.showDetail({ properties: { ...this._data }, id: this._data.componentId, tag: { ...this.tag } });
             } else if (this.tag) {
