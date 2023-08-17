@@ -22,129 +22,24 @@ define("@scom/scom-dune/global/interfaces.ts", ["require", "exports"], function 
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
 });
-define("@scom/scom-dune/global/utils.ts", ["require", "exports", "@ijstech/components"], function (require, exports, components_1) {
+define("@scom/scom-dune/global/index.ts", ["require", "exports", "@scom/scom-dune/global/interfaces.ts"], function (require, exports, interfaces_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.getComponent = exports.getChartType = exports.formatNumberWithSeparators = exports.formatNumberByFormat = exports.formatNumber = void 0;
-    const formatNumber = (num, options) => {
-        if (num === null)
-            return '-';
-        const { decimals, format, percentValues } = options || {};
-        if (percentValues) {
-            return `${(0, exports.formatNumberWithSeparators)(num, 2)}%`;
-        }
-        if (format) {
-            return (0, exports.formatNumberByFormat)(num, format);
-        }
-        const absNum = Math.abs(num);
-        if (absNum >= 1000000000) {
-            return (0, exports.formatNumberWithSeparators)((num / 1000000000), decimals || 3) + 'B';
-        }
-        if (absNum >= 1000000) {
-            return (0, exports.formatNumberWithSeparators)((num / 1000000), decimals || 3) + 'M';
-        }
-        if (absNum >= 1000) {
-            return (0, exports.formatNumberWithSeparators)((num / 1000), decimals || 3) + 'K';
-        }
-        if (absNum < 0.0000001) {
-            return (0, exports.formatNumberWithSeparators)(num);
-        }
-        if (absNum < 0.00001) {
-            return (0, exports.formatNumberWithSeparators)(num, 6);
-        }
-        if (absNum < 0.001) {
-            return (0, exports.formatNumberWithSeparators)(num, 4);
-        }
-        return (0, exports.formatNumberWithSeparators)(num, 2);
-    };
-    exports.formatNumber = formatNumber;
-    const formatNumberByFormat = (num, format, separators) => {
-        const decimalPlaces = format.split('.')[1] ? format.split('.').length : 0;
-        if (format.includes('%')) {
-            return (0, exports.formatNumberWithSeparators)((num * 100), decimalPlaces) + '%';
-        }
-        const currencySymbol = format.indexOf('$') !== -1 ? '$' : '';
-        const roundedNum = (0, exports.formatNumberWithSeparators)(num, decimalPlaces);
-        if (separators && !format.includes('.ma')) {
-            return `${currencySymbol}${roundedNum}`;
-        }
-        const parts = roundedNum.split('.');
-        const decimalPart = parts.length > 1 ? parts[1] : '';
-        const integerPart = (0, exports.formatNumber)(parseInt(parts[0].replace(/,/g, '')), { decimals: decimalPart.length });
-        return `${currencySymbol}${integerPart}`;
-    };
-    exports.formatNumberByFormat = formatNumberByFormat;
-    const formatNumberWithSeparators = (value, precision) => {
-        if (!value)
-            value = 0;
-        if (precision || precision === 0) {
-            let outputStr = '';
-            if (value >= 1) {
-                outputStr = value.toLocaleString('en-US', { maximumFractionDigits: precision });
-            }
-            else {
-                outputStr = value.toLocaleString('en-US', { maximumSignificantDigits: precision });
-            }
-            return outputStr;
-        }
-        return value.toLocaleString('en-US');
-    };
-    exports.formatNumberWithSeparators = formatNumberWithSeparators;
-    const getChartType = (type, defaultType) => {
-        switch (type) {
-            case 'area':
-                return 'line';
-            case 'column':
-                return 'bar';
-            default:
-                return type || defaultType;
-        }
-    };
-    exports.getChartType = getChartType;
-    const getComponent = async (path) => {
-        const element = await components_1.application.createElement(path);
-        // application.currentModuleDir = path;
-        // await application.loadScript(`${path}/index.js`);
-        // application.currentModuleDir = '';
-        // const elementName = `i-${path.split('/').pop()}`;
-        // const element = document.createElement(elementName);
-        return element;
-    };
-    exports.getComponent = getComponent;
-});
-define("@scom/scom-dune/global/index.ts", ["require", "exports", "@scom/scom-dune/global/interfaces.ts", "@scom/scom-dune/global/utils.ts"], function (require, exports, interfaces_1, utils_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
+    ///<amd-module name='@scom/scom-dune/global/index.ts'/> 
     __exportStar(interfaces_1, exports);
-    __exportStar(utils_1, exports);
 });
-define("@scom/scom-dune/index.css.ts", ["require", "exports", "@ijstech/components"], function (require, exports, components_2) {
+define("@scom/scom-dune/index.css.ts", ["require", "exports", "@ijstech/components"], function (require, exports, components_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.duneStyle = exports.customContainerDapp = exports.containerStyle = void 0;
-    exports.containerStyle = components_2.Styles.style({
+    exports.duneStyle = exports.containerStyle = void 0;
+    exports.containerStyle = components_1.Styles.style({
         width: 'var(--layout-container-width)',
         maxWidth: 'var(--layout-container-max_width)',
         textAlign: 'var(--layout-container-text_align)',
         margin: '0 auto',
         padding: 10
     });
-    exports.customContainerDapp = components_2.Styles.style({
-        '$nest': {
-            '&> i-vstack > i-panel': {
-                overflow: 'visible',
-                $nest: {
-                    '&> i-grid-layout': {
-                        display: 'block'
-                    }
-                }
-            },
-            'dapp-container-body': {
-                overflow: 'visible'
-            }
-        }
-    });
-    exports.duneStyle = components_2.Styles.style({
+    exports.duneStyle = components_1.Styles.style({
         display: 'block',
         $nest: {
             '&.dune-dark--theme': {
@@ -861,11 +756,11 @@ define("@scom/scom-dune/data.json.ts", ["require", "exports"], function (require
         // }
     ];
 });
-define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/scom-dune/global/index.ts", "@scom/scom-dune/index.css.ts", "@scom/scom-dune/data.json.ts", "@scom/scom-configurator-settings"], function (require, exports, components_3, index_1, index_css_1, data_json_1, scom_configurator_settings_1) {
+define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/scom-dune/index.css.ts", "@scom/scom-dune/data.json.ts", "@scom/scom-configurator-settings"], function (require, exports, components_2, index_css_1, data_json_1, scom_configurator_settings_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const Theme = components_3.Styles.Theme.ThemeVars;
-    let ScomDune = class ScomDune extends components_3.Module {
+    const Theme = components_2.Styles.Theme.ThemeVars;
+    let ScomDune = class ScomDune extends components_2.Module {
         static async create(options, parent) {
             let self = new this(parent, options);
             await self.ready();
@@ -875,7 +770,6 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
             super(parent, options);
             this._data = { componentId: 0 };
             this.tag = {};
-            this.defaultEdit = true;
             this.showConfig = () => {
                 var _a, _b;
                 const ideToolbar = this.closest('ide-toolbar');
@@ -886,23 +780,6 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                         return;
                     }
                 }
-                if (!this.pnlConfig.hasChildNodes()) {
-                    const config = new scom_configurator_settings_1.default();
-                    config.direction = true;
-                    config.data = data_json_1.default;
-                    config.onSaveConfigData = (configData) => {
-                        const { tag, properties } = configData || {};
-                        if (tag)
-                            this.setTag(tag, true);
-                        if (properties)
-                            this.setData(properties);
-                        this.mdConfig.visible = false;
-                        this.pnlConfig.clearInnerHTML();
-                    };
-                    this.pnlConfig.appendChild(config);
-                    config.showSaveBtn = false;
-                }
-                this.mdConfig.visible = true;
             };
         }
         get showFooter() {
@@ -911,7 +788,6 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
         }
         set showFooter(value) {
             this._data.showFooter = value;
-            // if (this.dappContainer) this.dappContainer.showFooter = this.showFooter;
         }
         get showHeader() {
             var _a;
@@ -919,23 +795,13 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
         }
         set showHeader(value) {
             this._data.showHeader = value;
-            // if (this.dappContainer) this.dappContainer.showHeader = this.showHeader;
-        }
-        get existingCharts() {
-            const data = data_json_1.default;
-            return data.map(v => {
-                return {
-                    title: `${v.title} ${v.description ? `(${v.description})` : ''}`,
-                    id: v.id
-                };
-            });
         }
         getData() {
             return this._data;
         }
         async setData(data) {
             this._data = data;
-            await this.updateDuneData();
+            await this.renderPlaceholder();
         }
         getTag() {
             return this.tag;
@@ -951,54 +817,8 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                 }
             }
             this.width = this.tag.width || 700;
-            // this.dappContainer.width = this.width;
-            // this.dappContainer.maxWidth = '100%';
-            // const containerBody = this.dappContainer.querySelector('dapp-container-body') as Panel;
-            // if (containerBody) {
-            //   containerBody.width = this.width;
-            //   containerBody.maxWidth = '100%';
-            // }
-            this.onUpdateBlock();
         }
-        getPropertiesSchema() {
-            const propertiesSchema = {
-                type: 'object',
-                properties: {
-                    componentId: {
-                        type: 'number',
-                        oneOf: this.existingCharts,
-                        required: true
-                    }
-                }
-            };
-            return propertiesSchema;
-        }
-        getThemeSchema() {
-            const themeSchema = {
-                type: 'object',
-                properties: {
-                    // darkShadow: {
-                    //   type: 'boolean'
-                    // },
-                    fontColor: {
-                        type: 'string',
-                        format: 'color'
-                    },
-                    backgroundColor: {
-                        type: 'string',
-                        format: 'color'
-                    },
-                    // width: {
-                    //   type: 'string'
-                    // },
-                    height: {
-                        type: 'string'
-                    }
-                }
-            };
-            return themeSchema;
-        }
-        _getActions(propertiesSchema, themeSchema) {
+        _getActions() {
             const actions = [
                 {
                     name: 'Settings',
@@ -1025,7 +845,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                     isReplacement: true,
                     customUI: {
                         render: (data, onReplace) => {
-                            const vstack = new components_3.VStack();
+                            const vstack = new components_2.VStack();
                             const config = new scom_configurator_settings_1.default();
                             config.data = data_json_1.default;
                             if (this._data.options) {
@@ -1038,7 +858,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                                 if (configData && onReplace) {
                                     const { path } = configData;
                                     onReplace(Object.assign(Object.assign({}, configData), { module: {
-                                            name: 'Dune Blocks',
+                                            name: 'Dune Block',
                                             path,
                                             category: 'charts'
                                         } }));
@@ -1048,41 +868,9 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                             config.showSaveBtn = false;
                             return vstack;
                         }
-                    },
-                    userInputDataSchema: propertiesSchema,
+                    }
                 }
             ];
-            if (themeSchema) {
-                actions.push({
-                    name: 'Theme Settings',
-                    icon: 'palette',
-                    command: (builder, userInputData) => {
-                        let oldTag = {};
-                        return {
-                            execute: async () => {
-                                if (!userInputData)
-                                    return;
-                                oldTag = Object.assign({}, this.tag);
-                                if (builder === null || builder === void 0 ? void 0 : builder.setTag)
-                                    builder.setTag(userInputData);
-                                else
-                                    this.setTag(userInputData);
-                            },
-                            undo: () => {
-                                if (!userInputData)
-                                    return;
-                                this.tag = JSON.parse(JSON.stringify(oldTag));
-                                if (builder === null || builder === void 0 ? void 0 : builder.setTag)
-                                    builder.setTag(oldTag);
-                                else
-                                    this.setTag(oldTag);
-                            },
-                            redo: () => { }
-                        };
-                    },
-                    userInputDataSchema: themeSchema
-                });
-            }
             return actions;
         }
         saveConfigData(data, tag) {
@@ -1100,33 +888,7 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                     name: 'Builder Configurator',
                     target: 'Builders',
                     getActions: () => {
-                        return this._getActions(this.getPropertiesSchema(), this.getThemeSchema());
-                    },
-                    getData: this.getData.bind(this),
-                    setData: this.setData.bind(this),
-                    getTag: this.getTag.bind(this),
-                    setTag: this.setTag.bind(this)
-                },
-                {
-                    name: 'Emdedder Configurator',
-                    target: 'Embedders',
-                    getActions: () => {
-                        return this._getActions(this.getPropertiesSchema(), this.getThemeSchema());
-                    },
-                    getLinkParams: () => {
-                        const data = this._data || {};
-                        return {
-                            data: window.btoa(JSON.stringify(data))
-                        };
-                    },
-                    setLinkParams: async (params) => {
-                        if (params.data) {
-                            const utf8String = decodeURIComponent(params.data);
-                            const decodedString = window.atob(utf8String);
-                            const newData = JSON.parse(decodedString);
-                            let resultingData = Object.assign(Object.assign({}, self._data), newData);
-                            await this.setData(resultingData);
-                        }
+                        return this._getActions();
                     },
                     getData: this.getData.bind(this),
                     setData: this.setData.bind(this),
@@ -1135,66 +897,18 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
                 }
             ];
         }
-        updateStyle(name, value) {
-            value ? this.style.setProperty(name, value) : this.style.removeProperty(name);
-        }
-        updateTheme() {
-            var _a, _b;
-            this.updateStyle('--text-primary', (_a = this.tag) === null || _a === void 0 ? void 0 : _a.fontColor);
-            this.updateStyle('--background-main', (_b = this.tag) === null || _b === void 0 ? void 0 : _b.backgroundColor);
-        }
-        onUpdateBlock() {
-            const containerModule = this.vStackDune.firstChild;
-            if (containerModule === null || containerModule === void 0 ? void 0 : containerModule.setTag) {
-                containerModule.setTag(this.tag);
-            }
-            this.updateTheme();
-        }
-        async updateDuneData() {
-            var _a;
-            // if (this.dappContainer) {
-            //   this.dappContainer.showHeader = this.showHeader;
-            //   this.dappContainer.showFooter = this.showFooter;
-            // }
+        async renderPlaceholder() {
             this.vStackDune.clearInnerHTML();
-            const componentId = Number((_a = this._data) === null || _a === void 0 ? void 0 : _a.componentId);
-            if (!isNaN(componentId) && componentId >= 0) {
-                const duneChart = data_json_1.default.find(v => v.id === this._data.componentId);
-                const containerModule = await (0, index_1.getComponent)(duneChart.path);
-                this.vStackDune.appendChild(containerModule);
-                await containerModule.ready();
-                if (containerModule === null || containerModule === void 0 ? void 0 : containerModule.getConfigurators) {
-                    const configurator = containerModule.getConfigurators().find((configurator) => configurator.target === "Builders");
-                    if (configurator === null || configurator === void 0 ? void 0 : configurator.setData) {
-                        await configurator.setData(this._data || duneChart.properties);
-                    }
-                    const tag = this.tag || duneChart.tag;
-                    if ((configurator === null || configurator === void 0 ? void 0 : configurator.setTag) && tag) {
-                        await configurator.setTag(tag);
-                    }
-                }
-            }
-            else {
-                this.vStackDune.appendChild(this.$render("i-vstack", { gap: 20, horizontalAlignment: "center", verticalAlignment: "center", height: 100, maxHeight: "100%", onClick: this.showConfig, class: "pointer" },
-                    this.$render("i-label", { caption: "Dune Blocks", font: { size: '20px' } }),
-                    this.$render("i-icon", { name: "plus", fill: Theme.colors.primary.contrastText, width: 36, height: 36 })));
-            }
-            this.onUpdateBlock();
+            this.vStackDune.appendChild(this.$render("i-vstack", { gap: 20, horizontalAlignment: "center", verticalAlignment: "center", height: 100, maxHeight: "100%", onClick: this.showConfig, class: "pointer" },
+                this.$render("i-label", { caption: "Dune Block", font: { size: '20px' } }),
+                this.$render("i-icon", { name: "plus", fill: Theme.colors.primary.contrastText, width: 36, height: 36 })));
         }
         async init() {
             this.isReadyCallbackQueued = true;
             super.init();
-            this.updateTheme();
             this.classList.add(index_css_1.duneStyle);
             this.width = this.tag.width || 700;
             this.maxWidth = '100%';
-            // this.dappContainer.width = this.width;
-            // this.dappContainer.maxWidth = '100%';
-            // const containerBody = this.dappContainer.querySelector('dapp-container-body') as Panel;
-            // if (containerBody) {
-            //   containerBody.width = this.width;
-            //   containerBody.maxWidth = '100%';
-            // }
             const tag = this.getAttribute('tag', true);
             if (tag) {
                 this.setTag(tag);
@@ -1216,8 +930,8 @@ define("@scom/scom-dune", ["require", "exports", "@ijstech/components", "@scom/s
         }
     };
     ScomDune = __decorate([
-        components_3.customModule,
-        (0, components_3.customElements)('i-scom-dune')
+        components_2.customModule,
+        (0, components_2.customElements)('i-scom-dune')
     ], ScomDune);
     exports.default = ScomDune;
 });
